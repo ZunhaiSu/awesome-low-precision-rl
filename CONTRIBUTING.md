@@ -8,7 +8,7 @@ Include a primary-source URL and explain the connection to low-precision rollout
 
 Add or update a record in `data/papers.json`. Preserve the existing schema, record the reviewed version, and keep conference and preprint versions together. Supply authors, title, first-publication date, primary discussion location, and scope note. Distinguish direct low-precision experiments from general TIM evidence.
 
-For core studies, add a source-located observation and its interpretive limit to `data/evidence.json`. Update `README.md`, `references.bib`, and the inline bibliography/corpus table in `survey/survey.tex` when needed. Run `python3 scripts/validate.py`, compile the manuscript, and inspect the rendered pages. Update the snapshot date only after the stated source checks have actually been performed.
+For core studies, add a source-located observation and its interpretive limit to `data/evidence.json`. Update `README.md`, `references.bib`, and the inline bibliography/corpus table in `survey/survey.tex` when needed. Run `python3 scripts/build.py --figures` and inspect the affected rendered pages. The build refreshes the public PDF before validating source and catalog consistency. Update the snapshot date only after the stated source checks have actually been performed.
 
 ## Report a correction
 

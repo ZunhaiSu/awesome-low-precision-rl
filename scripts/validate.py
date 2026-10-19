@@ -24,6 +24,8 @@ assert embedded==(root/'survey/mystyle.cls').read_text()
 assert len(re.findall(r'^\\section\{',body.split('\\appendix',1)[0],re.M))==8
 for path in root.rglob('*.md'):
  text=path.read_text()
+ for target in re.findall(r'<img[^>]+src="([^"]+)"',text):
+  if not target.startswith(('http:','https:')):assert (path.parent/target).exists(),(path,target)
  for target in re.findall(r'\]\(([^)]+)\)',text):
   if target.startswith(('http:','https:','#','mailto:')):continue
   assert (path.parent/target.split('#')[0]).exists(),(path,target)
@@ -53,8 +55,12 @@ assert {e['key'] for e in evidence}=={r['key'] for r in rows if r['role']=='core
 assert all(e['url'].startswith('https://') and e['locator'] and e['observation'] and e['limit'] for e in evidence)
 assert re.findall(r'(?m)^\\author(?:\[[^\]]*\])?\{([^}]+)\}',s)==['Zunhai Su']
 assert re.findall(r'(?m)^\\affil(?:\[[^\]]*\])?\{([^}]+)\}',s)==['The University of Hong Kong']
-assert len(re.findall(r'\\begin\{figure\}',body))==4
+figures=re.findall(r'\\begin\{figure\}',body)
+markers=re.findall(r'% BEGIN FIGURE ([a-z_]+)',body)
+assert len(figures)==len(markers)
+assert len(markers)==len(set(markers))
+assert all((root/'figures'/f'{name}.svg').exists() for name in markers),'missing figure export'
 assert body.count('\\tableofcontents')==1
 assert body.index('\\label{fig:overview}')<body.index('\\tableofcontents')<body.index('\\section{Introduction')<body.index('\\section{Problem Formulation')
 assert (root/'Survey.pdf').read_bytes()==(root/'survey/survey.pdf').read_bytes(),'root PDF differs from manuscript PDF'
-print(f'PASS: {len(rows)} focal papers; {len(keys)} references; 8 main sections; {len(evidence)} evidence records; citations, labels, locations, template and local links valid.')
+print(f'PASS: {len(rows)} focal papers; {len(keys)} references; 8 main sections; {len(figures)} figures; {len(evidence)} evidence records; citations, labels, locations, template and local links valid.')

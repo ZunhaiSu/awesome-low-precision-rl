@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export three embedded TikZ diagrams as portable SVG assets.
+"""Export embedded TikZ diagrams using the manuscript palette as portable SVG assets.
 
 Requires Tectonic and Poppler's pdftocairo. The manuscript stays self-contained;
 these assets are for the companion README, not inputs to the paper.
@@ -20,14 +20,10 @@ preamble=r'''\documentclass[11pt,tikz,border=6pt]{standalone}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,fit}
-\definecolor{navy}{HTML}{18344F}
-\definecolor{bluewash}{HTML}{EDF3F9}
-\definecolor{tealwash}{HTML}{EAF5F2}
-\definecolor{redwash}{HTML}{FBECE8}
-\definecolor{redwarn}{HTML}{A74835}
+''' + re.search(r'% BEGIN SURVEY PALETTE\n(.*?)\n% END SURVEY PALETTE',source,re.S).group(1) + r'''
 \begin{document}
 '''
-for name in ['overview','taxonomy','clipping']:
+for name in re.findall(r'% BEGIN FIGURE ([a-z_]+)',source):
  match=re.search(r'% BEGIN FIGURE '+name+r'\n(.*?)\n% END FIGURE '+name,source,re.S)
  if not match:raise ValueError('Missing embedded diagram: '+name)
  with tempfile.TemporaryDirectory(prefix='survey-figure-') as directory:

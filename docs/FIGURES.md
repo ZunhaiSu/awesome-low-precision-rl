@@ -1,18 +1,32 @@
-# Original figures
+# Figures and visual conventions
 
-The manuscript contains four original vector figures. The overview, taxonomy, and clipping diagrams are also exported as SVGs for the README. All four remain embedded in the standalone LaTeX source.
+The manuscript contains ten original vector figures. Their definitions, captions, and assumptions are embedded in `survey/survey.tex`; each is exported to SVG for repository reuse. No figure is a cross-paper performance leaderboard.
 
-1. **Survey overview (Figure 1).** The first-page graphical overview connects quantized rollout, collected experience, learner updates, and synchronization. Blue and teal panels locate numerical and learning interventions; the lower band connects fidelity, stability, quality, and training cost. This is a conceptual diagram, with no experimental performance curves.
-2. **Component taxonomy (Figure 2).** A branching taxonomy maps all twenty focal works onto the numerical and learning families. Asterisks mark cross-category components, daggers mark supporting studies, and QeRL appears in a separate exploration boundary band.
-3. **Feedback loop (Figure 3).** Sampler, responses and learning signals, learner, and parameter synchronization locate interventions in the technical formulation.
-4. **Sign-dependent clipping (Figure 4).** Analytical curves follow the standard clipped surrogate with epsilon 0.2 and advantage +1 or -1. Red regions are flat clipping branches; the negative-advantage marker at ratio 0.7 illustrates Section 3.2.
+| Figure | Purpose | Interpretation |
+|---|---|---|
+| 1 · [Survey at a glance](../figures/overview.svg) | First-page learning loop and intervention interfaces. | Conceptual synthesis. |
+| 2 · [Work-to-class taxonomy](../figures/taxonomy.svg) | All twenty focal works; cross-category components, supporting studies, and the exploration boundary. | Conceptual synthesis. |
+| 3 · [Policy identities](../figures/policies.svg) | Current learner, sampling snapshot, actual behavior, proximal anchor, and KL reference. | Conceptual synthesis. |
+| 4 · [Conditional and response probabilities](../figures/prefixes.svg) | Exact two-step construction: leaf probabilities and prefix mass; not empirical. | Mathematical illustration. |
+| 5 · [Three mechanism routes](../figures/mechanisms.svg) | Relative influence, expected direction, and update selection can propagate through learning. | Conceptual synthesis. |
+| 6 · [Signed clipping](../figures/clipping.svg) | Analytical surrogate with epsilon 0.2 and advantages +1/-1; all loss-axis values explicit. | Mathematical illustration. |
+| 7 · [Update visibility](../figures/quantization.svg) | Fixed-step scalar quantizer, avoiding ties; a smaller update can cross a boundary. | Mathematical illustration. |
+| 8 · [Learning operators](../figures/operators.svg) | Different target objects for estimation, update influence, and scheduling; explanatory expressions. | Conceptual synthesis. |
+| 9 · [Evidence lenses](../figures/evidence.svg) | Different conditions for numerical, update, trajectory, and quality/cost observations. | Conceptual synthesis. |
+| 10 · [Serialized timing](../figures/timing.svg) | Constructed normalized example; rollout share 0.6, speedup 2, and optional added overhead 0.1. | Mathematical illustration. |
 
-The opening sequence is title/abstract and overview on page one, complete contents in the original template typography on pages two and three, and the introduction from page four. The body taxonomy retains the paper-level detail omitted from the compact overview.
+## Visual system
 
-To regenerate the three SVG assets with Tectonic and Poppler, run:
+Blue and teal distinguish numerical interfaces; violet and amber distinguish estimation and update control; slate identifies scheduling and context. Category codes, text, solid/dashed lines, and explicit values carry the meaning independently of color. Diagram text uses a consistent sans-serif face within the paper's original Charter-based template.
+
+The original contents typography remains on pages two and three, following the title/abstract and graphical overview. Main text begins on page four. The full work taxonomy and Surveyed Papers appendix are retained.
+
+## Regenerate assets
+
+With Tectonic and Poppler installed:
 
 ```sh
-python3 scripts/export_figures.py
+python3 scripts/build.py --figures
 ```
 
-The exporter accepts `--tectonic` and `--pdftocairo` when those programs are not on PATH. It uses temporary standalone builds and retains only the SVG outputs. The full paper does not load the exported files.
+Explicit tool paths can be supplied with `--tectonic` and `--pdftocairo`. The exporter reads the same palette and diagram definitions as the manuscript and uses temporary standalone builds. The full paper needs no external SVG input.

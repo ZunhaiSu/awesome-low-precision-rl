@@ -45,3 +45,7 @@ A subsequent user-requested cycle completed three more substantive passes. See [
 ## Five-pass prose and synthesis revision
 
 The next revision strengthens the connected scientific argument, expands qualitative evidence records to all thirteen core studies, and restores a complete printed contents page. See [the five-pass assessment and before/after examples](REVISION_3.md). The earlier entries remain a history of previous drafts; [BUILD.md](BUILD.md) describes the current manuscript.
+
+## Twenty-round visual and editorial cycle
+
+The next user-requested cycle completed twenty successive rounds covering the argument, figures, method comparisons, and README. The [twenty-round assessment](REVISION_4.md) records the actual evaluations and revisions. [BUILD.md](BUILD.md) remains the current document-integrity record.
