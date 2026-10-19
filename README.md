@@ -10,9 +10,11 @@ This repository accompanies **Training–Rollout Mismatch in Low-Precision LLM R
 
 **Affiliation:** The University of Hong Kong
 
-**Snapshot:** 2026-10-19 · **Focal corpus:** 20 unique contributions · **Status:** working survey manuscript.
+**Snapshot:** 2026-10-19 · **Focal corpus:** 20 unique contributions · **Status:** living survey · under active development.
 
 [GitHub repository](https://github.com/ZunhaiSu/awesome-low-precision-rl) · [Read the survey](survey/survey.pdf) · [LaTeX source](survey/survey.tex) · [Bibliography](references.bib) · [Machine-readable catalog](data/papers.json) · [Evidence records](data/evidence.json)
+
+> **Updates and collaboration.** This survey and its companion collection are under active development. Suggestions for missing papers, technical corrections, reproducibility insights, and research collaborations are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
 
 ## Contents
 
@@ -116,7 +118,7 @@ Full version notes, secondary locations, and scope caveats are in [`data/papers.
 The clipping diagram is an analytical illustration of the standard surrogate with positive and negative advantages; it is not a cross-paper performance plot. The flat branch switches sides with the sign of the learning signal. See §3.2 of the survey for the ratio semantics.
 
 
-The survey's selected [evidence records](data/evidence.json) connect six within-paper comparisons to primary-source sections and explicit limits. They support three recurring conclusions: assess correction over the learning trajectory; identify the numerical interface that is coupled; and examine which signed updates survive clipping or gating. The records are qualitative synthesis aids, not a complete result database.
+The [evidence records](data/evidence.json) cover all thirteen core method/system studies, linking their main observations to primary-source sections and interpretive limits. Six representative comparisons appear in the manuscript's evidence table. They support three recurring conclusions: assess correction over the learning trajectory; identify the numerical interface that is coupled; and examine which signed updates survive clipping or gating. The records are qualitative synthesis aids, not a complete result database.
 
 Keep four outcomes separate: **numerical agreement, optimization stability, learned-policy quality, and runtime cost**. A smaller average gap is not a stability guarantee; completing training is not equivalent to reaching comparable quality; rollout throughput is not end-to-end speedup.
 
@@ -181,7 +183,7 @@ Keep publication and preprint versions in one record. Label new combinations as 
 
 The manuscript uses `mystyle.cls` from [arXiv:2601.14004v4](https://arxiv.org/abs/2601.14004v4). This is a **typesetting template adaptation only**. The eight-section scientific framework is the framework developed for this survey. See [template provenance](docs/TEMPLATE.md) for the source's RAIL/DeepMind lineage, retained license notice, and modifications.
 
-The manuscript is a working draft with author-supplied names and affiliations. It has no assigned DOI or arXiv identifier and is not presented as peer reviewed. The [editorial history](docs/REVIEW.md) and [latest review cycle](docs/REVISION_2.md) document the draft's internal revisions.
+The manuscript is under active development. Missing papers, technical corrections, and research collaboration proposals are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues). It has no assigned DOI or arXiv identifier and is not presented as peer reviewed. The [editorial history](docs/REVIEW.md) and [latest review cycle](docs/REVISION_3.md) document the draft's internal revisions.
 
 ## License
 

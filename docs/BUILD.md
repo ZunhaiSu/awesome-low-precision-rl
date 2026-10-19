@@ -1,16 +1,17 @@
-# Current release validation
+# Current manuscript validation
 
-Validated on 2026-10-19 after the author, layout, and figure update.
+Validated on 2026-10-19 after the five-pass prose and synthesis revision.
 
-- Current manuscript: **24 pages**, 20 focal works and 26 references.
-- Author and affiliation: **Zunhai Su, The University of Hong Kong**. The PDF author metadata agrees.
-- First-page layout: compact title/abstract panel followed directly by the introduction; no separate cover or printed contents page. PDF section bookmarks remain.
-- Figures: three embedded TikZ figures, including two newly exported SVG diagrams for the README. The exported SVG files parse successfully.
+- Manuscript: **25 pages**, 20 focal works, 26 references, and 13 source-located core evidence records.
+- Author and affiliation: **Zunhai Su, The University of Hong Kong**; PDF author metadata agrees.
+- Navigation: the introduction begins on page one. A complete one-page contents listing follows Section 1, covering all eight sections and three appendices; PDF bookmarks remain available.
+- Figures: three embedded TikZ figures. The two existing README SVG assets remain consistent with their unchanged TikZ definitions.
 - Built-in LaTeX compiler: success on the final source.
-- Tectonic 0.17.0: successful PDF export in the project and from a new directory containing only `survey.tex`; both have 24 pages. The external SVG files are not needed to build the paper.
-- Consistency checker: citations, labels, bibliography keys, embedded class, eight main sections, discussion locations, evidence keys, local links, the single author and affiliation, and the three figure environments passed.
-- Visual inspection: all 24 pages rendered and inspected; the title page, taxonomy diagram, and clipping plot were additionally checked at a readable scale.
+- Tectonic 0.17.0: successful project build and a separate clean build whose only supplied project file was `survey.tex`; both produced 25-page PDFs. No external figure or bibliography file is required for this standalone build.
+- Consistency checker: all focal and bibliography keys, citations, labels, primary/secondary discussion locations, matching embedded class, eight sections, thirteen core evidence records, local links, author metadata, and printed-contents placement passed.
+- Visual inspection: all 25 pages rendered and reviewed. The first page, complete contents, and evidence-table page were also inspected at a readable scale. The corpus table starts on a fresh page and is kept together.
+- Each of the five editorial passes compiled successfully. Source/PDF snapshots were compared during revision; representative prose comparisons appear in [REVISION_3.md](REVISION_3.md).
 
-Nonfatal legacy package encoding warnings and one underfull bibliography box remain. No overfull boxes, undefined citations, or compilation errors were observed. The conventional `latexmk` command in the README is an alternative build option and has not been independently tested in this environment.
+Nonfatal legacy package encoding warnings and one underfull bibliography paragraph remain. No overfull boxes, undefined citations, unresolved cross-references, or compilation errors were observed. The README's conventional `latexmk` command is an alternative build option and was not independently tested in this environment.
 
-These checks establish document integrity and portability, not experimental reproduction or independent peer review. The six-pass editorial history describes earlier drafts; this note records the current layout.
+These checks establish document integrity and portability. They do not establish experimental reproduction or independent peer review.

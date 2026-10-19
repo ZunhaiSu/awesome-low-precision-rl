@@ -41,3 +41,7 @@ At the end of this review cycle, author details were pending. Author details wer
 ## Additional revision cycle
 
 A subsequent user-requested cycle completed three more substantive passes. See [second-cycle assessment and changes](REVISION_2.md). The original review above records the first delivered draft; [BUILD.md](BUILD.md) records validation of the current manuscript.
+
+## Five-pass prose and synthesis revision
+
+The next revision strengthens the connected scientific argument, expands qualitative evidence records to all thirteen core studies, and restores a complete printed contents page. See [the five-pass assessment and before/after examples](REVISION_3.md). The earlier entries remain a history of previous drafts; [BUILD.md](BUILD.md) describes the current manuscript.

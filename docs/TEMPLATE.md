@@ -12,4 +12,4 @@ Changes: one dormant, unrelated hard-coded author-contribution sentence was remo
 
 The eight-section scientific framework remains the framework developed for this low-precision RL survey.
 
-Front-matter adaptation: the title/abstract panel is compacted at manuscript level, the separate cover and printed contents pages are removed, and the introduction begins on the first page. PDF section bookmarks retain navigation. The original class and its embedded copy remain synchronized. Three original TikZ figures now explain the intervention taxonomy, the learning feedback loop, and sign-dependent clipping; the two new diagrams are also supplied as standalone vector assets.
+Front-matter adaptation: the title/abstract panel is compacted at manuscript level, the introduction begins on the first page, and a complete one-page contents listing follows the introduction. PDF section bookmarks provide additional navigation. The original class and its embedded copy remain synchronized. Three original TikZ figures now explain the intervention taxonomy, the learning feedback loop, and sign-dependent clipping; the two new diagrams are also supplied as standalone vector assets.

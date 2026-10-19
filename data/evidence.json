@@ -1,7 +1,28 @@
 {
   "checked_date": "2026-10-19",
-  "purpose": "Selected source-linked observations for the survey evidence table; not an exhaustive extraction or a new benchmark.",
+  "purpose": "Source-linked qualitative evidence for all thirteen core method/system studies. Six selected comparisons appear in the survey evidence table; this is not an exhaustive experimental extraction or a new benchmark.",
   "observations": [
+    {
+      "key": "flashrl",
+      "url": "https://www.opt-ml.org/papers/2025/paper116.pdf",
+      "locator": "Method discussion; Section 4, especially Section 4.3",
+      "observation": "TIS uses recorded rollout probabilities to bound correction in hybrid and quantized rollout settings; comparisons examine stability and downstream learning.",
+      "limit": "Truncated correction is a biased surrogate; the experiments do not imply equivalence to response-level importance sampling."
+    },
+    {
+      "key": "jet",
+      "url": "https://arxiv.org/abs/2601.14243v2",
+      "locator": "Sections 4.1-4.2 and 5.2-5.3",
+      "observation": "Unified FP8 precision flow and coordinated quantization granularity address learner-rollout inconsistency, with accuracy and efficiency evaluated in the reported stack.",
+      "limit": "Path-specific consistency does not establish bitwise identity across arbitrary engines or formats."
+    },
+    {
+      "key": "fp8rl",
+      "url": "https://arxiv.org/abs/2601.18150v2",
+      "locator": "Sections 2.1.3, 2.2, 2.3.2, and 2.4",
+      "observation": "The stack combines W8A8 rollout, attention/KV scaling, synchronization, and adopted TIS/MIS; v2 also explores end-to-end FP8.",
+      "limit": "Learner precision and component settings vary by experiment; system-level gains do not isolate every component."
+    },
     {
       "key": "qurl",
       "url": "https://arxiv.org/html/2602.13953v1",
@@ -10,11 +31,32 @@
       "limit": "Within-paper setting; not a universal failure horizon."
     },
     {
+      "key": "qarl",
+      "url": "https://aclanthology.org/2026.findings-acl.841/",
+      "locator": "Sections 3.1-3.2, 4, and 4.2",
+      "observation": "Rollout-aligned QAT and sequence-level TBPO are evaluated jointly and through component ablations for quantized MoE reasoning RL.",
+      "limit": "The numerical and objective components act on different objects; QAT emulation is distinct from native low-precision arithmetic."
+    },
+    {
+      "key": "ais",
+      "url": "https://arxiv.org/html/2605.13907v1",
+      "locator": "Sections 3.1 and 4.1-4.4",
+      "observation": "An adaptive mixture of uncorrected and importance-weighted gradients responds to mismatch diagnostics; the paper studies autoregressive and diffusion models.",
+      "limit": "The adapted quantity is the estimator mixture, not precision; diffusion likelihood semantics differ from the autoregressive formulation."
+    },
+    {
       "key": "quads",
       "url": "https://arxiv.org/html/2607.15810v1",
       "locator": "Section 4.3.1; Section 4.3.2 and Figure 8",
       "observation": "Asymmetric weight QAT and rollout residual compensation show complementary gains.",
       "limit": "Ablation does not establish universal necessity or superiority of asymmetric QAT."
+    },
+    {
+      "key": "acrl",
+      "url": "https://arxiv.org/html/2607.24062v1",
+      "locator": "Sections 5.1-5.6",
+      "observation": "Advantage-guided probability adjustment regulates discrepancy through update influence; robustness and bidirectional-control ablations examine the reported FP8 regimes.",
+      "limit": "Regulation around a reference range is not unconditional minimization of discrepancy and does not establish native FP4 transfer."
     },
     {
       "key": "score",
@@ -36,6 +78,13 @@
       "locator": "Sections 3-5; Appendix B.3-B.4",
       "observation": "Local directional diagnostics motivate gating and repair; token-wise predictiveness is restricted in the routing-conditioned MoE analysis.",
       "limit": "Population directional trends do not ensure token-independent contraction."
+    },
+    {
+      "key": "trace",
+      "url": "https://arxiv.org/html/2610.07767v2",
+      "locator": "Sections 3.1-3.2 and 4.1-4.5",
+      "observation": "Rollout-guided FP4 rounding and compact quantization-information transfer are evaluated for MoE learning, including efficiency and component comparisons.",
+      "limit": "The local rounding argument is not a global policy-divergence guarantee; storage, transport, and state matching remain system dependencies."
     },
     {
       "key": "kv4",

@@ -49,9 +49,11 @@ for row in rows:
    assert loc in locations.get(row['key'],set()),('section mapping',row['key'],loc)
 evidence=json.loads((root/'data/evidence.json').read_text())['observations']
 assert len({e['key'] for e in evidence})==len(evidence)
-assert {e['key'] for e in evidence}<={r['key'] for r in rows}
+assert {e['key'] for e in evidence}=={r['key'] for r in rows if r['role']=='core'},'missing core evidence record'
 assert all(e['url'].startswith('https://') and e['locator'] and e['observation'] and e['limit'] for e in evidence)
 assert re.findall(r'(?m)^\\author(?:\[[^\]]*\])?\{([^}]+)\}',s)==['Zunhai Su']
 assert re.findall(r'(?m)^\\affil(?:\[[^\]]*\])?\{([^}]+)\}',s)==['The University of Hong Kong']
 assert len(re.findall(r'\\begin\{figure\}',body))==3
+assert body.count('\\tableofcontents')==1
+assert body.index('\\section{Introduction')<body.index('\\tableofcontents')<body.index('\\section{Problem Formulation')
 print(f'PASS: {len(rows)} focal papers; {len(keys)} references; 8 main sections; {len(evidence)} evidence records; citations, labels, locations, template and local links valid.')
