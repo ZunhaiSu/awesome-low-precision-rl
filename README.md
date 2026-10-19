@@ -16,6 +16,8 @@ This repository accompanies **Training–Rollout Mismatch in Low-Precision LLM R
 
 > **Updates and collaboration.** This survey and its companion collection are under active development. Suggestions for missing papers, technical corrections, reproducibility insights, and research collaborations are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
 
+![Survey overview: numerical execution and learning in a shared feedback loop](figures/overview.svg)
+
 ## Contents
 
 - [Scope](#scope)
@@ -141,7 +143,7 @@ cd survey
 tectonic survey.tex
 ```
 
-The two README diagrams are exported from the TikZ definitions embedded in the manuscript. With Tectonic and Poppler available, regenerate them with `python3 scripts/export_figures.py`. See [figure notes](docs/FIGURES.md) for their scope.
+The three README diagrams are exported from the TikZ definitions embedded in the manuscript. With Tectonic and Poppler available, regenerate them with `python3 scripts/export_figures.py`. See [figure notes](docs/FIGURES.md) for their scope.
 
 The PDF is supplied as a reading copy. `references.bib` is available for reuse, but the standalone source does not require a separate BibTeX run. A reasonably complete TeX installation is needed for the original template's fonts and packages; Tectonic may download its TeX bundle on first use.
 

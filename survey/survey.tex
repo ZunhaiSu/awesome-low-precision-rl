@@ -444,6 +444,7 @@ singlelinecheck=off,%
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{flafter}
+\usepackage{float}
 \usepackage[section]{placeins}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,fit}
@@ -500,7 +501,51 @@ Low-precision rollout generation can reduce execution cost while changing the nu
 \par\smallskip\noindent\textit{Living survey, under active development. Suggestions, corrections, and research collaborations are welcome via \href{https://github.com/ZunhaiSu/awesome-low-precision-rl/issues}{GitHub Issues}.}
 \end{abstract}
 \maketitle\thispagestyle{empty}
-% The introduction continues on page one; the full contents follows Section 1.
+% First-page graphical abstract; full contents and main text follow.
+\begin{figure}[H]
+\centering
+% BEGIN FIGURE overview
+\begin{tikzpicture}[font=\fontsize{8.5}{10}\selectfont,>=Stealth,
+ policy/.style={draw=navy!45,rounded corners=3pt,fill=white,align=center,text width=4.1cm,minimum height=1.10cm,inner sep=5pt},
+ family/.style={rounded corners=3pt,align=left,text width=7.35cm,minimum height=1.95cm,inner sep=6pt},
+ flow/.style={->,line width=0.85pt,draw=navy!80}]
+% The return path makes the changing data-generating policy explicit.
+\node[policy,fill=bluewash] (sampler) at (2.35,5.25) {\textbf{Quantized rollout}\\Actual behavior $q_k$\\Weights\; /\; activations\; /\; KV};
+\node[policy] (experience) at (8.10,5.25) {\textbf{Collected experience}\\Prefixes, responses, rewards\\and advantage signals};
+\node[policy,fill=tealwash] (learner) at (13.85,5.25) {\textbf{Learner update}\\Learner policy $p_\theta$\\Estimation and optimization};
+\draw[flow] (sampler.east)--(experience.west);
+\draw[flow] (experience.east)--(learner.west);
+\draw[flow] (learner.north)--(13.85,6.35)--node[above,fill=white,inner sep=2pt,font=\fontsize{8}{9}\selectfont]{Parameter synchronization and numerical conversion}(2.35,6.35)--(sampler.north);
+% Complementary intervention interfaces; neither column implies a paper ranking.
+\node[family,draw=navy!45,fill=bluewash] (num) at (4.04,2.62) {\textbf{A\quad Numerical design and execution}\\[3pt]
+\textbf{A1}\; Align learner--rollout computation\\
+\textbf{A2}\; Preserve fidelity and parameter updates};
+\node[family,draw=teal!55!black,fill=tealwash] (learn) at (12.20,2.62) {\textbf{B\quad Learning under residual mismatch}\\[3pt]
+\textbf{B1}\; Correct estimation\quad\textbf{B2}\; Control updates\\
+\textbf{B3}\; Adapt schedules\;{\fontsize{7.5}{9}\selectfont(general TIM evidence)}};
+\draw[->,line width=1pt,navy!70] (2.35,3.65)--(sampler.south);
+\draw[->,line width=1pt,teal!65!black] (13.85,3.65)--(learner.south);
+\node[align=center,text=redwarn,font=\fontsize{8}{9.5}\selectfont,text width=7.1cm] at (8.10,4.12) {Execution mismatch and policy lag\\can change the learning signal};
+\node[draw=navy!20,fill=navy!3,rounded corners=2pt,align=center,text width=15.7cm,minimum height=.67cm,inner sep=3pt] at (8.12,.70) {\textbf{Evidence across the loop:}\quad numerical fidelity\; $\cdot$\; stability\; $\cdot$\; policy quality\; $\cdot$\; training cost};
+\end{tikzpicture}
+% END FIGURE overview
+\caption{Survey at a glance. Numerical methods act on learner or sampler execution; learning methods change how samples drive updates. Their effects return through the rollout--learning loop.}\label{fig:overview}
+\end{figure}
+
+\clearpage
+\begingroup
+\fontsize{9.5}{11}\selectfont
+\setlength{\parskip}{0pt}
+\setcounter{tocdepth}{2}
+\makeatletter
+\renewcommand*\l@section[2]{\addvspace{4pt}\@dottedtocline{1}{0em}{1.8em}{\bfseries #1}{\bfseries #2}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{1.8em}{2.5em}}
+\tableofcontents
+\makeatother
+\endgroup
+\clearpage
+
+
 
 \section{Introduction and Scope}\label{sec:intro}
 \subsection{Why Low-Precision Rollouts Complicate Policy Optimization}
@@ -545,19 +590,6 @@ Broader surveys cover low-precision LLM training, rollout strategies, and reinfo
 Four questions guide the discussion: \textbf{RQ1}, how to separate execution mismatch from parameter changes and decoding differences; \textbf{RQ2}, how disagreement distorts estimation and optimization; \textbf{RQ3}, which objects numerical and learning interventions modify; and \textbf{RQ4}, which findings hold under the reported experimental conditions and system costs.
 
 Our contribution is to connect policy semantics, intervention mechanisms, and published evidence. Sections~\ref{sec:form}--\ref{sec:mechanisms} establish a common notation and trace how execution differences enter learning (RQ1--RQ2). The component taxonomy then makes integrated methods comparable through the operations they change, organizing Sections~\ref{sec:numerical}--\ref{sec:learning} (RQ3). Section~\ref{sec:synthesis} relates the resulting learning outcomes to evaluation rules, information requirements, and cost (RQ4), leading to the research directions in Section~\ref{sec:open}.
-
-\clearpage
-\begingroup
-\fontsize{9.5}{11}\selectfont
-\setlength{\parskip}{0pt}
-\setcounter{tocdepth}{2}
-\makeatletter
-\renewcommand*\l@section[2]{\addvspace{4pt}\@dottedtocline{1}{0em}{1.8em}{\bfseries #1}{\bfseries #2}}
-\renewcommand*\l@subsection{\@dottedtocline{2}{1.8em}{2.5em}}
-\tableofcontents
-\makeatother
-\endgroup
-\clearpage
 
 \section{Problem Formulation and Taxonomy}\label{sec:form}
 \subsection{Learner, Behavior, Proximal, and Reference Policies}

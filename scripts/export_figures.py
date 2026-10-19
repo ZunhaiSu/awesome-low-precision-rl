@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export the two embedded TikZ diagrams as portable SVG assets.
+"""Export three embedded TikZ diagrams as portable SVG assets.
 
 Requires Tectonic and Poppler's pdftocairo. The manuscript stays self-contained;
 these assets are for the companion README, not inputs to the paper.
@@ -27,7 +27,7 @@ preamble=r'''\documentclass[11pt,tikz,border=6pt]{standalone}
 \definecolor{redwarn}{HTML}{A74835}
 \begin{document}
 '''
-for name in ['taxonomy','clipping']:
+for name in ['overview','taxonomy','clipping']:
  match=re.search(r'% BEGIN FIGURE '+name+r'\n(.*?)\n% END FIGURE '+name,source,re.S)
  if not match:raise ValueError('Missing embedded diagram: '+name)
  with tempfile.TemporaryDirectory(prefix='survey-figure-') as directory:

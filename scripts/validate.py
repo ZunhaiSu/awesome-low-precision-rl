@@ -53,7 +53,7 @@ assert {e['key'] for e in evidence}=={r['key'] for r in rows if r['role']=='core
 assert all(e['url'].startswith('https://') and e['locator'] and e['observation'] and e['limit'] for e in evidence)
 assert re.findall(r'(?m)^\\author(?:\[[^\]]*\])?\{([^}]+)\}',s)==['Zunhai Su']
 assert re.findall(r'(?m)^\\affil(?:\[[^\]]*\])?\{([^}]+)\}',s)==['The University of Hong Kong']
-assert len(re.findall(r'\\begin\{figure\}',body))==3
+assert len(re.findall(r'\\begin\{figure\}',body))==4
 assert body.count('\\tableofcontents')==1
-assert body.index('\\section{Introduction')<body.index('\\tableofcontents')<body.index('\\section{Problem Formulation')
+assert body.index('\\label{fig:overview}')<body.index('\\tableofcontents')<body.index('\\section{Introduction')<body.index('\\section{Problem Formulation')
 print(f'PASS: {len(rows)} focal papers; {len(keys)} references; 8 main sections; {len(evidence)} evidence records; citations, labels, locations, template and local links valid.')
