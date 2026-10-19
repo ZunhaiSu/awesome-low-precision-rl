@@ -1,18 +1,16 @@
 # Current manuscript validation
 
-Validated on 2026-10-20 after twenty editorial and visual rounds. The literature snapshot remains 2026-10-19.
+Validated on 20 October 2026 for the [integrated edition](REVISION_5.md). The literature snapshot remains 19 October 2026.
 
-- Manuscript: **29 pages**, 20 focal works, 26 references, 13 source-located core evidence records, and **10 original vector figures**.
-- Author: **Zunhai Su, The University of Hong Kong**; PDF author metadata agrees.
-- Navigation: title/abstract and graphical overview on page one, original contents typography on pages two and three, introduction from page four. The complete taxonomy and two-page Surveyed Papers table remain present.
-- Public copy: root `Survey.pdf` and `survey/survey.pdf` match byte for byte.
-- Built-in LaTeX compiler: success on the final source.
-- Tectonic 0.17.0: project build and clean build from only `survey.tex` both produced 29-page PDFs. The embedded class and bibliography supply the standalone source; external SVGs are not build inputs.
-- Public build command: `scripts/build.py --figures` successfully built the paper, refreshed the root copy, exported all ten SVGs, and ran the consistency checker.
-- Integrity: bibliography/citation keys, labels, eight sections, primary and secondary discussion locations, all thirteen core evidence records, matching class copies, figure markers/exports, Markdown and HTML image paths, author metadata, and PDF copies passed.
-- Visual review: all 29 final pages rendered and inspected. The policy, probability-tree, mechanisms, clipping, quantizer, learning-operator, evidence, and timing pages were also inspected at a readable scale during revision. The conclusion no longer spills a few lines onto a separate page.
-- README: browser preview checked the hero, image scaling, catalog, and navigation; GitHub-compatible details keep supporting material expandable. The preview is a local approximation of GitHub styling.
-- Numerical illustrations: checked the probability-tree reweighting, fixed-step quantizer cases, signed clipping derivatives away from boundaries, and normalized timing arithmetic.
-- Revision record: twenty saved source/README snapshots; sixteen source-changing rounds compiled, while four README-only rounds retained the preceding PDF. See [REVISION_4.md](REVISION_4.md).
+- **Manuscript:** 28 pages, eight main sections, twenty focal studies, twenty-six references, thirteen source-located core evidence records, and ten original vector figures.
+- **Author:** Zunhai Su, The University of Hong Kong; PDF author metadata agrees.
+- **Navigation:** title, abstract, and graphical overview on page one; original contents typography on pages two and three; introduction from page four; conclusion on page twenty-three; Surveyed Papers appendix from page twenty-four.
+- **Integrity:** all eleven displayed equations, all twenty appendix paper entries, and bibliography content match the preceding technical edition. The classification and primary/secondary discussion locations pass the consistency checker.
+- **Compilation:** the built-in editor compiler and Tectonic 0.17.0 both succeed on the final source. A clean directory containing only `survey.tex` also builds a 28-page PDF. The embedded class and bibliography provide the standalone distribution.
+- **Diagnostics:** no overfull or underfull boxes, undefined citations, unresolved references, or LaTeX errors in the final Tectonic build. Nonfatal encoding warnings from legacy packages remain.
+- **Visual review:** all 28 pages rendered and inspected. Final bibliography changes were re-rendered and inspected at a readable scale. The conclusion fits on the final main-text page, and bibliography entries remain together across page breaks.
+- **Figures:** all ten SVG exports are valid XML. The build/export command regenerates them from the manuscript's TikZ definitions and shared palette. Analytical constructions remain identified separately from empirical observations.
+- **Public PDF:** root `Survey.pdf` and `survey/survey.pdf` match byte for byte.
+- **Repository:** citations, bibliography keys, figure markers, local links, image paths, author fields, matching class copies, and the eight-section framework pass `scripts/validate.py`. README navigation reflects the revised research-findings heading.
 
-Nonfatal legacy package encoding warnings and one underfull bibliography paragraph remain. No overfull boxes, undefined citations, unresolved references, or compilation errors were observed. No independent experiments or external peer review are implied by these checks.
+The current cycle compared the main historical versions and completed four focused manuscript revisions, with a successful build saved after each. This is editorial and technical self-review, without new experiments or external peer review. The source-selection and evidence limitations remain explicit in the manuscript.

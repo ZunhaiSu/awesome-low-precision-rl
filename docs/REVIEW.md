@@ -1,5 +1,7 @@
 # Editorial review history
 
+The recommended manuscript is the [integrated edition](REVISION_5.md), which compares the main versions and consolidates their scientific argument. The entries below preserve earlier assessments.
+
 The first cycle below records the original delivered draft. The additional cycle at the end links to the current revision assessment.
 
 This is self-review of a working manuscript, not independent peer review or experimental replication. The scientific outline remains the agreed eight-section framework. The reference paper supplies the actual LaTeX template only.

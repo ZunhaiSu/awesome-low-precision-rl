@@ -17,7 +17,7 @@ The companion manuscript, *Training–Rollout Mismatch in Low-Precision LLM Rein
 
 ## Contents
 
-[Start here](#start-here) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Evidence](#how-to-interpret-results) · [Build](#build-and-validate) · [Contribute](#contribute) · [Citation](#citation)
+[Start here](#start-here) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Build](#build-and-validate) · [Contribute](#contribute) · [Citation](#citation)
 
 ## Start here
 
@@ -47,7 +47,7 @@ This is a focused narrative survey. General PTQ, low-precision pretraining, and 
 | 7. Open Problems | Develop priorities in diagnosis, composition, stateful execution, and transfer. |
 | 8. Conclusion | Bring numerical fidelity and learning correction into one perspective. |
 
-Appendix A summarizes all twenty focal works; Appendices B–C document source handling and evidence interpretation.
+Appendix A summarizes all twenty focal works; Appendices B–C describe source selection, assumptions, and transfer.
 
 </details>
 
@@ -123,15 +123,15 @@ A supporting role does not exclude direct low-precision experiments. The role re
 
 **[QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html)** (2025) combines NVFP4, LoRA, and adaptive quantization noise. It is discussed in Box 1 because exploration and agreement answer different questions in this setting.
 
-## How to interpret results
+## Research findings
 
 The [evidence records](data/evidence.json) cover all thirteen core studies and locate their observations in the primary papers. The survey develops three recurring findings:
 
 **Correction evolves with learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [AIS](https://arxiv.org/abs/2605.13907), and [Score Centering](https://arxiv.org/abs/2609.20807) show why estimator behavior and the training trajectory deserve attention beyond an early stable window.
 
-**Coupling has an interface.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) share different information: a precision-flow design, a representation, or realized rounding decisions. Their remaining execution differences determine the scope of agreement.
+**Alignment depends on the shared computation.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) share different information: a precision-flow design, a representation, or realized rounding decisions. Their remaining execution differences determine the scope of agreement.
 
-**Retained updates matter.** [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870) and [TRIAGE](https://arxiv.org/abs/2610.07043) connect stability to signed clipping or direction-dependent control. Mean disagreement alone can hide which learning contributions survive.
+**Signed update selection reveals hidden effects.** [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870) and [TRIAGE](https://arxiv.org/abs/2610.07043) connect stability to signed clipping or direction-dependent control. Mean disagreement alone can hide which learning contributions survive.
 
 Numerical fidelity, optimization stability, policy quality, and runtime remain distinct outcomes. Section 6 connects them through within-study evidence, information requirements, and timing scope.
 
@@ -201,6 +201,6 @@ Propose a missing paper, correct a technical claim, or discuss a research collab
 
 The paper adapts the **typesetting template** from [arXiv:2601.14004v4](https://arxiv.org/abs/2601.14004v4); its scientific framework is specific to this survey. Attribution and modifications are documented in [TEMPLATE.md](docs/TEMPLATE.md).
 
-The survey is a working manuscript under active development. The [latest editorial review](docs/REVISION_4.md) records twenty rounds of revision, with earlier cycles retained in the [review history](docs/REVIEW.md). Editorial self-review does not imply external peer review.
+The survey is under active development. Its scientific scope and source versions are documented alongside the manuscript; editorial assessments are available in the [review history](docs/REVIEW.md).
 
 Repository content and template adaptations use [CC BY-SA 4.0](LICENSE). Linked papers retain their own licenses; their PDFs are not redistributed here.
