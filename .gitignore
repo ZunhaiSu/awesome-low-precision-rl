@@ -1,0 +1,15 @@
+# LaTeX build intermediates
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.bbl
+*.blg
+
+# Local operating-system and Python files
+.DS_Store
+__pycache__/

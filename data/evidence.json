@@ -1,0 +1,55 @@
+{
+  "checked_date": "2026-10-19",
+  "purpose": "Selected source-linked observations for the survey evidence table; not an exhaustive extraction or a new benchmark.",
+  "observations": [
+    {
+      "key": "qurl",
+      "url": "https://arxiv.org/html/2602.13953v1",
+      "locator": "Sections 4.1-4.3 and 5.3",
+      "observation": "Longer-run behavior under TIS motivates ACR; invariant scaling addresses quantized weight-update visibility.",
+      "limit": "Within-paper setting; not a universal failure horizon."
+    },
+    {
+      "key": "quads",
+      "url": "https://arxiv.org/html/2607.15810v1",
+      "locator": "Section 4.3.1; Section 4.3.2 and Figure 8",
+      "observation": "Asymmetric weight QAT and rollout residual compensation show complementary gains.",
+      "limit": "Ablation does not establish universal necessity or superiority of asymmetric QAT."
+    },
+    {
+      "key": "score",
+      "url": "https://arxiv.org/html/2609.20807v1",
+      "locator": "Sections 5.1-5.4; Appendix A.1-A.2",
+      "observation": "Shared-objective corrections are compared; top-k behavior reconstruction is used; composition is tested under lag.",
+      "limit": "Conditional score centering is not recovery of the on-policy trajectory distribution."
+    },
+    {
+      "key": "fullfp8",
+      "url": "https://arxiv.org/abs/2609.22870v1",
+      "locator": "Sections 3-5.1; Algorithm 1",
+      "observation": "Signed clipping effects motivate BF16-reference calibration; main GRPO endpoints select the best average checkpoint over 500 steps.",
+      "limit": "Best checkpoint differs from final checkpoint or time-to-quality."
+    },
+    {
+      "key": "triage",
+      "url": "https://arxiv.org/html/2610.07043v2",
+      "locator": "Sections 3-5; Appendix B.3-B.4",
+      "observation": "Local directional diagnostics motivate gating and repair; token-wise predictiveness is restricted in the routing-conditioned MoE analysis.",
+      "limit": "Population directional trends do not ensure token-independent contraction."
+    },
+    {
+      "key": "kv4",
+      "url": "https://arxiv.org/html/2610.14448v1",
+      "locator": "Sections 5.2 and 6.1-6.3; Appendix A.1",
+      "observation": "Selective protection improves INT4 KV fidelity and learning under the retained TIS recipe.",
+      "limit": "Colocated quota-based partial collection; generation and optimization alternate.",
+      "timing": {
+        "model": "Qwen3-8B-Base",
+        "iterations": 400,
+        "cumulative_rollout_speedup": 1.8,
+        "cumulative_full_iteration_speedup": 1.27,
+        "baseline": "BF16 rollout"
+      }
+    }
+  ]
+}
