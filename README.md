@@ -55,7 +55,7 @@ The survey follows a progression from **policy semantics**, through **failure me
 | 7. Open Problems | Predictive diagnosis, method composition, stateful execution, and generalization | Which unresolved questions would make the results more transferable? |
 | 8. Conclusion | Integrated perspective on numerical fidelity and learning correction | What principles emerge across the literature? |
 
-Three contributions connect these sections: **explicit policy and probability semantics**, **classification of operative method components**, and **evidence synthesis with stated conditions and limits**. The appendices map all twenty focal works to their discussion locations and document source/version handling. Section 6 synthesizes existing results; the survey does not introduce a new experimental benchmark.
+Three contributions connect these sections: **explicit policy and probability semantics**, **classification of operative method components**, and **evidence synthesis with stated conditions and limits**. Appendix A contains a **Surveyed Papers** table covering all twenty focal works, their numerical regimes, method components, and discussion locations. The other appendices document source/version handling and evidence interpretation. Section 6 synthesizes existing results; the survey does not introduce a new experimental benchmark.
 
 ## Taxonomy
 

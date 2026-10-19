@@ -12,3 +12,5 @@
 A1/A2 and B1/B2 are not mathematically disjoint sets. Assign a component by its operative rule and design objective; document secondary effects through cross-references. A whole paper can contain several components. B3 remains a short section because direct low-bit evidence is limited in the current corpus.
 
 Paper roles (core/support/boundary) and evidence types are distinct. MiniRL is principally a formulation reference here but includes direct FP8 rollout experiments. QeRL has direct quantized-RL evidence without being a mismatch-elimination method. VeXact is a diagnostic reference rather than a quantized accelerator.
+
+Figure 2 maps every focal work onto the taxonomy, including cross-category components and supporting connections. Appendix A provides the corresponding Surveyed Papers table with numerical regimes and discussion locations.

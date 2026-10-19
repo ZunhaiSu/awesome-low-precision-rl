@@ -533,16 +533,8 @@ Low-precision rollout generation can reduce execution cost while changing the nu
 \end{figure}
 
 \clearpage
-\begingroup
-\fontsize{9.5}{11}\selectfont
-\setlength{\parskip}{0pt}
 \setcounter{tocdepth}{2}
-\makeatletter
-\renewcommand*\l@section[2]{\addvspace{4pt}\@dottedtocline{1}{0em}{1.8em}{\bfseries #1}{\bfseries #2}}
-\renewcommand*\l@subsection{\@dottedtocline{2}{1.8em}{2.5em}}
 \tableofcontents
-\makeatother
-\endgroup
 \clearpage
 
 
@@ -556,25 +548,52 @@ The practical objective is an efficiently learned policy. Faster generation, clo
 The recent literature approaches this question through several interfaces. FlashRL motivates correction using actual rollout probabilities; Jet-RL changes the numerical paths shared by learner and sampler; later studies intervene in quantization, clipping, gradient estimation, or local update dynamics \citep{flashrl,jet}. Their contributions are easiest to compare when the unit of analysis is the \emph{method component}, rather than the paper title or precision format. An integrated system may contain both an execution intervention and an optimization intervention, neither of which should disappear behind a single label.
 
 
-Figure~\ref{fig:taxonomy-map} previews the two intervention interfaces. The distinction is operational: numerical methods change the computation that realizes a policy, while learning methods change the update computed from sampled data.
+Figure~\ref{fig:taxonomy-map} maps the surveyed work onto these intervention interfaces. It separates the numerical and learning branches, while showing how distinct components of an integrated method can occupy more than one class. Appendix~\ref{app:corpus} provides a corresponding paper-by-paper summary.
 
 \begin{figure}[!htb]
 \centering
 % BEGIN FIGURE taxonomy
-\begin{tikzpicture}[font=\footnotesize,>=Stealth,
- card/.style={draw=navy!55,rounded corners=2pt,align=left,text width=6.8cm,inner sep=6pt,minimum height=2.2cm},
- heading/.style={font=\small\bfseries,text=navy,align=center,text width=7.2cm}]
-\node[heading] at (0,0) {A. Numerical design\\and execution (Section 4)};
-\node[heading] at (7.8,0) {B. Learning under\\residual mismatch (Section 5)};
-\node[card,fill=bluewash] at (0,-1.60) {\textbf{A1\quad Align computation}\\Precision flow; QAT; guided rounding\\\emph{Jet-RL; QaRL; QUADS; TRACE}};
-\node[card,fill=bluewash] at (0,-4.10) {\textbf{A2\quad Control error; preserve updates}\\Scaling; compensation; calibration;\\selective W/A/KV precision\\\emph{QuRL UAQ; QUADS RAC; FP8-RL; KV4-RL}};
-\node[card,fill=white,draw=navy!35,dashed] at (0,-6.60) {\textbf{Configuration axes (recorded separately)}\\W/A/KV; dense/MoE; native/simulated;\\full-parameter/low-rank; collection schedule};
-\node[card,fill=tealwash] at (7.8,-1.60) {\textbf{B1\quad Correct gradient estimation}\\Weighting; adaptation; score centering\\\emph{FlashRL/TIS; AIS; CIS; Score Centering}};
-\node[card,fill=tealwash] at (7.8,-4.10) {\textbf{B2\quad Control policy-update influence}\\Clipping; trust bands; gating; repair\\\emph{QuRL ACR; QaRL TBPO; Calibrated Clipping;\\ACRL; TRIAGE}};
-\node[card,fill=tealwash] at (7.8,-6.60) {\textbf{B3\quad Adapt the optimization schedule}\\Learning-rate adaptation over training\\\emph{Beyond Precision (general TIM evidence)}};
+\begin{tikzpicture}[font=\fontsize{9}{11}\selectfont,>=Stealth,
+ root/.style={draw=navy,fill=navy,text=white,rounded corners=3pt,align=center,text width=1.95cm,minimum height=1.25cm,inner sep=5pt},
+ family/.style={rounded corners=3pt,align=center,text width=2.35cm,minimum height=1.25cm,inner sep=5pt,font=\fontsize{9}{11}\selectfont\bfseries},
+ leaf/.style={rounded corners=3pt,align=left,text width=8.95cm,minimum height=1.85cm,inner sep=7pt},
+ branch/.style={draw=navy!65,line width=.8pt}]
+\node[root] (root) at (1.03,-5.18) {Low-precision\\RL\\interventions};
+\node[family,draw=navy!60,fill=bluewash,text=navy] (a) at (4.03,-2.18) {A\quad Numerical\\design and\\execution};
+\node[family,draw=teal!55!black,fill=tealwash,text=teal!40!black] (b) at (4.03,-7.55) {B\quad Learning\\under residual\\mismatch};
+\node[leaf,draw=navy!45,fill=bluewash] (a1) at (11.06,-.95) {\textbf{A1\quad Align learner--rollout computation}\hfill Section 4.1\\[4pt]
+Jet-RL$^*$\;;\; QaRL$^*$ (rollout-aligned QAT)\\
+QUADS$^*$ (weight QAT)\;;\; TRACE (guided rounding)};
+\node[leaf,draw=navy!45,fill=bluewash] (a2) at (11.06,-3.40) {\textbf{A2\quad Preserve fidelity and parameter updates}\hfill Section 4.2\\[4pt]
+FP8-RL\;;\; QuRL$^*$ (UAQ)\;;\; QUADS$^*$ (RAC)\\
+KV4-RL (selective KV protection)\;;\; Jet-RL$^*$ (granularity)};
+\node[leaf,draw=teal!50!black,fill=tealwash] (b1) at (11.06,-5.80) {\textbf{B1\quad Correct gradient estimation}\hfill Section 5.1\\[4pt]
+FlashRL / TIS\;;\; AIS\;;\; Score Centering\\
+CIS$^\dagger$ (confidence-dependent importance correction)};
+\node[leaf,draw=teal!50!black,fill=tealwash] (b2) at (11.06,-8.18) {\textbf{B2\quad Control policy-update influence}\hfill Section 5.2\\[4pt]
+QuRL$^*$ (ACR)\;;\; QaRL$^*$ (TBPO)\;;\; ACRL\;;\; TRIAGE\\
+Full Pipeline FP8 RL (Calibrated Clipping)};
+\node[leaf,draw=teal!50!black,dashed,fill=tealwash,minimum height=1.45cm] (b3) at (11.06,-10.33) {\textbf{B3\quad Adapt the optimization schedule}\hfill Section 5.3\\[4pt]
+Beyond Precision$^\dagger$\; (general TIM evidence)\\
+Direct low-bit validation remains limited.};
+\draw[branch] (root.east)--(2.52,-5.18);
+\draw[branch,->] (2.52,-5.18)|-(a.west);
+\draw[branch,->] (2.52,-5.18)|-(b.west);
+\draw[branch] (a.east)--(5.82,-2.18);
+\draw[branch,->] (5.82,-2.18)|-(a1.west);
+\draw[branch,->] (5.82,-2.18)|-(a2.west);
+\draw[branch] (b.east)--(5.82,-7.55);
+\draw[branch,->] (5.82,-7.55)|-(b1.west);
+\draw[branch,->] (5.82,-7.55)|-(b2.west);
+\draw[branch,->] (5.82,-7.55)|-(b3.west);
+\node[draw=navy!25,fill=navy!3,rounded corners=2pt,align=left,text width=15.25cm,inner sep=6pt] at (8.07,-12.03) {\textbf{Supporting connections}\quad R3$^\dagger$: routing alignment (A1);\quad FP16-Mismatch$^\dagger$: precision choice (A2).\\
+MiniRL$^\dagger$: policy formulation;\quad VeXact$^\dagger$: diagnostic reference.};
+\node[draw=redwarn!45,fill=redwash,rounded corners=2pt,align=left,text width=15.25cm,inner sep=6pt] at (8.07,-13.28) {\textbf{Boundary case}\quad QeRL: NVFP4, LoRA, and adaptive noise for exploration (Box 1).};
+\node[align=left,text width=15.6cm,font=\fontsize{8}{9.5}\selectfont] at (8.07,-14.20) {$^*$A work contributes to multiple classes through distinct components or numerical design choices.\\
+$^\dagger$Supporting formulation or general TIM evidence; a supporting role does not exclude quantized experiments.};
 \end{tikzpicture}
 % END FIGURE taxonomy
-\caption{Road map of the component taxonomy. Integrated studies can contribute components to both columns; configuration labels describe the experimental regime separately. The detailed taxonomy and evidence boundaries are developed in Sections~\ref{sec:form}, \ref{sec:numerical}, and~\ref{sec:learning}.}\label{fig:taxonomy-map}
+\caption{Taxonomy of the surveyed work. Branches identify what each component directly changes; repeated names reveal cross-category contributions. All thirteen core studies, six supporting studies, and the exploration boundary case are shown. Numerical configurations remain separate comparison axes. Appendix~\ref{app:corpus} gives the paper-by-paper summary and discussion locations.}\label{fig:taxonomy-map}
 \end{figure}
 
 \subsection{Scope, Related Surveys, and Review Protocol}
@@ -867,6 +886,8 @@ The residual error helps explain where composition has value. Conditional correc
 
 \takeaway{Estimator correction changes an expectation; update control changes which contributions are allowed to act; scheduling changes their evolution over training. Their composition depends on shared probability semantics and the learning signal that survives.}
 
+% Keep complete section groups together across the two contents pages.
+\addtocontents{toc}{\protect\newpage}
 \section{Synthesis of Findings and Practical Trade-offs}\label{sec:synthesis}
 The literature offers its clearest comparisons through controlled changes within a system. Read together, these studies reveal how numerical fidelity, estimator behavior, and update selection interact. The synthesis below follows those connections, relating learning outcomes to the information and execution cost required to obtain them.
 
@@ -993,38 +1014,45 @@ This perspective shifts attention from reducing a single discrepancy statistic t
 
 \clearpage
 \appendix
-\section{Focal Corpus and Section Mapping}\label{app:corpus}
-The following table contains twenty unique focal contributions. A primary location identifies where a work is developed in detail; additional locations identify a distinct component or a contextual use. Supporting roles do not imply absence of direct low-precision experiments. Conference and preprint versions are not counted twice. Foundational and neighboring references are excluded from the count of twenty.
-\begingroup\footnotesize\setlength{\tabcolsep}{4pt}
-\begin{longtable}{@{}P{29mm}P{22mm}P{23mm}P{71mm}@{}}
-\caption{Focal works, component classes, and primary discussion locations. Secondary locations are shown in parentheses. All twenty enter the literature coverage synthesis.}\label{tab:corpus}\\
-\toprule Work & Class / role & Location & Scope note \\\midrule\endfirsthead
-\toprule Work & Class / role & Location & Scope note \\\midrule\endhead
+\section{Surveyed Papers and Section Mapping}\label{app:corpus}
+Table~\ref{tab:corpus} summarizes all twenty focal contributions, their numerical settings, operative components, and discussion locations. The year denotes first public appearance; the bibliography may cite a later formal publication. Core, supporting, and boundary roles describe their use in this review. A supporting study can still contain direct quantized-rollout experiments. Primary discussion locations appear first, followed by secondary locations in parentheses.
+
+\begingroup\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}P{29mm}P{37mm}P{59mm}P{29mm}@{}}
+\caption{Surveyed papers: numerical regimes, method components, and section mapping. Conference and preprint versions count as one contribution.}\label{tab:corpus}\\
+\toprule Work / first year & Numerical regime & Component(s) and contribution & Discussion \\\midrule\endfirsthead
+\multicolumn{4}{l}{\textit{Table \thetable\ continued: Surveyed papers}}\\[3pt]
+\toprule Work / first year & Numerical regime & Component(s) and contribution & Discussion \\\midrule\endhead
 \midrule\multicolumn{4}{r}{Continued on next page}\\\endfoot
 \bottomrule\endlastfoot
-FlashRL / TIS \citep{flashrl} & B1 & 5.1 (1.1; 2.1) & Quantized rollout; recorded behavior probabilities. \\
-QeRL \citep{qerl} & Boundary & Box 1 & NVFP4 with LoRA and adaptive noise; exploration setting. \\
-Jet-RL \citep{jet} & A1; A2 & 4.1 (6.2) & Unified FP8 flow; granularity is an associated numerical design choice. \\
-FP8-RL \citep{fp8rl} & A2; system & 4.2 (5.1; 6.2; 6.3) & FP8 stack; adopted TIS/MIS is not a new correction family. \\
-QuRL \citep{qurl} & B2; A2 & 5.2 (3.1; 4.2; 5.4; 6.2) & ACR and UAQ are distinct components. \\
-QaRL \citep{qarl} & A1; B2 & 4.1 (5.2; 5.4; 6.2) & Aligned QAT and TBPO are distinct components. \\
-AIS \citep{ais} & B1 & 5.1 (6.1; 6.2) & Adaptive estimator mixture; autoregressive and diffusion evidence distinguished. \\
-QUADS \citep{quads} & A1; A2 & 4.1 (4.2; 5.4; 6.2) & Asymmetric QAT plus rollout activation compensation. \\
-ACRL \citep{acrl} & B2 & 5.2 (3.3; 6.2) & Advantage-guided, discrepancy-dependent update control. \\
-Score Centering \citep{score} & B1 & 5.1 (2.2; 3.2; 5.4; 6.2) & Additive score correction; not full on-policy recovery. \\
-Full Pipeline FP8 RL \citep{fullfp8} & B2; system & 5.2 (3.2; 6.2; 6.3) & Clipping calibration; distinguish from quantizer calibration. \\
-TRIAGE \citep{triage} & B2 & 5.2 (3.3; 6.2) & Direction-aware control under native W4A4 execution. \\
-TRACE \citep{trace} & A1 & 4.1 (3.1; 6.2) & Rollout-guided rounding; local guarantees have limited scope. \\
-MiniRL \citep{minirl} & Support; B1/B2 & 2.1 (1.2; 5.1) & Formulation role; also contains direct FP8 rollout experiments. \\
-R3 \citep{r3} & Support; A1 & 3.1 (4.1) & MoE routing replay; routing mismatch is not uniquely quantization-induced. \\
-FP16-Mismatch \citep{fp16} & Support; A2 & 3.1 & BF16/FP16 numerical evidence; not a low-bit acceleration method. \\
-KV4-RL \citep{kv4} & A2; system & 4.2 (5.1; 6.2; 6.3) & INT4 KV with selective protection; colocated partial rollout. \\
-Beyond Precision \citep{beyond} & Support; B3 & 5.3 (3.3) & General TIM scheduling evidence; aggressive FP4 transfer remains untested. \\
-VeXact / Diagnosing TIM \citep{vexact} & Diagnostic & 3.4 & Zero-mismatch reference for attribution; not a quantized accelerator. \\
-CIS \citep{cis} & Support; B1 & 5.1 (3.2) & Calibrated importance sampling; BF16 cross-engine evidence. \\
+\multicolumn{4}{@{}l}{\textbf{Core method and system studies (13)}}\\*
+\textbf{FlashRL / TIS} \citep{flashrl}\newline 2025 & Higher-precision learner; quantized rollout & \textbf{B1}: truncated importance correction using recorded behavior probabilities. & 5.1 (1.1; 2.1) \\[5pt]
+\textbf{Jet-RL} \citep{jet}\newline 2026 & Unified FP8 learner and rollout paths & \textbf{A1; A2}: coordinated precision flow and quantization granularity. & 4.1 (6.2) \\[5pt]
+\textbf{FP8-RL} \citep{fp8rl}\newline 2026 & W8A8 rollout; FP8 attention / KV; FP8 learner explored in v2 & \textbf{A2; system}: scaling, calibration, and synchronization; adopts TIS/MIS. & 4.2 (5.1; 6.2; 6.3) \\[5pt]
+\textbf{QuRL} \citep{qurl}\newline 2026 & INT8 / FP8 rollout & \textbf{B2; A2}: adaptive clipping (ACR) and update-aware quantization (UAQ). & 5.2 (3.1; 4.2; 5.4; 6.2) \\[5pt]
+\textbf{QaRL} \citep{qarl}\newline 2026 & Quantized MoE rollout; aligned learner QAT & \textbf{A1; B2}: rollout-aligned QAT and sequence-level trust-band updates (TBPO). & 4.1 (5.2; 5.4; 6.2) \\[5pt]
+\textbf{AIS} \citep{ais}\newline 2026 & BF16 learner / FP8 rollout; autoregressive and diffusion models & \textbf{B1}: adaptive mixture of uncorrected and importance-weighted estimators. & 5.1 (6.1; 6.2) \\[5pt]
+\textbf{QUADS} \citep{quads}\newline 2026 & NVFP4 MoE rollout; learner weight QAT & \textbf{A1; A2}: asymmetric weight QAT and rollout residual activation compensation. & 4.1 (4.2; 5.4; 6.2) \\[5pt]
+\textbf{ACRL} \citep{acrl}\newline 2026 & FP8 rollout; discrepancy-dependent updates & \textbf{B2}: advantage-guided probability adjustment regulates discrepancy. & 5.2 (3.3; 6.2) \\[5pt]
+\textbf{Score Centering} \citep{score}\newline 2026 & BF16 learner; quantized rollout or policy lag & \textbf{B1}: additive score centering; behavior expectation is approximated. & 5.1 (2.2; 3.2; 5.4; 6.2) \\[5pt]
+\textbf{Full Pipeline FP8 RL} \citep{fullfp8}\newline 2026 & FP8 learner and rollout; calibration against BF16 & \textbf{B2; system}: reference-calibrated clipping preserves signed contributions. & 5.2 (3.2; 6.2; 6.3) \\[5pt]
+\textbf{TRIAGE} \citep{triage}\newline 2026 & Native NVFP4 W4A4; MoE analysis & \textbf{B2}: direction-selective gating, rebalancing, and bounded local repair. & 5.2 (3.3; 6.2) \\[5pt]
+\textbf{TRACE} \citep{trace}\newline 2026 & FP4 MoE rollout; guided learner QAT & \textbf{A1}: transfers rollout quantization information to guide learner rounding. & 4.1 (3.1; 6.2) \\[5pt]
+\textbf{KV4-RL} \citep{kv4}\newline 2026 & INT4 KV with bounded INT8 protection & \textbf{A2; system}: protects sensitive cache positions under retained TIS; generation and optimization alternate. & 4.2 (5.1; 6.2; 6.3) \\[5pt]
+\addlinespace[3pt]
+\multicolumn{4}{@{}l}{\textbf{Supporting formulation and general TIM studies (6)}}\\*
+\textbf{R3} \citep{r3}\newline 2025 & MoE routing; general execution mismatch & \textbf{A1 context}: replay of discrete routing choices; not uniquely quantization-induced. & 3.1 (4.1) \\[5pt]
+\textbf{FP16-Mismatch} \citep{fp16}\newline 2025 & BF16 / FP16 numerical comparison & \textbf{A2 context}: precision-selection evidence; not a low-bit acceleration method. & 3.1 \\[5pt]
+\textbf{MiniRL} \citep{minirl}\newline 2025 & Hybrid-engine RL; includes FP8-rollout experiments & \textbf{Formulation; B1/B2}: distinguishes behavior, proximal, and learner roles. & 2.1 (1.2; 5.1) \\[5pt]
+\textbf{Beyond Precision} \citep{beyond}\newline 2026 & General TIM; optimization scheduling & \textbf{B3}: mismatch-informed learning-rate scheduling; FP4 transfer remains open. & 5.3 (3.3) \\[5pt]
+\textbf{VeXact / Diagnosing TIM} \citep{vexact}\newline 2026 & Matched-execution diagnostic reference & \textbf{Diagnosis}: zero-mismatch counterfactual for attribution. & 3.4 \\[5pt]
+\textbf{CIS} \citep{cis}\newline 2026 & BF16 cross-engine mismatch & \textbf{B1 context}: confidence-dependent truncation; not direct FP4 validation. & 5.1 (3.2) \\[5pt]
+\addlinespace[3pt]
+\multicolumn{4}{@{}l}{\textbf{Exploration boundary case (1)}}\\*
+\textbf{QeRL} \citep{qerl}\newline 2025 & NVFP4 with LoRA and adaptive noise & \textbf{Exploration boundary}: quantization noise can aid exploration in its low-rank setting. & Box 1 \\[5pt]
+\addlinespace[3pt]
 \end{longtable}
 \endgroup
-
 
 \section{Source Selection and Version Handling}\label{app:protocol}
 \paragraph{Construction of this snapshot.}
