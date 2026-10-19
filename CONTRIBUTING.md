@@ -25,3 +25,9 @@ Do not infer a global ranking from different model/hardware/budget settings. Rec
 ## Rights and attribution
 
 Contribute material you may share under the repository license. Link to third-party papers instead of copying their PDFs. Preserve the supplied template's CC BY-SA attribution. Do not add an author's name, affiliation, endorsement, or publication status without verified authorization or a primary source.
+
+## Keep the public PDF current
+
+The repository-root `Survey.pdf` is the public reading copy and must match `survey/survey.pdf` byte for byte. After each manuscript update on Overleaf, build the latest source, refresh both PDF copies, and synchronize the corresponding LaTeX and changed supporting files to GitHub. Preserve unrelated GitHub edits. A failed compilation must not replace the last successful public PDF.
+
+The maintainer uses a local scheduled check to detect Overleaf updates. An unchanged source does not require a rebuild or an empty commit. The literature snapshot changes only after a literature check, independently of typesetting or synchronization.

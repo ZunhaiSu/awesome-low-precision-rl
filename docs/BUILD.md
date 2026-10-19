@@ -3,6 +3,7 @@
 Current checks cover the restored contents typography, expanded work-to-class taxonomy, and Surveyed Papers appendix. The literature snapshot remains October 19, 2026.
 
 - Manuscript: **27 pages**, 20 focal works, 26 references, and 13 source-located core evidence records.
+- Public PDF: repository-root `Survey.pdf` is an exact copy of `survey/survey.pdf`; the checker enforces this match.
 - Author and affiliation: **Zunhai Su, The University of Hong Kong**; PDF author metadata agrees.
 - Navigation: the first page contains the title/abstract panel and a vector survey overview. Pages two and three contain the complete contents in the original template typography, covering all eight sections and three appendices. The introduction begins on page four; PDF bookmarks remain available.
 - Figures: four embedded TikZ figures. Figure 2 is a work-to-class taxonomy covering all twenty focal studies. Three README SVG assets are exported from the overview, taxonomy, and clipping definitions.

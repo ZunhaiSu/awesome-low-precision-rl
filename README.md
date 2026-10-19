@@ -12,7 +12,7 @@ This repository accompanies **Training–Rollout Mismatch in Low-Precision LLM R
 
 **Snapshot:** 2026-10-19 · **Focal corpus:** 20 unique contributions · **Status:** living survey · under active development.
 
-[GitHub repository](https://github.com/ZunhaiSu/awesome-low-precision-rl) · [Read the survey](survey/survey.pdf) · [LaTeX source](survey/survey.tex) · [Bibliography](references.bib) · [Machine-readable catalog](data/papers.json) · [Evidence records](data/evidence.json)
+[GitHub repository](https://github.com/ZunhaiSu/awesome-low-precision-rl) · [Read the survey](Survey.pdf) · [LaTeX source](survey/survey.tex) · [Bibliography](references.bib) · [Machine-readable catalog](data/papers.json) · [Evidence records](data/evidence.json)
 
 > **Updates and collaboration.** This survey and its companion collection are under active development. Suggestions for missing papers, technical corrections, reproducibility insights, and research collaborations are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
 

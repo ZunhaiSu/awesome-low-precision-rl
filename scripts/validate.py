@@ -56,4 +56,5 @@ assert re.findall(r'(?m)^\\affil(?:\[[^\]]*\])?\{([^}]+)\}',s)==['The University
 assert len(re.findall(r'\\begin\{figure\}',body))==4
 assert body.count('\\tableofcontents')==1
 assert body.index('\\label{fig:overview}')<body.index('\\tableofcontents')<body.index('\\section{Introduction')<body.index('\\section{Problem Formulation')
+assert (root/'Survey.pdf').read_bytes()==(root/'survey/survey.pdf').read_bytes(),'root PDF differs from manuscript PDF'
 print(f'PASS: {len(rows)} focal papers; {len(keys)} references; 8 main sections; {len(evidence)} evidence records; citations, labels, locations, template and local links valid.')
