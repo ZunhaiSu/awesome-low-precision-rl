@@ -516,7 +516,7 @@ singlelinecheck=off,%
 \begin{document}
 \begin{abstract}
 \textbf{Abstract:} 
-Low-precision rollout generation can reduce the cost of language-model reinforcement learning while changing the policy that supplies its training data. Numerical approximation then propagates through gradient estimation, policy updates, and subsequent generation. We present a focused qualitative survey of twenty focal studies through this feedback loop. A common formulation separates execution mismatch from policy staleness and decoding transformations, and distinguishes conditional correction from response-level change of measure. A component taxonomy connects numerical alignment and fidelity control with estimator correction, update control, and schedule adaptation. Three relationships emerge: correction interacts with the evolving policy; alignment depends on the computation shared at a specific interface; and signed update contributions can expose effects hidden by aggregate discrepancy. These relationships explain how numerical and learning interventions complement one another, and why closer agreement alone does not establish better learning. We compare their assumptions, information requirements, and system costs, and identify open problems in predictive diagnosis, composition, and stateful collection.
+Low-precision rollout generation can reduce the cost of language-model reinforcement learning while changing the policy that supplies training data. The resulting mismatch feeds into gradient estimation, policy updates, and later generation. This focused qualitative survey brings together twenty studies through a common policy formulation and a component taxonomy. The formulation separates execution differences, decoding, and policy staleness, and distinguishes conditional correction from response-level change of measure. The taxonomy covers computation alignment, fidelity control, estimator correction, update control, and scheduling. Across the reviewed experiments, correction interacts with the evolving policy; alignment gains depend on the shared interface; and signed update contributions can reveal effects hidden by average discrepancy. These relationships explain complementary roles for numerical fidelity and learning correction. We connect their assumptions and information requirements to reported quality and system costs, and identify open problems in predictive diagnosis, coherent composition, and stateful collection.
 \par\medskip
 \noindent\textbf{Keywords:} quantized rollout; low-precision reinforcement learning; training--inference mismatch; importance sampling; quantization-aware training.
 \par\medskip\textbf{Literature snapshot:} October 19, 2026.
@@ -556,7 +556,6 @@ Low-precision rollout generation can reduce the cost of language-model reinforce
 \setcounter{tocdepth}{2}
 \tableofcontents
 \clearpage
-
 
 
 \section{Introduction and Scope}\label{sec:intro}
@@ -623,7 +622,7 @@ The twenty focal contributions comprise thirteen method or system studies, six f
 
 Broader surveys address low-precision LLM training, rollout strategies, and reinforcement learning for reasoning models \citep{lowprecisionsurvey,rolloutsurvey,reasoningsurvey}. The distinctive concern here is the connection between actual sampling probabilities, numerical execution, and the update computed from sampled data. General post-training quantization, pretraining-only methods, and speculative-draft acceleration enter only where they clarify that connection.
 
-The collection supports a focused narrative synthesis of primary studies. Numerical formats, architectures, adaptation regimes, and collection schedules remain separate from the method taxonomy, so that similar mechanisms can be compared without treating unlike experimental settings as equivalent. Appendix~\ref{app:terms} defines recurring abbreviations.
+The collection supports a focused qualitative synthesis of primary studies. Numerical format, architecture, adaptation, and collection protocol remain separate comparison axes. Table~\ref{tab:coverage} summarizes the represented regimes; Appendix~\ref{app:terms} defines recurring abbreviations.
 
 \subsection{Perspective and Contributions}
 Numerical fidelity and learning correction are coupled. A more faithful sampler changes the errors a correction encounters, while the update rule determines which errors affect learning. Their joint design determines which sample contributions reach the parameter update and the computation needed to preserve them.
@@ -733,15 +732,14 @@ A two-step example in Figure~\ref{fig:prefixes} makes the distinction tangible. 
 \node[surveyCard,fill=slatewash,text width=15.2cm,align=center,surveySmall] at (7.9,-.55) {Second-token conditionals agree: $p(a_2\mid h_1)/q(a_2\mid h_1)=1$.\\The first-token ratios, $0.5/0.8$ and $0.5/0.2$, recover the complete-path probabilities.};
 \end{tikzpicture}
 % END FIGURE prefixes
-\caption{Exact two-step illustration of conditional and response-level correction. Leaf values are complete-response probabilities. Equal second-token conditionals coexist with different prefix masses; the product ratio restores the four target probabilities of $0.25$. This is a constructed illustration, not an experimental result.}\label{fig:prefixes}
+\caption{Conditional and response-level correction in a two-step probability tree. Leaf values are complete-response probabilities. Equal second-token conditionals coexist with different prefix masses; the product ratio restores the four target probabilities of $0.25$. This is a constructed illustration, not an experimental result.}\label{fig:prefixes}
 \end{figure}
 
 \subsection{A Component-Level Taxonomy of Interventions}
 We group components by the object they directly modify. \textbf{A: numerical interventions} alter representation or execution. A1 matches computation between learner and sampler; A2 controls quantization error or preserves parameter updates. \textbf{B: learning interventions} alter how sampled data produce updates. B1 corrects gradient estimation; B2 controls the acceptance, magnitude, or direction of policy updates; B3 adapts the optimization schedule.
 
-The classes follow each component's operative rule and design objective. An alignment method may also improve fidelity, and every estimator correction ultimately changes an update. The useful distinction is what the component is constructed to do. A multiplicative weight, for example, can correct a distributional expectation or regulate update influence; its algebraic form alone does not determine its class. B3 extends the taxonomy to schedule adaptation, for which direct low-bit evidence remains limited.
+A component's purpose determines its assignment, while secondary effects can cross class boundaries. Alignment may improve fidelity, and both estimator correction and update control can use multiplicative weights. The distinction between B1 and B2 is the target: a distributional expectation or the influence of an update. QaRL and QuRL therefore occupy several classes through coequal components. An adopted correction remains separate from a system's proposed contribution; discussion locations indicate expository placement. Direct low-bit evidence for B3 remains limited.
 
-Assignments follow the operation introduced by a component. Shared execution choices indicate A1; preserving resolution or sensitive states indicates A2; correcting a target expectation indicates B1; controlling update acceptance or influence indicates B2; changing the schedule indicates B3. A work can introduce several coequal components, as in QaRL or QuRL. An adopted correction is identified separately from the component proposed by a system. Primary and secondary discussion locations denote expository placement, not a ranking of contributions or evidence strength.
 
 \begin{table}[!htbp]
 \centering\small
@@ -757,12 +755,11 @@ B3 & Optimization schedule & Mismatch-informed LR adaptation & Stability relativ
 \end{table}
 
 
-
 \FloatBarrier
 \subsection{Numerical Regimes and Contribution Roles}
 The same intervention can operate under different W/A/KV precisions, dense or mixture-of-experts (MoE) architectures, low-rank or full-parameter updates, and synchronous or partial collection. Native kernels and quantize--dequantize simulation also implement different numerical paths. In particular, ``FP4 training'' leaves open the precision of master weights, backward computation, and optimizer states.
 
-A study's role in the taxonomy depends on its contribution, while its experiments determine where that contribution has been tested. A formulation study can contain quantized-rollout evidence, and a quantized system can integrate an existing correction. This distinction preserves the experimental scope and attribution of both.
+These configuration axes also preserve attribution: integrating a correction into a quantized system is distinct from introducing that correction. A study's contribution role and the regimes tested in its experiments are recorded separately.
 
 \section{Mechanisms: From Numerical Discrepancy to Learning Dynamics}\label{sec:mechanisms}
 \subsection{Sources and Propagation of Execution Discrepancy}
@@ -820,7 +817,6 @@ $\ell(r,A)=\min\{rA,\clip(r,1-\epsilon,1+\epsilon)A\}$, with $0<\epsilon<1$ and 
 Thus the active clipping side depends on the learning signal. For an illustrative objective that clips the combined learner--behavior ratio, a same-snapshot ratio of $0.7$ with $\epsilon=0.2$ already suppresses a negative-advantage token, even before a learner update. This is not the decoupled surrogate in Section~\ref{sec:b1}; the example explains why naming the clipped ratio is essential to interpreting a failure or a repair.
 
 
-
 Figure~\ref{fig:clipping-sign} makes this sign dependence explicit for the standard surrogate. It also shows why clipping the combined learner--behavior ratio can suppress an update that a proximal ratio would still permit.
 
 \begin{figure}[!htb]
@@ -864,7 +860,7 @@ Optimization scale adds another feedback channel. Beyond Precision studies the r
 \subsection{Diagnosing the Effects of Mismatch}
 Diagnosis begins with the comparison used to isolate an effect. Replacing an inference engine can simultaneously change arithmetic, batching, memory use, and generated trajectories. A resulting quality difference cannot automatically be assigned to the precision format. VeXact constructs a zero-mismatch reference to help separate execution mismatch from other training effects \citep{vexact}. It supplies a diagnostic counterfactual against which the effects of accelerated execution can be interpreted.
 
-Execution, update behavior, and policy learning form a causal chain. Shared-prefix replay isolates changes in conditional probabilities; update diagnostics expose their effect on the estimator or constraint; training trajectories reveal the accumulated consequence. VeXact's reference is especially useful at the first interface. Connecting all three links explains why the same numerical discrepancy can be harmless under one update rule and damaging under another.
+The diagnostics in Table~\ref{tab:diagnostics} locate different effects within the chain from execution to learning. A controlled comparison connects a change in conditional probabilities to an estimator or update decision; the training trajectory reveals its accumulated consequence.
 
 
 \begin{table}[!htbp]
@@ -878,7 +874,7 @@ Update selection & Active clipping branches and retained contributions, separate
 \end{tabularx}
 \end{table}
 
-The first two diagnostics compare policies at shared prefixes; signed update diagnostics additionally depend on the actual surrogate and fixed advantage signals. Free-running trajectories then reveal whether the diagnosed effect persists as the sampled histories change.
+Shared-prefix measurements isolate conditional effects, whereas free-running trajectories include changes in the histories visited. Signed update diagnostics additionally depend on the surrogate and fixed advantage signals. Their connection to learning requires evidence over the training trajectory.
 
 \discussion{Box 1. Quantization and exploration}{QeRL combines low-precision execution, low-rank adaptation, and adaptive quantization noise, making exploration an explicit part of the training design \citep{qerl}. It occupies a boundary of this survey: the numerical perturbation changes the search process as well as agreement between computations. Its results establish a role for quantization noise in that setting, with task utility depending on the induced sampling distribution and the learner's adaptation capacity. They do not establish a benefit from arbitrary cross-engine error.}
 
@@ -927,7 +923,7 @@ Figure~\ref{fig:quantization} illustrates why update magnitude alone does not de
 \node[surveySmall,text=muted] at (7.7,-.85) {Fixed-step illustration: $Q(w)=0.5\,\mathrm{round}(2w)$; the chosen values avoid ties.};
 \end{tikzpicture}
 % END FIGURE quantization
-\caption{Constructed illustration of quantized-update visibility in Equation~\eqref{eq:quantupdate}. Under the fixed-step scalar quantizer, the blue update stays inside a cell while the smaller amber update crosses a boundary. Variable scales change these boundaries. This is a constructed illustration, not an experimental result.}\label{fig:quantization}
+\caption{Quantized-update visibility in Equation~\eqref{eq:quantupdate}. Under the fixed-step scalar quantizer, the blue update stays inside a cell while the smaller amber update crosses a boundary. Variable scales change these boundaries. This is a constructed illustration, not an experimental result.}\label{fig:quantization}
 \end{figure}
 
 QUADS addresses another residual: activation error in the rollout path. Its Residual Activation Compensation complements learner-side weight QAT, allowing alignment and error reduction to operate on different parts of the system \citep{quads}. The component ablations are particularly useful here because they distinguish what weight alignment recovers from what activation compensation adds.
@@ -939,9 +935,9 @@ KV4-RL allocates fidelity across positions instead of raising precision uniforml
 These methods preserve different information needed by learning. Parameter rescaling protects update visibility, residual compensation reduces activation error, recalibration follows distributional change, and positional protection targets sensitive cache states. Their W/A/KV targets locate the computation on which each mechanism acts.
 
 \subsection{Residual Mismatch and Limits of Alignment}
-Every alignment strategy leaves a boundary. Shared weights can coexist with different activations, a common quantizer with different surrounding kernels, and protected states with an otherwise unchanged network. Agreement between endpoints and fidelity to a higher-precision computation are separate properties, each conditional on the parameter snapshot and input history.
+Alignment and fidelity constrain different comparisons: agreement between endpoints and faithfulness to a higher-precision computation. Shared weights can coexist with different activations, and a common quantizer with different surrounding kernels. Each result is therefore conditional on the shared interface, parameter snapshot, and input history.
 
-This partial coverage explains why numerical methods often coexist with learning correction. A more faithful sampler can still lag behind the learner, while a closely matched conditional distribution cannot undo the histories excluded by earlier sampling decisions. The residual determines what a learning-side intervention has left to address.
+Residual differences connect numerical design to learning correction. A more faithful sampler may still lag behind the learner, and conditional agreement at an observed prefix cannot recover histories excluded by earlier decisions. A learning intervention addresses how these remaining differences affect estimation or the resulting update.
 
 Maintaining a shared numerical interface requires information as well as arithmetic. Operator choices require coordination, QAT depends on matching quantizer semantics, and rounding guidance requires storage and correspondence with learner states \citep{jet,qarl,quads,trace}. Fidelity control instead uses calibration, compensation, or selective execution to preserve sensitive information \citep{qurl,fp8rl,kv4}. Table~\ref{tab:numerical-interfaces} compares these dependencies and the discrepancies each leaves unresolved.
 
@@ -958,7 +954,7 @@ Fidelity control & Scales, update resolution, residuals, or protected states & C
 \end{table}
 
 
-The residual mismatch determines the role of learning-side correction. Its treatment depends on whether the remaining error changes the target expectation, the influence of an update, or the evolution of optimization.
+The relevant correction depends on which residual effect changes the estimator or update, and on the information available to control it.
 
 \section{Learning under Residual Mismatch}\label{sec:learning}
 Residual mismatch enters learning through both estimation and optimization. Estimator correction changes how behavior samples represent a target expectation; update control regulates their influence; scheduling changes the scale of adaptation over time. These objectives lead to different trade-offs among bias, variance, progress, and stability.
@@ -989,7 +985,7 @@ Score Centering replaces the score at a prefix with
 \end{equation}
 With the exact expectation, its mean under $q$ vanishes and the drift term in Equation~\eqref{eq:drift} is removed \citep{score}. The remaining covariance is still measured under $q$, so this is not full recovery of an on-policy gradient. The reported implementation uses sampler top-$k$ log-probabilities and models the omitted tail using the learner distribution; its default is $k=128$ \citep{score}. The omitted mass therefore enters through a modeled tail rather than being discarded. The coefficients used to form the correction are detached, and its fidelity depends on that behavior reconstruction.
 
-The distinction between multiplicative and additive correction also determines the information returned by the sampler. Ratio-based methods need probabilities of sampled actions; exact score centering needs a behavior-weighted score expectation. Truncation and reconstruction make different approximations to these quantities. Their derivative interpretation additionally depends on the learner computation, including any surrogate gradient through a quantizer. These methods consequently offer different kinds of correction: changing relative action weights, removing a conditional drift term, or adapting how much correction is applied.
+These corrections differ in their targets and information requirements. Ratio-based methods use sampled-action probabilities to adjust relative weights; score centering uses a behavior-weighted score expectation to remove conditional drift. Truncation and tail reconstruction approximate different objects. Their gradient interpretation also depends on the learner computation, including any surrogate gradient through a quantizer. These distinctions remain relevant when corrections are combined.
 
 \subsection{Controlling the Influence of Policy Updates}\label{sec:b2}
 \paragraph{Restoring or reshaping update constraints.}
@@ -1035,15 +1031,15 @@ $\nabla_\theta\ell(r_t,A_t)$;\quad gating or bounded repair\\[4pt]
 \needspace{6\baselineskip}
 Composition takes several forms. QaRL and QuRL combine numerical and learning interventions, while QUADS couples numerical alignment with activation-error compensation. Score Centering combines estimator corrections by centering the importance-weighted score \citep{qarl,qurl,quads,score}. These results motivate composition while leaving its behavior under other combinations open.
 
-A joint rule depends on consistent behavior probabilities, parameter snapshots, and estimator definitions. Centering an unweighted score need not center a weighted one; successive masks can remove the same examples; a reference pass adds computation to an otherwise inexpensive rule. These interactions connect the statistical compatibility of components to the system costs examined next.
+Compatibility is a property of the joint estimator. A center computed for an unweighted score need not remove drift after weighting; successive masks can discard the same examples; a reference pass adds computation to an otherwise inexpensive rule. Consistent behavior probabilities and parameter snapshots establish the common basis of the operations, while their interaction determines the retained update and its cost.
 
-Composition is useful when one component addresses an error left by another. Conditional correction preserves the collected histories, numerical alignment can leave policy lag, and clipping controls influence without reproducing sampler arithmetic. Their joint benefit depends on preserving useful signal after all corrections and constraints have acted.
+Complementarity consequently depends on the residual effect addressed by each component and on the signed contributions left after all operations have acted.
 
 
 % Keep complete section groups together across the two contents pages.
 \addtocontents{toc}{\protect\newpage}
 \section{Synthesis of Findings and Practical Trade-offs}\label{sec:synthesis}
-Controlled changes within individual systems reveal how numerical fidelity and learning correction interact. The resulting evidence connects three design choices: how closely the endpoints share computation, how sampled data enter the update, and which contributions survive repeated optimization. Their practical value depends on the quality gained and the system cost incurred.
+Within-study comparisons connect numerical execution to update behavior and learned-policy quality. They expose how closely the endpoints share computation, how samples enter the estimator, and which contributions survive optimization. These connections explain why numerical agreement, stability, and quality can respond differently to an intervention. Training cost determines whether the resulting benefit improves learning efficiency.
 
 \subsection{Experimental Regimes}
 Asymmetric learner--sampler precision exposes differences between numerical representations. Low precision on both sides makes the consistency of their execution paths and the resulting update especially salient. KV quantization acts on retained state, whereas weight and activation quantization alter other parts of computation. Low-rank adaptation and full-parameter RL also provide different degrees of freedom for responding to these changes.
@@ -1094,17 +1090,17 @@ Evaluation precision and checkpoint rule\\Task quality, iteration cost, time-to-
 
 \needspace{9\baselineskip}
 \paragraph{Correction and mismatch evolve together.}
-QuRL observes disagreement that grows beyond an initially stable period, with ACR and UAQ addressing different changes in clipping and update visibility \citep{qurl}. AIS adapts the correction mixture, ACRL regulates discrepancy through update influence, and Score Centering removes a conditional estimator drift term \citep{ais,acrl,score}. Correction and sampling therefore co-evolve: each altered update changes the policy and the discrepancy encountered in later rounds. Early agreement and bounded weights therefore characterize only part of the learning trajectory.
+QuRL observes disagreement beyond an initially stable period, with ACR and UAQ addressing different changes in clipping and update visibility \citep{qurl}. AIS adapts the correction mixture, ACRL regulates discrepancy through update influence, and Score Centering removes a conditional estimator drift term \citep{ais,acrl,score}. The common feature is feedback: an altered update changes the policy and the mismatch encountered later. Early agreement and bounded weights describe only part of this process.
 
 \paragraph{Alignment gains depend on the shared interface.}
-Jet-RL couples precision flow, while QaRL, QUADS, and TRACE couple representations or realized rounding decisions \citep{jet,qarl,quads,trace}. QUADS gives a particularly informative component comparison: asymmetric weight QAT recovers much of the performance loss, and rollout-side residual compensation further narrows the gap. Its asymmetric-versus-symmetric QAT comparison further separates nominal symmetry from effective alignment. FP8-RL adds the system perspective, showing how calibration and synchronization support a changing low-precision policy \citep{fp8rl}. The benefit is tied to the aligned interface and depends on whether a new stack preserves both that interface and its surrounding computation.
+Jet-RL couples precision flow; QaRL, QUADS, and TRACE couple representations or realized rounding decisions \citep{jet,qarl,quads,trace}. QUADS separates two effects: asymmetric weight QAT recovers much of the performance loss, and rollout activation compensation further narrows the gap. Its asymmetric-versus-symmetric comparison shows why nominal symmetry alone does not define effective alignment. FP8-RL adds calibration and synchronization for a changing low-precision policy \citep{fp8rl}. Transfer depends on preserving the interface responsible for the gain and its surrounding computation.
 
 \paragraph{Signed update selection explains effects hidden by averages.}
 The full-pipeline FP8 study connects excessive lower-side clipping of negative-advantage tokens to pathological training dynamics, whereas TRIAGE uses local and direction-dependent information to select interventions \citep{fullfp8,triage}. Both link stability to the signed signal retained after control. An aggregate clipping fraction or mean log-probability gap can hide that structure. TRIAGE's MoE routing-conditioned analysis also shows limits to token-wise directional predictiveness, distinguishing a population pattern from a reliable predictor for each token.
 
 \begin{table}[!htb]
 \centering\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
-\caption{Selected within-study comparisons. Each row separates the comparison, reported finding, and interpretive limit; source locations are provided in the companion evidence table.}\label{tab:observations}
+\caption{Within-study evidence for the synthesis. Regimes, comparison rules, and interpretive limits are retained; the companion evidence collection provides source locations.}\label{tab:observations}
 \begin{tabularx}{\linewidth}{@{}P{27mm}YYY@{}}\toprule
 Study / setting & Comparison & Reported finding & Interpretation and limit \\\midrule
 \rowcolor{bluewash} QuRL \citep{qurl}\newline INT8/FP8 & Longer TIS runs; ACR and invariant-scaling ablations. & Later behavior departs from the initially stable window; clipping and update visibility need distinct treatment. & A short stable interval does not establish long-horizon effectiveness; the observed horizon is setting-specific.\\[6pt]
@@ -1116,10 +1112,10 @@ KV4-RL \citep{kv4}\newline INT4 KV & Unprotected INT4 versus bounded INT8 protec
 \end{tabularx}
 \end{table}
 
-The studies converge on the learning signal preserved by the combined design. Weight alignment and activation compensation address complementary errors in QUADS; UAQ and ACR connect update visibility with clipping in QuRL; cache protection recovers later gains under an unchanged correction recipe in KV4-RL. These examples explain why better execution can reduce the burden on correction, while a better update rule can make residual execution error tolerable.
+These comparisons establish different forms of complementarity. QUADS combines two numerical interventions, QuRL combines update visibility with clipping control, and KV4-RL improves cache fidelity while retaining the correction recipe. Their results connect the component being changed to the contributions available for learning. They support the combinations tested within each system, while explaining how numerical fidelity and learning correction can address different residual effects.
 
 \subsection{Efficiency Gains and Implementation Costs}
-The same complementarity has a system cost. For serialized phases, iteration time can be decomposed as
+Preserving useful contributions adds work in different phases of training. For serialized phases, iteration time can be decomposed as
 \begin{equation}\label{eq:time}
 T_{\mathrm{iter}}=T_{\mathrm{rollout}}+T_{\mathrm{learner}}+T_{\mathrm{sync}}+
 T_{\mathrm{quant/calib}}+T_{\mathrm{other}},
@@ -1149,7 +1145,7 @@ The serialized model also gives a simple bound on what a rollout improvement can
 $h=0:\;T/T_0=0.7$ ($1.43\times$ overall)\qquad $h=0.1:\;T/T_0=0.8$ ($1.25\times$ overall)};
 \end{tikzpicture}
 % END FIGURE timing
-\caption{Analytical timing illustration for serialized execution. Doubling rollout speed reduces iteration time from $T_0$ to $0.7T_0$ when rollout accounts for $60\%$ of the baseline. Added work of $0.1T_0$ reduces the overall speedup from $1.43\times$ to $1.25\times$. This is a constructed illustration, not an experimental result.}\label{fig:timing}
+\caption{Serialized timing with a faster rollout phase and added overhead. Doubling rollout speed reduces iteration time from $T_0$ to $0.7T_0$ when rollout accounts for $60\%$ of the baseline. Added work of $0.1T_0$ reduces the overall speedup from $1.43\times$ to $1.25\times$. This is a constructed illustration, not an experimental result.}\label{fig:timing}
 \end{figure}
 
 Each intervention changes a different part of this cost. FP8-RL illustrates the work needed for scale estimation and numerical conversion \citep{fp8rl}. Reference calibration adds learner computation; guided rounding adds storage, transport, and state matching; selective precision adds work in the protected region. Table~\ref{tab:interfaces} relates these dependencies to the information each method needs.
@@ -1179,41 +1175,41 @@ The strongest empirical support concerns mechanisms within the settings in which
 
 This synthesis inherits the scope of its curated sources and the implementation details they make available. Source-linked observations expose the basis of the comparisons, while unreported conditions remain unresolved. The collection supports neither an exhaustive account of the field nor independent replication of its empirical results.
 
-Several gaps concern what this snapshot extracts. It does not systematically code seed counts, uncertainty estimates, negative results, or cross-hardware replication, so no global evidence score is assigned. Stateful partial collection is represented, but cross-version cache provenance remains incompletely characterized. Multi-turn agent and tool interactions are outside the direct evidence synthesized here. B3 lacks comparably extensive direct low-bit support, and diffusion results remain contextual to the autoregressive analysis. These are boundaries of coverage, rather than claims that the wider literature contains no relevant work.
+Direct low-bit scheduling evidence remains limited, and stateful provenance is only partly characterized. Multi-turn agent and tool interaction lies outside the direct evidence synthesized here; diffusion results are contextual to the autoregressive analysis. Seed counts, uncertainty, negative results, and cross-hardware replication are not systematically extracted. These are limits of this synthesis, not claims of absence from the wider literature.
 
 
 \section{Open Problems}\label{sec:open}
-Existing methods show that low-precision RL can improve through both numerical and learning interventions. The remaining challenge is to predict their joint behavior: when a discrepancy becomes harmful, which component addresses it, and how the benefit transfers across systems and tasks.
+The remaining challenge is to predict when mismatch becomes harmful, how interventions interact, and which benefits transfer across systems and tasks.
 
 \subsection{Predicting Harmful Mismatch}
-Mean disagreement is an incomplete predictor because learning depends on where error occurs and which update it changes. Confidence-conditioned tails, signed clipping distortions, conditional drift, and directional concentration offer more specific candidates. The open question is whether these diagnostics predict later instability or lost learning progress early enough to guide intervention.
+Learning depends on where error occurs and which update it changes. Confidence-conditioned tails, signed clipping distortions, conditional drift, and directional concentration offer more specific predictors than mean disagreement. Can they anticipate instability or lost progress early enough to guide intervention?
 
-Different failure targets require different predictors. Collapse within a horizon, reduced progress per update, and failure to reach a quality threshold need not share the same precursor. A mechanism-based diagnostic would remain predictive after a change of model or correction rule. It would also explain intervention effects: lowering the diagnostic without improving learning may reflect correlation, or the suppression of useful signal together with the measured risk.
+Collapse, reduced progress per update, and failure to reach a quality threshold need not share a precursor. A mechanism-based diagnostic should remain predictive across models and correction rules. Lowering it without improving learning may instead reflect correlation, or suppression of useful signal alongside the measured risk.
 
 \subsection{Composing Numerical and Learning Interventions}
-Numerical fidelity changes the operating regime of a correction. Conversely, a correction that suppresses updates can change the apparent value of finer quantization. Their joint design therefore depends on marginal benefit: how much additional learning a component preserves after another component has already acted.
+Greater fidelity alters the discrepancy encountered by a correction; restrictive update rules can conceal the value of finer quantization by suppressing the affected contributions. A component's value therefore depends on its marginal effect on learning progress and cost after other interventions act.
 
-Multiple masks, truncations, or trust bands can suppress the same contributions. Apparent stability may then reflect weak learning. The central problem is to characterize the joint estimator, the contributions it retains from positive and negative advantages, and the reference or distributional computation it requires. This would connect compatibility to quality gained per unit of computation.
+Multiple masks, truncations, or trust bands can suppress the same contributions, making weak learning appear stable. Characterizing the joint estimator requires the contributions retained from positive and negative advantages and the reference or distributional computation involved. This connects compatibility to quality gained per unit of computation.
 
 \subsection{Precision, Staleness, and Long-Horizon Interaction}
 Partial and asynchronous collection can make the sampling version token-dependent. A probability gap may then combine parameter change with execution mismatch, as Equation~\eqref{eq:decomp} makes explicit. Separating their effects requires information about snapshots, replay, or retained cache states that a production system may not store. The smallest behavior record sufficient for reliable correction remains a joint statistical and system question.
 
 Long responses amplify this difficulty. An early numerical perturbation changes the prefixes visited later, even if conditional correction at each observed prefix is accurate. This suggests allocating precision according to position, layer, context, and training phase, with learning benefit as the objective. Local tensor error alone cannot identify where the extra fidelity is worth its cost.
 
-Multi-turn interaction extends the same question beyond token prefixes. Tool observations and environment transitions add state that shapes later behavior and may need to enter the record alongside cache provenance and sampling probabilities. The taxonomy still locates numerical and learning interventions, but evidence from single-response generation leaves their effectiveness in these settings open.
+Multi-turn interaction adds tool observations and environment transitions that shape later behavior. These may need to accompany cache provenance and sampling probabilities in the behavior record. Evidence from single-response generation leaves the effectiveness of the surveyed interventions in these settings open.
 
 \subsection{Generalization and Comparable Evidence}
 Transfer hinges on assumptions about behavior and execution. A correction derived for sampling probabilities can change meaning when an engine returns pre-decoding log-probabilities; rounding guidance can lose correspondence after a synchronization change. Whether a diagnostic or intervention remains effective when these interfaces change is an open question. Controlled transfer across stacks would help distinguish a general mechanism from benefits tied to one kernel, collection protocol, or correction recipe.
 
 \section{Conclusion}\label{sec:conclusion}
-Low-precision rollout places numerical approximation inside the learning process: it changes the policy that generates experience and can thereby change both the current update and future trajectories. The reviewed methods address this feedback through shared computation, preserved fidelity, estimator correction, update control, and schedule adaptation.
+Quantized rollout places numerical approximation inside the learning process. It changes the policy that generates experience and can thereby alter the current update and future trajectories. The reviewed methods address this feedback through shared computation, preserved fidelity, estimator correction, update control, and schedule adaptation.
 
-Their common design problem is to preserve useful learning signal at lower computational cost. Interface-specific alignment, evolving correction, and signed update behavior explain complementary parts of that problem. Predictive diagnostics and coherent composition can turn these findings into a broader account of efficient learning across numerical paths, models, and interaction settings.
+Their common objective is useful learning at lower computational cost. The evidence connects that objective to the evolution of correction, the interface being aligned, and the signed contributions retained by the update. Predictive diagnostics and joint-estimator analysis can clarify when these relationships survive changes in numerical paths, models, and interaction settings.
 
 \clearpage
 \appendix
 \section{Surveyed Papers and Section Mapping}\label{app:corpus}
-Table~\ref{tab:corpus} summarizes all twenty focal contributions, their numerical settings, operative components, and discussion locations. The year denotes first public appearance; the bibliography may cite a later formal publication. Core, supporting, and boundary roles describe their use in this review. A supporting study can still contain direct quantized-rollout experiments. Primary discussion locations appear first, followed by secondary locations in parentheses.
+Table~\ref{tab:corpus} summarizes the twenty focal studies, numerical regimes, and component assignments. Years denote first public appearance; bibliography records may cite later formal publications. Main discussion locations precede additional locations in parentheses. Contribution roles are defined in Appendix~\ref{app:protocol}.
 
 \begingroup\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.20}
 \begin{longtable}{@{}P{29mm}P{37mm}P{59mm}P{29mm}@{}}
@@ -1263,22 +1259,22 @@ A focal study contributes a direct quantized-rollout or low-precision RL interve
 The catalog distinguishes first-publication dates, publication venues, and reviewed versions. QeRL, QuRL, and QaRL use formal publication records in the bibliography. Conference and preprint versions, aliases, and changes in presentation count as one contribution. Unpinned arXiv links are distinguished from locally reviewed versions, since a later revision may change the claims supported by a source.
 
 \paragraph{Attribution of evidence.}
-Method claims and empirical observations are attributed to primary sources. Equations~\eqref{eq:decomp}, \eqref{eq:is}, \eqref{eq:seqpg}, \eqref{eq:drift}, and \eqref{eq:clipbranch} are explanatory identities under their stated assumptions. Figures and summary tables are original syntheses; constructed examples are identified separately from published measurements. The companion repository provides the catalog, bibliography, and source-linked evidence, with links to third-party papers.
+Method claims and observations are attributed to primary sources. The likelihood, drift, and clipping identities explain mechanisms under the stated assumptions; they are distinct from experimental findings. Figures and tables are original syntheses, and constructed examples are labeled separately from published measurements. The companion evidence collection links observations to reviewed sources.
 
 \paragraph{Evidence roles and verification.}
-Core, supporting, and boundary labels describe a study's role in this argument. The catalog separately records whether its evidence concerns direct low-precision RL, general TIM, a diagnostic reference, a precision comparison, or exploration. Neither axis grades experimental quality. The source-linked observations retain their setting and limitation; no independent reproduction was performed for this survey. A missing statistical or implementation field is left unassessed, rather than interpreted as evidence of absence. Reviewed arXiv versions are pinned where the saved source record identifies one; publication records and version-unspecified links remain explicitly distinguished.
+Contribution role identifies relevance to the argument; evidence domain identifies the setting examined. Neither grades experimental quality. Source-linked observations retain their conditions and limitations. No independent reproduction was performed, and unextracted statistical or implementation fields remain unassessed. The catalog separates identified reviewed versions from version-unspecified records.
 
 \section{Evidence, Assumptions, and Transfer}\label{app:checklist}
-A result about mismatch is conditional on the policy that generated the data. Parameter versions, numerical paths, decoding transformations, and retained execution state determine the behavior law. Learner, proximal, and KL-reference policies define separate roles in correction and optimization. Their relationship fixes the meaning of a reported ratio or discrepancy.
+Transfer depends on the relationship between the sampled behavior and the computation used to learn from it. Parameter versions, numerical paths, decoding, and retained state determine the behavior law; learner, proximal, and reference policies define separate loss roles. A changed execution path can therefore alter the meaning of a correction even when the nominal precision format remains the same.
 
-The component taxonomy describes the intervention; numerical configuration describes the setting in which it acts. Conditional correction, truncated weights, partial execution alignment, and reconstructed expectations leave different residual approximations. An empirical result establishes the behavior of the tested combination under its evaluation conditions. Transfer requires the assumptions responsible for that result to remain valid.
+The residual approximation identifies what a result leaves open: prefix selection after conditional correction, bias from truncation, unmatched execution after alignment, or error in a reconstructed expectation. A published combination supports its tested estimator and regime. Generalization requires the assumptions responsible for that result to remain valid.
 
 
 \clearpage
 \section{Terminology}\label{app:terms}
 \begingroup\small
 \begin{longtable}{@{}P{35mm}P{123mm}@{}}
-\caption{Terminology used in the text and figures. Method abbreviations identify components, not interchangeable update rules.}\label{tab:terms}\\
+\caption{Terminology and component abbreviations used in the text and figures.}\label{tab:terms}\\
 \toprule Term & Meaning \\\midrule\endfirsthead
 \toprule Term & Meaning \\\midrule\endhead
 \bottomrule\endlastfoot

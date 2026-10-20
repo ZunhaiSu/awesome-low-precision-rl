@@ -1,6 +1,6 @@
 # Editorial review history
 
-The recommended manuscript is the [integrated edition](REVISION_5.md), which compares the main versions and consolidates their scientific argument. The entries below preserve earlier assessments.
+The recommended manuscript is the [current refined edition](ASSESSMENT.md), which integrates the expanded coverage and evidence with a more continuous scientific argument. The entries below preserve earlier assessments; [REVISION_5.md](REVISION_5.md) describes the integrated base edition.
 
 The first cycle below records the original delivered draft. The additional cycle at the end links to the current revision assessment.
 

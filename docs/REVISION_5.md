@@ -4,7 +4,7 @@
 
 This assessment describes the integrated base edition. Subsequent refinements add coverage, diagnostics, terminology, and generated catalog/evidence views; [BUILD.md](BUILD.md) describes the current manuscript and pagination.
 
-The integrated edition is the recommended manuscript. It retains the twenty-round edition's technical formulation and ten vector figures, while developing a more continuous scholarly argument. The organizing idea is the learning signal preserved by numerical and learning interventions, together with the computation needed to preserve it.
+The integrated edition provides the base for the [current refined manuscript](ASSESSMENT.md). It retains the twenty-round edition's technical formulation and ten vector figures, while developing a more continuous scholarly argument. The organizing idea is the learning signal preserved by numerical and learning interventions, together with the computation needed to preserve it.
 
 ## Comparison of the main versions
 
