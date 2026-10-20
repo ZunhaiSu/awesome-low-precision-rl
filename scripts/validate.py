@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Validate the public paper catalog, evidence views, links, and PDF-only release."""
 import json
+import hashlib
 import re
 import subprocess
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote
 
 root = Path(__file__).resolve().parents[1]
 rows = json.loads((root / 'data/papers.json').read_text())
@@ -45,7 +47,7 @@ for path in root.rglob('*.md'):
     for target in targets:
         if not target or target.startswith(('http:', 'https:', '#', 'mailto:')):
             continue
-        assert (path.parent / target.split('#')[0]).exists(), (path, target)
+        assert (path.parent / unquote(target.split('#')[0])).exists(), (path, target)
 for path in [root / 'README.md', root / 'data/papers.json']:
     text = path.read_text()
     assert '/Users/' not in text and 'file://' not in text, ('private path', path)
@@ -57,7 +59,41 @@ for row in rows:
     assert readme.count(f'[{title}]({url})') == 1, row['key']
 
 tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root).decode().rstrip('\0').split('\0')
-assert [p for p in tracked if p.lower().endswith('.pdf')] == ['Survey.pdf']
+library = json.loads((root / 'papers/manifest.json').read_text())
+entries = library['papers']
+by_key = {r['key']: r for r in rows}
+assert len(entries) == len(rows) and {e['key'] for e in entries} == set(by_key)
+assert len({e['path'] for e in entries}) == len(entries)
+mirrors = set()
+for tier, count in [('main', 13), ('related', 16)]:
+    group = [e for e in entries if e['reading_tier'] == tier]
+    assert len(group) == count
+    assert sorted(e['reading_number'] for e in group) == list(range(1, count + 1))
+    assert [e['first_publication'] for e in sorted(group, key=lambda e: e['reading_number'])] == sorted(e['first_publication'] for e in group)
+for entry in entries:
+    paper = by_key[entry['key']]
+    for field in ['title', 'authors', 'first_publication', 'reviewed_version']:
+        assert entry[field] == paper[field], (entry['key'], field)
+    assert entry['source_url'] == paper['reviewed_source_url']
+    assert entry['official_pdf_url'].startswith('https://')
+    path = root / entry['path']
+    assert path.is_relative_to(root / 'papers') and '..' not in path.parts
+    assert path.is_file() and entry['reading_scope'] and entry['reading_focus']
+    assert entry['license']['evidence_url'] == entry['source_url']
+    if entry['distribution'] == 'mirror':
+        assert entry['pdf_path'] == entry['path'] and path.suffix == '.pdf'
+        assert entry['license']['redistribution_verified'] is True
+        assert entry['license']['url'].startswith('https://creativecommons.org/')
+        assert path.read_bytes().startswith(b'%PDF-')
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == entry['source_pdf_sha256']
+        mirrors.add(entry['path'])
+    else:
+        assert entry['distribution'] == 'official_link' and entry['pdf_path'] is None
+        assert not entry['license']['redistribution_verified'] and path.suffix == '.md'
+        assert entry['official_pdf_url'] in path.read_text()
+assert len(mirrors) == library['counts']['pdf_mirrors'] == 11
+assert len(entries) - len(mirrors) == library['counts']['official_links'] == 18
+assert set(p for p in tracked if p.lower().endswith('.pdf')) == {'Survey.pdf'} | mirrors
 assert not any(Path(p).suffix.lower() in {'.tex', '.cls', '.sty', '.bib', '.bst'} for p in tracked)
 assert (root / 'Survey.pdf').read_bytes().startswith(b'%PDF-')
-print(f'PASS: {len(rows)} linked paper titles; {len(evidence)} evidence records; metadata, generated views, local links, and PDF-only manuscript release valid.')
+print(f'PASS: {len(rows)} linked titles; {len(evidence)} evidence records; 13 mainline / 16 related entries; {len(mirrors)} licensed PDF hashes; links and PDF-only survey release valid.')

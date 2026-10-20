@@ -4,3 +4,7 @@ This work is licensed under CC BY-SA 4.0.
 Full license: https://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 The manuscript's typesetting-template attribution and modifications are documented in docs/TEMPLATE.md.
+
+Third-party paper PDFs under papers/ are excluded from this repository license.
+They retain their original licenses and copyright ownership; see papers/NOTICES.md
+and papers/manifest.json for the exact source versions and attribution.

@@ -26,11 +26,11 @@ Do not infer a global ranking from different model/hardware/budget settings. Rec
 
 ## Rights and attribution
 
-Contribute material you may share under the repository license. Link to third-party papers instead of copying their PDFs. Preserve the supplied template's CC BY-SA attribution. Do not add an author's name, affiliation, endorsement, or publication status without verified authorization or a primary source.
+Contribute original material you may share under the repository license. Third-party papers retain their own licenses. Mirror a paper only when its exact source version explicitly permits redistribution: preserve its original bytes and notices, provide full attribution and the license URL in `papers/NOTICES.md`, and record source and hash evidence in `papers/manifest.json`. Otherwise add a numbered entry linking to the official PDF. Preserve the supplied template's CC BY-SA attribution. Do not add an author's name, affiliation, endorsement, or publication status without verified authorization or a primary source.
 
 ## Keep the public PDF current
 
-The repository-root `Survey.pdf` is the only published manuscript file. Manuscript sources are maintained separately in Overleaf and must not be uploaded to this repository. Do not add LaTeX sources, class/style files, manuscript build scripts, or a second PDF copy in a source directory.
+The repository-root `Survey.pdf` is the only published survey manuscript file. Licensed third-party reading copies belong under `papers/` and are checked against its manifest. Manuscript sources are maintained separately in Overleaf and must not be uploaded to this repository. Do not add LaTeX sources, class/style files, manuscript build scripts, or a second PDF copy in a source directory.
 
 After a requested manuscript update, compile and check the source in the authoring project, inspect the affected PDF pages, then publish the successful PDF as `Survey.pdf`. Refresh changed catalog records and SVG figures as needed. Preserve unrelated GitHub edits. A failed compilation must not replace the last successful public PDF.
 

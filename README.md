@@ -16,6 +16,7 @@
 
 <p align="center">
   <a href="Survey.pdf"><strong>Read the survey PDF</strong></a> &nbsp;·&nbsp;
+  <a href="papers/README.md">Reading library</a> &nbsp;·&nbsp;
   <a href="#paper-catalog">Papers</a> &nbsp;·&nbsp;
   <a href="docs/EVIDENCE.md">Evidence</a> &nbsp;·&nbsp;
   <a href="#citation">Cite</a>
@@ -38,7 +39,7 @@ Low-precision execution changes both the cost of generating experience and the l
 
 ## Contents
 
-[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
+[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Reading library](#reading-library) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
 
 ## Scope
 
@@ -98,6 +99,17 @@ The catalog follows first public appearance. The routes below follow conceptual 
 | What must a deployable low-precision stack coordinate? | [FP8-RL](https://arxiv.org/abs/2601.18150) → [Miles](https://arxiv.org/abs/2609.08368v1) → [QATFactory QARL](https://arxiv.org/abs/2609.39223v2): calibration, conversion, precision exceptions, and weight transfer. | §§4, 6.3 |
 
 Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html) visible as an exploration boundary case and [Beyond Precision](https://arxiv.org/abs/2602.01826) as general TIM evidence for scheduling. A route expresses reading dependencies, without implying a performance ranking or historical influence.
+
+## Reading library
+
+The [numbered paper library](papers/README.md) follows a focused reading path: **13 quantized-RL papers first**, followed by **16 related theory and system papers**. The numbering matches the local library; the survey's broader contribution roles remain in the catalog below.
+
+| Start here | Continue here |
+|---|---|
+| [01 · 量化 RL 主线 / Quantized RL](papers/01_%E9%87%8F%E5%8C%96RL%E4%B8%BB%E7%BA%BF/README.md) | [02 · 相关理论与系统 / Related reading](papers/02_%E7%9B%B8%E5%85%B3%E7%90%86%E8%AE%BA%E4%B8%8E%E7%B3%BB%E7%BB%9F/README.md) |
+| 13 papers centered on quantized rollout and low-precision RL. | 16 papers on TIM, optimization, diagnosis, theory, and integrated systems. |
+
+The library includes **11 licensed PDF copies and 18 official-PDF links**, with complete titles and reading notes. Third-party copies retain their own [licenses and attribution](papers/NOTICES.md).
 
 ## Paper catalog
 
@@ -219,4 +231,4 @@ The paper adapts the **typesetting template** from [arXiv:2601.14004v4](https://
 
 The survey is under active development. Its scientific scope and source versions are documented alongside the manuscript; editorial assessments are available in the [review history](docs/REVIEW.md).
 
-The survey PDF, repository content, and template adaptations use [CC BY-SA 4.0](LICENSE). Linked papers retain their own licenses; their PDFs are not redistributed here.
+The original survey, annotations, and template adaptations use [CC BY-SA 4.0](LICENSE). Third-party paper copies retain their individual licenses and attribution, as documented in [paper notices](papers/NOTICES.md); other entries link to official PDFs.
