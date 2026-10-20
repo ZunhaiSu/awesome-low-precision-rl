@@ -24,16 +24,6 @@
 
 Low-precision execution changes both the cost of generating experience and the learning signal computed from it. This focused survey connects numerical mechanisms, estimator correction, and policy optimization through a component taxonomy and source-linked evidence.
 
-<p align="center">
-  <img src="figures/overview.svg" alt="Survey overview: generation, collected experience, and learner updates form a feedback loop" width="920">
-</p>
-
-> **Living survey.** Technical corrections, missing papers, and research collaborations are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
-
-## Contents
-
-[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Build](#build-and-validate) · [Contribute](#contribute) · [Citation](#citation)
-
 ## Explore the survey
 
 | Understand the mechanisms | Compare interventions | Assess the evidence |
@@ -41,7 +31,15 @@ Low-precision execution changes both the cost of generating experience and the l
 | Policy roles, execution differences, and their effects on learning. | Numerical alignment, fidelity control, estimator correction, and update control. | Within-study findings, assumptions, quality, and system cost. |
 | [Reading routes](#reading-routes) · §§2–3 | [Component taxonomy](#taxonomy) · §§4–5 | [Evidence records](docs/EVIDENCE.md) · §6 |
 
-The [reviewed catalog](docs/CATALOG.md) provides full titles, authors, numerical regimes, and source versions. [JSON records](data/papers.json) and [BibTeX](references.bib) support reuse.
+<p align="center">
+  <img src="figures/overview.svg" alt="Survey overview: generation, collected experience, and learner updates form a feedback loop" width="680">
+</p>
+
+> **Living survey.** Technical corrections, missing papers, and research collaborations are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
+
+## Contents
+
+[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Build](#build-and-validate) · [Contribute](#contribute) · [Citation](#citation)
 
 ## Scope
 
@@ -101,7 +99,7 @@ Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f06
 
 ## Paper catalog
 
-The tables follow first public appearance and count each contribution once. Full titles, authors, reviewed versions, and additional discussion locations are in the [reviewed catalog](docs/CATALOG.md) and Surveyed Papers appendix. Dates can precede the formal publication linked here. [Classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains.
+The tables follow first public appearance and count each contribution once. Full titles, authors, reviewed versions, and additional discussion locations are in the [reviewed catalog](docs/CATALOG.md) and Surveyed Papers appendix. Dates can precede the formal publication linked here. [Classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains. [JSON records](data/papers.json) and [BibTeX](references.bib) support reuse.
 
 Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 · Fidelity](docs/CATALOG.md#fidelity-a2) · [B1 · Estimation](docs/CATALOG.md#estimation-b1) · [B2 · Update control](docs/CATALOG.md#update-control-b2) · [B3 · Scheduling](docs/CATALOG.md#scheduling-b3).
 

@@ -1,6 +1,6 @@
 # Current manuscript validation
 
-Validated on 20 October 2026 after presentation refinements to the polished manuscript and repository. The literature snapshot remains 19 October 2026. See the [current comparison and assessment](ASSESSMENT.md).
+Validated on 20 October 2026 after final reader-oriented adjustments to the polished manuscript and repository. The literature snapshot remains 19 October 2026. See the [current comparison and assessment](ASSESSMENT.md).
 
 - **Manuscript:** 30 pages, eight main sections, twenty focal studies, twenty-six references, thirteen source-located core evidence records, and ten original vector figures.
 - **Author:** Zunhai Su, The University of Hong Kong; PDF metadata agrees.
@@ -9,7 +9,7 @@ Validated on 20 October 2026 after presentation refinements to the polished manu
 - **Coverage and evidence:** the coverage matrix separates numerical, model/adaptation, collection, and generation regimes. The diagnostic table links mechanisms to observables and intervention targets. The six-study comparison separates comparison, finding, and limitation. Relevance and evidence domain are independent metadata; no experimental-quality grade or new benchmark is claimed.
 - **Sources:** saved reviewed arXiv versions are pinned in metadata and both bibliographies where identified; formal publications and version-unspecified records remain distinct. Source selection and extraction gaps are stated in the manuscript.
 - **Compilation:** built-in editor compiler and Tectonic 0.17.0 succeed. A clean directory containing only `survey.tex` also builds a 30-page PDF. No overfull/underfull boxes, undefined citations, unresolved references, or LaTeX errors. Legacy-package encoding warnings remain nonfatal.
-- **Visual review:** all 30 final pages rendered and inspected; the reading pathways, consistent table headers, synthesis, conclusion, and complete glossary were also checked at a readable scale. The first synthesis finding, conclusion, and terminology table are kept together.
+- **Visual review:** all 30 final pages rendered and inspected; the evidence comparison and two-page paper appendix were checked at a readable scale after increasing row spacing and emphasizing primary discussion locations. The reading pathways, consistent table headers, synthesis, conclusion, and complete glossary remain intact. The first synthesis finding, conclusion, and terminology table are kept together.
 - **Repository consistency:** the README catalog, complete catalog/evidence views, and status SVG are generated from JSON. The checker validates generated content, metadata domains, saved version URLs, citations, section mappings, figure exports, local links, author fields, class copies, and matching root/nested PDFs. A temporary-copy check confirmed that stale views are detected and regeneration restores consistency. The preferred manuscript citation passes the official CFF schema.
 - **Synchronization:** publication is manual; the scheduled monitor remains paused. Root `Survey.pdf` and `survey/survey.pdf` match byte for byte.
 

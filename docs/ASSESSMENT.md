@@ -48,8 +48,10 @@ The presentation was compared with [Efficient Large Language Models: A Survey](h
 |---|---|---|
 | Connect the taxonomy to the paper | Preserve the complete component map and its section references; add three reading pathways after the contents. | Gives separate entry points for foundations, methods, and evidence without changing the agreed framework or contents typography. |
 | Make dense comparisons easier to scan | Use consistent pale-blue, bold table headers and retain booktabs rules. | Supports the notation, diagnostic, comparison, and appendix tables without adding visual clutter. |
-| Make the repository a useful research entry point | Center the title, paper identity, author, resources, and restrained status labels; show three reader routes. | Keeps the actual survey PDF prominent and makes the scope and evidence accessible before the detailed catalog. |
+| Make the repository a useful research entry point | Center the title, paper identity, author, resources, and restrained status labels; place three reader routes before a compact overview graphic. | Keeps the actual survey PDF prominent and brings the reading choices into view earlier. |
 | Connect paper groups to full records | Generate five intervention navigation groups alongside chronological catalog entries. | Retains first-publication ordering while allowing component-based lookup and explicitly labeling supporting studies. |
 | Make citation accessible | Add a schema-validated CFF file with the working manuscript as the preferred citation. | Uses GitHub's standard citation interface without inventing publication status, a DOI, or a preprint identifier. |
 
 The design choices are editorial judgments based on these examples, not a ranking of the reference projects. Promotional news, star-history graphics, and a deeper taxonomy were unnecessary for the current collection. The literature snapshot and all scientific claims remain unchanged.
+
+The final reader pass improves the two densest tables with slightly more row spacing. Four evidence-limit cells are shorter while retaining their qualifications. In the surveyed-paper appendix, bold primary discussion locations sit above parenthesized additional locations; all twenty records retain their content. These adjustments preserve the 30-page layout.
