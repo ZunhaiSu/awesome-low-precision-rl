@@ -1,6 +1,6 @@
 # Current manuscript validation
 
-Validated on 20 October 2026 after three further editorial passes over the feedback-expanded manuscript. The literature snapshot remains 19 October 2026. See the [current comparison and assessment](ASSESSMENT.md).
+Validated on 20 October 2026 after the final precision edit of the three-pass manuscript. The literature snapshot remains 19 October 2026. See the [current comparison and assessment](ASSESSMENT.md).
 
 - **Manuscript:** 30 pages, eight main sections, twenty focal studies, twenty-six references, thirteen source-located core evidence records, and ten original vector figures.
 - **Author:** Zunhai Su, The University of Hong Kong; PDF metadata agrees.

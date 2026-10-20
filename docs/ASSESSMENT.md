@@ -2,7 +2,7 @@
 
 20 October 2026. Literature snapshot: 19 October 2026.
 
-The current edition combines the integrated manuscript's continuous argument with the feedback edition's clearer coverage and evidence boundaries. Three further editorial passes reduce repeated explanations, sharpen comparisons between interventions, and refine the abstract, conclusion, captions, and appendices. The result is a 30-page focused qualitative survey. This is authoring self-review, not independent peer review or experimental replication.
+The current edition combines the integrated manuscript's continuous argument with the feedback edition's clearer coverage and evidence boundaries. Three editorial passes reduced repetition and strengthened comparative synthesis. A final precision edit clarifies where numerical interventions act, distinguishes candidate diagnostics from validated predictors, and aligns the abstract and conclusion with the evidence. The result is a 30-page focused qualitative survey. This is authoring self-review, not independent peer review or experimental replication.
 
 ## Comparison
 
@@ -10,7 +10,8 @@ The current edition combines the integrated manuscript's continuous argument wit
 |---|---|---|
 | Integrated base, 28 pages | Connects policy semantics, numerical mechanisms, learning interventions, and training cost. | Coverage across regimes and diagnostic relationships are less explicit; terminology is scattered. |
 | Feedback-expanded edition, 31 pages | Adds coverage and mechanism–diagnostic tables, fuller notation and terminology, and more structured within-study comparisons. | Classification rules, evidence roles, and limitations recur in several places, interrupting the argument. |
-| **Current edition, 30 pages** | **Retains those substantive additions while explaining residual mismatch, intervention compatibility, and evidence more directly.** | **Scientific conclusions remain bounded by the reviewed source studies and their heterogeneous settings.** |
+| Three-pass edition, 30 pages | Retains those substantive additions while explaining residual mismatch, intervention compatibility, and evidence more directly. | Some overview statements are broader than the methods they summarize; the research agenda does not clearly separate candidate diagnostics from validated predictors. |
+| **Current polished edition, 30 pages** | **Preserves the scientific structure while making intervention targets and evidential claims more precise. The abstract and conclusion develop the same mechanism-based argument.** | **Scientific conclusions remain bounded by the reviewed source studies and their heterogeneous settings.** |
 
 Pagination is a layout result, not a measure of scientific quality. The current edition removes a sparse conclusion spill page without reducing the focal corpus, technical formulation, or table of surveyed papers.
 
@@ -19,6 +20,17 @@ Pagination is a layout result, not a measure of scientific quality. The current 
 1. **Scope and classification.** Consolidated overlapping explanations of component assignments, contribution roles, and coverage limits. Non-exclusive labels, secondary effects, and the limited direct low-bit evidence for scheduling remain explicit.
 2. **Comparative synthesis.** Distinguished agreement from higher-precision fidelity and connected residual numerical differences to learning correction. The synthesis now contrasts QUADS's two numerical interventions, QuRL's numerical and update-control components, and KV4-RL's cache protection under a retained correction recipe. Compatibility is explained through the joint estimator, retained signed contributions, and computational dependencies.
 3. **Whole-paper prose and layout.** Refined the abstract and conclusion around the same scientific argument; shortened repeated caption framing and appendix explanations; compressed overlapping research-agenda prose. Constructed examples remain clearly distinguished from experimental results. Each pass produced a successfully compiled manuscript.
+
+## Final precision edit
+
+| Before | After | Reason |
+|---|---|---|
+| Numerical design is described as determining or changing the data-generating computation. | Numerical interventions may act on the learner, sampler, or their shared interface. | Learner-side QAT can align computation without directly changing the sampler. |
+| A comparison of QaRL and QUADS is said to reveal selective alignment. | Their designs illustrate selective alignment. | Conceptual comparison should not imply a controlled experiment between the two papers. |
+| Mechanism-linked diagnostics are called more specific predictors, followed by a question about their predictive value. | They are identified as candidate diagnostics whose predictive value remains unresolved. | A plausible mechanism does not establish prospective predictive validity. |
+| Conditional agreement is said not to recover histories excluded earlier. | Conditional agreement does not restore a response distribution changed by earlier decisions. | Prefix-distribution mismatch can persist even when all histories retain positive support. |
+
+The abstract now introduces the learning consequences before the taxonomy and synthesis. The conclusion connects numerical fidelity, correction, and total training cost without repeating a list of findings. Cross-paper synthesis uses claims proportionate to the tested settings. The quantized-update explanation was shortened so its paragraph is not interrupted by the figure across a page break.
 
 ## Assessment
 

@@ -516,7 +516,7 @@ singlelinecheck=off,%
 \begin{document}
 \begin{abstract}
 \textbf{Abstract:} 
-Low-precision rollout generation can reduce the cost of language-model reinforcement learning while changing the policy that supplies training data. The resulting mismatch feeds into gradient estimation, policy updates, and later generation. This focused qualitative survey brings together twenty studies through a common policy formulation and a component taxonomy. The formulation separates execution differences, decoding, and policy staleness, and distinguishes conditional correction from response-level change of measure. The taxonomy covers computation alignment, fidelity control, estimator correction, update control, and scheduling. Across the reviewed experiments, correction interacts with the evolving policy; alignment gains depend on the shared interface; and signed update contributions can reveal effects hidden by average discrepancy. These relationships explain complementary roles for numerical fidelity and learning correction. We connect their assumptions and information requirements to reported quality and system costs, and identify open problems in predictive diagnosis, coherent composition, and stateful collection.
+Quantized rollouts can lower the cost of language-model reinforcement learning while changing the policy that generates training experience. Mismatch with the learner can then alter gradient estimates, clipping decisions, and later trajectories. This focused qualitative survey synthesizes twenty studies through a policy formulation that separates numerical execution, decoding, and staleness, while distinguishing conditional correction from response-level change of measure. It organizes interventions by their direct targets: shared computation, numerical fidelity, gradient estimation, update influence, and optimization schedules. Three relationships recur in the reviewed evidence: correction and mismatch evolve together; alignment gains depend on the computation actually shared; and signed update contributions expose effects hidden by average discrepancy. These relationships explain why numerical design and learning correction can be complementary, and why agreement or throughput alone does not establish efficient learning. We connect these mechanisms to information requirements, learning outcomes, and system costs, and identify open problems in diagnosis, composition, and stateful collection.
 \par\medskip
 \noindent\textbf{Keywords:} quantized rollout; low-precision reinforcement learning; training--inference mismatch; importance sampling; quantization-aware training.
 \par\medskip\textbf{Literature snapshot:} October 19, 2026.
@@ -564,7 +564,7 @@ In language-model reinforcement learning, generation determines the responses, r
 
 The practical objective is to learn a capable policy within a finite computational budget. Faster generation contributes to that objective through the quality of the data it supplies and the updates those data support. Numerical agreement, optimization stability, task performance, and runtime capture different parts of this relationship. Aggressive clipping, for example, can stabilize training while discarding useful signal; a more faithful sampler can preserve that signal while reducing the throughput gained from quantization. Their value depends on how efficiently the complete learning process improves the policy.
 
-Existing methods intervene at different points in this process. FlashRL uses actual rollout probabilities to correct learning from a different sampling policy; Jet-RL coordinates learner and sampler precision flow; subsequent studies act on quantization, clipping, gradient estimation, and local update dynamics \citep{flashrl,jet}. These interventions often coexist within one system. Classifying their components makes the relationship visible: numerical design determines the data-generating computation, while learning-side rules determine how the resulting samples influence the next policy.
+Existing methods intervene at different points in this process. FlashRL uses actual rollout probabilities to correct learning from a different sampling policy; Jet-RL coordinates learner and sampler precision flow; subsequent studies act on quantization, clipping, gradient estimation, and local update dynamics \citep{flashrl,jet}. These interventions often coexist within one system. Numerical components act on learner or sampler computation, including the interface between them; learning-side rules determine how the resulting samples influence the next policy. Component-level classification preserves these distinct roles within integrated systems.
 
 
 Figure~\ref{fig:taxonomy-map} organizes these components by the computation or update they change. Cross-category assignments preserve the distinct contributions of integrated methods; Appendix~\ref{app:corpus} summarizes the corresponding papers.
@@ -738,7 +738,7 @@ A two-step example in Figure~\ref{fig:prefixes} makes the distinction tangible. 
 \subsection{A Component-Level Taxonomy of Interventions}
 We group components by the object they directly modify. \textbf{A: numerical interventions} alter representation or execution. A1 matches computation between learner and sampler; A2 controls quantization error or preserves parameter updates. \textbf{B: learning interventions} alter how sampled data produce updates. B1 corrects gradient estimation; B2 controls the acceptance, magnitude, or direction of policy updates; B3 adapts the optimization schedule.
 
-A component's purpose determines its assignment, while secondary effects can cross class boundaries. Alignment may improve fidelity, and both estimator correction and update control can use multiplicative weights. The distinction between B1 and B2 is the target: a distributional expectation or the influence of an update. QaRL and QuRL therefore occupy several classes through coequal components. An adopted correction remains separate from a system's proposed contribution; discussion locations indicate expository placement. Direct low-bit evidence for B3 remains limited.
+Classification follows the operation and its target, while secondary effects can cross class boundaries. Alignment may improve fidelity, and both estimator correction and update control can use multiplicative weights. B1 targets a distributional expectation; B2 regulates sample influence on the update. QaRL and QuRL therefore occupy several classes through coequal components. An adopted correction remains separate from a system's proposed contribution; discussion locations indicate expository placement. Direct low-bit evidence for B3 remains limited.
 
 
 \begin{table}[!htbp]
@@ -881,12 +881,12 @@ Shared-prefix measurements isolate conditional effects, whereas free-running tra
 These mechanisms connect numerical design to the learning signal it preserves. Relative weighting, conditional drift, threshold decisions, and trajectory feedback expose different consequences of the same execution change. The numerical and learning interventions that follow address different parts of that chain.
 
 \section{Numerical Design and Execution Alignment}\label{sec:numerical}
-Numerical design offers two complementary ways to change the policy that generates training data. Alignment brings learner and sampler computations closer at a shared interface; fidelity control preserves the information that a low-precision representation would otherwise lose. The distinction matters because two approximate paths can agree without either becoming more accurate relative to a higher-precision model.
+Numerical design can act on the learner, the sampler, or the interface between them. Alignment brings their computations closer at a shared interface; fidelity control preserves information that a low-precision representation would otherwise lose. The distinction matters because two approximate paths can agree without either becoming more accurate relative to a higher-precision model.
 
 \subsection{Aligning Learner and Rollout Computation}\label{sec:a1}
 Jet-RL coordinates the precision flow used by learner and sampler \citep{jet}. Its unified FP8 design matches corresponding operators and quantization granularity across the endpoints. This makes the computation, rather than the format label, the interface of alignment.
 
-QaRL implements such coupling through rollout-aligned quantization-aware training (QAT): the learner's forward pass reflects the representation used during generation \citep{qarl}. QUADS takes a deliberately asymmetric approach, fake-quantizing learner weights while retaining higher-precision learner activations \citep{quads}. Both designs bring part of the learner computation closer to the sampler, but QUADS leaves activation error to a separate rollout-side component. Their comparison reveals that alignment can be selective; uniform precision across the whole model is neither its definition nor a prerequisite. QAT emulation and native low-precision kernels nevertheless remain distinct numerical paths.
+QaRL implements such coupling through rollout-aligned quantization-aware training (QAT): the learner's forward pass reflects the representation used during generation \citep{qarl}. QUADS takes a deliberately asymmetric approach, fake-quantizing learner weights while retaining higher-precision learner activations \citep{quads}. Both designs bring part of the learner computation closer to the sampler, but QUADS leaves activation error to a separate rollout-side component. These designs illustrate selective alignment; uniform precision across the whole model is neither its definition nor a prerequisite. QAT emulation and native low-precision kernels nevertheless remain distinct numerical paths.
 
 TRACE shares realized quantization information \citep{trace}. Compact rollout-side guidance informs learner-side FP4 rounding when a common quantizer specification still yields different decisions near a boundary. Its local rounding argument explains the benefit at that interface; full-network divergence also depends on downstream computation.
 
@@ -899,7 +899,7 @@ Q(w+\delta w)=Q(w),
 \end{equation}
 even when $\delta w\ne0$. Visibility depends on the distance to a quantization boundary and on scale behavior, as well as update magnitude. QuRL's Update-Aware Quantization uses invariant scaling to alter the relationship between quantization resolution and parameter updates \citep{qurl}. Its numerical contribution is therefore distinct from ACR, which modifies the clipping rule in Section~\ref{sec:b2}.
 
-Figure~\ref{fig:quantization} illustrates why update magnitude alone does not determine visibility. The distance to the next quantization boundary can make a smaller change visible while a larger one remains within a single cell. The example holds the scale fixed; learned or recalibrated scales change the cell boundaries themselves.
+Figure~\ref{fig:quantization} shows a smaller update crossing a boundary while a larger one stays within its cell. Changing the scale moves these boundaries.
 
 \begin{figure}[!htb]
 \centering
@@ -937,7 +937,7 @@ These methods preserve different information needed by learning. Parameter resca
 \subsection{Residual Mismatch and Limits of Alignment}
 Alignment and fidelity constrain different comparisons: agreement between endpoints and faithfulness to a higher-precision computation. Shared weights can coexist with different activations, and a common quantizer with different surrounding kernels. Each result is therefore conditional on the shared interface, parameter snapshot, and input history.
 
-Residual differences connect numerical design to learning correction. A more faithful sampler may still lag behind the learner, and conditional agreement at an observed prefix cannot recover histories excluded by earlier decisions. A learning intervention addresses how these remaining differences affect estimation or the resulting update.
+Residual differences connect numerical design to learning correction. A more faithful sampler may still lag behind the learner, and conditional agreement at observed prefixes does not restore a response distribution changed by earlier decisions. A learning intervention addresses how these remaining differences affect estimation or the resulting update.
 
 Maintaining a shared numerical interface requires information as well as arithmetic. Operator choices require coordination, QAT depends on matching quantizer semantics, and rounding guidance requires storage and correspondence with learner states \citep{jet,qarl,quads,trace}. Fidelity control instead uses calibration, compensation, or selective execution to preserve sensitive information \citep{qurl,fp8rl,kv4}. Table~\ref{tab:numerical-interfaces} compares these dependencies and the discrepancies each leaves unresolved.
 
@@ -1112,10 +1112,10 @@ KV4-RL \citep{kv4}\newline INT4 KV & Unprotected INT4 versus bounded INT8 protec
 \end{tabularx}
 \end{table}
 
-These comparisons establish different forms of complementarity. QUADS combines two numerical interventions, QuRL combines update visibility with clipping control, and KV4-RL improves cache fidelity while retaining the correction recipe. Their results connect the component being changed to the contributions available for learning. They support the combinations tested within each system, while explaining how numerical fidelity and learning correction can address different residual effects.
+These studies illustrate different forms of complementarity. QUADS combines two numerical interventions, QuRL combines update visibility with clipping control, and KV4-RL improves cache fidelity while retaining the correction recipe. Their results connect the component being changed to the contributions available for learning. They support the combinations tested within each system and suggest how numerical fidelity and learning correction can address different residual effects.
 
 \subsection{Efficiency Gains and Implementation Costs}
-Preserving useful contributions adds work in different phases of training. For serialized phases, iteration time can be decomposed as
+An intervention's computational benefit depends on the work required for generation, learning, synchronization, and correction. For serialized phases, iteration time can be decomposed as
 \begin{equation}\label{eq:time}
 T_{\mathrm{iter}}=T_{\mathrm{rollout}}+T_{\mathrm{learner}}+T_{\mathrm{sync}}+
 T_{\mathrm{quant/calib}}+T_{\mathrm{other}},
@@ -1182,14 +1182,14 @@ Direct low-bit scheduling evidence remains limited, and stateful provenance is o
 The remaining challenge is to predict when mismatch becomes harmful, how interventions interact, and which benefits transfer across systems and tasks.
 
 \subsection{Predicting Harmful Mismatch}
-Learning depends on where error occurs and which update it changes. Confidence-conditioned tails, signed clipping distortions, conditional drift, and directional concentration offer more specific predictors than mean disagreement. Can they anticipate instability or lost progress early enough to guide intervention?
+Learning depends on where error occurs and which update it changes. Confidence-conditioned tails, signed clipping distortions, conditional drift, and directional concentration are candidate diagnostics with closer links to the update than mean disagreement. Their ability to predict instability or lost progress early enough to guide intervention remains unresolved.
 
 Collapse, reduced progress per update, and failure to reach a quality threshold need not share a precursor. A mechanism-based diagnostic should remain predictive across models and correction rules. Lowering it without improving learning may instead reflect correlation, or suppression of useful signal alongside the measured risk.
 
 \subsection{Composing Numerical and Learning Interventions}
 Greater fidelity alters the discrepancy encountered by a correction; restrictive update rules can conceal the value of finer quantization by suppressing the affected contributions. A component's value therefore depends on its marginal effect on learning progress and cost after other interventions act.
 
-Multiple masks, truncations, or trust bands can suppress the same contributions, making weak learning appear stable. Characterizing the joint estimator requires the contributions retained from positive and negative advantages and the reference or distributional computation involved. This connects compatibility to quality gained per unit of computation.
+Multiple masks, truncations, or trust bands can suppress the same contributions, making weak learning appear stable. Analysis of the joint estimator must identify its bias and variance, the contributions retained from positive and negative advantages, and the cost of reference passes or reconstructed expectations. This connects compatibility to quality gained per unit of computation.
 
 \subsection{Precision, Staleness, and Long-Horizon Interaction}
 Partial and asynchronous collection can make the sampling version token-dependent. A probability gap may then combine parameter change with execution mismatch, as Equation~\eqref{eq:decomp} makes explicit. Separating their effects requires information about snapshots, replay, or retained cache states that a production system may not store. The smallest behavior record sufficient for reliable correction remains a joint statistical and system question.
@@ -1199,12 +1199,12 @@ Long responses amplify this difficulty. An early numerical perturbation changes 
 Multi-turn interaction adds tool observations and environment transitions that shape later behavior. These may need to accompany cache provenance and sampling probabilities in the behavior record. Evidence from single-response generation leaves the effectiveness of the surveyed interventions in these settings open.
 
 \subsection{Generalization and Comparable Evidence}
-Transfer hinges on assumptions about behavior and execution. A correction derived for sampling probabilities can change meaning when an engine returns pre-decoding log-probabilities; rounding guidance can lose correspondence after a synchronization change. Whether a diagnostic or intervention remains effective when these interfaces change is an open question. Controlled transfer across stacks would help distinguish a general mechanism from benefits tied to one kernel, collection protocol, or correction recipe.
+Transfer depends on behavior and execution semantics. Correction requires probabilities of actual sampling events; rounding guidance requires correspondence between numerical states. Pre-decoding probabilities and changed synchronization protocols can violate these requirements. Controlled comparisons across stacks are needed to establish which benefits survive changes in kernels, collection protocols, and correction recipes.
 
 \section{Conclusion}\label{sec:conclusion}
-Quantized rollout places numerical approximation inside the learning process. It changes the policy that generates experience and can thereby alter the current update and future trajectories. The reviewed methods address this feedback through shared computation, preserved fidelity, estimator correction, update control, and schedule adaptation.
+Quantized rollout places numerical approximation inside the learning loop: the data-generating policy affects both the current update and future trajectories. The surveyed interventions address distinct parts of this loop through computation alignment, numerical fidelity, estimator correction, update control, and schedule adaptation.
 
-Their common objective is useful learning at lower computational cost. The evidence connects that objective to the evolution of correction, the interface being aligned, and the signed contributions retained by the update. Predictive diagnostics and joint-estimator analysis can clarify when these relationships survive changes in numerical paths, models, and interaction settings.
+Numerical fidelity changes the error presented to the learner; correction changes its influence on the update. This interaction makes average agreement, short-term stability, and rollout throughput incomplete measures of effective training. The goal is policy quality at lower total computational cost. Predictive diagnostics and joint-estimator analysis can clarify when a combination achieves that goal across systems and collection regimes.
 
 \clearpage
 \appendix
