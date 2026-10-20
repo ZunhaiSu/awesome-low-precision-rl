@@ -1,4 +1,11 @@
 # LaTeX build intermediates
+# Manuscript sources remain in the separate Overleaf authoring project.
+survey/
+*.tex
+*.cls
+*.sty
+*.bib
+*.bst
 *.aux
 *.log
 *.out

@@ -18,7 +18,6 @@
   <a href="Survey.pdf"><strong>Read the survey PDF</strong></a> &nbsp;·&nbsp;
   <a href="#paper-catalog">Papers</a> &nbsp;·&nbsp;
   <a href="docs/EVIDENCE.md">Evidence</a> &nbsp;·&nbsp;
-  <a href="survey/survey.tex">LaTeX</a> &nbsp;·&nbsp;
   <a href="#citation">Cite</a>
 </p>
 
@@ -39,7 +38,7 @@ Low-precision execution changes both the cost of generating experience and the l
 
 ## Contents
 
-[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Build](#build-and-validate) · [Contribute](#contribute) · [Citation](#citation)
+[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
 
 ## Scope
 
@@ -99,7 +98,7 @@ Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f06
 
 ## Paper catalog
 
-Each entry pairs a short name with the full paper title, linked directly to the reviewed source. The tables follow first public appearance and count each contribution once. Authors, reviewed versions, and additional discussion locations are in the [reviewed catalog](docs/CATALOG.md) and Surveyed Papers appendix. Dates can precede the formal publication linked here. [Classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains. [JSON records](data/papers.json) and [BibTeX](references.bib) support reuse.
+Each entry pairs a short name with the full paper title, linked directly to the reviewed source. The tables follow first public appearance and count each contribution once. Authors, reviewed versions, and additional discussion locations are in the [reviewed catalog](docs/CATALOG.md) and Surveyed Papers appendix. Dates can precede the formal publication linked here. [Classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains. [JSON records](data/papers.json) support reuse.
 
 Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 · Fidelity](docs/CATALOG.md#fidelity-a2) · [B1 · Estimation](docs/CATALOG.md#estimation-b1) · [B2 · Update control](docs/CATALOG.md#update-control-b2) · [B3 · Scheduling](docs/CATALOG.md#scheduling-b3).
 
@@ -178,30 +177,7 @@ The curves illustrate the standard surrogate with epsilon 0.2 and advantage ±1.
 | [Evidence lenses](figures/evidence.svg) | Numerical, update, trajectory, and quality/cost measurements. |
 | [Timing decomposition](figures/timing.svg) | A constructed example separating rollout acceleration from iteration speedup. |
 
-All figures are editable vector drawings embedded in the standalone LaTeX source. Numerical illustrations are explicitly labeled; no cross-paper leaderboard is inferred.
-
-</details>
-
-## Build and validate
-
-The manuscript embeds its class, bibliography, and vector figures. `survey/survey.tex` can be shared as one LaTeX source file; the matching separate class supports conventional project editing.
-
-With [Tectonic](https://tectonic-typesetting.github.io/) installed, run from the repository root:
-
-```sh
-python3 scripts/build.py
-```
-
-<details>
-<summary><strong>Maintaining the catalog and exporting figures</strong></summary>
-
-First run `python3 scripts/build_tables.py` after changing the JSON records. The manuscript build refreshes the root `Survey.pdf` and checks the generated views, catalog, bibliography, figures, and local links. To also regenerate every SVG, install Poppler and run:
-
-```sh
-python3 scripts/build.py --figures
-```
-
-The scripts accept explicit tool paths through `--tectonic` and `--pdftocairo`. See [build notes](docs/BUILD.md) and [figure notes](docs/FIGURES.md) for tested behavior and figure assumptions. The root PDF and `survey/survey.pdf` are kept identical.
+All figures are available as scalable vector drawings. Numerical illustrations are explicitly labeled; no cross-paper leaderboard is inferred. See the [figure notes](docs/FIGURES.md) for their purposes and assumptions.
 
 </details>
 
@@ -229,4 +205,4 @@ The paper adapts the **typesetting template** from [arXiv:2601.14004v4](https://
 
 The survey is under active development. Its scientific scope and source versions are documented alongside the manuscript; editorial assessments are available in the [review history](docs/REVIEW.md).
 
-Repository content and template adaptations use [CC BY-SA 4.0](LICENSE). Linked papers retain their own licenses; their PDFs are not redistributed here.
+The survey PDF, repository content, and template adaptations use [CC BY-SA 4.0](LICENSE). Linked papers retain their own licenses; their PDFs are not redistributed here.

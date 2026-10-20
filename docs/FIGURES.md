@@ -1,6 +1,6 @@
 # Figures and visual conventions
 
-The manuscript contains ten original vector figures. Their definitions, captions, and assumptions are embedded in `survey/survey.tex`; each is exported to SVG for repository reuse. No figure is a cross-paper performance leaderboard.
+The manuscript contains ten original vector figures, also supplied as SVGs for repository reuse. The captions and assumptions appear in [Survey.pdf](../Survey.pdf). No figure is a cross-paper performance leaderboard.
 
 | Figure | Purpose | Interpretation |
 |---|---|---|
@@ -21,12 +21,4 @@ Blue and teal distinguish numerical interfaces; violet and amber distinguish est
 
 The original contents typography remains on pages two and three, following the title/abstract and graphical overview. Main text begins on page four. The full work taxonomy and Surveyed Papers appendix are retained.
 
-## Regenerate assets
-
-With Tectonic and Poppler installed:
-
-```sh
-python3 scripts/build.py --figures
-```
-
-Explicit tool paths can be supplied with `--tectonic` and `--pdftocairo`. The exporter reads the same palette and diagram definitions as the manuscript and uses temporary standalone builds. The full paper needs no external SVG input.
+The SVGs and PDF are prepared from the same authoring project. Figure updates are published together with the corresponding manuscript revision.

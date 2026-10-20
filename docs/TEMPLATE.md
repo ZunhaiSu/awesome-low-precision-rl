@@ -1,15 +1,7 @@
-# LaTeX template provenance
+# Typesetting attribution
 
-The paper uses the actual `mystyle.cls` supplied with [arXiv:2601.14004v4](https://arxiv.org/abs/2601.14004v4), not that paper's scientific outline.
+The survey adapts the typesetting template supplied with [arXiv:2601.14004v4](https://arxiv.org/abs/2601.14004v4). The supplied class identifies its lineage as a UC Berkeley RAIL adaptation of the Google DeepMind technical report template and declares [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/).
 
-The supplied class identifies its lineage as an edited Berkeley RAIL / Google DeepMind report template and declares **CC BY-SA 4.0**. Its provenance and license notice are preserved in `survey/mystyle.cls` and in the embedded copy inside `survey/survey.tex`.
+The adaptation retains the font stack, blue section headings, pale-blue title/abstract panel, running title, numbered references, and right-aligned page numbers. Changes include compact front matter, a first-page graphical overview, PDF navigation, original diagrams and their shared palette, and font-encoding adjustments for consistent compilation. An unrelated hard-coded author-contribution sentence was removed.
 
-Preserved features: 11-point letterpaper, the source's font stack, blue section headings, pale-blue title/abstract panel, running title, numbered references, and right-aligned page numbers. The source main file's one-inch margin override is also applied.
-
-Changes: one dormant, unrelated hard-coded author-contribution sentence was removed; small-cap microtype tracking was disabled for XeTeX compatibility and the same XCharter family was forced to Type 1 for consistent font encoding; manuscript-specific macros and original diagrams were added. The reference paper's prose, figures, author list, contact information, and repository identity are not reused.
-
-`survey.tex` embeds the class using `filecontents*`, so the full manuscript is available as one LaTeX file. A matching separate class is supplied for conventional project editing. Both copies must remain synchronized.
-
-The eight-section scientific framework remains the framework developed for this low-precision RL survey.
-
-Front-matter adaptation: the title/abstract panel is compacted at manuscript level, a vector graphical overview follows the title/abstract panel on the first page, the complete contents uses the original template typography and flows over pages two and three, and the introduction begins on page four. PDF section bookmarks provide additional navigation. The original class and its embedded copy remain synchronized. Ten original TikZ figures explain the framework, probability semantics, mechanisms, numerical interventions, learning operators, evidence, and timing. They share a manuscript-level palette and diagram typography, and are exported as SVGs. The template class and its embedded copy retain their original attribution and remain synchronized.
+The reference paper's prose, figures, author list, and repository identity are not reused. The scientific scope and eight-section framework were developed for this low-precision RL survey. This repository distributes the resulting [PDF](../Survey.pdf); manuscript sources are maintained separately.
