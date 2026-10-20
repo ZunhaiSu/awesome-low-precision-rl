@@ -46,7 +46,7 @@ The scale of optimization over time; direct low-bit evidence remains limited.
 
 ### FlashRL / TIS
 
-**On the Rollout-Training Mismatch in Modern RL Systems**
+**[On the Rollout-Training Mismatch in Modern RL Systems](https://www.opt-ml.org/papers/2025/paper116.pdf)**
 
 Authors: Feng Yao; Liyuan Liu; Dinghuai Zhang; Chengyu Dong; Jingbo Shang; Jianfeng Gao.
 
@@ -62,7 +62,7 @@ First public: 2025 · Reviewed record: [OPT2025](https://www.opt-ml.org/papers/2
 
 ### QeRL
 
-**QeRL: Quantization-enhanced Low-Rank Reinforcement Learning for LLMs**
+**[QeRL: Quantization-enhanced Low-Rank Reinforcement Learning for LLMs](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html)**
 
 Authors: Wei Huang; Yi Ge; Shuai Yang; Yicheng Xiao; Huizi Mao; Yujun Lin; Hanrong Ye; Sifei Liu; Ka Chun Cheung; Hongxu Yin; Yao Lu; Xiaojuan Qi; Song Han; Yukang Chen.
 
@@ -80,7 +80,7 @@ First public: 2025-10-13 · Reviewed record: [ICLR2026](https://proceedings.iclr
 
 ### R3
 
-**Stabilizing MoE Reinforcement Learning by Aligning Training and Inference Routers**
+**[Stabilizing MoE Reinforcement Learning by Aligning Training and Inference Routers](https://arxiv.org/abs/2510.11370v2)**
 
 Authors: Wenhan Ma; Hailin Zhang; Liang Zhao; Yifan Song; Yudong Wang; Zhifang Sui; Fuli Luo.
 
@@ -98,7 +98,7 @@ First public: 2025-10-13 · Reviewed record: [v2](https://arxiv.org/abs/2510.113
 
 ### FP16-Mismatch
 
-**Defeating the Training-Inference Mismatch via FP16**
+**[Defeating the Training-Inference Mismatch via FP16](https://arxiv.org/abs/2510.26788v1)**
 
 Authors: Penghui Qi; Zichen Liu; Xiangxin Zhou; Tianyu Pang; Chao Du; Wee Sun Lee; Min Lin.
 
@@ -116,7 +116,7 @@ First public: 2025-10-30 · Reviewed record: [v1](https://arxiv.org/abs/2510.267
 
 ### MiniRL
 
-**Stabilizing Reinforcement Learning with LLMs: Formulation and Practices**
+**[Stabilizing Reinforcement Learning with LLMs: Formulation and Practices](https://arxiv.org/abs/2512.01374v3)**
 
 Authors: Chujie Zheng; Kai Dang; Bowen Yu; Mingze Li; Huiqiang Jiang; Junrong Lin; Yuqiong Liu; Hao Lin; Chencan Wu; Feng Hu; An Yang; Jingren Zhou; Junyang Lin.
 
@@ -134,7 +134,7 @@ First public: 2025-12-01 · Reviewed record: [v3](https://arxiv.org/abs/2512.013
 
 ### Jet-RL
 
-**Jet-RL: Enabling On-Policy FP8 Reinforcement Learning with Unified Training and Rollout Precision Flow**
+**[Jet-RL: Enabling On-Policy FP8 Reinforcement Learning with Unified Training and Rollout Precision Flow](https://arxiv.org/abs/2601.14243v2)**
 
 Authors: Haocheng Xi; Charlie Ruan; Peiyuan Liao; Yujun Lin; Han Cai; Yilong Zhao; Shuo Yang; Kurt Keutzer; Song Han; Ligeng Zhu.
 
@@ -152,7 +152,7 @@ First public: 2026-01-20 · Reviewed record: [v2](https://arxiv.org/abs/2601.142
 
 ### FP8-RL
 
-**FP8-RL: A Practical and Stable Low-Precision Stack for LLM Reinforcement Learning**
+**[FP8-RL: A Practical and Stable Low-Precision Stack for LLM Reinforcement Learning](https://arxiv.org/abs/2601.18150v2)**
 
 Authors: Zhaopeng Qiu; Shuang Yu; Jingqi Zhang; Shuai Zhang; Xue Huang; Jingyi Yang; Junjie Lai.
 
@@ -170,7 +170,7 @@ First public: 2026-01-26 · Reviewed record: [v2](https://arxiv.org/abs/2601.181
 
 ### Beyond Precision
 
-**Beyond Precision: Training-Inference Mismatch is an Optimization Problem and Simple LR Scheduling Fixes It**
+**[Beyond Precision: Training-Inference Mismatch is an Optimization Problem and Simple LR Scheduling Fixes It](https://arxiv.org/abs/2602.01826)**
 
 Authors: Yaxiang Zhang; Yingru Li; Jiacai Liu; Jiawei Xu; Ziniu Li; Qian Liu; Haoyuan Li.
 
@@ -188,7 +188,7 @@ First public: 2026-02-02 · Reviewed record: [arXiv record](https://arxiv.org/ab
 
 ### QuRL
 
-**QuRL: Efficient Reinforcement Learning with Quantized Rollout**
+**[QuRL: Efficient Reinforcement Learning with Quantized Rollout](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html)**
 
 Authors: Yuhang Li; Reena Elangovan; Xin Dong; Priyadarshini Panda; Brucek Khailany.
 
@@ -206,7 +206,7 @@ First public: 2026-02-15 · Reviewed record: [ICLR2026](https://proceedings.iclr
 
 ### QaRL
 
-**QaRL: Rollout-Aligned Quantization-Aware RL for Fast and Stable Training under Training--Inference Mismatch**
+**[QaRL: Rollout-Aligned Quantization-Aware RL for Fast and Stable Training under Training–Inference Mismatch](https://aclanthology.org/2026.findings-acl.841/)**
 
 Authors: Hao Gu; Hao Wang; Jiacheng Liu; Lujun Li; Qiyuan Zhu; Bei Liu; Binxing Xu; Lei Wang; Xintong Yang; Sida Lin; Sirui Han; Yike Guo.
 
@@ -224,7 +224,7 @@ First public: 2026-04-09 · Reviewed record: [ACL2026-Findings](https://aclantho
 
 ### AIS
 
-**AIS: Adaptive Importance Sampling for Quantized RL**
+**[AIS: Adaptive Importance Sampling for Quantized RL](https://arxiv.org/abs/2605.13907v1)**
 
 Authors: Jiajun Zhou; Wei Shao; Lingchao Zheng; Yuwei Fan; Ngai Wong.
 
@@ -242,7 +242,7 @@ First public: 2026-05-13 · Reviewed record: [v1](https://arxiv.org/abs/2605.139
 
 ### VeXact / Diagnosing TIM
 
-**Diagnosing Training Inference Mismatch in LLM Reinforcement Learning via a Zero-Mismatch Reference**
+**[Diagnosing Training Inference Mismatch in LLM Reinforcement Learning via a Zero-Mismatch Reference](https://arxiv.org/abs/2605.14220)**
 
 Authors: Tianle Zhong; Neiwen Ling; Yifan Pi; Zijun Wei; Tianshu Yu; Geoffrey Fox; Peng Wu; Xiao Yu.
 
@@ -260,7 +260,7 @@ First public: 2026-05-14 · Reviewed record: [arXiv record](https://arxiv.org/ab
 
 ### QUADS
 
-**QUADS: Stabilizing NVFP4 Reinforcement Learning for MoE via QUantization-error Alignment across Dual Sides**
+**[QUADS: Stabilizing NVFP4 Reinforcement Learning for MoE via QUantization-error Alignment across Dual Sides](https://arxiv.org/abs/2607.15810v1)**
 
 Authors: Zhengyang Zhuge; Hao Yu; Xin Wang; Zheng Li; Yizhong Cao; Dayiheng Liu; Jianwei Zhang.
 
@@ -278,7 +278,7 @@ First public: 2026-07-17 · Reviewed record: [v1](https://arxiv.org/abs/2607.158
 
 ### ACRL
 
-**ACRL: Adaptive Control of Training-Inference Discrepancy for Stable Reinforcement Learning**
+**[ACRL: Adaptive Control of Training-Inference Discrepancy for Stable Reinforcement Learning](https://arxiv.org/abs/2607.24062v1)**
 
 Authors: Wenwu Fan; Qihong Lin; Zhijie Xia; Zhuo Zheng; Sihao Wang; Qiang Chen; Liangsheng Zhu.
 
@@ -296,7 +296,7 @@ First public: 2026-07-27 · Reviewed record: [v1](https://arxiv.org/abs/2607.240
 
 ### Score Centering
 
-**Score Centering Stabilizes Off-policy Reinforcement Learning**
+**[Score Centering Stabilizes Off-policy Reinforcement Learning](https://arxiv.org/abs/2609.20807v1)**
 
 Authors: Martin Marek; Max Ryabinin.
 
@@ -314,7 +314,7 @@ First public: 2026-09-17 · Reviewed record: [v1](https://arxiv.org/abs/2609.208
 
 ### Full Pipeline FP8 RL
 
-**Towards Full Pipeline FP8 Reinforcement Learning for LLMs**
+**[Towards Full Pipeline FP8 Reinforcement Learning for LLMs](https://arxiv.org/abs/2609.22870v1)**
 
 Authors: Fanchao Chen; Ziheng Jiang; Ziyun Wei; Zheng Zhong; Du Li; Chi Zhang; Haibin Lin; Shivaram Venkataraman.
 
@@ -332,7 +332,7 @@ First public: 2026-09-19 · Reviewed record: [v1](https://arxiv.org/abs/2609.228
 
 ### CIS
 
-**Rethinking Training-Inference Mismatch in LLM Reinforcement Learning: Where It Arises and How to Correct It**
+**[Rethinking Training-Inference Mismatch in LLM Reinforcement Learning: Where It Arises and How to Correct It](https://arxiv.org/abs/2609.32444)**
 
 Authors: Tianrun Yu; Kaixiang Zhao; Shangzhe Li; Yuxiao Yang; Porter Jenkins; Weitong Zhang; Taylor W. Killian.
 
@@ -350,7 +350,7 @@ First public: 2026-09-26 · Reviewed record: [arXiv record](https://arxiv.org/ab
 
 ### TRIAGE
 
-**TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning**
+**[TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning](https://arxiv.org/abs/2610.07043v2)**
 
 Authors: Zhen Li; Shuai Zhang; Yanggan Gu; Yiming Zhang; Yang Yu; Mingfa Feng; Congkai Xie; Shuang Yu; Junjie Lai; Hongxia Yang.
 
@@ -368,7 +368,7 @@ First public: 2026-10-05 · Reviewed record: [v2](https://arxiv.org/abs/2610.070
 
 ### TRACE
 
-**TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models**
+**[TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models](https://arxiv.org/abs/2610.07767v2)**
 
 Authors: Xin Wang; Hao Yu; Zhengyang Zhuge; Bochao Mao; Zheng Li; Junda Feng; Yuyan Luo; Yi Zhang; Yizhong Cao; Mi Zhang; Dayiheng Liu; Jianwei Zhang.
 
@@ -386,7 +386,7 @@ First public: 2026-10-06 · Reviewed record: [v2](https://arxiv.org/abs/2610.077
 
 ### KV4-RL
 
-**KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization**
+**[KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization](https://arxiv.org/abs/2610.14448v1)**
 
 Authors: Sihwan Park; Sung-Yub Kim; Doohyuk Jang; Eunho Yang.
 

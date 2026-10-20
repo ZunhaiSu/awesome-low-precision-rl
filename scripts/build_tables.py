@@ -15,6 +15,10 @@ def cell(value):
 def source(row):
     return row.get('reviewed_source_url') or row['publication_url']
 
+def title_link(row):
+    title = cell(row['title']).replace('--', '–')
+    return f"[{title}]({source(row)})"
+
 def author_name(value):
     if ', ' in value:
         family, given = value.split(', ', 1)
@@ -30,10 +34,10 @@ def generate():
                         ('support', 'Supporting formulation and general TIM studies'),
                         ('boundary', 'Exploration boundary')]:
         group = sorted((r for r in rows if r['role'] == role), key=lambda r: r['first_publication'])
-        catalog += [f'### {title}', '', '| First public | Study | Focus | Class / discussion |',
+        catalog += [f'### {title}', '', '| First public | Paper | Focus | Class / discussion |',
                     '|---|---|---|---|']
         for r in group:
-            catalog.append(f"| {r['first_publication']} | **[{cell(r['name'])}]({source(r)})** | "
+            catalog.append(f"| {r['first_publication']} | **{cell(r['name'])}**<br>{title_link(r)} | "
                            f"{cell(r['catalog_summary'])} | {cell(r['categories'])} · {r['primary_section']} |")
         catalog += ['']
     catalog += ['Roles describe relevance to the survey, rather than evidence quality. '
@@ -62,7 +66,7 @@ def generate():
         full += [f'### {heading}', '', description, '', ' · '.join(links), '']
     full += ['## Chronological records', '']
     for r in sorted(rows, key=lambda r: r['first_publication']):
-        full += [f'<a id="paper-{r["key"]}"></a>', '', f"### {r['name']}", '', f"**{r['title']}**", '',
+        full += [f'<a id="paper-{r["key"]}"></a>', '', f"### {r['name']}", '', f"**{title_link(r)}**", '',
                  'Authors: ' + '; '.join(author_name(x) for x in r['authors']) + '.', '',
                  f"First public: {r['first_publication']} · Reviewed record: [{r['reviewed_version']}]({source(r)}) · Source snapshot checked: {r['checked_date']}", '',
                  f"- Numerical regime: {r['regime']}",
@@ -80,7 +84,7 @@ def generate():
               '|---|---|---|---|']
     for e in evidence['observations']:
         r = by_key[e['key']]
-        detail.append(f"| **{cell(r['name'])}**<br>{cell(r['regime'])} | {cell(e['observation'])} | "
+        detail.append(f"| **{cell(r['name'])}**<br>{title_link(r)}<br>{cell(r['regime'])} | {cell(e['observation'])} | "
                       f"{cell(e['limit'])} | [Source]({e['url']})<br>{cell(e['locator'])} |")
     detail += ['', 'Statistical reporting and external replication have not been exhaustively extracted. Missing metadata is unassessed, rather than a negative experimental finding.', '']
     status = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570 30" role="img" aria-labelledby="title desc">
