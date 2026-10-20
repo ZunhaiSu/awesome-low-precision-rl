@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Please cite the survey manuscript below, and cite the original papers for their individual results."
+title: "Awesome Low-Precision RL"
+authors:
+  - family-names: "Su"
+    given-names: "Zunhai"
+    affiliation: "The University of Hong Kong"
+url: "https://github.com/ZunhaiSu/awesome-low-precision-rl"
+license: "CC-BY-SA-4.0"
+preferred-citation:
+  type: generic
+  title: "Training–Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey"
+  authors:
+    - family-names: "Su"
+      given-names: "Zunhai"
+      affiliation: "The University of Hong Kong"
+  year: 2026
+  notes: "Working manuscript. Literature snapshot: 19 October 2026."
+  url: "https://github.com/ZunhaiSu/awesome-low-precision-rl"

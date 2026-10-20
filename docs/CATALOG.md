@@ -4,7 +4,47 @@ Generated from `data/papers.json`. Dates and versions identify the reviewed snap
 
 The catalog separates contribution role, evidence domain, and numerical regime. No independent reproduction was performed for this survey; this status makes no claim about reproductions elsewhere. Code availability, seed counts, and experiment-level model/task coverage are not systematically audited here.
 
-## FlashRL / TIS
+## Browse by intervention
+
+[Chronological records](#chronological-records) · [Evidence synthesis](EVIDENCE.md) · [Classification rules](TAXONOMY.md)
+
+A work can appear in several component classes. Supporting studies are labeled explicitly; diagnostics and the exploration boundary remain in the chronological records.
+
+### Alignment (A1)
+
+Shared learner–sampler computation.
+
+[R3](#paper-r3) (support) · [Jet-RL](#paper-jet) · [QaRL](#paper-qarl) · [QUADS](#paper-quads) · [TRACE](#paper-trace)
+
+### Fidelity (A2)
+
+Quantization error and visible parameter updates.
+
+[FP16-Mismatch](#paper-fp16) (support) · [Jet-RL](#paper-jet) · [FP8-RL](#paper-fp8rl) · [QuRL](#paper-qurl) · [QUADS](#paper-quads) · [KV4-RL](#paper-kv4)
+
+### Estimation (B1)
+
+Target expectations and gradient correction.
+
+[FlashRL / TIS](#paper-flashrl) · [MiniRL](#paper-minirl) (support) · [AIS](#paper-ais) · [Score Centering](#paper-score) · [CIS](#paper-cis) (support)
+
+### Update control (B2)
+
+The influence of samples on policy updates.
+
+[MiniRL](#paper-minirl) (support) · [QuRL](#paper-qurl) · [QaRL](#paper-qarl) · [ACRL](#paper-acrl) · [Full Pipeline FP8 RL](#paper-fullfp8) · [TRIAGE](#paper-triage)
+
+### Scheduling (B3)
+
+The scale of optimization over time; direct low-bit evidence remains limited.
+
+[Beyond Precision](#paper-beyond) (support)
+
+## Chronological records
+
+<a id="paper-flashrl"></a>
+
+### FlashRL / TIS
 
 **On the Rollout-Training Mismatch in Modern RL Systems**
 
@@ -18,7 +58,9 @@ First public: 2025 · Reviewed record: [OPT2025](https://www.opt-ml.org/papers/2
 - Main discussion: 5.1; additional locations: 1.1; 2.1
 - Scope: Quantized rollout; recorded behavior probabilities.
 
-## QeRL
+<a id="paper-qerl"></a>
+
+### QeRL
 
 **QeRL: Quantization-enhanced Low-Rank Reinforcement Learning for LLMs**
 
@@ -34,7 +76,9 @@ First public: 2025-10-13 · Reviewed record: [ICLR2026](https://proceedings.iclr
 
 [arXiv record](https://arxiv.org/abs/2510.11696) · [Publication/source](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html)
 
-## R3
+<a id="paper-r3"></a>
+
+### R3
 
 **Stabilizing MoE Reinforcement Learning by Aligning Training and Inference Routers**
 
@@ -50,7 +94,9 @@ First public: 2025-10-13 · Reviewed record: [v2](https://arxiv.org/abs/2510.113
 
 [arXiv record](https://arxiv.org/abs/2510.11370) · [Publication/source](https://arxiv.org/abs/2510.11370)
 
-## FP16-Mismatch
+<a id="paper-fp16"></a>
+
+### FP16-Mismatch
 
 **Defeating the Training-Inference Mismatch via FP16**
 
@@ -66,7 +112,9 @@ First public: 2025-10-30 · Reviewed record: [v1](https://arxiv.org/abs/2510.267
 
 [arXiv record](https://arxiv.org/abs/2510.26788) · [Publication/source](https://arxiv.org/abs/2510.26788)
 
-## MiniRL
+<a id="paper-minirl"></a>
+
+### MiniRL
 
 **Stabilizing Reinforcement Learning with LLMs: Formulation and Practices**
 
@@ -82,7 +130,9 @@ First public: 2025-12-01 · Reviewed record: [v3](https://arxiv.org/abs/2512.013
 
 [arXiv record](https://arxiv.org/abs/2512.01374) · [Publication/source](https://arxiv.org/abs/2512.01374)
 
-## Jet-RL
+<a id="paper-jet"></a>
+
+### Jet-RL
 
 **Jet-RL: Enabling On-Policy FP8 Reinforcement Learning with Unified Training and Rollout Precision Flow**
 
@@ -98,7 +148,9 @@ First public: 2026-01-20 · Reviewed record: [v2](https://arxiv.org/abs/2601.142
 
 [arXiv record](https://arxiv.org/abs/2601.14243) · [Publication/source](https://arxiv.org/abs/2601.14243)
 
-## FP8-RL
+<a id="paper-fp8rl"></a>
+
+### FP8-RL
 
 **FP8-RL: A Practical and Stable Low-Precision Stack for LLM Reinforcement Learning**
 
@@ -114,7 +166,9 @@ First public: 2026-01-26 · Reviewed record: [v2](https://arxiv.org/abs/2601.181
 
 [arXiv record](https://arxiv.org/abs/2601.18150) · [Publication/source](https://arxiv.org/abs/2601.18150)
 
-## Beyond Precision
+<a id="paper-beyond"></a>
+
+### Beyond Precision
 
 **Beyond Precision: Training-Inference Mismatch is an Optimization Problem and Simple LR Scheduling Fixes It**
 
@@ -130,7 +184,9 @@ First public: 2026-02-02 · Reviewed record: [arXiv record](https://arxiv.org/ab
 
 [arXiv record](https://arxiv.org/abs/2602.01826) · [Publication/source](https://arxiv.org/abs/2602.01826)
 
-## QuRL
+<a id="paper-qurl"></a>
+
+### QuRL
 
 **QuRL: Efficient Reinforcement Learning with Quantized Rollout**
 
@@ -146,7 +202,9 @@ First public: 2026-02-15 · Reviewed record: [ICLR2026](https://proceedings.iclr
 
 [arXiv record](https://arxiv.org/abs/2602.13953) · [Publication/source](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html)
 
-## QaRL
+<a id="paper-qarl"></a>
+
+### QaRL
 
 **QaRL: Rollout-Aligned Quantization-Aware RL for Fast and Stable Training under Training--Inference Mismatch**
 
@@ -162,7 +220,9 @@ First public: 2026-04-09 · Reviewed record: [ACL2026-Findings](https://aclantho
 
 [arXiv record](https://arxiv.org/abs/2604.07853) · [Publication/source](https://aclanthology.org/2026.findings-acl.841/)
 
-## AIS
+<a id="paper-ais"></a>
+
+### AIS
 
 **AIS: Adaptive Importance Sampling for Quantized RL**
 
@@ -178,7 +238,9 @@ First public: 2026-05-13 · Reviewed record: [v1](https://arxiv.org/abs/2605.139
 
 [arXiv record](https://arxiv.org/abs/2605.13907) · [Publication/source](https://arxiv.org/abs/2605.13907)
 
-## VeXact / Diagnosing TIM
+<a id="paper-vexact"></a>
+
+### VeXact / Diagnosing TIM
 
 **Diagnosing Training Inference Mismatch in LLM Reinforcement Learning via a Zero-Mismatch Reference**
 
@@ -194,7 +256,9 @@ First public: 2026-05-14 · Reviewed record: [arXiv record](https://arxiv.org/ab
 
 [arXiv record](https://arxiv.org/abs/2605.14220) · [Publication/source](https://arxiv.org/abs/2605.14220)
 
-## QUADS
+<a id="paper-quads"></a>
+
+### QUADS
 
 **QUADS: Stabilizing NVFP4 Reinforcement Learning for MoE via QUantization-error Alignment across Dual Sides**
 
@@ -210,7 +274,9 @@ First public: 2026-07-17 · Reviewed record: [v1](https://arxiv.org/abs/2607.158
 
 [arXiv record](https://arxiv.org/abs/2607.15810) · [Publication/source](https://arxiv.org/abs/2607.15810)
 
-## ACRL
+<a id="paper-acrl"></a>
+
+### ACRL
 
 **ACRL: Adaptive Control of Training-Inference Discrepancy for Stable Reinforcement Learning**
 
@@ -226,7 +292,9 @@ First public: 2026-07-27 · Reviewed record: [v1](https://arxiv.org/abs/2607.240
 
 [arXiv record](https://arxiv.org/abs/2607.24062) · [Publication/source](https://arxiv.org/abs/2607.24062)
 
-## Score Centering
+<a id="paper-score"></a>
+
+### Score Centering
 
 **Score Centering Stabilizes Off-policy Reinforcement Learning**
 
@@ -242,7 +310,9 @@ First public: 2026-09-17 · Reviewed record: [v1](https://arxiv.org/abs/2609.208
 
 [arXiv record](https://arxiv.org/abs/2609.20807) · [Publication/source](https://arxiv.org/abs/2609.20807)
 
-## Full Pipeline FP8 RL
+<a id="paper-fullfp8"></a>
+
+### Full Pipeline FP8 RL
 
 **Towards Full Pipeline FP8 Reinforcement Learning for LLMs**
 
@@ -258,7 +328,9 @@ First public: 2026-09-19 · Reviewed record: [v1](https://arxiv.org/abs/2609.228
 
 [arXiv record](https://arxiv.org/abs/2609.22870) · [Publication/source](https://arxiv.org/abs/2609.22870)
 
-## CIS
+<a id="paper-cis"></a>
+
+### CIS
 
 **Rethinking Training-Inference Mismatch in LLM Reinforcement Learning: Where It Arises and How to Correct It**
 
@@ -274,7 +346,9 @@ First public: 2026-09-26 · Reviewed record: [arXiv record](https://arxiv.org/ab
 
 [arXiv record](https://arxiv.org/abs/2609.32444) · [Publication/source](https://arxiv.org/abs/2609.32444)
 
-## TRIAGE
+<a id="paper-triage"></a>
+
+### TRIAGE
 
 **TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning**
 
@@ -290,7 +364,9 @@ First public: 2026-10-05 · Reviewed record: [v2](https://arxiv.org/abs/2610.070
 
 [arXiv record](https://arxiv.org/abs/2610.07043) · [Publication/source](https://arxiv.org/abs/2610.07043)
 
-## TRACE
+<a id="paper-trace"></a>
+
+### TRACE
 
 **TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models**
 
@@ -306,7 +382,9 @@ First public: 2026-10-06 · Reviewed record: [v2](https://arxiv.org/abs/2610.077
 
 [arXiv record](https://arxiv.org/abs/2610.07767) · [Publication/source](https://arxiv.org/abs/2610.07767)
 
-## KV4-RL
+<a id="paper-kv4"></a>
+
+### KV4-RL
 
 **KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization**
 

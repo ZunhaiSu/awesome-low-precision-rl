@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Generate the README catalog and review tables from the canonical JSON records."""
+"""Generate reader views and the repository status badge from canonical records."""
 import argparse
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,8 +47,22 @@ def generate():
     full = ['# Reviewed paper catalog', '',
             'Generated from `data/papers.json`. Dates and versions identify the reviewed snapshot, not a claim that a source has never changed.', '',
             'The catalog separates contribution role, evidence domain, and numerical regime. No independent reproduction was performed for this survey; this status makes no claim about reproductions elsewhere. Code availability, seed counts, and experiment-level model/task coverage are not systematically audited here.', '']
+    full += ['## Browse by intervention', '',
+             '[Chronological records](#chronological-records) · [Evidence synthesis](EVIDENCE.md) · [Classification rules](TAXONOMY.md)', '',
+             'A work can appear in several component classes. Supporting studies are labeled explicitly; diagnostics and the exploration boundary remain in the chronological records.', '']
+    for code, heading, description in [
+            ('A1', 'Alignment (A1)', 'Shared learner–sampler computation.'),
+            ('A2', 'Fidelity (A2)', 'Quantization error and visible parameter updates.'),
+            ('B1', 'Estimation (B1)', 'Target expectations and gradient correction.'),
+            ('B2', 'Update control (B2)', 'The influence of samples on policy updates.'),
+            ('B3', 'Scheduling (B3)', 'The scale of optimization over time; direct low-bit evidence remains limited.')]:
+        selected = [r for r in rows if re.search(r'\b' + code + r'\b', r['categories'])]
+        links = [f"[{r['name']}](#paper-{r['key']})" + (' (support)' if r['role'] == 'support' else '')
+                 for r in sorted(selected, key=lambda r: r['first_publication'])]
+        full += [f'### {heading}', '', description, '', ' · '.join(links), '']
+    full += ['## Chronological records', '']
     for r in sorted(rows, key=lambda r: r['first_publication']):
-        full += [f"## {r['name']}", '', f"**{r['title']}**", '',
+        full += [f'<a id="paper-{r["key"]}"></a>', '', f"### {r['name']}", '', f"**{r['title']}**", '',
                  'Authors: ' + '; '.join(author_name(x) for x in r['authors']) + '.', '',
                  f"First public: {r['first_publication']} · Reviewed record: [{r['reviewed_version']}]({source(r)}) · Source snapshot checked: {r['checked_date']}", '',
                  f"- Numerical regime: {r['regime']}",
@@ -68,9 +83,19 @@ def generate():
         detail.append(f"| **{cell(r['name'])}**<br>{cell(r['regime'])} | {cell(e['observation'])} | "
                       f"{cell(e['limit'])} | [Source]({e['url']})<br>{cell(e['locator'])} |")
     detail += ['', 'Statistical reporting and external replication have not been exhaustively extracted. Missing metadata is unassessed, rather than a negative experimental finding.', '']
+    status = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570 30" role="img" aria-labelledby="title desc">
+<title id="title">Working survey · {len(rows)} focal studies · CC BY-SA 4.0</title>
+<desc id="desc">Research status, catalog size, and repository license.</desc>
+<g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11.5" font-weight="600" text-anchor="middle">
+<rect x="1" y="1" width="182" height="28" rx="6" fill="#EEF4FB" stroke="#CBD7E2"/><text x="92" y="19" fill="#2865A0">WORKING SURVEY</text>
+<rect x="194" y="1" width="182" height="28" rx="6" fill="#EDF7F4" stroke="#CBD7E2"/><text x="285" y="19" fill="#147D77">{len(rows)} FOCAL STUDIES</text>
+<rect x="387" y="1" width="182" height="28" rx="6" fill="#F1F4F7" stroke="#CBD7E2"/><text x="478" y="19" fill="#52677D">CC BY-SA 4.0</text>
+</g></svg>
+'''
     return {ROOT / 'README.md': readme,
             ROOT / 'docs/CATALOG.md': '\n'.join(full),
-            ROOT / 'docs/EVIDENCE.md': '\n'.join(detail)}
+            ROOT / 'docs/EVIDENCE.md': '\n'.join(detail),
+            ROOT / 'figures/status.svg': status}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

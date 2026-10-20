@@ -452,7 +452,7 @@ singlelinecheck=off,%
 \usepackage{fancyhdr}
 \usepackage[numbers,sort&compress]{natbib}
 \definecolor{darkblue}{rgb}{0,0.40,0.75}
-\hypersetup{pdfauthor={Zunhai Su},pdftitle={Training--Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey},colorlinks=true,linkcolor=darkblue,citecolor=darkblue,urlcolor=darkblue,breaklinks=true}
+\hypersetup{pdfauthor={Zunhai Su},pdftitle={Training--Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey},bookmarksopen=true,bookmarksnumbered=true,bookmarksdepth=2,colorlinks=true,linkcolor=darkblue,citecolor=darkblue,urlcolor=darkblue,breaklinks=true}
 \usepackage{url}
 % BEGIN SURVEY PALETTE
 \definecolor{navy}{HTML}{16324F}
@@ -555,6 +555,17 @@ Quantized rollouts can lower the cost of language-model reinforcement learning w
 \clearpage
 \setcounter{tocdepth}{2}
 \tableofcontents
+
+\par\vspace{1.5em}
+\noindent{\color{navy}\bfseries Reading pathways}\par\smallskip
+\begingroup\small\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.15}
+\noindent\begin{tabularx}{\linewidth}{@{}YYY@{}}\toprule
+\textcolor{blue}{\textbf{Foundations}} & \textcolor{violet}{\textbf{Methods}} & \textcolor{teal}{\textbf{Evidence}}\\[3pt]
+Policy roles, execution mismatch, and its effects on learning. & Numerical interfaces, estimator correction, and update control. & Within-study findings, system costs, and open problems.\\[5pt]
+Sections~\ref{sec:form}--\ref{sec:mechanisms} & Sections~\ref{sec:numerical}--\ref{sec:learning} & Sections~\ref{sec:synthesis}--\ref{sec:open}\\\bottomrule
+\end{tabularx}
+\par\smallskip\noindent Appendix~\ref{app:corpus}: surveyed papers\enspace$\cdot$\enspace Appendices~\ref{app:protocol}--\ref{app:checklist}: sources and assumptions\enspace$\cdot$\enspace Appendix~\ref{app:terms}: terminology
+\endgroup
 \clearpage
 
 
@@ -643,7 +654,7 @@ A proximal policy $p_{\mathrm{prox}}$ supplies the denominator of a policy-updat
 \centering\small
 \caption{Policies and quantities used throughout the survey. Execution paths are part of policy identity.}\label{tab:notation}
 \begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
-Symbol & Meaning \\\midrule
+\rowcolor{bluewash} \textbf{Symbol} & \textbf{Meaning}\\\midrule
 $p_\theta$ & Current learner policy under its specified execution path.\\
 $p_k$ & Learner-side policy evaluated at sampling snapshot $\theta_k$.\\
 $q_k$ & Actual behavior policy that sampled the token.\\
@@ -745,7 +756,7 @@ Classification follows the operation and its target, while secondary effects can
 \centering\small
 \caption{Five intervention classes. These categories describe operative components, not exclusive paper types.}\label{tab:taxonomy}
 \begin{tabularx}{\linewidth}{@{}P{11mm}P{35mm}YY@{}}\toprule
-Class & Direct object & Representative components & Residual limitation\\\midrule
+\rowcolor{bluewash} \textbf{Class} & \textbf{Direct object} & \textbf{Representative components} & \textbf{Residual limitation}\\\midrule
 A1 & Shared computation & Precision flow; aligned QAT; guided rounding & Unmatched execution interfaces.\\
 A2 & Quantization fidelity & UAQ; residual compensation; calibration; selective precision & Resolution of useful parameter changes.\\
 B1 & Gradient estimator & TIS; AIS; CIS; Score Centering & Target expectation and approximation bias.\\
@@ -867,7 +878,7 @@ The diagnostics in Table~\ref{tab:diagnostics} locate different effects within t
 \centering\small\setlength{\tabcolsep}{4pt}
 \caption{Mechanisms, observable diagnostics, and intervention targets. Diagnostics characterize different effects and do not by themselves predict downstream quality.}\label{tab:diagnostics}
 \begin{tabularx}{\linewidth}{@{}P{28mm}YY@{}}\toprule
-Mechanism & Diagnostic at a specified policy and prefix & Related intervention \\\midrule
+\rowcolor{bluewash} \textbf{Mechanism} & \textbf{Diagnostic at a specified policy and prefix} & \textbf{Related intervention}\\\midrule
 Relative influence & Tails of $p/q$, conditioned on token confidence; correction truncation or masking rate. & B1: TIS, AIS, and CIS control estimator influence \citep{flashrl,ais,cis}.\\[5pt]
 Conditional score drift & Estimated $\E_q[s_\theta]$ and the contribution $\E_q[A]\E_q[s_\theta]$; reconstruction error matters. & B1: Score Centering removes the exact first-moment term; implementations approximate it \citep{score}.\\[5pt]
 Update selection & Active clipping branches and retained contributions, separated by advantage sign; local directional patterns. & B2: clipping calibration and direction-aware control \citep{fullfp8,triage}.\\\bottomrule
@@ -945,7 +956,7 @@ Maintaining a shared numerical interface requires information as well as arithme
 \centering\small
 \caption{Numerical strategies, the information they share or preserve, and their remaining execution differences.}\label{tab:numerical-interfaces}
 \begin{tabularx}{\linewidth}{@{}P{29mm}YYY@{}}\toprule
-Strategy & Shared or protected object & Information dependency & Residual discrepancy \\\midrule
+\rowcolor{bluewash} \textbf{Strategy} & \textbf{Shared or protected object} & \textbf{Information dependency} & \textbf{Residual discrepancy}\\\midrule
 Precision flow & Corresponding operator precision and granularity & Coordinated numerical configuration & Engine and surrounding-kernel differences.\\[3pt]
 Aligned QAT & Learner representation corresponding to rollout & Matching quantizer semantics & Native versus simulated arithmetic; unmatched activations.\\[3pt]
 Guided rounding & Realized rollout quantization decisions & Stored and matched rollout guidance & Unshared modules and downstream propagation.\\[3pt]
@@ -1053,7 +1064,7 @@ Table~\ref{tab:coverage} makes the scope and its boundaries explicit.
 \centering\small\setlength{\tabcolsep}{4pt}
 \caption{Coverage matrix for the qualitative snapshot. Rows are independent dimensions; the presence of two regimes does not imply that their combination has been evaluated.}\label{tab:coverage}
 \begin{tabularx}{\linewidth}{@{}P{28mm}YY@{}}\toprule
-Dimension & Represented in the focal collection & Boundary of the synthesis \\\midrule
+\rowcolor{bluewash} \textbf{Dimension} & \textbf{Represented in the focal collection} & \textbf{Boundary of the synthesis}\\\midrule
 Intervention & A1/A2 numerical design; B1/B2 learning rules; B3 scheduling. & Direct low-bit evidence is thinner for B3 than for the other classes.\\[4pt]
 Numerical interface & Weight/activation quantization, KV storage, scales, rounding, routing, and synchronization. & An interface-level result does not establish full-network agreement.\\[4pt]
 Precision & FP8, FP4/NVFP4, INT8/INT4; BF16/FP16 comparisons provide context. & Format labels omit scale granularity, precision exceptions, and native versus simulated arithmetic.\\[4pt]
@@ -1102,7 +1113,7 @@ The full-pipeline FP8 study connects excessive lower-side clipping of negative-a
 \centering\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
 \caption{Within-study evidence for the synthesis. Regimes, comparison rules, and interpretive limits are retained; the companion evidence collection provides source locations.}\label{tab:observations}
 \begin{tabularx}{\linewidth}{@{}P{27mm}YYY@{}}\toprule
-Study / setting & Comparison & Reported finding & Interpretation and limit \\\midrule
+\rowcolor{bluewash} \textbf{Study / setting} & \textbf{Comparison} & \textbf{Reported finding} & \textbf{Interpretation and limit}\\\midrule
 \rowcolor{bluewash} QuRL \citep{qurl}\newline INT8/FP8 & Longer TIS runs; ACR and invariant-scaling ablations. & Later behavior departs from the initially stable window; clipping and update visibility need distinct treatment. & A short stable interval does not establish long-horizon effectiveness; the observed horizon is setting-specific.\\[6pt]
 QUADS \citep{quads}\newline NVFP4 MoE & Weight-only learner QAT, then added rollout activation compensation. & Weight alignment recovers much of the performance loss; compensation further improves held-out scores. & Supports complementary numerical components within this design; cross-engine transfer is untested here.\\[6pt]
 \rowcolor{bluewash} Score Centering \citep{score}\newline BF16 learner & Additive and importance corrections under shared objectives; composition under lag. & Corrections affect distinct estimator terms; their composition helps in the reported staleness tests. & Behavior expectations are reconstructed; this is not full trajectory-distribution recovery.\\[6pt]
@@ -1156,7 +1167,7 @@ Token throughput also depends on the realized workload. A policy that produces s
 \centering\small
 \caption{Information and execution dependencies of the reviewed approaches. These interfaces explain system cost without assigning an overhead ranking.}\label{tab:interfaces}
 \begin{tabularx}{\linewidth}{@{}P{32mm}YY@{}}\toprule
-Approach & Information or execution dependency & Consequence for implementation\\\midrule
+\rowcolor{bluewash} \textbf{Approach} & \textbf{Information or execution dependency} & \textbf{Consequence for implementation}\\\midrule
 TIS / AIS / CIS & Behavior probabilities and learner/proximal probabilities & Stored probabilities must include the sampling transformations.\\
 Score Centering & A behavior-weighted score expectation, exact or approximated & Exact evaluation requires distributional information; reconstruction introduces approximation.\\
 Aligned QAT & A learner path corresponding to rollout quantization & Unmatched kernels and interfaces leave residual execution error.\\
@@ -1214,9 +1225,9 @@ Table~\ref{tab:corpus} summarizes the twenty focal studies, numerical regimes, a
 \begingroup\footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.20}
 \begin{longtable}{@{}P{29mm}P{37mm}P{59mm}P{29mm}@{}}
 \caption{Surveyed papers: numerical regimes, method components, and section mapping. Conference and preprint versions count as one contribution.}\label{tab:corpus}\\
-\toprule Work / first year & Numerical regime & Component(s) and contribution & Discussion \\\midrule\endfirsthead
+\toprule \rowcolor{bluewash} \textbf{Work / first year} & \textbf{Numerical regime} & \textbf{Component(s) and contribution} & \textbf{Discussion}\\\midrule\endfirsthead
 \multicolumn{4}{l}{\textit{Table \thetable\ continued: Surveyed papers}}\\[3pt]
-\toprule Work / first year & Numerical regime & Component(s) and contribution & Discussion \\\midrule\endhead
+\toprule \rowcolor{bluewash} \textbf{Work / first year} & \textbf{Numerical regime} & \textbf{Component(s) and contribution} & \textbf{Discussion}\\\midrule\endhead
 \midrule\multicolumn{4}{r}{Continued on next page}\\\endfoot
 \bottomrule\endlastfoot
 \multicolumn{4}{@{}l}{\textbf{Core method and system studies (13)}}\\*
@@ -1275,8 +1286,8 @@ The residual approximation identifies what a result leaves open: prefix selectio
 \begingroup\small
 \begin{longtable}{@{}P{35mm}P{123mm}@{}}
 \caption{Terminology and component abbreviations used in the text and figures.}\label{tab:terms}\\
-\toprule Term & Meaning \\\midrule\endfirsthead
-\toprule Term & Meaning \\\midrule\endhead
+\toprule \rowcolor{bluewash} \textbf{Term} & \textbf{Meaning}\\\midrule\endfirsthead
+\toprule \rowcolor{bluewash} \textbf{Term} & \textbf{Meaning}\\\midrule\endhead
 \bottomrule\endlastfoot
 TIM & Training--inference mismatch; the survey emphasizes the learner--rollout interface.\\[4pt]
 W / A / KV & Weights, activations, and key--value cache; distinct numerical targets.\\[4pt]

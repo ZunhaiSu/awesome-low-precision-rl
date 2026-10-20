@@ -39,3 +39,17 @@ The strongest improvement is the connection from mechanism to intervention to ev
 Further stylistic expansion would offer limited benefit. The remaining priorities are scientific: checking source-specific interpretations with domain experts, assessing the curated corpus for omissions, and obtaining stronger evidence for cross-system transfer, scheduling, and stateful interaction. The survey does not provide a cross-paper leaderboard or an independently reproduced benchmark.
 
 The eight-section framework, twenty focal studies, twenty-six references, thirteen core evidence records, eleven displayed equations, ten vector figures, and all surveyed-paper rows are retained. [BUILD.md](BUILD.md) records the final compilation, consistency, and visual checks. Earlier assessments remain in the [review history](REVIEW.md).
+
+## Presentation in context
+
+The presentation was compared with [Efficient Large Language Models: A Survey](https://arxiv.org/abs/2312.03863) and its [companion repository](https://github.com/AIoT-MLSys-Lab/Efficient-LLMs-Survey), [A Survey of Reinforcement Learning for Large Reasoning Models](https://arxiv.org/abs/2509.08827) and its [repository](https://github.com/TsinghuaC3I/Awesome-RL-for-LRMs), and the [Stop Overthinking repository](https://github.com/Eclipsess/Awesome-Efficient-Reasoning-LLMs). The original [typesetting reference](https://arxiv.org/abs/2601.14004v4) was also inspected. These are presentation references; they do not establish the scope, completeness, or scientific quality of this review.
+
+| Presentation need | Adopted form | Fit to this survey |
+|---|---|---|
+| Connect the taxonomy to the paper | Preserve the complete component map and its section references; add three reading pathways after the contents. | Gives separate entry points for foundations, methods, and evidence without changing the agreed framework or contents typography. |
+| Make dense comparisons easier to scan | Use consistent pale-blue, bold table headers and retain booktabs rules. | Supports the notation, diagnostic, comparison, and appendix tables without adding visual clutter. |
+| Make the repository a useful research entry point | Center the title, paper identity, author, resources, and restrained status labels; show three reader routes. | Keeps the actual survey PDF prominent and makes the scope and evidence accessible before the detailed catalog. |
+| Connect paper groups to full records | Generate five intervention navigation groups alongside chronological catalog entries. | Retains first-publication ordering while allowing component-based lookup and explicitly labeling supporting studies. |
+| Make citation accessible | Add a schema-validated CFF file with the working manuscript as the preferred citation. | Uses GitHub's standard citation interface without inventing publication status, a DOI, or a preprint identifier. |
+
+The design choices are editorial judgments based on these examples, not a ranking of the reference projects. Promotional news, star-history graphics, and a deeper taxonomy were unnecessary for the current collection. The literature snapshot and all scientific claims remain unchanged.

@@ -1,30 +1,47 @@
-# Awesome Low-Precision RL
+<h1 align="center">Awesome Low-Precision RL</h1>
 
-### Quantized rollouts and training–rollout mismatch
+<p align="center">
+  <strong>Training–Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey</strong><br>
+  Quantized rollouts · Numerical alignment · Learning under mismatch
+</p>
 
-A survey and curated research collection on how low-precision execution changes reinforcement learning for language models.
+<p align="center">
+  <strong>Zunhai Su</strong> · The University of Hong Kong<br>
+  Literature snapshot: <strong>19 October 2026</strong> · Editorial update: 20 October 2026
+</p>
 
-**[Survey PDF](Survey.pdf)** · [LaTeX](survey/survey.tex) · [BibTeX](references.bib) · [Paper catalog](data/papers.json) · [Evidence table](docs/EVIDENCE.md) · [Reviewed catalog](docs/CATALOG.md)
+<p align="center">
+  <img src="figures/status.svg" alt="Working survey · 20 focal studies · CC BY-SA 4.0" width="570">
+</p>
 
-**Zunhai Su · The University of Hong Kong**<br>
-Living survey · Literature snapshot: **19 October 2026** · **20 focal studies**<br>
-Editorial update: **20 October 2026**
+<p align="center">
+  <a href="Survey.pdf"><strong>Read the survey PDF</strong></a> &nbsp;·&nbsp;
+  <a href="#paper-catalog">Papers</a> &nbsp;·&nbsp;
+  <a href="docs/EVIDENCE.md">Evidence</a> &nbsp;·&nbsp;
+  <a href="survey/survey.tex">LaTeX</a> &nbsp;·&nbsp;
+  <a href="#citation">Cite</a>
+</p>
 
-The companion manuscript, *Training–Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey*, connects numerical execution, gradient estimation, and policy optimization. It examines which numerical differences affect learning and how numerical design and learning correction determine the updates retained during training.
+Low-precision execution changes both the cost of generating experience and the learning signal computed from it. This focused survey connects numerical mechanisms, estimator correction, and policy optimization through a component taxonomy and source-linked evidence.
 
-<img src="figures/overview.svg" alt="Survey overview: generation, collected experience, and learner updates form a feedback loop" width="100%">
+<p align="center">
+  <img src="figures/overview.svg" alt="Survey overview: generation, collected experience, and learner updates form a feedback loop" width="920">
+</p>
 
-> **An evolving research resource.** Missing papers, technical corrections, reproducibility observations, and collaboration ideas are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
+> **Living survey.** Technical corrections, missing papers, and research collaborations are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
 
 ## Contents
 
-[Start here](#start-here) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Build](#build-and-validate) · [Contribute](#contribute) · [Citation](#citation)
+[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Build](#build-and-validate) · [Contribute](#contribute) · [Citation](#citation)
 
-## Start here
+## Explore the survey
 
-1. Read the [survey](Survey.pdf), especially §§2–3, to distinguish actual behavior probabilities, learner computation, and policy lag.
-2. Use the taxonomy below to choose a numerical route (§4) or a learning route (§5). A study may contribute to both.
-3. Read §6 alongside Appendix A for the evidence synthesis and the complete **Surveyed Papers** table.
+| Understand the mechanisms | Compare interventions | Assess the evidence |
+|---|---|---|
+| Policy roles, execution differences, and their effects on learning. | Numerical alignment, fidelity control, estimator correction, and update control. | Within-study findings, assumptions, quality, and system cost. |
+| [Reading routes](#reading-routes) · §§2–3 | [Component taxonomy](#taxonomy) · §§4–5 | [Evidence records](docs/EVIDENCE.md) · §6 |
+
+The [reviewed catalog](docs/CATALOG.md) provides full titles, authors, numerical regimes, and source versions. [JSON records](data/papers.json) and [BibTeX](references.bib) support reuse.
 
 ## Scope
 
@@ -84,7 +101,9 @@ Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f06
 
 ## Paper catalog
 
-Each row represents one contribution. Dates refer to first public appearance; links may point to a later formal publication. Full titles, authors, reviewed versions, and secondary locations are available in the [catalog](data/papers.json), [bibliography](references.bib), and Surveyed Papers appendix. The tables below are generated from the JSON catalog; [classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains.
+The tables follow first public appearance and count each contribution once. Full titles, authors, reviewed versions, and additional discussion locations are in the [reviewed catalog](docs/CATALOG.md) and Surveyed Papers appendix. Dates can precede the formal publication linked here. [Classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains.
+
+Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 · Fidelity](docs/CATALOG.md#fidelity-a2) · [B1 · Estimation](docs/CATALOG.md#estimation-b1) · [B2 · Update control](docs/CATALOG.md#update-control-b2) · [B3 · Scheduling](docs/CATALOG.md#scheduling-b3).
 
 <!-- BEGIN GENERATED CATALOG -->
 
@@ -175,6 +194,9 @@ With [Tectonic](https://tectonic-typesetting.github.io/) installed, run from the
 python3 scripts/build.py
 ```
 
+<details>
+<summary><strong>Maintaining the catalog and exporting figures</strong></summary>
+
 First run `python3 scripts/build_tables.py` after changing the JSON records. The manuscript build refreshes the root `Survey.pdf` and checks the generated views, catalog, bibliography, figures, and local links. To also regenerate every SVG, install Poppler and run:
 
 ```sh
@@ -183,9 +205,11 @@ python3 scripts/build.py --figures
 
 The scripts accept explicit tool paths through `--tectonic` and `--pdftocairo`. See [build notes](docs/BUILD.md) and [figure notes](docs/FIGURES.md) for tested behavior and figure assumptions. The root PDF and `survey/survey.pdf` are kept identical.
 
+</details>
+
 ## Citation
 
-The survey is a working manuscript. Until a public preprint identifier is available, the following metadata can be used to cite the manuscript; please cite the original papers for their individual results.
+The survey is a working manuscript. Use the citation below or GitHub's **Cite this repository** control, which uses [CITATION.cff](CITATION.cff). Please cite the original papers for their individual results.
 
 ```bibtex
 @misc{su2026trainingrollout,
