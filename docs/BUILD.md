@@ -1,6 +1,6 @@
 # Current manuscript validation
 
-Validated on 20 October 2026 for the [integrated edition](REVISION_5.md). The literature snapshot remains 19 October 2026.
+Validated on 20 October 2026 for the [integrated edition](REVISION_5.md), including the current prose refinement. The literature snapshot remains 19 October 2026.
 
 - **Manuscript:** 28 pages, eight main sections, twenty focal studies, twenty-six references, thirteen source-located core evidence records, and ten original vector figures.
 - **Author:** Zunhai Su, The University of Hong Kong; PDF author metadata agrees.
@@ -13,4 +13,4 @@ Validated on 20 October 2026 for the [integrated edition](REVISION_5.md). The li
 - **Public PDF:** root `Survey.pdf` and `survey/survey.pdf` match byte for byte.
 - **Repository:** citations, bibliography keys, figure markers, local links, image paths, author fields, matching class copies, and the eight-section framework pass `scripts/validate.py`. README navigation reflects the revised research-findings heading.
 
-The current cycle compared the main historical versions and completed four focused manuscript revisions, with a successful build saved after each. This is editorial and technical self-review, without new experiments or external peer review. The source-selection and evidence limitations remain explicit in the manuscript.
+The current prose refinement clarifies the distinct forms of composition in QaRL/QuRL, QUADS, and Score Centering, and makes method comparisons more precise. Equations, figures, tables, classification, and source coverage retain the integrated edition's technical content. This is editorial and technical self-review, without new experiments or external peer review.

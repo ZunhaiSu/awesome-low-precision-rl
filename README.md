@@ -9,7 +9,7 @@ A survey and curated research collection on how low-precision execution changes 
 **Zunhai Su · The University of Hong Kong**<br>
 Living survey · Literature snapshot: **19 October 2026** · **20 focal studies**
 
-The companion manuscript, *Training–Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey*, connects numerical execution, gradient estimation, and policy optimization. Its central question is which numerical differences change learning, and how numerical and learning interventions address them.
+The companion manuscript, *Training–Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey*, connects numerical execution, gradient estimation, and policy optimization. It examines which numerical differences affect learning and how numerical design and learning correction determine the updates retained during training.
 
 <img src="figures/overview.svg" alt="Survey overview: generation, collected experience, and learner updates form a feedback loop" width="100%">
 
@@ -127,7 +127,7 @@ A supporting role does not exclude direct low-precision experiments. The role re
 
 The [evidence records](data/evidence.json) cover all thirteen core studies and locate their observations in the primary papers. The survey develops three recurring findings:
 
-**Correction evolves with learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [AIS](https://arxiv.org/abs/2605.13907), and [Score Centering](https://arxiv.org/abs/2609.20807) show why estimator behavior and the training trajectory deserve attention beyond an early stable window.
+**Correction evolves with learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [AIS](https://arxiv.org/abs/2605.13907), and [Score Centering](https://arxiv.org/abs/2609.20807) address complementary effects on the evolving learner: clipping and update visibility, adaptive importance weighting, and conditional score drift.
 
 **Alignment depends on the shared computation.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) share different information: a precision-flow design, a representation, or realized rounding decisions. Their remaining execution differences determine the scope of agreement.
 
