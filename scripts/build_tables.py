@@ -31,7 +31,7 @@ def generate():
     by_key = {r['key']: r for r in rows}
     catalog = []
     for role, title in [('core', 'Core methods and systems'),
-                        ('support', 'Supporting formulation and general TIM studies'),
+                        ('support', 'Supporting formulation, theory, and general TIM studies'),
                         ('boundary', 'Exploration boundary')]:
         group = sorted((r for r in rows if r['role'] == role), key=lambda r: r['first_publication'])
         catalog += [f'### {title}', '', '| First public | Paper | Focus | Class / discussion |',

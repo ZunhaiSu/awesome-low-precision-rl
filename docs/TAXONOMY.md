@@ -7,10 +7,10 @@ The unit of classification is a component. Its operative purpose identifies the 
 | A1 | Shared computation | Match learner and rollout operators, representations, or realized execution choices. |
 | A2 | Numerical fidelity | Preserve update resolution or sensitive information through scaling, compensation, calibration, or selective precision. |
 | B1 | Estimation | Change action weights or score expectations to address a distributional estimation problem. |
-| B2 | Update influence | Change acceptance, constraints, magnitude, or direction of sampled contributions. |
+| B2 | Update influence | Change the constraints, magnitude, or direction of sampled contributions, or accept/reject a whole candidate update. |
 | B3 | Optimization schedule | Change the scale or schedule of learning over time. |
 
-These purposes can overlap. QaRL introduces A1 and B2 components, QuRL introduces B2 and A2 components, and QUADS combines A1 with A2. Rollout-ResQ is A2 activation compensation. P3O, DRPO, and MIPU are B2 controls over batch reliability, divergence geometry, and whole-update acceptance. Miles contributes A1 contracts and A2 precision choices; QATFactory's QARL component aligns quantized representations without making its BF16 matmuls native FP4 training. A multiplicative weight can belong to B1 or B2 depending on its target. A system's adoption of TIS is distinguished from its numerical or integration contribution.
+These purposes can overlap. QaRL introduces A1 and B2 components, QuRL introduces B2 and A2 components, and QUADS combines A1 with A2. Rollout-ResQ is A2 activation compensation. P3O, DRPO, and MIPU are B2 controls over batch reliability, divergence geometry, and whole-update acceptance. Miles contributes A1 contracts and A2 precision choices; QATFactory's QARL component aligns quantized representations while retaining BF16 training matmuls. A multiplicative weight can belong to B1 or B2 depending on its target. A system's adoption of TIS is distinguished from its numerical or integration contribution.
 
 `primary_section` and `secondary_sections` locate the survey discussion. They do not rank a paper's components, novelty, or evidence strength. Ordering in `categories` does not make other components less important.
 

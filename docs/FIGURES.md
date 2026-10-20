@@ -11,7 +11,7 @@ The manuscript contains ten original vector figures, also supplied as SVGs for r
 | 5 · [Three mechanism routes](../figures/mechanisms.svg) | Relative influence, expected direction, and update selection can propagate through learning. | Conceptual synthesis. |
 | 6 · [Signed clipping](../figures/clipping.svg) | Analytical surrogate with epsilon 0.2 and advantages +1/-1; all loss-axis values explicit. | Mathematical illustration. |
 | 7 · [Update visibility](../figures/quantization.svg) | Fixed-step scalar quantizer, avoiding ties; a smaller update can cross a boundary. | Mathematical illustration. |
-| 8 · [Learning operators](../figures/operators.svg) | Different target objects for estimation, update influence, and scheduling; explanatory expressions. | Conceptual synthesis. |
+| 8 · [Learning operators](../figures/operators.svg) | Estimator correction, local and batch control, whole-candidate acceptance, and scheduling. | Conceptual synthesis. |
 | 9 · [Evidence lenses](../figures/evidence.svg) | Different conditions for numerical, update, trajectory, and quality/cost observations. | Conceptual synthesis. |
 | 10 · [Serialized timing](../figures/timing.svg) | Constructed normalized example; rollout share 0.6, speedup 2, and optional added overhead 0.1. | Mathematical illustration. |
 

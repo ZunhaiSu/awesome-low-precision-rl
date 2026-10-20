@@ -44,7 +44,7 @@ Low-precision execution changes both the cost of generating experience and the l
 
 The collection focuses on the interface between the numerical policy that generates a rollout and the computation used to learn from it. It covers weight, activation, and KV-cache quantization; low precision on one or both endpoints; and closely related work on training–inference mismatch (TIM).
 
-The focal corpus contains **19 method/system studies, 9 formulation or general TIM studies, and 1 exploration boundary case**. These roles describe how a study enters the survey. Foundational RL papers and neighboring surveys appear in the bibliography but are not counted as focal works.
+The focal corpus contains **19 method/system studies, 9 supporting formulation/theory/general TIM studies, and 1 exploration boundary case**. These roles describe how a study enters the survey. Foundational RL papers and neighboring surveys appear in the bibliography but are not counted as focal works.
 
 This is a focused narrative survey. General PTQ, low-precision pretraining, and unrelated rollout acceleration fall outside its focal scope. The collection synthesizes published evidence and introduces no new benchmark.
 
@@ -92,9 +92,10 @@ The catalog follows first public appearance. The routes below follow conceptual 
 | What is the mismatch being corrected? | [FlashRL / TIS](https://www.opt-ml.org/papers/2025/paper116.pdf) → [MiniRL](https://arxiv.org/abs/2512.01374) → [VeXact / Diagnosing TIM](https://arxiv.org/abs/2605.14220) | §§2–3 |
 | How can the two numerical paths be coupled? | [Jet-RL](https://arxiv.org/abs/2601.14243) → [QaRL](https://aclanthology.org/2026.findings-acl.841/) → [QUADS](https://arxiv.org/abs/2607.15810) → [TRACE](https://arxiv.org/abs/2610.07767) | §4.1 |
 | Which information should low precision preserve? | [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html) (UAQ) → [FP8-RL](https://arxiv.org/abs/2601.18150) → [HiFloat4 / Rollout-ResQ](https://arxiv.org/abs/2607.26515v1) → [KV4-RL](https://arxiv.org/abs/2610.14448) | §4.2 |
-| How do correction and control differ? | TIS → [AIS](https://arxiv.org/abs/2605.13907) → [Score Centering](https://arxiv.org/abs/2609.20807) / [CIS](https://arxiv.org/abs/2609.32444); then ACR, TBPO, [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870), [ACRL](https://arxiv.org/abs/2607.24062), and [TRIAGE](https://arxiv.org/abs/2610.07043) | §5 |
-
-For update-control extensions, read [DPPO](https://arxiv.org/abs/2602.04879v3) before [DRPO](https://arxiv.org/abs/2606.09821v1), then compare [P3O / ESS](https://arxiv.org/abs/2605.12380v2) and [MIPU](https://arxiv.org/abs/2606.29526v1). For systems, compare [Miles](https://arxiv.org/abs/2609.08368v1) with the QARL component of [QATFactory](https://arxiv.org/abs/2609.39223v2). Read [Baselines and Score Centering](https://arxiv.org/abs/2610.22263v1) alongside Score Centering to distinguish token- and sequence-level estimators.
+| How should behavior samples estimate a target gradient? | [TIS](https://www.opt-ml.org/papers/2025/paper116.pdf) → [AIS](https://arxiv.org/abs/2605.13907) → [Score Centering](https://arxiv.org/abs/2609.20807), alongside [baseline theory](https://arxiv.org/abs/2610.22263v1); compare [CIS](https://arxiv.org/abs/2609.32444). | §5.1 |
+| Which local learning contributions should be retained? | [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html) (ACR) → [QaRL](https://aclanthology.org/2026.findings-acl.841/) (TBPO) → [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870); then compare [ACRL](https://arxiv.org/abs/2607.24062) and [TRIAGE](https://arxiv.org/abs/2610.07043). | §5.2 |
+| How can control extend beyond local clipping? | [DPPO](https://arxiv.org/abs/2602.04879v3) → [DRPO](https://arxiv.org/abs/2606.09821v1) for trust-region geometry; [P3O / ESS](https://arxiv.org/abs/2605.12380v2) for batch reliability; [MIPU](https://arxiv.org/abs/2606.29526v1) for candidate acceptance. | §5.2 |
+| What must a deployable low-precision stack coordinate? | [FP8-RL](https://arxiv.org/abs/2601.18150) → [Miles](https://arxiv.org/abs/2609.08368v1) → [QATFactory QARL](https://arxiv.org/abs/2609.39223v2): calibration, conversion, precision exceptions, and weight transfer. | §§4, 6.3 |
 
 Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html) visible as an exploration boundary case and [Beyond Precision](https://arxiv.org/abs/2602.01826) as general TIM evidence for scheduling. A route expresses reading dependencies, without implying a performance ranking or historical influence.
 
@@ -130,7 +131,7 @@ Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 �
 | 2026-10-06 | **TRACE**<br>[TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models](https://arxiv.org/abs/2610.07767v2) | Rollout-guided FP4 rounding for MoE | A1 · 4.1 |
 | 2026-10-10 | **KV4-RL**<br>[KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization](https://arxiv.org/abs/2610.14448v1) | INT4 KV with selective INT8 protection | A2; system · 4.2 |
 
-### Supporting formulation and general TIM studies
+### Supporting formulation, theory, and general TIM studies
 
 | First public | Paper | Focus | Class / discussion |
 |---|---|---|---|
@@ -158,13 +159,13 @@ Roles describe relevance to the survey, rather than evidence quality. Primary an
 
 The [evidence records](data/evidence.json) cover all nineteen core studies and locate their observations in the primary papers. The survey develops three recurring findings:
 
-**Correction evolves with learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [AIS](https://arxiv.org/abs/2605.13907), and [Score Centering](https://arxiv.org/abs/2609.20807) address complementary effects on the evolving learner: clipping and update visibility, adaptive importance weighting, and conditional score drift.
+**Correction and mismatch evolve together.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [AIS](https://arxiv.org/abs/2605.13907), and [Score Centering](https://arxiv.org/abs/2609.20807) address clipping and update visibility, adaptive importance weighting, and conditional score drift. These interventions change the policy and the mismatch encountered later; [P3O](https://arxiv.org/abs/2605.12380v2) adds batch-adaptive control with setting-specific trajectory evidence.
 
 **Alignment depends on the shared computation.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) share different information: a precision-flow design, a representation, or realized rounding decisions. Their remaining execution differences determine the scope of agreement.
 
-**Signed update selection reveals hidden effects.** [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870) and [TRIAGE](https://arxiv.org/abs/2610.07043) connect stability to signed clipping or direction-dependent control. Mean disagreement alone can hide which learning contributions survive.
+**Signed update selection reveals hidden effects.** [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870) and [TRIAGE](https://arxiv.org/abs/2610.07043) connect stability to signed clipping or direction-dependent control. [DRPO](https://arxiv.org/abs/2606.09821v1) and [MIPU](https://arxiv.org/abs/2606.29526v1) extend the comparison to corrective gradients and whole-candidate acceptance. Mean disagreement alone leaves the location, direction, and stage of control unresolved.
 
-The expanded evidence includes **simulated FP4** in HiFloat4, **native NVFP4 rollout with BF16 training matmuls** in QATFactory, and recipe-level system integration in Miles. These settings support different accuracy and efficiency claims.
+Interpretation depends on the execution regime: **simulated FP4** in HiFloat4, **native NVFP4 rollout with BF16 training matmuls** in QATFactory, and recipe-level system integration in Miles support different accuracy and efficiency claims.
 
 Numerical fidelity, optimization stability, policy quality, and runtime remain distinct outcomes. Section 6 connects them through within-study evidence, information requirements, and timing scope.
 
@@ -186,7 +187,7 @@ The curves illustrate the standard surrogate with epsilon 0.2 and advantage ±1.
 | [Probability trees](figures/prefixes.svg) | Equal local conditionals with different prefix and response probabilities. |
 | [Mechanism map](figures/mechanisms.svg) | Relative influence, score drift, update selection, and feedback. |
 | [Quantized-update visibility](figures/quantization.svg) | Why a smaller update can cross a boundary while a larger one remains invisible. |
-| [Learning operators](figures/operators.svg) | The different target objects of estimator correction, update control, and scheduling. |
+| [Learning operators](figures/operators.svg) | Estimator correction, local and batch control, whole-candidate acceptance, and scheduling. |
 | [Evidence lenses](figures/evidence.svg) | Numerical, update, trajectory, and quality/cost measurements. |
 | [Timing decomposition](figures/timing.svg) | A constructed example separating rollout acceleration from iteration speedup. |
 
