@@ -5,7 +5,7 @@ The manuscript contains ten original vector figures, also supplied as SVGs for r
 | Figure | Purpose | Interpretation |
 |---|---|---|
 | 1 · [Survey at a glance](../figures/overview.svg) | First-page learning loop and intervention interfaces. | Conceptual synthesis. |
-| 2 · [Work-to-class taxonomy](../figures/taxonomy.svg) | All twenty focal works; cross-category components, supporting studies, and the exploration boundary. | Conceptual synthesis. |
+| 2 · [Work-to-class taxonomy](../figures/taxonomy.svg) | All twenty-nine focal works; cross-category components, supporting studies, and the exploration boundary. | Conceptual synthesis. |
 | 3 · [Policy identities](../figures/policies.svg) | Current learner, sampling snapshot, actual behavior, proximal anchor, and KL reference. | Conceptual synthesis. |
 | 4 · [Conditional and response probabilities](../figures/prefixes.svg) | Exact two-step construction: leaf probabilities and prefix mass; not empirical. | Mathematical illustration. |
 | 5 · [Three mechanism routes](../figures/mechanisms.svg) | Relative influence, expected direction, and update selection can propagate through learning. | Conceptual synthesis. |

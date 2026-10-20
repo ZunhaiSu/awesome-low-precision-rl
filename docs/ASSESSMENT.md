@@ -1,5 +1,7 @@
 # Current manuscript: comparison and editorial assessment
 
+This assessment concerns the earlier twenty-study edition. The expanded twenty-nine-study manuscript is described in [current validation](BUILD.md).
+
 20 October 2026. Literature snapshot: 19 October 2026.
 
 The current edition combines the integrated manuscript's continuous argument with the feedback edition's clearer coverage and evidence boundaries. Three editorial passes reduced repetition and strengthened comparative synthesis. A final precision edit clarifies where numerical interventions act, distinguishes candidate diagnostics from validated predictors, and aligns the abstract and conclusion with the evidence. The result is a 30-page focused qualitative survey. This is authoring self-review, not independent peer review or experimental replication.

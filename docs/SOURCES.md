@@ -1,13 +1,13 @@
 # Source and scope notes
 
-Snapshot: 2026-10-19.
+Literature snapshot: 2026-10-20.
 
-The focal corpus starts from an existing seventeen-paper working collection and adds Beyond Precision, VeXact/Diagnosing TIM, and CIS. Primary method descriptions were checked in the papers or their official/arXiv pages during preparation. Formal publication records are used for QeRL, QuRL, and QaRL where available. This is not a new exhaustive literature search and no retrospective database screening counts are claimed.
+The focal collection contains twenty-nine independent contributions: nineteen method or system studies, nine supporting formulation/theory/general TIM studies, and one exploration boundary case. Conference and preprint versions count once. General PTQ, low-precision pretraining, unrelated generation modalities, and speculative-drafter acceleration remain outside the focal scope.
 
-`data/papers.json` is the portable source catalog: it contains public URLs and no private filesystem paths. `reviewed_version` records a pinned version when available; “arXiv record” means the record was checked without representing it as a locally pinned PDF version. Related surveys and foundational methods appear in the manuscript bibliography but remain outside the focal count.
+The targeted update used arXiv metadata queries for quantized rollout, low-precision LLM RL, and training–inference mismatch over 2025-01-01 through 2026-10-20, keyword searches, backward citation tracing, and primary-text checks of candidate methods. This is a curated narrative survey rather than an exhaustive systematic review. The search does not imply that every study using these terms belongs in the focal corpus.
 
-No cross-paper numerical benchmark has been conducted. Mathematical identities in the manuscript are explanatory statements with assumptions, while method-specific outcomes belong to the cited papers. The manuscript's main evidence synthesis is qualitative.
+The canonical catalog records full titles, authors, first-publication dates, reviewed source versions, numerical regimes, evidence domains, and discussion locations. QeRL, QuRL, and QaRL use formal publication records; title changes between preprints and proceedings do not create new entries. Per-record check dates remain explicit. The pinned P3O v2 was updated on 19 October; the score-centering baseline note first appeared on 15 October.
 
-The layout source is arXiv:2601.14004v4. Only its template is adopted; its scientific organization is not the framework for this manuscript.
+Source-linked observations cover all nineteen core studies and preserve their setting and interpretive limit. HiFloat4 reports simulated FP4 accuracy experiments; QATFactory's QARL uses native NVFP4 rollout with BF16 training matmuls; Miles supplies integrated recipe-level evidence. These are different numerical and evidentiary regimes.
 
-`data/evidence.json` contains thirteen within-paper observations with source-section locators and explicit interpretive limits. It complements the twenty-entry catalog without claiming exhaustive empirical extraction. Autoregressive equations and the diffusion-based evidence within AIS are explicitly distinguished. Secondary section locations were audited against actual in-text citations.
+No cross-paper benchmark or independent experimental reproduction was performed. Seed counts, uncertainty, implementation coverage, and replication elsewhere are not exhaustively extracted. Related surveys and foundational methods are cited in the manuscript bibliography without entering the focal count.

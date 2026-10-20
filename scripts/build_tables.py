@@ -78,7 +78,7 @@ def generate():
             full += [f"[arXiv record]({r['arxiv_url']}) · [Publication/source]({r['publication_url']})", '']
 
     detail = ['# Source-linked qualitative evidence', '',
-              'Generated from `data/evidence.json` and `data/papers.json`. These records cover all thirteen core studies. Supporting and boundary studies remain in the [complete catalog](CATALOG.md); their role does not imply an absence of low-precision experiments.', '',
+              'Generated from `data/evidence.json` and `data/papers.json`. These records cover all nineteen core studies. Supporting and boundary studies remain in the [complete catalog](CATALOG.md); their role does not imply an absence of low-precision experiments.', '',
               'Observations retain their source setting and interpretive limit. They are not quality grades, pooled estimates, or independent replications. A source section is a locator within the linked reviewed source; a survey discussion number is a different field.', '',
               '| Study / reviewed regime | Source observation | Interpretive limit | Primary source / location |',
               '|---|---|---|---|']

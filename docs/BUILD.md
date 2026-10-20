@@ -1,13 +1,12 @@
 # Current manuscript validation
 
-The public manuscript was validated on 20 October 2026. Its literature snapshot remains 19 October 2026.
+Validated on 20 October 2026 after the targeted literature expansion. The literature snapshot is 20 October 2026.
 
-- **Manuscript:** 30 pages, eight main sections, twenty focal studies, twenty-six references, thirteen source-located core evidence records, and ten original vector figures.
-- **Author:** Zunhai Su, The University of Hong Kong; PDF metadata agrees.
-- **Navigation:** title, abstract, and graphical overview on page one; contents on pages two and three; main text from page four; Surveyed Papers appendix from page twenty-five; terminology table on page twenty-eight.
-- **Document checks:** compilation and citation checks passed in the separate authoring project. All thirty pages were rendered and visually inspected; the evidence comparison and paper appendix were checked at a readable scale.
-- **Public files:** the manuscript is distributed only as the root [Survey.pdf](../Survey.pdf). LaTeX sources and manuscript compilation tools remain in the Overleaf authoring project.
-- **Catalog checks:** `python3 scripts/validate.py` checks canonical metadata, generated views, complete linked titles, evidence coverage, local links, and the PDF-only publication layout.
-- **Publication:** updates are manual. A failed build must not replace the last successful PDF. The literature snapshot changes only after the corresponding source checks.
+- **Coverage:** twenty-nine focal studies: nineteen methods/systems, nine supporting formulation/theory/general TIM studies, and one exploration boundary. Thirty-five bibliography records and nineteen source-located core observations.
+- **Manuscript:** 33 pages, eight main sections, ten vector figures, and eleven displayed equations. Author: Zunhai Su, The University of Hong Kong.
+- **Navigation:** graphical overview on page one; contents on pages two and three; complete work-to-class figure; Surveyed Papers appendix from page twenty-seven; source/evidence notes on page twenty-nine; glossary on page thirty.
+- **Document checks:** compilation, citations, cross-references, component locations, bibliography, and authoring-template consistency pass. All pages were rendered for layout review; the expanded taxonomy and paper appendix were inspected at a readable scale.
+- **Evidence boundaries:** simulated FP4 in HiFloat4, native NVFP4 rollout with BF16 training matmuls in QATFactory, and recipe-level integration in Miles are identified separately. Estimator granularity, practical inference-gap proxies, and short-horizon P3O evidence retain their limits.
+- **Public release:** the manuscript is distributed only as root Survey.pdf. Sources and manuscript compilation tools remain in the separate Overleaf authoring project. The public validator checks metadata, full linked titles, generated views, evidence coverage, local links, and the PDF-only layout.
 
-These checks establish document consistency, not independent experimental reproduction or external peer review.
+Publication remains manual. These checks establish document consistency, not independent experimental reproduction or external peer review.

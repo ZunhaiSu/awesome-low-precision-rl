@@ -14,25 +14,25 @@ A work can appear in several component classes. Supporting studies are labeled e
 
 Shared learner–sampler computation.
 
-[R3](#paper-r3) (support) · [Jet-RL](#paper-jet) · [QaRL](#paper-qarl) · [QUADS](#paper-quads) · [TRACE](#paper-trace)
+[R3](#paper-r3) (support) · [TBIK / Deterministic Inference](#paper-tbik) (support) · [Jet-RL](#paper-jet) · [QaRL](#paper-qarl) · [QUADS](#paper-quads) · [Miles v0.1](#paper-miles) · [QATFactory / QARL](#paper-qatfactory) · [TRACE](#paper-trace)
 
 ### Fidelity (A2)
 
 Quantization error and visible parameter updates.
 
-[FP16-Mismatch](#paper-fp16) (support) · [Jet-RL](#paper-jet) · [FP8-RL](#paper-fp8rl) · [QuRL](#paper-qurl) · [QUADS](#paper-quads) · [KV4-RL](#paper-kv4)
+[FP16-Mismatch](#paper-fp16) (support) · [Jet-RL](#paper-jet) · [FP8-RL](#paper-fp8rl) · [QuRL](#paper-qurl) · [QUADS](#paper-quads) · [HiFloat4 / Rollout-ResQ](#paper-hif4) · [Miles v0.1](#paper-miles) · [KV4-RL](#paper-kv4)
 
 ### Estimation (B1)
 
 Target expectations and gradient correction.
 
-[FlashRL / TIS](#paper-flashrl) · [MiniRL](#paper-minirl) (support) · [AIS](#paper-ais) · [Score Centering](#paper-score) · [CIS](#paper-cis) (support)
+[FlashRL / TIS](#paper-flashrl) · [MiniRL](#paper-minirl) (support) · [AIS](#paper-ais) · [Score Centering](#paper-score) · [CIS](#paper-cis) (support) · [Baselines and Score Centering](#paper-scorebaseline) (support)
 
 ### Update control (B2)
 
 The influence of samples on policy updates.
 
-[MiniRL](#paper-minirl) (support) · [QuRL](#paper-qurl) · [QaRL](#paper-qarl) · [ACRL](#paper-acrl) · [Full Pipeline FP8 RL](#paper-fullfp8) · [TRIAGE](#paper-triage)
+[MiniRL](#paper-minirl) (support) · [DPPO](#paper-dppo) (support) · [QuRL](#paper-qurl) · [QaRL](#paper-qarl) · [P3O / ESS](#paper-p3o) · [DRPO](#paper-drpo) · [MIPU](#paper-mipu) · [ACRL](#paper-acrl) · [Full Pipeline FP8 RL](#paper-fullfp8) · [TRIAGE](#paper-triage)
 
 ### Scheduling (B3)
 
@@ -62,11 +62,11 @@ First public: 2025 · Reviewed record: [OPT2025](https://www.opt-ml.org/papers/2
 
 ### QeRL
 
-**[QeRL: Quantization-enhanced Low-Rank Reinforcement Learning for LLMs](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html)**
+**[QeRL: Beyond Efficiency - Quantization-enhanced Reinforcement Learning for LLMs](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html)**
 
 Authors: Wei Huang; Yi Ge; Shuai Yang; Yicheng Xiao; Huizi Mao; Yujun Lin; Hanrong Ye; Sifei Liu; Ka Chun Cheung; Hongxu Yin; Yao Lu; Xiaojuan Qi; Song Han; Yukang Chen.
 
-First public: 2025-10-13 · Reviewed record: [ICLR2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html) · Source snapshot checked: 2026-10-19
+First public: 2025-10-13 · Reviewed record: [ICLR2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html) · Source snapshot checked: 2026-10-20
 
 - Numerical regime: NVFP4 with LoRA and adaptive noise
 - Contribution role: boundary; evidence domain: exploration_boundary
@@ -111,6 +111,24 @@ First public: 2025-10-30 · Reviewed record: [v1](https://arxiv.org/abs/2510.267
 - Scope: BF16/FP16 numerical evidence; not a low-bit acceleration method.
 
 [arXiv record](https://arxiv.org/abs/2510.26788) · [Publication/source](https://arxiv.org/abs/2510.26788)
+
+<a id="paper-tbik"></a>
+
+### TBIK / Deterministic Inference
+
+**[Deterministic Inference across Tensor Parallel Sizes That Eliminates Training-Inference Mismatch](https://arxiv.org/abs/2511.17826v2)**
+
+Authors: Ziyang Zhang; Xinheng Ding; Jiayi Yuan; Rixin Liu; Huizi Mao; Jiarong Xing; Zirui Liu.
+
+First public: 2025-11-21 · Reviewed record: [v2](https://arxiv.org/abs/2511.17826v2) · Source snapshot checked: 2026-10-20
+
+- Numerical regime: BF16 / FP32; matched reduction order across TP sizes
+- Contribution role: support; evidence domain: general_TIM
+- Components: Support; A1
+- Main discussion: 3.1; additional locations: 4.1; 6.3
+- Scope: Deterministic cross-TP execution reference; not a low-bit rollout acceleration method.
+
+[arXiv record](https://arxiv.org/abs/2511.17826) · [Publication/source](https://arxiv.org/abs/2511.17826)
 
 <a id="paper-minirl"></a>
 
@@ -170,11 +188,11 @@ First public: 2026-01-26 · Reviewed record: [v2](https://arxiv.org/abs/2601.181
 
 ### Beyond Precision
 
-**[Beyond Precision: Training-Inference Mismatch is an Optimization Problem and Simple LR Scheduling Fixes It](https://arxiv.org/abs/2602.01826)**
+**[Beyond Precision: Training-Inference Mismatch is an Optimization Problem and Simple LR Scheduling Fixes It](https://arxiv.org/abs/2602.01826v1)**
 
 Authors: Yaxiang Zhang; Yingru Li; Jiacai Liu; Jiawei Xu; Ziniu Li; Qian Liu; Haoyuan Li.
 
-First public: 2026-02-02 · Reviewed record: [arXiv record](https://arxiv.org/abs/2602.01826) · Source snapshot checked: 2026-10-19
+First public: 2026-02-02 · Reviewed record: [v1](https://arxiv.org/abs/2602.01826v1) · Source snapshot checked: 2026-10-20
 
 - Numerical regime: General TIM; optimization scheduling
 - Contribution role: support; evidence domain: general_TIM
@@ -184,15 +202,33 @@ First public: 2026-02-02 · Reviewed record: [arXiv record](https://arxiv.org/ab
 
 [arXiv record](https://arxiv.org/abs/2602.01826) · [Publication/source](https://arxiv.org/abs/2602.01826)
 
+<a id="paper-dppo"></a>
+
+### DPPO
+
+**[Rethinking the Trust Region in LLM Reinforcement Learning](https://arxiv.org/abs/2602.04879v3)**
+
+Authors: Penghui Qi; Xiangxin Zhou; Zichen Liu; Tianyu Pang; Chao Du; Min Lin; Wee Sun Lee.
+
+First public: 2026-02-04 · Reviewed record: [v3](https://arxiv.org/abs/2602.04879v3) · Source snapshot checked: 2026-10-20
+
+- Numerical regime: General LLM trust-region and cross-engine mismatch evidence
+- Contribution role: support; evidence domain: general_TIM
+- Components: Support; B2
+- Main discussion: 5.2; additional locations: 3.2
+- Scope: Divergence-based trust-region geometry; do not infer native FP4 or FP8 validation.
+
+[arXiv record](https://arxiv.org/abs/2602.04879) · [Publication/source](https://arxiv.org/abs/2602.04879)
+
 <a id="paper-qurl"></a>
 
 ### QuRL
 
-**[QuRL: Efficient Reinforcement Learning with Quantized Rollout](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html)**
+**[QuRL: Low-Precision Reinforcement Learning for Efficient Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html)**
 
 Authors: Yuhang Li; Reena Elangovan; Xin Dong; Priyadarshini Panda; Brucek Khailany.
 
-First public: 2026-02-15 · Reviewed record: [ICLR2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html) · Source snapshot checked: 2026-10-19
+First public: 2026-02-15 · Reviewed record: [ICLR2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html) · Source snapshot checked: 2026-10-20
 
 - Numerical regime: INT8 / FP8 rollout
 - Contribution role: core; evidence domain: direct_low_precision
@@ -220,6 +256,24 @@ First public: 2026-04-09 · Reviewed record: [ACL2026-Findings](https://aclantho
 
 [arXiv record](https://arxiv.org/abs/2604.07853) · [Publication/source](https://aclanthology.org/2026.findings-acl.841/)
 
+<a id="paper-p3o"></a>
+
+### P3O / ESS
+
+**[Let the Batch Decide, On- or Off-Policy: Effective Sample Size for RL Post-Training](https://arxiv.org/abs/2605.12380v2)**
+
+Authors: Rasool Fakoor; Murdock Aubry; Nicholas Stranges; Alexander J. Smola.
+
+First public: 2026-05-12 · Reviewed record: [v2](https://arxiv.org/abs/2605.12380v2) · Source snapshot checked: 2026-10-20
+
+- Numerical regime: BF16 learner / FP8 rollout; dense reasoning models
+- Contribution role: core; evidence domain: direct_low_precision
+- Components: B2
+- Main discussion: 5.2; additional locations: 6.2; 6.3
+- Scope: Normalized ESS controls update influence and off-policy regularization.
+
+[arXiv record](https://arxiv.org/abs/2605.12380) · [Publication/source](https://arxiv.org/abs/2605.12380)
+
 <a id="paper-ais"></a>
 
 ### AIS
@@ -242,11 +296,11 @@ First public: 2026-05-13 · Reviewed record: [v1](https://arxiv.org/abs/2605.139
 
 ### VeXact / Diagnosing TIM
 
-**[Diagnosing Training Inference Mismatch in LLM Reinforcement Learning via a Zero-Mismatch Reference](https://arxiv.org/abs/2605.14220)**
+**[Diagnosing Training Inference Mismatch in LLM Reinforcement Learning via a Zero-Mismatch Reference](https://arxiv.org/abs/2605.14220v2)**
 
 Authors: Tianle Zhong; Neiwen Ling; Yifan Pi; Zijun Wei; Tianshu Yu; Geoffrey Fox; Peng Wu; Xiao Yu.
 
-First public: 2026-05-14 · Reviewed record: [arXiv record](https://arxiv.org/abs/2605.14220) · Source snapshot checked: 2026-10-19
+First public: 2026-05-14 · Reviewed record: [v2](https://arxiv.org/abs/2605.14220v2) · Source snapshot checked: 2026-10-20
 
 - Numerical regime: Matched-execution diagnostic reference
 - Contribution role: support; evidence domain: diagnostic_reference
@@ -255,6 +309,42 @@ First public: 2026-05-14 · Reviewed record: [arXiv record](https://arxiv.org/ab
 - Scope: Zero-mismatch reference for attribution; not a quantized accelerator.
 
 [arXiv record](https://arxiv.org/abs/2605.14220) · [Publication/source](https://arxiv.org/abs/2605.14220)
+
+<a id="paper-drpo"></a>
+
+### DRPO
+
+**[Rethinking the Divergence Regularization in LLM RL](https://arxiv.org/abs/2606.09821v1)**
+
+Authors: Jiarui Yao; Xiangxin Zhou; Penghui Qi; Wee Sun Lee; Liefeng Bo; Tianyu Pang.
+
+First public: 2026-06-08 · Reviewed record: [v1](https://arxiv.org/abs/2606.09821v1) · Source snapshot checked: 2026-10-20
+
+- Numerical regime: BF16, FP8 rollout-only, and FP8 end-to-end MoE settings
+- Contribution role: core; evidence domain: direct_low_precision
+- Components: B2
+- Main discussion: 5.2; additional locations: 6.2
+- Scope: Smooth divergence-based update control; distinguish the Binary-TV geometry from importance-ratio clipping.
+
+[arXiv record](https://arxiv.org/abs/2606.09821) · [Publication/source](https://arxiv.org/abs/2606.09821)
+
+<a id="paper-mipu"></a>
+
+### MIPU
+
+**[The Mirage of Optimizing Training Policies: Monotonic Inference Policies as the Real Objective for LLM Reinforcement Learning](https://arxiv.org/abs/2606.29526v1)**
+
+Authors: Jing Liang; Hongyao Tang; Yi Ma; Yancheng He; Weixun Wang; Xiaoyang Li; Ju Huang; Wenbo Su; Jinyi Liu; Yan Zheng; Jianye Hao; Bo Zheng.
+
+First public: 2026-06-28 · Reviewed record: [v1](https://arxiv.org/abs/2606.29526v1) · Source snapshot checked: 2026-10-20
+
+- Numerical regime: BF16 learner / FP8 rollout; Qwen3-1.7B and 4B
+- Contribution role: core; evidence domain: direct_low_precision
+- Components: B2; formulation
+- Main discussion: 5.2; additional locations: 2.1; 6.2; 6.3
+- Scope: Sampler-referenced candidates and inference-gap-aware acceptance; practical proxy guarantees are limited.
+
+[arXiv record](https://arxiv.org/abs/2606.29526) · [Publication/source](https://arxiv.org/abs/2606.29526)
 
 <a id="paper-quads"></a>
 
@@ -291,6 +381,42 @@ First public: 2026-07-27 · Reviewed record: [v1](https://arxiv.org/abs/2607.240
 - Scope: Advantage-guided, discrepancy-dependent update control.
 
 [arXiv record](https://arxiv.org/abs/2607.24062) · [Publication/source](https://arxiv.org/abs/2607.24062)
+
+<a id="paper-hif4"></a>
+
+### HiFloat4 / Rollout-ResQ
+
+**[HiFloat4 Format for End-To-End Reinforcement Learning Post-Training of Large Language Models](https://arxiv.org/abs/2607.26515v1)**
+
+Authors: Hei Yi Mak; Shadan Golestan; Hoang Le; Mehran Taghian Jazi; Yunke Peng; Yaoyuan Wang; Yao Wang; Junsong Wang; Tianchi Hu; Fengchen He; Guipeng Hu; Tanzila Rahman; Anandharaju Durai Raju.
+
+First public: 2026-07-29 · Reviewed record: [v1](https://arxiv.org/abs/2607.26515v1) · Source snapshot checked: 2026-10-20
+
+- Numerical regime: Simulated end-to-end HiF4 / MXFP4; rollout residual correction
+- Contribution role: core; evidence domain: direct_low_precision
+- Components: A2
+- Main discussion: 4.2; additional locations: 3.1; 6.2; 6.3
+- Scope: Direct rollout activation compensation; all FP4 experiments are simulated, so native speedup is unmeasured.
+
+[arXiv record](https://arxiv.org/abs/2607.26515) · [Publication/source](https://arxiv.org/abs/2607.26515)
+
+<a id="paper-miles"></a>
+
+### Miles v0.1
+
+**[Miles v0.1: Production-Level Post-Training](https://arxiv.org/abs/2609.08368v1)**
+
+Authors: RadixArk; Tom Chen; Mao Cheng; Shi Dong; Kangrui Du; Yanbin Jiang; Jiajun Li; Yiming Li; Tao Lin; Yusheng Su; Andy Ye; Yueming Yuan; Zhichen Zeng.
+
+First public: 2026-09-08 · Reviewed record: [v1](https://arxiv.org/abs/2609.08368v1) · Source snapshot checked: 2026-10-20
+
+- Numerical regime: FP8 / MXFP8 / NVFP4 RL recipes; precision exceptions
+- Contribution role: core; evidence domain: direct_low_precision
+- Components: A1; A2; system
+- Main discussion: 4.1; additional locations: 4.2; 6.1; 6.3
+- Scope: Shared quantization/export contracts and integration evidence; MXFP8/NVFP4 recipes remain Beta.
+
+[arXiv record](https://arxiv.org/abs/2609.08368) · [Publication/source](https://arxiv.org/abs/2609.08368)
 
 <a id="paper-score"></a>
 
@@ -332,11 +458,11 @@ First public: 2026-09-19 · Reviewed record: [v1](https://arxiv.org/abs/2609.228
 
 ### CIS
 
-**[Rethinking Training-Inference Mismatch in LLM Reinforcement Learning: Where It Arises and How to Correct It](https://arxiv.org/abs/2609.32444)**
+**[Rethinking Training-Inference Mismatch in LLM Reinforcement Learning: Where It Arises and How to Correct It](https://arxiv.org/abs/2609.32444v1)**
 
 Authors: Tianrun Yu; Kaixiang Zhao; Shangzhe Li; Yuxiao Yang; Porter Jenkins; Weitong Zhang; Taylor W. Killian.
 
-First public: 2026-09-26 · Reviewed record: [arXiv record](https://arxiv.org/abs/2609.32444) · Source snapshot checked: 2026-10-19
+First public: 2026-09-26 · Reviewed record: [v1](https://arxiv.org/abs/2609.32444v1) · Source snapshot checked: 2026-10-20
 
 - Numerical regime: BF16 cross-engine mismatch
 - Contribution role: support; evidence domain: general_TIM
@@ -345,6 +471,24 @@ First public: 2026-09-26 · Reviewed record: [arXiv record](https://arxiv.org/ab
 - Scope: Calibrated importance sampling; BF16 cross-engine evidence.
 
 [arXiv record](https://arxiv.org/abs/2609.32444) · [Publication/source](https://arxiv.org/abs/2609.32444)
+
+<a id="paper-qatfactory"></a>
+
+### QATFactory / QARL
+
+**[QATFactory: A Versatile, Deployment-Aligned Framework for Quantization-aware Training and Distillation of LLMs](https://arxiv.org/abs/2609.39223v2)**
+
+Authors: Weili Xu; Jisen Li; Yuqing Jian; Chenxi Li; Zhizhou Sha; Yifan Yu; Qingyang Wu; Chenfeng Xu; Zhongzhu Zhou; Tianyi Zhang; Ben Athiwaratkun.
+
+First public: 2026-09-30 · Reviewed record: [v2](https://arxiv.org/abs/2609.39223v2) · Source snapshot checked: 2026-10-20
+
+- Numerical regime: Native NVFP4 rollout; simulated-quantization BF16 training
+- Contribution role: core; evidence domain: direct_low_precision
+- Components: A1; system
+- Main discussion: 4.1; additional locations: 6.2; 6.3
+- Scope: The QARL component is focal; the framework also includes separate QAD/PTQ studies.
+
+[arXiv record](https://arxiv.org/abs/2609.39223) · [Publication/source](https://arxiv.org/abs/2609.39223)
 
 <a id="paper-triage"></a>
 
@@ -399,3 +543,21 @@ First public: 2026-10-10 · Reviewed record: [v1](https://arxiv.org/abs/2610.144
 - Scope: INT4 KV with selective protection; colocated partial rollout.
 
 [arXiv record](https://arxiv.org/abs/2610.14448) · [Publication/source](https://arxiv.org/abs/2610.14448)
+
+<a id="paper-scorebaseline"></a>
+
+### Baselines and Score Centering
+
+**[Baselines and Score Centering in Policy Gradient Estimation](https://arxiv.org/abs/2610.22263v1)**
+
+Authors: Shuo Han; Ziqing Hu.
+
+First public: 2026-10-15 · Reviewed record: [v1](https://arxiv.org/abs/2610.22263v1) · Source snapshot checked: 2026-10-20
+
+- Numerical regime: Sequence- and token-level regularized importance sampling
+- Contribution role: support; evidence domain: general_TIM
+- Components: Support; B1
+- Main discussion: 5.1; additional locations: 5.4
+- Scope: Covariance analysis of group baselines and score centering; theoretical support, not a quantized accelerator.
+
+[arXiv record](https://arxiv.org/abs/2610.22263) · [Publication/source](https://arxiv.org/abs/2610.22263)

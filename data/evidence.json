@@ -1,6 +1,6 @@
 {
-  "checked_date": "2026-10-19",
-  "purpose": "Source-linked qualitative evidence for all thirteen core method/system studies. Six selected comparisons appear in the survey evidence table; this is not an exhaustive experimental extraction or a new benchmark.",
+  "checked_date": "2026-10-20",
+  "purpose": "Source-linked qualitative evidence for all nineteen core method/system studies. Six selected comparisons appear in the manuscript evidence table; this is not exhaustive experimental extraction or a new benchmark.",
   "observations": [
     {
       "key": "flashrl",
@@ -99,6 +99,48 @@
         "cumulative_full_iteration_speedup": 1.27,
         "baseline": "BF16 rollout"
       }
+    },
+    {
+      "key": "p3o",
+      "url": "https://arxiv.org/abs/2605.12380v2",
+      "locator": "Sections 3 and 4.3-4.4",
+      "observation": "Under BF16 training and FP8 rollout, P3O avoids the evaluated late collapse on Qwen3-8B-Base; the smaller-model comparison shows little separation.",
+      "limit": "The evaluated FP8 trajectories are short and the baseline has no separate mismatch correction; this is not a universal long-run stability guarantee."
+    },
+    {
+      "key": "drpo",
+      "url": "https://arxiv.org/abs/2606.09821v1",
+      "locator": "Sections 3-4.1; Appendix D.4-D.6",
+      "observation": "A smooth regularizer supplies corrective gradients outside the Binary-TV trust region; experiments include FP8 rollout and FP8 end-to-end MoE training.",
+      "limit": "Low-precision results concern the tested architectures and recipes; bounded update weights do not establish global policy improvement."
+    },
+    {
+      "key": "mipu",
+      "url": "https://arxiv.org/abs/2606.29526v1",
+      "locator": "Sections 3-5.4; Appendix A-B",
+      "observation": "FP8-rollout comparisons and component ablations separate sampler-referenced candidate construction from post-synchronization inference-gap-aware acceptance.",
+      "limit": "The practical acceptance proxy is not an unconditional monotonic-improvement certificate; extra evaluation and rollback can affect cost."
+    },
+    {
+      "key": "hif4",
+      "url": "https://arxiv.org/abs/2607.26515v1",
+      "locator": "Sections 4.2-4.3 and 5; Section 6 limitations",
+      "observation": "Precision ablations identify rollout activation underflow as a key failure source; sparse residual correction improves the evaluated FP4 RL accuracy.",
+      "limit": "All FP4 experiments use simulation. Hardware-friendly sparsity and overhead analysis do not establish measured native-FP4 speedup."
+    },
+    {
+      "key": "miles",
+      "url": "https://arxiv.org/abs/2609.08368v1",
+      "locator": "Sections 3.1, 4, 5.3, and 9",
+      "observation": "The system coordinates checkpoint conversion, learner forward, rollout, and weight export under common quantization rules, with explicit high-precision exceptions.",
+      "limit": "Recipe-level integration is not isolated evidence for every component; MXFP8/NVFP4 are marked Beta and tested model/hardware coverage is bounded."
+    },
+    {
+      "key": "qatfactory",
+      "url": "https://arxiv.org/abs/2609.39223v2",
+      "locator": "Sections 3.4-3.5 and 4.6",
+      "observation": "On Qwen3-8B-Base, native NVFP4 rollout with simulated-quantization training improves quantized endpoint quality over post-RL RTN and reduces measured step time.",
+      "limit": "QARL evidence must be separated from the larger QAD study; the training matmuls run in BF16 and this is not native FP4 training."
     }
   ]
 }
