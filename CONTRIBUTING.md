@@ -8,7 +8,9 @@ Include a primary-source URL and explain the connection to low-precision rollout
 
 Add or update a record in `data/papers.json`. Preserve the existing schema, record the reviewed version, and keep conference and preprint versions together. Supply authors, title, first-publication date, primary discussion location, and scope note. Distinguish direct low-precision experiments from general TIM evidence.
 
-For core studies, add a source-located observation and its interpretive limit to `data/evidence.json`. Update `README.md`, `references.bib`, and the inline bibliography/corpus table in `survey/survey.tex` when needed. Run `python3 scripts/build.py --figures` and inspect the affected rendered pages. The build refreshes the public PDF before validating source and catalog consistency. Update the snapshot date only after the stated source checks have actually been performed.
+For core studies, add a source-located observation and its interpretive limit to `data/evidence.json`. Supply a numerical regime, evidence domain, replication status, concise catalog summary, and reviewed source URL in `data/papers.json`. A pinned version must come from an identified source record. Do not infer code availability, seed counts, or replication elsewhere from an unfilled field.
+
+Run `python3 scripts/build_tables.py` to refresh the README catalog and the complete catalog/evidence views. Preserve manual README content outside the generated markers. Update `references.bib` and the inline bibliography/corpus table in `survey/survey.tex` when needed. Run `python3 scripts/build.py --figures` and inspect affected pages. The consistency checker rejects stale generated views. Update the literature snapshot only after the stated source checks have actually been performed. [Classification guidance](docs/TAXONOMY.md) distinguishes relevance, method components, and evidence domains; none is an experimental-quality grade.
 
 ## Report a correction
 
@@ -30,4 +32,4 @@ Contribute material you may share under the repository license. Link to third-pa
 
 The repository-root `Survey.pdf` is the public reading copy and must match `survey/survey.pdf` byte for byte. After each manuscript update on Overleaf, build the latest source, refresh both PDF copies, and synchronize the corresponding LaTeX and changed supporting files to GitHub. Preserve unrelated GitHub edits. A failed compilation must not replace the last successful public PDF.
 
-The maintainer uses a local scheduled check to detect Overleaf updates. An unchanged source does not require a rebuild or an empty commit. The literature snapshot changes only after a literature check, independently of typesetting or synchronization.
+Synchronization is manual. The scheduled Overleaf monitor is paused; manuscript edits and publication are performed when requested. An unchanged source does not require a rebuild or an empty commit. The literature snapshot changes only after a literature check, independently of typesetting or synchronization.

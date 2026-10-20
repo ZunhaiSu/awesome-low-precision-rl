@@ -1,16 +1,16 @@
 # Current manuscript validation
 
-Validated on 20 October 2026 for the [integrated edition](REVISION_5.md), including the current prose refinement. The literature snapshot remains 19 October 2026.
+Validated on 20 October 2026 after selective incorporation of reader feedback. The literature snapshot remains 19 October 2026.
 
-- **Manuscript:** 28 pages, eight main sections, twenty focal studies, twenty-six references, thirteen source-located core evidence records, and ten original vector figures.
-- **Author:** Zunhai Su, The University of Hong Kong; PDF author metadata agrees.
-- **Navigation:** title, abstract, and graphical overview on page one; original contents typography on pages two and three; introduction from page four; conclusion on page twenty-three; Surveyed Papers appendix from page twenty-four.
-- **Integrity:** all eleven displayed equations, all twenty appendix paper entries, and bibliography content match the preceding technical edition. The classification and primary/secondary discussion locations pass the consistency checker.
-- **Compilation:** the built-in editor compiler and Tectonic 0.17.0 both succeed on the final source. A clean directory containing only `survey.tex` also builds a 28-page PDF. The embedded class and bibliography provide the standalone distribution.
-- **Diagnostics:** no overfull or underfull boxes, undefined citations, unresolved references, or LaTeX errors in the final Tectonic build. Nonfatal encoding warnings from legacy packages remain.
-- **Visual review:** all 28 pages rendered and inspected. Final bibliography changes were re-rendered and inspected at a readable scale. The conclusion fits on the final main-text page, and bibliography entries remain together across page breaks.
-- **Figures:** all ten SVG exports are valid XML. The build/export command regenerates them from the manuscript's TikZ definitions and shared palette. Analytical constructions remain identified separately from empirical observations.
-- **Public PDF:** root `Survey.pdf` and `survey/survey.pdf` match byte for byte.
-- **Repository:** citations, bibliography keys, figure markers, local links, image paths, author fields, matching class copies, and the eight-section framework pass `scripts/validate.py`. README navigation reflects the revised research-findings heading.
+- **Manuscript:** 31 pages, eight main sections, twenty focal studies, twenty-six references, thirteen source-located core evidence records, and ten original vector figures.
+- **Author:** Zunhai Su, The University of Hong Kong; PDF metadata agrees.
+- **Navigation:** title/abstract and graphical overview on page one; original contents typography on pages two and three; main text from page four; conclusion on page twenty-five; Surveyed Papers appendix from page twenty-six; complete terminology table on page twenty-nine.
+- **Technical content:** eleven displayed equations. The two-factor decomposition now has an explicit multiplication sign and separated labels. Support, stopping, fixed advantages, behavior semantics, and conditional-versus-response distinctions remain present. All ten TikZ definitions and all twenty appendix paper entries retain their technical content.
+- **Coverage and evidence:** the coverage matrix separates numerical, model/adaptation, collection, and generation regimes. The diagnostic table links mechanisms to observables and intervention targets. The six-study comparison separates comparison, finding, and limitation. Relevance and evidence domain are independent metadata; no experimental-quality grade or new benchmark is claimed.
+- **Sources:** saved reviewed arXiv versions are pinned in metadata and both bibliographies where identified; formal publications and version-unspecified records remain distinct. Source selection and extraction gaps are stated in the manuscript.
+- **Compilation:** built-in editor compiler and Tectonic 0.17.0 succeed. A clean directory containing only `survey.tex` also builds a 31-page PDF. No overfull/underfull boxes, undefined citations, unresolved references, or LaTeX errors. Legacy-package encoding warnings remain nonfatal.
+- **Visual review:** all 31 final pages rendered and inspected; the decomposition, new tables, evidence rows, complete glossary, and references were checked at a readable scale. The first synthesis finding and terminology table are kept together.
+- **Repository consistency:** the README catalog and complete catalog/evidence views are generated from JSON. The checker validates generated content, metadata domains, saved version URLs, citations, section mappings, figure exports, local links, author fields, class copies, and matching root/nested PDFs. A temporary-copy check confirmed that stale views are detected and regeneration restores consistency.
+- **Synchronization:** publication is manual; the scheduled monitor remains paused. Root `Survey.pdf` and `survey/survey.pdf` match byte for byte.
 
-The current prose refinement clarifies the distinct forms of composition in QaRL/QuRL, QUADS, and Score Centering, and makes method comparisons more precise. Equations, figures, tables, classification, and source coverage retain the integrated edition's technical content. This is editorial and technical self-review, without new experiments or external peer review.
+Reader suggestions were evaluated against the source and rendered manuscript. Alleged missing-factor and FPS/OCR errors were not present as stated; the associated readability issues were improved. Subjective E1–E4 grades, a generic stacked estimator, new benchmark claims, and duplicate YAML data were not introduced. No independent experiments or external peer review are implied.

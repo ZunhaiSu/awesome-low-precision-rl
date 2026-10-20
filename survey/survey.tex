@@ -516,7 +516,7 @@ singlelinecheck=off,%
 \begin{document}
 \begin{abstract}
 \textbf{Abstract:} 
-Low-precision rollout generation can reduce the cost of language-model reinforcement learning while changing the policy that supplies its training data. Numerical approximation then propagates through gradient estimation, policy updates, and subsequent generation. We survey twenty focal studies through this feedback loop. A common formulation separates execution mismatch from policy staleness and decoding transformations, and distinguishes conditional correction from response-level change of measure. A component taxonomy connects numerical alignment and fidelity control with estimator correction, update control, and schedule adaptation. Three relationships emerge: correction interacts with the evolving policy; alignment depends on the computation shared at a specific interface; and signed update contributions can expose effects hidden by aggregate discrepancy. These relationships explain how numerical and learning interventions complement one another, and why closer agreement alone does not establish better learning. We compare their assumptions, information requirements, and system costs, and identify open problems in predictive diagnosis, composition, and stateful collection.
+Low-precision rollout generation can reduce the cost of language-model reinforcement learning while changing the policy that supplies its training data. Numerical approximation then propagates through gradient estimation, policy updates, and subsequent generation. We present a focused qualitative survey of twenty focal studies through this feedback loop. A common formulation separates execution mismatch from policy staleness and decoding transformations, and distinguishes conditional correction from response-level change of measure. A component taxonomy connects numerical alignment and fidelity control with estimator correction, update control, and schedule adaptation. Three relationships emerge: correction interacts with the evolving policy; alignment depends on the computation shared at a specific interface; and signed update contributions can expose effects hidden by aggregate discrepancy. These relationships explain how numerical and learning interventions complement one another, and why closer agreement alone does not establish better learning. We compare their assumptions, information requirements, and system costs, and identify open problems in predictive diagnosis, composition, and stateful collection.
 \par\medskip
 \noindent\textbf{Keywords:} quantized rollout; low-precision reinforcement learning; training--inference mismatch; importance sampling; quantization-aware training.
 \par\medskip\textbf{Literature snapshot:} October 19, 2026.
@@ -549,7 +549,7 @@ Low-precision rollout generation can reduce the cost of language-model reinforce
 \node[draw=rulegray,fill=white,rounded corners=2pt,align=center,text width=3.55cm,inner sep=4pt,surveySmall] at (\x,.71) {\word};}
 \end{tikzpicture}
 % END FIGURE overview
-\caption{Survey at a glance. Numerical methods act on learner or sampler execution; learning methods change how samples drive updates. Their effects return through the rollout--learning loop.}\label{fig:overview}
+\caption{Survey at a glance. Numerical methods act on learner or sampler execution; learning methods change how samples drive updates. Their effects return through the rollout--learning loop. W, A, and KV denote weights, activations, and key--value cache.}\label{fig:overview}
 \end{figure}
 
 \clearpage
@@ -561,7 +561,7 @@ Low-precision rollout generation can reduce the cost of language-model reinforce
 
 \section{Introduction and Scope}\label{sec:intro}
 \subsection{Why Low-Precision Rollouts Complicate Policy Optimization}
-In language-model reinforcement learning, generation determines the responses, rewards, and histories from which the next policy is learned. Quantizing the rollout engine changes this source of training data as well as its computational cost. A local numerical difference can alter a sampled token, the learning signal assigned to a response, and the parameter update that shapes later generation. The resulting training--rollout mismatch is therefore part of a feedback process whose consequences extend beyond the accuracy of a single forward pass.
+In language-model reinforcement learning, generation determines the responses, rewards, and histories from which the next policy is learned. Quantizing the rollout engine changes this source of training data as well as its computational cost. A local numerical difference can alter a sampled token, the learning signal assigned to a response, and the parameter update that shapes later generation. The resulting training--rollout mismatch is a low-precision instance of training--inference mismatch (TIM), with consequences that extend beyond the accuracy of a single forward pass.
 
 The practical objective is to learn a capable policy within a finite computational budget. Faster generation contributes to that objective through the quality of the data it supplies and the updates those data support. Numerical agreement, optimization stability, task performance, and runtime capture different parts of this relationship. Aggressive clipping, for example, can stabilize training while discarding useful signal; a more faithful sampler can preserve that signal while reducing the throughput gained from quantization. Their value depends on how efficiently the complete learning process improves the policy.
 
@@ -623,7 +623,7 @@ The twenty focal contributions comprise thirteen method or system studies, six f
 
 Broader surveys address low-precision LLM training, rollout strategies, and reinforcement learning for reasoning models \citep{lowprecisionsurvey,rolloutsurvey,reasoningsurvey}. The distinctive concern here is the connection between actual sampling probabilities, numerical execution, and the update computed from sampled data. General post-training quantization, pretraining-only methods, and speculative-draft acceleration enter only where they clarify that connection.
 
-The collection supports a focused narrative synthesis of primary studies. Numerical formats, architectures, adaptation regimes, and collection schedules remain separate from the method taxonomy, so that similar mechanisms can be compared without treating unlike experimental settings as equivalent.
+The collection supports a focused narrative synthesis of primary studies. Numerical formats, architectures, adaptation regimes, and collection schedules remain separate from the method taxonomy, so that similar mechanisms can be compared without treating unlike experimental settings as equivalent. Appendix~\ref{app:terms} defines recurring abbreviations.
 
 \subsection{Perspective and Contributions}
 Numerical fidelity and learning correction are coupled. A more faithful sampler changes the errors a correction encounters, while the update rule determines which errors affect learning. Their joint design determines which sample contributions reach the parameter update and the computation needed to preserve them.
@@ -636,7 +636,7 @@ Let $x$ be a prompt, $y_{1:T}$ a response, and $h_t=(x,y_{<t})$ its prefix. A po
 
 The behavior policy $q_k(a\mid h)$ is the distribution that actually sampled the token. It includes the rollout engine, numerical representation, and sampling transformation. Temperature and vocabulary truncation therefore belong to its definition: a raw-model log-probability returned by an engine need not equal the probability after decoding transformations.
 
-The collection protocol is part of the behavior law. Under deterministic execution and version schedules, the generated history determines the sampler state, including cache entries computed under earlier parameter versions. The subscript $k$ abbreviates that rollout path; a checkpoint identifier alone cannot specify stateful execution.
+The collection protocol is part of the behavior law. Under deterministic execution and version schedules, the generated history determines the sampler state, including cache entries computed under earlier parameter versions. The subscript $k$ abbreviates that rollout path. Cache provenance identifies the parameter versions and numerical paths that produced retained cache entries; a checkpoint identifier alone cannot specify this state.
 
 A proximal policy $p_{\mathrm{prox}}$ supplies the denominator of a policy-update constraint. A reference policy $p_{\mathrm{ref}}$ supplies a regularization target. These are different roles: a frozen pre-update learner may be proximal, while a much earlier policy is the KL reference. Neither is automatically the policy that generated every token. PPO and GRPO provide familiar contexts for these distinctions \citep{ppo,grpo}; mismatch-aware formulations require them to remain explicit \citep{flashrl,minirl}.
 
@@ -653,7 +653,11 @@ $p_{\mathrm{ref}}$ & Policy used for KL regularization; not the behavior denomin
 $\Delta_k$ & Same-snapshot log-probability difference, $\log p_k-\log q_k$.\\
 $d_\theta$ & Current learner--behavior gap, $\log p_\theta-\log q_k$.\\
 $A_t$ & Advantage or other policy-gradient learning signal.\\
-$s_\theta(a,h)$ & Score vector, $\nabla_\theta\log p_\theta(a\mid h)$.\\\bottomrule
+$s_\theta(a,h)$ & Score vector, $\nabla_\theta\log p_\theta(a\mid h)$.\\
+$c_t,\bar c_t$ & Behavior-to-proximal correction and its truncated or masked form.\\
+$r_t(\theta)$ & Proximal update ratio, $p_\theta/p_{\mathrm{prox}}$.\\
+$W_\theta(y\mid x)$ & Complete-response likelihood ratio, $P_\theta/Q$.\\
+$N,\sg$ & Valid-token count and stop-gradient operator in Equation~\eqref{eq:surrogate}.\\\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -661,10 +665,11 @@ $s_\theta(a,h)$ & Score vector, $\nabla_\theta\log p_\theta(a\mid h)$.\\\bottomr
 At a fixed prefix and token with positive relevant probabilities,
 \begin{equation}\label{eq:decomp}
 \frac{p_\theta(a\mid h)}{q_k(a\mid h)}=
-\underbrace{\frac{p_\theta(a\mid h)}{p_k(a\mid h)}}_{\text{parameter change}}
-\underbrace{\frac{p_k(a\mid h)}{q_k(a\mid h)}}_{\text{same-snapshot execution/decoding difference}}.
+\underbrace{\left(\frac{p_\theta(a\mid h)}{p_k(a\mid h)}\right)}_{\text{parameter change / lag}}
+\;\times\;
+\underbrace{\left(\frac{p_k(a\mid h)}{q_k(a\mid h)}\right)}_{\substack{\text{same-snapshot}\\\text{execution / decoding}}}.
 \end{equation}
-The first factor captures parameter change since collection, including asynchronous version lag; the factorization requires no independence assumption. The second compares execution at the sampling snapshot. It isolates numerical differences when decoding is matched and also includes decoding differences when temperature or top-$p$ filtering changes. The intermediate policy $p_k$ is a conceptual reference and need not be retained by the implementation. In partial rollouts, $k=k(t)$ may vary across tokens. If caches survive synchronization, their earlier computations remain part of the behavior path, so reconstructing $q_k$ requires cache provenance or the realized sampling probabilities as well as the current checkpoint.
+The first factor captures parameter change since collection, including asynchronous version lag; the factorization requires no independence assumption. The second compares execution at the sampling snapshot. It isolates numerical differences when decoding is matched and also includes decoding differences when temperature or top-$p$ filtering changes. The intermediate policy $p_k$ is a conceptual reference and need not be retained by the implementation. In partial rollout, a response can span collection boundaries, so $k=k(t)$ may vary across tokens. If caches survive synchronization, their earlier computations remain part of the behavior path, so reconstructing $q_k$ requires cache provenance or the realized sampling probabilities as well as the current checkpoint.
 
 Figure~\ref{fig:policies} separates these snapshot comparisons from the two policy roles used by the loss. A proximal anchor and a KL reference can be chosen independently of the actual sampler.
 
@@ -728,13 +733,15 @@ A two-step example in Figure~\ref{fig:prefixes} makes the distinction tangible. 
 \node[surveyCard,fill=slatewash,text width=15.2cm,align=center,surveySmall] at (7.9,-.55) {Second-token conditionals agree: $p(a_2\mid h_1)/q(a_2\mid h_1)=1$.\\The first-token ratios, $0.5/0.8$ and $0.5/0.2$, recover the complete-path probabilities.};
 \end{tikzpicture}
 % END FIGURE prefixes
-\caption{Exact two-step illustration of conditional and response-level correction. Leaf values are complete-response probabilities. Equal second-token conditionals coexist with different prefix masses; the product ratio restores the four target probabilities of $0.25$. These are constructed probabilities, not experimental results.}\label{fig:prefixes}
+\caption{Exact two-step illustration of conditional and response-level correction. Leaf values are complete-response probabilities. Equal second-token conditionals coexist with different prefix masses; the product ratio restores the four target probabilities of $0.25$. This is a constructed illustration, not an experimental result.}\label{fig:prefixes}
 \end{figure}
 
 \subsection{A Component-Level Taxonomy of Interventions}
 We group components by the object they directly modify. \textbf{A: numerical interventions} alter representation or execution. A1 matches computation between learner and sampler; A2 controls quantization error or preserves parameter updates. \textbf{B: learning interventions} alter how sampled data produce updates. B1 corrects gradient estimation; B2 controls the acceptance, magnitude, or direction of policy updates; B3 adapts the optimization schedule.
 
 The classes follow each component's operative rule and design objective. An alignment method may also improve fidelity, and every estimator correction ultimately changes an update. The useful distinction is what the component is constructed to do. A multiplicative weight, for example, can correct a distributional expectation or regulate update influence; its algebraic form alone does not determine its class. B3 extends the taxonomy to schedule adaptation, for which direct low-bit evidence remains limited.
+
+Assignments follow the operation introduced by a component. Shared execution choices indicate A1; preserving resolution or sensitive states indicates A2; correcting a target expectation indicates B1; controlling update acceptance or influence indicates B2; changing the schedule indicates B3. A work can introduce several coequal components, as in QaRL or QuRL. An adopted correction is identified separately from the component proposed by a system. Primary and secondary discussion locations denote expository placement, not a ranking of contributions or evidence strength.
 
 \begin{table}[!htbp]
 \centering\small
@@ -844,7 +851,7 @@ Figure~\ref{fig:clipping-sign} makes this sign dependence explicit for the stand
 \node[text=muted,surveySmall] at (11,-.82) {Lower boundary controls $A<0$};
 \end{tikzpicture}
 % END FIGURE clipping
-\caption{Signed clipping in Equation~\eqref{eq:clipbranch}, with $\epsilon=0.2$ and $A=\pm1$. The gray interval is $[0.8,1.2]$; amber segments are flat. At $r=0.7$, a negative-advantage token contributes no gradient through this objective. The clipped policy ratio determines the interpretation.}\label{fig:clipping-sign}
+\caption{Signed clipping in Equation~\eqref{eq:clipbranch}, with $\epsilon=0.2$ and $A=\pm1$. The gray interval is $[0.8,1.2]$; amber segments are flat. At $r=0.7$, a negative-advantage token contributes no gradient through this objective. The clipped policy ratio determines the interpretation. This is a constructed illustration, not an experimental result.}\label{fig:clipping-sign}
 \end{figure}
 
 \subsection{Feedback across Optimization Steps}
@@ -858,6 +865,20 @@ Optimization scale adds another feedback channel. Beyond Precision studies the r
 Diagnosis begins with the comparison used to isolate an effect. Replacing an inference engine can simultaneously change arithmetic, batching, memory use, and generated trajectories. A resulting quality difference cannot automatically be assigned to the precision format. VeXact constructs a zero-mismatch reference to help separate execution mismatch from other training effects \citep{vexact}. It supplies a diagnostic counterfactual against which the effects of accelerated execution can be interpreted.
 
 Execution, update behavior, and policy learning form a causal chain. Shared-prefix replay isolates changes in conditional probabilities; update diagnostics expose their effect on the estimator or constraint; training trajectories reveal the accumulated consequence. VeXact's reference is especially useful at the first interface. Connecting all three links explains why the same numerical discrepancy can be harmless under one update rule and damaging under another.
+
+
+\begin{table}[!htbp]
+\centering\small\setlength{\tabcolsep}{4pt}
+\caption{Mechanisms, observable diagnostics, and intervention targets. Diagnostics characterize different effects and do not by themselves predict downstream quality.}\label{tab:diagnostics}
+\begin{tabularx}{\linewidth}{@{}P{28mm}YY@{}}\toprule
+Mechanism & Diagnostic at a specified policy and prefix & Related intervention \\\midrule
+Relative influence & Tails of $p/q$, conditioned on token confidence; correction truncation or masking rate. & B1: TIS, AIS, and CIS control estimator influence \citep{flashrl,ais,cis}.\\[5pt]
+Conditional score drift & Estimated $\E_q[s_\theta]$ and the contribution $\E_q[A]\E_q[s_\theta]$; reconstruction error matters. & B1: Score Centering removes the exact first-moment term; implementations approximate it \citep{score}.\\[5pt]
+Update selection & Active clipping branches and retained contributions, separated by advantage sign; local directional patterns. & B2: clipping calibration and direction-aware control \citep{fullfp8,triage}.\\\bottomrule
+\end{tabularx}
+\end{table}
+
+The first two diagnostics compare policies at shared prefixes; signed update diagnostics additionally depend on the actual surrogate and fixed advantage signals. Free-running trajectories then reveal whether the diagnosed effect persists as the sampled histories change.
 
 \discussion{Box 1. Quantization and exploration}{QeRL combines low-precision execution, low-rank adaptation, and adaptive quantization noise, making exploration an explicit part of the training design \citep{qerl}. It occupies a boundary of this survey: the numerical perturbation changes the search process as well as agreement between computations. Its results establish a role for quantization noise in that setting, with task utility depending on the induced sampling distribution and the learner's adaptation capacity. They do not establish a benefit from arbitrary cross-engine error.}
 
@@ -906,7 +927,7 @@ Figure~\ref{fig:quantization} illustrates why update magnitude alone does not de
 \node[surveySmall,text=muted] at (7.7,-.85) {Fixed-step illustration: $Q(w)=0.5\,\mathrm{round}(2w)$; the chosen values avoid ties.};
 \end{tikzpicture}
 % END FIGURE quantization
-\caption{Constructed illustration of quantized-update visibility in Equation~\eqref{eq:quantupdate}. Under the fixed-step scalar quantizer, the blue update stays inside a cell while the smaller amber update crosses a boundary. Variable scales change these boundaries.}\label{fig:quantization}
+\caption{Constructed illustration of quantized-update visibility in Equation~\eqref{eq:quantupdate}. Under the fixed-step scalar quantizer, the blue update stays inside a cell while the smaller amber update crosses a boundary. Variable scales change these boundaries. This is a constructed illustration, not an experimental result.}\label{fig:quantization}
 \end{figure}
 
 QUADS addresses another residual: activation error in the rollout path. Its Residual Activation Compensation complements learner-side weight QAT, allowing alignment and error reduction to operate on different parts of the system \citep{quads}. The component ablations are particularly useful here because they distinguish what weight alignment recovers from what activation compensation adds.
@@ -956,10 +977,10 @@ A representative decoupled surrogate is
 \end{equation}
 where $\bar c_t$ is a possibly truncated correction, the sampled advantages are held fixed, and $\sg$ denotes no differentiation through the correction weight. The separation exposes two different operations: bounding the mismatch correction $c_t$ and clipping the proximal ratio $r_t$. Individual objectives differ in how they perform and combine these operations. An upper-truncated correction, for example, takes $\bar c_t=\min(c_t,C)$, whereas masking can discard selected ratios. Here $N$ counts valid sampled tokens. Response-level averaging and length normalization assign different relative weights, so the reduction rule is part of the estimator being compared.
 
-FlashRL's TIS provides a basic bounded correction using actual rollout probabilities \citep{flashrl}. MiniRL exemplifies the mismatch-aware distinction between behavior and proximal policies underlying this notation \citep{minirl}. FP8-RL adopts token-level TIS/MIS variants, while KV4-RL retains TIS alongside cache protection \citep{fp8rl,kv4}. The system studies show how the correction operates alongside other numerical components. Truncation bounds extreme influence while changing the expectation; recording an actual behavior denominator supplies the required probability semantics, but does not remove that truncation bias.
+FlashRL's truncated importance sampling (TIS) provides a basic bounded correction using actual rollout probabilities \citep{flashrl}. MiniRL exemplifies the mismatch-aware distinction between behavior and proximal policies underlying this notation \citep{minirl}. FP8-RL adopts token-level TIS and masked importance sampling (MIS) variants, while KV4-RL retains TIS alongside cache protection \citep{fp8rl,kv4}. The system studies show how the correction operates alongside other numerical components. Truncation bounds extreme influence while changing the expectation; recording an actual behavior denominator supplies the required probability semantics, but does not remove that truncation bias.
 
 \paragraph{Adapting the amount and location of correction.}
-AIS uses observable mismatch diagnostics to interpolate between uncorrected and fully importance-weighted gradients \citep{ais}. Its adaptive quantity is the estimator mixture, not a precision schedule. CIS instead derives a confidence-dependent importance-weight cap from a discrepancy representation \citep{cis}. These approaches differ in what they adapt: overall correction strength versus the location of truncation across token confidence. CIS is used here as general TIM evidence; its BF16 cross-engine experiments are not direct FP4 validation.
+Adaptive importance sampling (AIS) uses observable mismatch diagnostics to interpolate between uncorrected and fully importance-weighted gradients \citep{ais}. Its adaptive quantity is the estimator mixture, not a precision schedule. Calibrated importance sampling (CIS) instead derives a confidence-dependent importance-weight cap from a discrepancy representation \citep{cis}. These approaches differ in what they adapt: overall correction strength versus the location of truncation across token confidence. CIS is used here as general TIM evidence; its BF16 cross-engine experiments are not direct FP4 validation.
 
 \paragraph{Additive score correction.}
 Score Centering replaces the score at a prefix with
@@ -972,7 +993,7 @@ The distinction between multiplicative and additive correction also determines t
 
 \subsection{Controlling the Influence of Policy Updates}\label{sec:b2}
 \paragraph{Restoring or reshaping update constraints.}
-QuRL's Adaptive Clipping Range adjusts the update boundary in response to the relationship between proximal and behavior probabilities \citep{qurl}. QaRL's TBPO combines negative-sample treatment with sequence-level trust-band control \citep{qarl}. The full-pipeline FP8 method first matches the lower clipping quantile on negative-advantage tokens to a BF16 reference, then adjusts the upper boundary to rebalance positive and negative contributions \citep{fullfp8}. Periodic reference passes amortize the calibration cost. All three act on the update constraint, but use different signals and aggregation levels. ``Calibration'' in the last method refers to objective boundaries, not quantizer scales.
+QuRL's Adaptive Clipping Range (ACR) adjusts the update boundary in response to the relationship between proximal and behavior probabilities \citep{qurl}. QaRL's Trust-Band Policy Optimization (TBPO) combines negative-sample treatment with sequence-level trust-band control \citep{qarl}. The full-pipeline FP8 method first matches the lower clipping quantile on negative-advantage tokens to a BF16 reference, then adjusts the upper boundary to rebalance positive and negative contributions \citep{fullfp8}. Periodic reference passes amortize the calibration cost. All three act on the update constraint, but use different signals and aggregation levels. ``Calibration'' in the last method refers to objective boundaries, not quantizer scales.
 
 The shared issue is which learning signal reaches the parameter update. A token-level boundary can restore a contribution lost to clipping, whereas a sequence-level trust band controls a whole response. Widening either region admits more updates, but their value depends on advantage sign and influence. The clipping count becomes informative when connected to those retained contributions.
 
@@ -1031,6 +1052,22 @@ AIS evaluates diffusion-based LLaDA alongside autoregressive Qwen models \citep{
 
 Architecture and collection protocol further condition conclusions. MoE execution introduces discrete route choices; cache-heavy long responses expose different runtime bottlenecks from shorter generations; partial collection permits a response to contain tokens sampled under different parameter versions. A method evaluated in one of these regimes may motivate a hypothesis in another, but that transfer is not itself an experimental result.
 
+Table~\ref{tab:coverage} makes the scope and its boundaries explicit.
+\begin{table}[!htbp]
+\centering\small\setlength{\tabcolsep}{4pt}
+\caption{Coverage matrix for the qualitative snapshot. Rows are independent dimensions; the presence of two regimes does not imply that their combination has been evaluated.}\label{tab:coverage}
+\begin{tabularx}{\linewidth}{@{}P{28mm}YY@{}}\toprule
+Dimension & Represented in the focal collection & Boundary of the synthesis \\\midrule
+Intervention & A1/A2 numerical design; B1/B2 learning rules; B3 scheduling. & Direct low-bit evidence is thinner for B3 than for the other classes.\\[4pt]
+Numerical interface & Weight/activation quantization, KV storage, scales, rounding, routing, and synchronization. & An interface-level result does not establish full-network agreement.\\[4pt]
+Precision & FP8, FP4/NVFP4, INT8/INT4; BF16/FP16 comparisons provide context. & Format labels omit scale granularity, precision exceptions, and native versus simulated arithmetic.\\[4pt]
+Model and adaptation & Dense and MoE models; low-rank and full-parameter updates appear in different studies. & Architecture and adaptation are separate axes; cross-regime transfer is not assumed.\\[4pt]
+Collection & Snapshot-based hybrid execution, policy lag, and quota-based partial collection. & Stateful provenance and fully overlapped execution require additional behavior and timing semantics.\\[4pt]
+Learning and generation & PPO/GRPO-style autoregressive RL; AIS also studies diffusion generation. & This survey's likelihood equations are autoregressive; denoising requires its own formulation.\\[4pt]
+Contribution role & Thirteen core studies, six supporting studies, and one exploration boundary. & Role identifies relevance to the argument, independently of experimental strength.\\\bottomrule
+\end{tabularx}
+\end{table}
+
 Table~\ref{tab:observations} brings together six within-study comparisons that illuminate these interactions. Appendix~\ref{app:corpus} covers all twenty focal works, and the companion evidence collection provides source locations for observations from all thirteen core studies.
 
 \subsection{Findings on Stability and Learning Quality}
@@ -1055,6 +1092,7 @@ Evaluation precision and checkpoint rule\\Task quality, iteration cost, time-to-
 \caption{Four layers of evidence connecting numerical execution to effective training. Controlled ablations can link an intervention across these layers; improvement at one layer alone leaves the others unresolved.}\label{fig:evidence}
 \end{figure}
 
+\needspace{9\baselineskip}
 \paragraph{Correction and mismatch evolve together.}
 QuRL observes disagreement that grows beyond an initially stable period, with ACR and UAQ addressing different changes in clipping and update visibility \citep{qurl}. AIS adapts the correction mixture, ACRL regulates discrepancy through update influence, and Score Centering removes a conditional estimator drift term \citep{ais,acrl,score}. Correction and sampling therefore co-evolve: each altered update changes the policy and the discrepancy encountered in later rounds. Early agreement and bounded weights therefore characterize only part of the learning trajectory.
 
@@ -1065,17 +1103,16 @@ Jet-RL couples precision flow, while QaRL, QUADS, and TRACE couple representatio
 The full-pipeline FP8 study connects excessive lower-side clipping of negative-advantage tokens to pathological training dynamics, whereas TRIAGE uses local and direction-dependent information to select interventions \citep{fullfp8,triage}. Both link stability to the signed signal retained after control. An aggregate clipping fraction or mean log-probability gap can hide that structure. TRIAGE's MoE routing-conditioned analysis also shows limits to token-wise directional predictiveness, distinguishing a population pattern from a reliable predictor for each token.
 
 \begin{table}[!htb]
-\centering\small\setlength{\tabcolsep}{4pt}
-\caption{Representative within-study observations supporting the synthesis. Settings and interpretation are retained beside each result; Appendix~\ref{app:corpus} summarizes the full focal corpus.}\label{tab:observations}
-\begin{tabularx}{\linewidth}{@{}P{32mm}YY@{}}\toprule
-Study / setting & Published comparison or observation & What the evidence supports \\\midrule
-QuRL \citep{qurl}\newline INT8/FP8 rollout & Longer-run behavior differs from early TIS behavior; ACR and invariant-scaling ablations address distinct failure modes. & Correction magnitude, clipping semantics, and update visibility are separate concerns; a short stable window is insufficient.\\[3pt]
-QUADS \citep{quads}\newline NVFP4 MoE rollout & Weight-only learner QAT recovers much of the loss; adding rollout activation compensation further improves held-out scores. & The two components have complementary evidence within this design; neither universal necessity nor cross-engine transfer follows.\\[3pt]
-Score Centering \citep{score}\newline BF16 learner; quantization or lag & Shared-objective experiments compare additive centering and importance correction; their composition helps in the reported staleness tests. & Estimator drift and importance-weight control are distinguishable. The implemented behavior expectation is approximated.\\[3pt]
-Full Pipeline FP8 \citep{fullfp8}\newline FP8 learner and rollout & Calibrated Clipping improves the reported learning outcomes across scaling choices. Main GRPO results use best-checkpoint selection over 500 steps. & Restoring signed update contributions can matter; the selected endpoint is not a fixed-budget final-checkpoint comparison.\\[3pt]
-TRIAGE \citep{triage}\newline Native NVFP4 & Local tail patterns motivate direction-selective gating and repair. Token-wise predictiveness has a narrower scope than the population characterization. & Local and signed diagnostics can be informative, with limits under MoE coupling; token-independent contraction is not established.\\[3pt]
-KV4-RL \citep{kv4}\newline INT4 KV; partial collection & Unprotected INT4 KV misses later learning gains under the retained TIS recipe; bounded INT8 protection recovers near-BF16 endpoint quality. & Conditional correction and cache fidelity address different effects. Timing and quality claims apply to the studied collection workload.\\
-\bottomrule
+\centering\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\caption{Selected within-study comparisons. Each row separates the comparison, reported finding, and interpretive limit; source locations are provided in the companion evidence table.}\label{tab:observations}
+\begin{tabularx}{\linewidth}{@{}P{27mm}YYY@{}}\toprule
+Study / setting & Comparison & Reported finding & Interpretation and limit \\\midrule
+\rowcolor{bluewash} QuRL \citep{qurl}\newline INT8/FP8 & Longer TIS runs; ACR and invariant-scaling ablations. & Later behavior departs from the initially stable window; clipping and update visibility need distinct treatment. & A short stable interval does not establish long-horizon effectiveness; the observed horizon is setting-specific.\\[6pt]
+QUADS \citep{quads}\newline NVFP4 MoE & Weight-only learner QAT, then added rollout activation compensation. & Weight alignment recovers much of the performance loss; compensation further improves held-out scores. & Supports complementary numerical components within this design; cross-engine transfer is untested here.\\[6pt]
+\rowcolor{bluewash} Score Centering \citep{score}\newline BF16 learner & Additive and importance corrections under shared objectives; composition under lag. & Corrections affect distinct estimator terms; their composition helps in the reported staleness tests. & Behavior expectations are reconstructed; this is not full trajectory-distribution recovery.\\[6pt]
+Full Pipeline FP8 \citep{fullfp8}\newline FP8 both sides & Clipping calibration across scaling choices; main GRPO endpoints over 500 steps. & Reference calibration improves reported outcomes while restoring signed contributions. & Main results select the best average checkpoint, rather than the final checkpoint at a fixed budget.\\[6pt]
+\rowcolor{bluewash} TRIAGE \citep{triage}\newline Native NVFP4 & Local tail analysis, direction-selective gating, and repair. & Local and signed patterns motivate intervention; MoE analysis restricts token-wise predictiveness. & Population trends do not establish contraction independently for every token.\\[6pt]
+KV4-RL \citep{kv4}\newline INT4 KV & Unprotected INT4 versus bounded INT8 protection, with TIS retained. & Protection recovers later gains and near-BF16 endpoint quality. & Cache fidelity and conditional correction affect different mechanisms; claims concern the studied partial-collection workload.\\\bottomrule
 \end{tabularx}
 \end{table}
 
@@ -1112,7 +1149,7 @@ The serialized model also gives a simple bound on what a rollout improvement can
 $h=0:\;T/T_0=0.7$ ($1.43\times$ overall)\qquad $h=0.1:\;T/T_0=0.8$ ($1.25\times$ overall)};
 \end{tikzpicture}
 % END FIGURE timing
-\caption{Analytical timing illustration for serialized execution. Doubling rollout speed reduces iteration time from $T_0$ to $0.7T_0$ when rollout accounts for $60\%$ of the baseline. Added work of $0.1T_0$ reduces the overall speedup from $1.43\times$ to $1.25\times$. These are constructed values.}\label{fig:timing}
+\caption{Analytical timing illustration for serialized execution. Doubling rollout speed reduces iteration time from $T_0$ to $0.7T_0$ when rollout accounts for $60\%$ of the baseline. Added work of $0.1T_0$ reduces the overall speedup from $1.43\times$ to $1.25\times$. This is a constructed illustration, not an experimental result.}\label{fig:timing}
 \end{figure}
 
 Each intervention changes a different part of this cost. FP8-RL illustrates the work needed for scale estimation and numerical conversion \citep{fp8rl}. Reference calibration adds learner computation; guided rounding adds storage, transport, and state matching; selective precision adds work in the protected region. Table~\ref{tab:interfaces} relates these dependencies to the information each method needs.
@@ -1137,10 +1174,12 @@ KV4-RL illustrates the difference between generation and training gains. Over 40
 
 Time or compute to a specified quality level connects these measurements to the learning objective. Endpoint scores, iteration time, and rollout throughput supply different parts of the picture. The trajectory is needed to recover time-to-quality when an intervention changes response length, learning speed, or checkpoint selection.
 
-\subsection{Limitations of Current Evidence}
+\subsection{Evidence Limits and Coverage Gaps}
 The strongest empirical support concerns mechanisms within the settings in which they were isolated. Model families, tasks, horizons, hardware, and numerical kernels vary across studies. Mathematical reasoning is a recurring evaluation setting, while interactive trajectories and broader task distributions are less directly covered. Transfer across precision formats likewise depends on scaling rules, higher-precision exceptions, and the surrounding kernels.
 
 This synthesis inherits the scope of its curated sources and the implementation details they make available. Source-linked observations expose the basis of the comparisons, while unreported conditions remain unresolved. The collection supports neither an exhaustive account of the field nor independent replication of its empirical results.
+
+Several gaps concern what this snapshot extracts. It does not systematically code seed counts, uncertainty estimates, negative results, or cross-hardware replication, so no global evidence score is assigned. Stateful partial collection is represented, but cross-version cache provenance remains incompletely characterized. Multi-turn agent and tool interactions are outside the direct evidence synthesized here. B3 lacks comparably extensive direct low-bit support, and diffusion results remain contextual to the autoregressive analysis. These are boundaries of coverage, rather than claims that the wider literature contains no relevant work.
 
 
 \section{Open Problems}\label{sec:open}
@@ -1226,47 +1265,76 @@ The catalog distinguishes first-publication dates, publication venues, and revie
 \paragraph{Attribution of evidence.}
 Method claims and empirical observations are attributed to primary sources. Equations~\eqref{eq:decomp}, \eqref{eq:is}, \eqref{eq:seqpg}, \eqref{eq:drift}, and \eqref{eq:clipbranch} are explanatory identities under their stated assumptions. Figures and summary tables are original syntheses; constructed examples are identified separately from published measurements. The companion repository provides the catalog, bibliography, and source-linked evidence, with links to third-party papers.
 
+\paragraph{Evidence roles and verification.}
+Core, supporting, and boundary labels describe a study's role in this argument. The catalog separately records whether its evidence concerns direct low-precision RL, general TIM, a diagnostic reference, a precision comparison, or exploration. Neither axis grades experimental quality. The source-linked observations retain their setting and limitation; no independent reproduction was performed for this survey. A missing statistical or implementation field is left unassessed, rather than interpreted as evidence of absence. Reviewed arXiv versions are pinned where the saved source record identifies one; publication records and version-unspecified links remain explicitly distinguished.
+
 \section{Evidence, Assumptions, and Transfer}\label{app:checklist}
 A result about mismatch is conditional on the policy that generated the data. Parameter versions, numerical paths, decoding transformations, and retained execution state determine the behavior law. Learner, proximal, and KL-reference policies define separate roles in correction and optimization. Their relationship fixes the meaning of a reported ratio or discrepancy.
 
 The component taxonomy describes the intervention; numerical configuration describes the setting in which it acts. Conditional correction, truncated weights, partial execution alignment, and reconstructed expectations leave different residual approximations. An empirical result establishes the behavior of the tested combination under its evaluation conditions. Transfer requires the assumptions responsible for that result to remain valid.
 
-\begingroup\raggedright
+
+\clearpage
+\section{Terminology}\label{app:terms}
+\begingroup\small
+\begin{longtable}{@{}P{35mm}P{123mm}@{}}
+\caption{Terminology used in the text and figures. Method abbreviations identify components, not interchangeable update rules.}\label{tab:terms}\\
+\toprule Term & Meaning \\\midrule\endfirsthead
+\toprule Term & Meaning \\\midrule\endhead
+\bottomrule\endlastfoot
+TIM & Training--inference mismatch; the survey emphasizes the learner--rollout interface.\\[4pt]
+W / A / KV & Weights, activations, and key--value cache; distinct numerical targets.\\[4pt]
+MoE / LoRA & Mixture-of-experts architecture / low-rank adaptation; architecture and adaptation are separate dimensions.\\[4pt]
+FP8 / FP4 / NVFP4 & Floating-point format families with eight or four bits; NVFP4 is a particular four-bit representation. Scaling, accumulation, and exceptions also determine execution.\\[4pt]
+INT8 / INT4 & Integer quantization at eight or four bits, with scales and execution semantics specified separately.\\[4pt]
+QAT & Quantization-aware training: the learner forward path models a quantized representation; this need not reproduce native kernel arithmetic.\\[4pt]
+TIS / MIS & Truncated / masked importance sampling; bounded or discarded corrections alter the estimator.\\[4pt]
+AIS / CIS & Adaptive / calibrated importance sampling: estimator-mixture adaptation and confidence-dependent truncation, respectively.\\[4pt]
+ACR / UAQ & QuRL's Adaptive Clipping Range / Update-Aware Quantization; B2 update control and A2 update visibility.\\[4pt]
+TBPO / RAC & QaRL's Trust-Band Policy Optimization / QUADS's Residual Activation Compensation; distinct objective and numerical components.\\[4pt]
+PPO / GRPO & Proximal Policy Optimization / Group Relative Policy Optimization. Their loss roles require behavior and proximal policies to be distinguished.\\[4pt]
+Partial rollout & Collection in which a response can span collection boundaries; it does not by itself imply concurrent generation and optimization.\\[4pt]
+Cache provenance & Parameter versions and numerical execution paths that produced retained cache entries.\\[4pt]
+Behavior / proximal / reference & Actual sampling law / update-ratio anchor / KL-regularization target; see Table~\ref{tab:notation}.\\
+\end{longtable}
+\endgroup
+
+\begingroup\small\raggedright
 \begin{thebibliography}{99}
 \interlinepenalty=10000
 \bibitem{flashrl} Feng Yao, Liyuan Liu, Dinghuai Zhang, Chengyu Dong, Jingbo Shang, Jianfeng Gao. On the Rollout-Training Mismatch in Modern RL Systems. \emph{OPT 2025: Optimization for Machine Learning}, 2025. \url{https://www.opt-ml.org/papers/2025/paper116.pdf}.
 
 \bibitem{qerl} Wei Huang, Yi Ge, Shuai Yang, Yicheng Xiao, Huizi Mao, Yujun Lin, Hanrong Ye, Sifei Liu, Ka Chun Cheung, Hongxu Yin, Yao Lu, Xiaojuan Qi, Song Han, Yukang Chen. QeRL: Quantization-enhanced Low-Rank Reinforcement Learning for LLMs. \emph{International Conference on Learning Representations}, 2026. \url{https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html}.
 
-\bibitem{jet} Haocheng Xi, Charlie Ruan, Peiyuan Liao, Yujun Lin, Han Cai, Yilong Zhao, Shuo Yang, Kurt Keutzer, Song Han, Ligeng Zhu. Jet-RL: Enabling On-Policy FP8 Reinforcement Learning with Unified Training and Rollout Precision Flow. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2601.14243}.
+\bibitem{jet} Haocheng Xi, Charlie Ruan, Peiyuan Liao, Yujun Lin, Han Cai, Yilong Zhao, Shuo Yang, Kurt Keutzer, Song Han, Ligeng Zhu. Jet-RL: Enabling On-Policy FP8 Reinforcement Learning with Unified Training and Rollout Precision Flow. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2601.14243v2}.
 
-\bibitem{fp8rl} Zhaopeng Qiu, Shuang Yu, Jingqi Zhang, Shuai Zhang, Xue Huang, Jingyi Yang, Junjie Lai. FP8-RL: A Practical and Stable Low-Precision Stack for LLM Reinforcement Learning. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2601.18150}.
+\bibitem{fp8rl} Zhaopeng Qiu, Shuang Yu, Jingqi Zhang, Shuai Zhang, Xue Huang, Jingyi Yang, Junjie Lai. FP8-RL: A Practical and Stable Low-Precision Stack for LLM Reinforcement Learning. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2601.18150v2}.
 
 \bibitem{qurl} Yuhang Li, Reena Elangovan, Xin Dong, Priyadarshini Panda, Brucek Khailany. QuRL: Efficient Reinforcement Learning with Quantized Rollout. \emph{International Conference on Learning Representations}, 2026. \url{https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html}.
 
 \bibitem{qarl} Hao Gu, Hao Wang, Jiacheng Liu, Lujun Li, Qiyuan Zhu, Bei Liu, Binxing Xu, Lei Wang, Xintong Yang, Sida Lin, Sirui Han, Yike Guo. QaRL: Rollout-Aligned Quantization-Aware RL for Fast and Stable Training under Training--Inference Mismatch. \emph{Findings of the Association for Computational Linguistics: ACL 2026}, 2026. \url{https://aclanthology.org/2026.findings-acl.841/}.
 
-\bibitem{ais} Jiajun Zhou, Wei Shao, Lingchao Zheng, Yuwei Fan, Ngai Wong. AIS: Adaptive Importance Sampling for Quantized RL. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2605.13907}.
+\bibitem{ais} Jiajun Zhou, Wei Shao, Lingchao Zheng, Yuwei Fan, Ngai Wong. AIS: Adaptive Importance Sampling for Quantized RL. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2605.13907v1}.
 
-\bibitem{quads} Zhengyang Zhuge, Hao Yu, Xin Wang, Zheng Li, Yizhong Cao, Dayiheng Liu, Jianwei Zhang. QUADS: Stabilizing NVFP4 Reinforcement Learning for MoE via QUantization-error Alignment across Dual Sides. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2607.15810}.
+\bibitem{quads} Zhengyang Zhuge, Hao Yu, Xin Wang, Zheng Li, Yizhong Cao, Dayiheng Liu, Jianwei Zhang. QUADS: Stabilizing NVFP4 Reinforcement Learning for MoE via QUantization-error Alignment across Dual Sides. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2607.15810v1}.
 
-\bibitem{acrl} Wenwu Fan, Qihong Lin, Zhijie Xia, Zhuo Zheng, Sihao Wang, Qiang Chen, Liangsheng Zhu. ACRL: Adaptive Control of Training-Inference Discrepancy for Stable Reinforcement Learning. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2607.24062}.
+\bibitem{acrl} Wenwu Fan, Qihong Lin, Zhijie Xia, Zhuo Zheng, Sihao Wang, Qiang Chen, Liangsheng Zhu. ACRL: Adaptive Control of Training-Inference Discrepancy for Stable Reinforcement Learning. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2607.24062v1}.
 
-\bibitem{score} Martin Marek, Max Ryabinin. Score Centering Stabilizes Off-policy Reinforcement Learning. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2609.20807}.
+\bibitem{score} Martin Marek, Max Ryabinin. Score Centering Stabilizes Off-policy Reinforcement Learning. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2609.20807v1}.
 
-\bibitem{fullfp8} Fanchao Chen, Ziheng Jiang, Ziyun Wei, Zheng Zhong, Du Li, Chi Zhang, Haibin Lin, Shivaram Venkataraman. Towards Full Pipeline FP8 Reinforcement Learning for LLMs. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2609.22870}.
+\bibitem{fullfp8} Fanchao Chen, Ziheng Jiang, Ziyun Wei, Zheng Zhong, Du Li, Chi Zhang, Haibin Lin, Shivaram Venkataraman. Towards Full Pipeline FP8 Reinforcement Learning for LLMs. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2609.22870v1}.
 
-\bibitem{triage} Zhen Li, Shuai Zhang, Yanggan Gu, Yiming Zhang, Yang Yu, Mingfa Feng, Congkai Xie, Shuang Yu, Junjie Lai, Hongxia Yang. TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2610.07043}.
+\bibitem{triage} Zhen Li, Shuai Zhang, Yanggan Gu, Yiming Zhang, Yang Yu, Mingfa Feng, Congkai Xie, Shuang Yu, Junjie Lai, Hongxia Yang. TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2610.07043v2}.
 
-\bibitem{trace} Xin Wang, Hao Yu, Zhengyang Zhuge, Bochao Mao, Zheng Li, Junda Feng, Yuyan Luo, Yi Zhang, Yizhong Cao, Mi Zhang, Dayiheng Liu, Jianwei Zhang. TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2610.07767}.
+\bibitem{trace} Xin Wang, Hao Yu, Zhengyang Zhuge, Bochao Mao, Zheng Li, Junda Feng, Yuyan Luo, Yi Zhang, Yizhong Cao, Mi Zhang, Dayiheng Liu, Jianwei Zhang. TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2610.07767v2}.
 
-\bibitem{minirl} Chujie Zheng, Kai Dang, Bowen Yu, Mingze Li, Huiqiang Jiang, Junrong Lin, Yuqiong Liu, Hao Lin, Chencan Wu, Feng Hu, An Yang, Jingren Zhou, Junyang Lin. Stabilizing Reinforcement Learning with LLMs: Formulation and Practices. \emph{arXiv preprint}, 2025. \url{https://arxiv.org/abs/2512.01374}.
+\bibitem{minirl} Chujie Zheng, Kai Dang, Bowen Yu, Mingze Li, Huiqiang Jiang, Junrong Lin, Yuqiong Liu, Hao Lin, Chencan Wu, Feng Hu, An Yang, Jingren Zhou, Junyang Lin. Stabilizing Reinforcement Learning with LLMs: Formulation and Practices. \emph{arXiv preprint}, 2025. \url{https://arxiv.org/abs/2512.01374v3}.
 
-\bibitem{r3} Wenhan Ma, Hailin Zhang, Liang Zhao, Yifan Song, Yudong Wang, Zhifang Sui, Fuli Luo. Stabilizing MoE Reinforcement Learning by Aligning Training and Inference Routers. \emph{arXiv preprint}, 2025. \url{https://arxiv.org/abs/2510.11370}.
+\bibitem{r3} Wenhan Ma, Hailin Zhang, Liang Zhao, Yifan Song, Yudong Wang, Zhifang Sui, Fuli Luo. Stabilizing MoE Reinforcement Learning by Aligning Training and Inference Routers. \emph{arXiv preprint}, 2025. \url{https://arxiv.org/abs/2510.11370v2}.
 
-\bibitem{fp16} Penghui Qi, Zichen Liu, Xiangxin Zhou, Tianyu Pang, Chao Du, Wee Sun Lee, Min Lin. Defeating the Training-Inference Mismatch via FP16. \emph{arXiv preprint}, 2025. \url{https://arxiv.org/abs/2510.26788}.
+\bibitem{fp16} Penghui Qi, Zichen Liu, Xiangxin Zhou, Tianyu Pang, Chao Du, Wee Sun Lee, Min Lin. Defeating the Training-Inference Mismatch via FP16. \emph{arXiv preprint}, 2025. \url{https://arxiv.org/abs/2510.26788v1}.
 
-\bibitem{kv4} Sihwan Park, Sung-Yub Kim, Doohyuk Jang, Eunho Yang. KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2610.14448}.
+\bibitem{kv4} Sihwan Park, Sung-Yub Kim, Doohyuk Jang, Eunho Yang. KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2610.14448v1}.
 
 \bibitem{beyond} Yaxiang Zhang, Yingru Li, Jiacai Liu, Jiawei Xu, Ziniu Li, Qian Liu, Haoyuan Li. Beyond Precision: Training-Inference Mismatch is an Optimization Problem and Simple LR Scheduling Fixes It. \emph{arXiv preprint}, 2026. \url{https://arxiv.org/abs/2602.01826}.
 

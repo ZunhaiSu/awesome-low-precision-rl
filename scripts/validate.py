@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Check the portable catalog, manuscript references, template, and local links."""
-import json,re,sys
+import json,re,sys,subprocess
 from collections import Counter
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
@@ -9,6 +9,12 @@ s=(root/'survey/survey.tex').read_text();body=s.split('\\begin{document}',1)[1]
 assert len(rows)==20 and len({r['id'] for r in rows})==20
 assert Counter(r['role'] for r in rows)=={'core':13,'support':6,'boundary':1}
 assert all(r['title'] and r['authors'] and r['publication_url'].startswith('https://') for r in rows)
+domains={'direct_low_precision','general_TIM','higher_precision_comparison','diagnostic_reference','exploration_boundary'}
+assert all(r['regime'] and r['evidence_domain'] in domains and r['replication_status'] for r in rows)
+for row in rows:
+ if re.fullmatch(r'v\d+',row['reviewed_version']):
+  assert row['reviewed_source_url']==row['arxiv_url']+row['reviewed_version']
+subprocess.run([sys.executable,str(root/'scripts/build_tables.py'),'--check'],check=True)
 keys=set(re.findall(r'\\bibitem\{([^}]+)\}',s))
 cites={key.strip() for group in re.findall(r'\\cite\w*(?:\[[^\]]*\])*\{([^}]+)\}',body) for key in group.split(',')}
 assert cites<=keys,('undefined citations',cites-keys)

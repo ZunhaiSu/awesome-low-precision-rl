@@ -21,7 +21,12 @@
     "primary_section": "5.1",
     "secondary_sections": "1.1; 2.1",
     "note": "Quantized rollout; recorded behavior probabilities.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "Higher-precision learner; quantized rollout",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://www.opt-ml.org/papers/2025/paper116.pdf",
+    "catalog_summary": "Recorded behavior probabilities and truncated correction"
   },
   {
     "id": "2510.11696",
@@ -53,7 +58,12 @@
     "primary_section": "Box 1",
     "secondary_sections": "",
     "note": "NVFP4 with LoRA and adaptive noise; exploration setting.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "NVFP4 with LoRA and adaptive noise",
+    "evidence_domain": "exploration_boundary",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html",
+    "catalog_summary": "NVFP4 with LoRA and adaptive noise; exploration setting."
   },
   {
     "id": "2601.14243",
@@ -81,7 +91,12 @@
     "primary_section": "4.1",
     "secondary_sections": "6.2",
     "note": "Unified FP8 flow; granularity is an associated numerical design choice.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "Unified FP8 learner and rollout paths",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2601.14243v2",
+    "catalog_summary": "Unified FP8 precision flow"
   },
   {
     "id": "2601.18150",
@@ -106,7 +121,12 @@
     "primary_section": "4.2",
     "secondary_sections": "5.1; 6.2; 6.3",
     "note": "FP8 stack; adopted TIS/MIS is not a new correction family.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "W8A8 rollout; FP8 attention / KV; FP8 learner explored in v2",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2601.18150v2",
+    "catalog_summary": "W8A8 rollout, FP8 attention/KV, and stack integration"
   },
   {
     "id": "2602.13953",
@@ -129,7 +149,12 @@
     "primary_section": "5.2",
     "secondary_sections": "3.1; 4.2; 5.4; 6.2",
     "note": "ACR and UAQ are distinct components.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "INT8 / FP8 rollout",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html",
+    "catalog_summary": "Adaptive clipping and update-aware quantization"
   },
   {
     "id": "2604.07853",
@@ -159,7 +184,12 @@
     "primary_section": "4.1",
     "secondary_sections": "5.2; 5.4; 6.2",
     "note": "Aligned QAT and TBPO are distinct components.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "Quantized MoE rollout; aligned learner QAT",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://aclanthology.org/2026.findings-acl.841/",
+    "catalog_summary": "Rollout-aligned QAT and trust-band updates"
   },
   {
     "id": "2605.13907",
@@ -182,7 +212,12 @@
     "primary_section": "5.1",
     "secondary_sections": "6.1; 6.2",
     "note": "Adaptive estimator mixture; autoregressive and diffusion evidence distinguished.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "BF16 learner / FP8 rollout; autoregressive and diffusion models",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2605.13907v1",
+    "catalog_summary": "Adaptive importance-weighted estimator mixture"
   },
   {
     "id": "2607.15810",
@@ -207,7 +242,12 @@
     "primary_section": "4.1",
     "secondary_sections": "4.2; 5.4; 6.2",
     "note": "Asymmetric QAT plus rollout activation compensation.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "NVFP4 MoE rollout; learner weight QAT",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2607.15810v1",
+    "catalog_summary": "NVFP4 MoE weight alignment and activation compensation"
   },
   {
     "id": "2607.24062",
@@ -232,7 +272,12 @@
     "primary_section": "5.2",
     "secondary_sections": "3.3; 6.2",
     "note": "Advantage-guided, discrepancy-dependent update control.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "FP8 rollout; discrepancy-dependent updates",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2607.24062v1",
+    "catalog_summary": "Discrepancy-dependent update control"
   },
   {
     "id": "2609.20807",
@@ -252,7 +297,12 @@
     "primary_section": "5.1",
     "secondary_sections": "2.2; 3.2; 5.4; 6.2",
     "note": "Additive score correction; not full on-policy recovery.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "BF16 learner; quantized rollout or policy lag",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2609.20807v1",
+    "catalog_summary": "Additive behavior-weighted score correction"
   },
   {
     "id": "2609.22870",
@@ -278,7 +328,12 @@
     "primary_section": "5.2",
     "secondary_sections": "3.2; 6.2; 6.3",
     "note": "Clipping calibration; distinguish from quantizer calibration.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "FP8 learner and rollout; calibration against BF16",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2609.22870v1",
+    "catalog_summary": "FP8 learner/rollout and calibrated clipping"
   },
   {
     "id": "2610.07043",
@@ -306,7 +361,12 @@
     "primary_section": "5.2",
     "secondary_sections": "3.3; 6.2",
     "note": "Direction-aware control under native W4A4 execution.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "Native NVFP4 W4A4; MoE analysis",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2610.07043v2",
+    "catalog_summary": "Direction-aware control for native NVFP4"
   },
   {
     "id": "2610.07767",
@@ -336,7 +396,12 @@
     "primary_section": "4.1",
     "secondary_sections": "3.1; 6.2",
     "note": "Rollout-guided rounding; local guarantees have limited scope.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "FP4 MoE rollout; guided learner QAT",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2610.07767v2",
+    "catalog_summary": "Rollout-guided FP4 rounding for MoE"
   },
   {
     "id": "2512.01374",
@@ -367,7 +432,12 @@
     "primary_section": "2.1",
     "secondary_sections": "1.2; 5.1",
     "note": "Formulation role; also contains direct FP8 rollout experiments.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "Hybrid-engine RL; includes FP8-rollout experiments",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2512.01374v3",
+    "catalog_summary": "Policy roles and mismatch-aware formulation; FP8 experiments"
   },
   {
     "id": "2510.11370",
@@ -392,7 +462,12 @@
     "primary_section": "3.1",
     "secondary_sections": "4.1",
     "note": "MoE routing replay; routing mismatch is not uniquely quantization-induced.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "MoE routing; general execution mismatch",
+    "evidence_domain": "general_TIM",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2510.11370v2",
+    "catalog_summary": "MoE routing alignment"
   },
   {
     "id": "2510.26788",
@@ -417,7 +492,12 @@
     "primary_section": "3.1",
     "secondary_sections": "",
     "note": "BF16/FP16 numerical evidence; not a low-bit acceleration method.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "BF16 / FP16 numerical comparison",
+    "evidence_domain": "higher_precision_comparison",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2510.26788v1",
+    "catalog_summary": "BF16/FP16 precision-selection evidence"
   },
   {
     "id": "2610.14448",
@@ -439,7 +519,12 @@
     "primary_section": "4.2",
     "secondary_sections": "5.1; 6.2; 6.3",
     "note": "INT4 KV with selective protection; colocated partial rollout.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "INT4 KV with bounded INT8 protection",
+    "evidence_domain": "direct_low_precision",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": "https://arxiv.org/abs/2610.14448v1",
+    "catalog_summary": "INT4 KV with selective INT8 protection"
   },
   {
     "id": "2602.01826",
@@ -464,7 +549,12 @@
     "primary_section": "5.3",
     "secondary_sections": "3.3",
     "note": "General TIM scheduling evidence; do not infer FP4 validation.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "General TIM; optimization scheduling",
+    "evidence_domain": "general_TIM",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": null,
+    "catalog_summary": "Optimization schedule under general TIM"
   },
   {
     "id": "2605.14220",
@@ -490,7 +580,12 @@
     "primary_section": "3.4",
     "secondary_sections": "",
     "note": "Zero-mismatch reference for attribution; not a quantized accelerator.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "Matched-execution diagnostic reference",
+    "evidence_domain": "diagnostic_reference",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": null,
+    "catalog_summary": "Zero-mismatch diagnostic reference"
   },
   {
     "id": "2609.32444",
@@ -515,6 +610,11 @@
     "primary_section": "5.1",
     "secondary_sections": "3.2",
     "note": "Calibrated importance sampling; BF16 cross-engine evidence.",
-    "checked_date": "2026-10-19"
+    "checked_date": "2026-10-19",
+    "regime": "BF16 cross-engine mismatch",
+    "evidence_domain": "general_TIM",
+    "replication_status": "not independently reproduced in this survey",
+    "reviewed_source_url": null,
+    "catalog_summary": "Confidence-dependent correction under BF16 cross-engine mismatch"
   }
 ]

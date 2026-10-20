@@ -4,10 +4,11 @@
 
 A survey and curated research collection on how low-precision execution changes reinforcement learning for language models.
 
-**[Survey PDF](Survey.pdf)** · [LaTeX](survey/survey.tex) · [BibTeX](references.bib) · [Paper catalog](data/papers.json) · [Source-linked evidence](data/evidence.json)
+**[Survey PDF](Survey.pdf)** · [LaTeX](survey/survey.tex) · [BibTeX](references.bib) · [Paper catalog](data/papers.json) · [Evidence table](docs/EVIDENCE.md) · [Reviewed catalog](docs/CATALOG.md)
 
 **Zunhai Su · The University of Hong Kong**<br>
-Living survey · Literature snapshot: **19 October 2026** · **20 focal studies**
+Living survey · Literature snapshot: **19 October 2026** · **20 focal studies**<br>
+Editorial update: **20 October 2026**
 
 The companion manuscript, *Training–Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey*, connects numerical execution, gradient estimation, and policy optimization. It examines which numerical differences affect learning and how numerical design and learning correction determine the updates retained during training.
 
@@ -47,7 +48,7 @@ This is a focused narrative survey. General PTQ, low-precision pretraining, and 
 | 7. Open Problems | Develop priorities in diagnosis, composition, stateful execution, and transfer. |
 | 8. Conclusion | Bring numerical fidelity and learning correction into one perspective. |
 
-Appendix A summarizes all twenty focal works; Appendices B–C describe source selection, assumptions, and transfer.
+Appendix A summarizes all twenty focal works; Appendices B–C describe source selection, assumptions, and transfer; Appendix D defines the terminology.
 
 </details>
 
@@ -83,45 +84,48 @@ Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f06
 
 ## Paper catalog
 
-Each row represents one contribution. Dates refer to first public appearance; links may point to a later formal publication. Full titles, authors, reviewed versions, and secondary locations are available in the [catalog](data/papers.json), [bibliography](references.bib), and Surveyed Papers appendix.
+Each row represents one contribution. Dates refer to first public appearance; links may point to a later formal publication. Full titles, authors, reviewed versions, and secondary locations are available in the [catalog](data/papers.json), [bibliography](references.bib), and Surveyed Papers appendix. The tables below are generated from the JSON catalog; [classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains.
+
+<!-- BEGIN GENERATED CATALOG -->
 
 ### Core methods and systems
 
 | First public | Study | Focus | Class / discussion |
 |---|---|---|---|
-| 2025 | **[FlashRL / TIS](https://www.opt-ml.org/papers/2025/paper116.pdf)** | Recorded behavior probabilities and truncated correction | B1 · §5.1 |
-| 2026-01-20 | **[Jet-RL](https://arxiv.org/abs/2601.14243)** | Unified FP8 precision flow | A1; A2 · §4.1 |
-| 2026-01-26 | **[FP8-RL](https://arxiv.org/abs/2601.18150)** | W8A8 rollout, FP8 attention/KV, and stack integration | A2; system integration · §4.2 |
-| 2026-02-15 | **[QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html)** | Adaptive clipping and update-aware quantization | B2; A2 · §5.2 |
-| 2026-04-09 | **[QaRL](https://aclanthology.org/2026.findings-acl.841/)** | Rollout-aligned QAT and trust-band updates | A1; B2 · §4.1 |
-| 2026-05-13 | **[AIS](https://arxiv.org/abs/2605.13907)** | Adaptive importance-weighted estimator mixture | B1 · §5.1 |
-| 2026-07-17 | **[QUADS](https://arxiv.org/abs/2607.15810)** | NVFP4 MoE weight alignment and activation compensation | A1; A2 · §4.1 |
-| 2026-07-27 | **[ACRL](https://arxiv.org/abs/2607.24062)** | Discrepancy-dependent update control | B2 · §5.2 |
-| 2026-09-17 | **[Score Centering](https://arxiv.org/abs/2609.20807)** | Additive behavior-weighted score correction | B1 · §5.1 |
-| 2026-09-19 | **[Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870)** | FP8 learner/rollout and calibrated clipping | B2; system integration · §5.2 |
-| 2026-10-05 | **[TRIAGE](https://arxiv.org/abs/2610.07043)** | Direction-aware control for native NVFP4 | B2 · §5.2 |
-| 2026-10-06 | **[TRACE](https://arxiv.org/abs/2610.07767)** | Rollout-guided FP4 rounding for MoE | A1 · §4.1 |
-| 2026-10-10 | **[KV4-RL](https://arxiv.org/abs/2610.14448)** | INT4 KV with selective INT8 protection | A2; system integration · §4.2 |
+| 2025 | **[FlashRL / TIS](https://www.opt-ml.org/papers/2025/paper116.pdf)** | Recorded behavior probabilities and truncated correction | B1 · 5.1 |
+| 2026-01-20 | **[Jet-RL](https://arxiv.org/abs/2601.14243v2)** | Unified FP8 precision flow | A1; A2 · 4.1 |
+| 2026-01-26 | **[FP8-RL](https://arxiv.org/abs/2601.18150v2)** | W8A8 rollout, FP8 attention/KV, and stack integration | A2; system · 4.2 |
+| 2026-02-15 | **[QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html)** | Adaptive clipping and update-aware quantization | B2; A2 · 5.2 |
+| 2026-04-09 | **[QaRL](https://aclanthology.org/2026.findings-acl.841/)** | Rollout-aligned QAT and trust-band updates | A1; B2 · 4.1 |
+| 2026-05-13 | **[AIS](https://arxiv.org/abs/2605.13907v1)** | Adaptive importance-weighted estimator mixture | B1 · 5.1 |
+| 2026-07-17 | **[QUADS](https://arxiv.org/abs/2607.15810v1)** | NVFP4 MoE weight alignment and activation compensation | A1; A2 · 4.1 |
+| 2026-07-27 | **[ACRL](https://arxiv.org/abs/2607.24062v1)** | Discrepancy-dependent update control | B2 · 5.2 |
+| 2026-09-17 | **[Score Centering](https://arxiv.org/abs/2609.20807v1)** | Additive behavior-weighted score correction | B1 · 5.1 |
+| 2026-09-19 | **[Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870v1)** | FP8 learner/rollout and calibrated clipping | B2; system · 5.2 |
+| 2026-10-05 | **[TRIAGE](https://arxiv.org/abs/2610.07043v2)** | Direction-aware control for native NVFP4 | B2 · 5.2 |
+| 2026-10-06 | **[TRACE](https://arxiv.org/abs/2610.07767v2)** | Rollout-guided FP4 rounding for MoE | A1 · 4.1 |
+| 2026-10-10 | **[KV4-RL](https://arxiv.org/abs/2610.14448v1)** | INT4 KV with selective INT8 protection | A2; system · 4.2 |
 
-<details>
-<summary><strong>Supporting formulation and general TIM studies</strong></summary>
+### Supporting formulation and general TIM studies
 
 | First public | Study | Focus | Class / discussion |
 |---|---|---|---|
-| 2025-10-13 | **[R3](https://arxiv.org/abs/2510.11370)** | MoE routing alignment | A1 · §3.1 |
-| 2025-10-30 | **[FP16-Mismatch](https://arxiv.org/abs/2510.26788)** | BF16/FP16 precision-selection evidence | A2 · §3.1 |
-| 2025-12-01 | **[MiniRL](https://arxiv.org/abs/2512.01374)** | Policy roles and mismatch-aware formulation; FP8 experiments | B1/B2 · §2.1 |
-| 2026-02-02 | **[Beyond Precision](https://arxiv.org/abs/2602.01826)** | Optimization schedule under general TIM | B3 · §5.3 |
-| 2026-05-14 | **[VeXact / Diagnosing TIM](https://arxiv.org/abs/2605.14220)** | Zero-mismatch diagnostic reference | Diagnostic · §3.4 |
-| 2026-09-26 | **[CIS](https://arxiv.org/abs/2609.32444)** | Confidence-dependent correction under BF16 cross-engine mismatch | B1 · §5.1 |
-
-A supporting role does not exclude direct low-precision experiments. The role records how the work supports this survey's argument.
-
-</details>
+| 2025-10-13 | **[R3](https://arxiv.org/abs/2510.11370v2)** | MoE routing alignment | Support; A1 · 3.1 |
+| 2025-10-30 | **[FP16-Mismatch](https://arxiv.org/abs/2510.26788v1)** | BF16/FP16 precision-selection evidence | Support; A2 · 3.1 |
+| 2025-12-01 | **[MiniRL](https://arxiv.org/abs/2512.01374v3)** | Policy roles and mismatch-aware formulation; FP8 experiments | Support; B1/B2 · 2.1 |
+| 2026-02-02 | **[Beyond Precision](https://arxiv.org/abs/2602.01826)** | Optimization schedule under general TIM | Support; B3 · 5.3 |
+| 2026-05-14 | **[VeXact / Diagnosing TIM](https://arxiv.org/abs/2605.14220)** | Zero-mismatch diagnostic reference | Diagnostic · 3.4 |
+| 2026-09-26 | **[CIS](https://arxiv.org/abs/2609.32444)** | Confidence-dependent correction under BF16 cross-engine mismatch | Support; B1 · 5.1 |
 
 ### Exploration boundary
 
-**[QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html)** (2025) combines NVFP4, LoRA, and adaptive quantization noise. It is discussed in Box 1 because exploration and agreement answer different questions in this setting.
+| First public | Study | Focus | Class / discussion |
+|---|---|---|---|
+| 2025-10-13 | **[QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html)** | NVFP4 with LoRA and adaptive noise; exploration setting. | Boundary · Box 1 |
+
+Roles describe relevance to the survey, rather than evidence quality. Primary and secondary discussion locations are navigation fields; a work can introduce several coequal components.
+
+<!-- END GENERATED CATALOG -->
 
 ## Research findings
 
@@ -171,7 +175,7 @@ With [Tectonic](https://tectonic-typesetting.github.io/) installed, run from the
 python3 scripts/build.py
 ```
 
-This builds the manuscript, refreshes the root `Survey.pdf`, and checks catalog, bibliography, figure, and link consistency. To also regenerate every SVG, install Poppler and run:
+First run `python3 scripts/build_tables.py` after changing the JSON records. The manuscript build refreshes the root `Survey.pdf` and checks the generated views, catalog, bibliography, figures, and local links. To also regenerate every SVG, install Poppler and run:
 
 ```sh
 python3 scripts/build.py --figures
