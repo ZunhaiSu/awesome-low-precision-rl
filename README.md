@@ -6,7 +6,8 @@
 </p>
 
 <p align="center">
-  <strong>Zunhai Su</strong> · The University of Hong Kong<br>
+  <strong>Zunhai Su<sup>1</sup> · Wei Wu<sup>2</sup> · Jianchao Tan<sup>2</sup> · Ngai Wong<sup>1</sup></strong><br>
+  <sup>1</sup>The University of Hong Kong &nbsp;·&nbsp; <sup>2</sup>Meituan<br>
   Literature snapshot: <strong>20 October 2026</strong> · Editorial update: 22 October 2026
 </p>
 
@@ -21,7 +22,7 @@
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollout changes both the cost of generating experience and the policy that supplies it. This survey follows those changes through sampling, gradient estimation, and policy updates, then compares the numerical and learning interventions used to control them. The framework connects mechanisms to reported quality and total training cost.
+Quantized rollout changes both the cost of generating experience and the policy that supplies it. This survey follows those changes through sampling, gradient estimation, and policy updates, then compares the numerical and learning interventions used to control them. The framework connects numerical mechanisms to the measurements used in practice, the interventions they motivate, and reported quality and total training cost.
 
 ## Explore the survey
 
@@ -96,7 +97,7 @@ The [related-work perspectives](docs/RELATED_WORK.md) connect this framework to 
 
 The papers do **not** use one common mismatch metric. TRIAGE's average absolute log gap, TRACE's gap extrema, QuRL's behavior-to-proximal KL, and KV4-RL's full-distribution shared-prefix KL describe different quantities. ESS measures weight concentration; reward and entropy describe learning outcomes.
 
-The survey connects **numerical disagreement → estimator or update effects → learned quality and total cost**. Its [measurement guide](docs/MEASUREMENTS.md) maps all **19 core studies**, with complete titles, source locations, policy comparisons, and interpretation limits. Section 3.4 explains the definitions; Appendix E provides the paper-level map. This is an evidence synthesis, not a new benchmark.
+The survey connects **numerical disagreement → estimator or update effects → learned quality and total cost**. Its [measurement guide](docs/MEASUREMENTS.md) maps all **19 core studies**, with complete titles, source locations, policy comparisons, and interpretation limits. Section 3.4 separates controlled numerical probes from online training diagnostics; Appendix E maps the source practices and reporting choices. Token versus response averaging, raw versus capped ESS, masks, distributed reductions and KL conventions are treated explicitly. This is an evidence synthesis, not a new benchmark.
 
 ## Comparing methods
 
@@ -109,7 +110,7 @@ The taxonomy identifies the intervention; the configuration identifies its teste
 | **Score Centering**<br>[Score Centering Stabilizes Off-policy Reinforcement Learning](https://arxiv.org/abs/2609.20807v1) | Center the behavior-weighted score to remove conditional drift. | BF16 learner; quantization stress includes FP4/INT4 KV; policy-lag experiments are separate. |
 | **KV4-RL**<br>[KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization](https://arxiv.org/abs/2610.14448v1) | Protect sensitive cache positions at higher precision. | INT4 KV with bounded INT8 protection; BF16 learner; quota-based partial collection. |
 
-TRACE directly compares TIS+SC under joint NVFP4 W/A/KV rollout. TRIAGE's reported comparisons do not include SC/TIS+SC or TRACE. Their results therefore answer different questions.
+The [studied combinations](docs/SYNTHESIS.md) connect numerical alignment, fidelity, correction and update control while distinguishing tested bundles from open combinations. TRACE directly compares TIS+SC under joint NVFP4 W/A/KV rollout. TRIAGE's reported comparisons do not include SC/TIS+SC or TRACE. Their results therefore answer different questions.
 
 [Execution and direct-comparison records](docs/COMPARISONS.md) retain the models, source locations, checkpoint rules, outcomes and limits. The [comparison map](figures/evidence.svg) shows selected within-study connections.
 
@@ -213,6 +214,7 @@ The curves illustrate the standard surrogate with epsilon 0.2 and advantage ±1.
 |---|---|
 | [Policy identities](figures/policies.svg) | Learner, sampling snapshot, actual behavior, proximal anchor, and KL reference. |
 | [Probability trees](figures/prefixes.svg) | Equal local conditionals with different prefix and response probabilities. |
+| [Measurement regimes](figures/measurement_practice.svg) | Fixed-checkpoint numerical probes and online update diagnostics, with distinct policy comparisons. |
 | [Mechanism map](figures/mechanisms.svg) | Relative influence, score drift, update selection, and feedback. |
 | [Quantized-update visibility](figures/quantization.svg) | Why a smaller update can cross a boundary while a larger one remains invisible. |
 | [Score centering](figures/centering.svg) | A calculated two-action example separating gradient centering from reward centering. |
@@ -232,7 +234,7 @@ The survey is a working manuscript. Use the citation below or GitHub's **Cite th
 ```bibtex
 @misc{su2026trainingrollout,
   title  = {Training--Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey},
-  author = {Su, Zunhai},
+  author = {Su, Zunhai and Wu, Wei and Tan, Jianchao and Wong, Ngai},
   year   = {2026},
   note   = {Working manuscript},
   url    = {https://github.com/ZunhaiSu/awesome-low-precision-rl}

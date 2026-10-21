@@ -96,3 +96,25 @@ The table identifies the selected evidence. Each following entry states its comp
 TRIAGE's average absolute gap, TRACE's extrema, QuRL's behavior-to-proximal KL, MIPU's sampled K3, and KV4-RL's paired full-distribution KL should not be ranked on a shared numerical axis. A useful synthesis follows a chain: **specified numerical disagreement → estimator or update effect → learned quality and total cost**. Each arrow requires its own evidence.
 
 This measurement map complements the [component taxonomy](TAXONOMY.md), [controlled comparison records](COMPARISONS.md), and [survey PDF](../Survey.pdf). Definitions and reported observations are taken from the reviewed versions in [the catalog](../data/papers.json); structured records are in [measurements.json](../data/measurements.json). No independent reproduction or universal mismatch score is claimed.
+
+## Measurement practice: a reproducible report
+
+These recommendations synthesize the reviewed practices; they are not a shared standard already used by all papers.
+
+| Regime | What to hold fixed or record | Read the result as |
+|---|---|---|
+| Controlled execution probe | Same checkpoint and exact prefixes; stated kernel, routing, cache, and decoding controls | A conditional discrepancy between the specified execution paths |
+| Online operational diagnostic | Original generation score/version; named current learner replay; pre/post update or synchronization stage | The gap actually encountered by training, potentially including lag |
+| Update audit | Same sampled batch, prefixes, advantages, masks and behavior scores before/after an update | Realized motion under that update; not a guarantee for unobserved histories |
+
+For two constructed responses of lengths 2 and 8 with constant absolute gaps 1 and 0.1, the token-weighted mean is **0.28**, while the response-weighted mean is **0.55**. Both calculations are correct; the reduction changes the question. Across ranks, combine sums and valid counts before division for a global token mean. Compute global maxima from maxima, not an average of rank maxima.
+
+Report full valid-token diagnostics alongside intervention-eligible subsets. A lower retained-token gap after gating can be a selection effect. Include subset occupancy and the relevant retained contribution; token count and advantage-weighted mass are not interchangeable.
+
+Practical source examples include [TRIAGE's fixed-batch update audit](https://arxiv.org/abs/2610.07043v2) (Appendix B.3), [KV4-RL's fixed-checkpoint shared-prefix KL](https://arxiv.org/abs/2610.14448v1) (Section 5.2 and Appendix B.5), [P3O's distributed moments](https://arxiv.org/abs/2605.12380v2) (Equation 11), and [CIS's measurement and numerical controls](https://arxiv.org/abs/2609.32444v1) (Appendices C.4 and D.5). CIS is supporting general-TIM evidence, not an additional direct FP4 experiment.
+
+A stored log-probability can have limited resolution. Near-one probabilities can saturate, and a clamp representable in one dtype may not be representable in another. State numeric precision, clamps, invalid-value handling, and the reduction population. Raw-logit errors additionally need an offset convention because a constant shift leaves softmax probabilities unchanged.
+
+Keep **learner–sampler KL**, **current–proximal KL**, **learner–reference KL**, and **teacher–student distillation KL** distinct. Also name K1/K3 or the full-vocabulary calculation, direction, probability convention, and sample law.
+
+Use quantiles and extrema with measured token counts. Define the time axis, report whether curves are smoothed, and identify the uncertainty unit. Tokens within one response and repeated evaluations of one trained model are not independent training replications. A compact set should follow the mechanism: direct discrepancy → estimator/update consequence → quality and total cost.

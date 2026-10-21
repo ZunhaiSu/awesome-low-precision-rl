@@ -121,4 +121,11 @@ for item in measurements:
  assert all(item.get(f) for f in ['family','locator','measure','comparison','interpretation_limit'])
  assert item['title'] in (root/'docs/MEASUREMENTS.md').read_text()
 
+
+# Keep repository and preferred-citation author records aligned with the manuscript.
+cff=(root/'CITATION.cff').read_text()
+authors=re.findall(r'family-names: "([^"\n]+)"\n\s+given-names: "([^"\n]+)"\n\s+affiliation: "([^"\n]+)"',cff)
+expected_authors=[('Su','Zunhai','The University of Hong Kong'),('Wu','Wei','Meituan'),('Tan','Jianchao','Meituan'),('Wong','Ngai','The University of Hong Kong')]
+assert authors==expected_authors*2,'citation author/affiliation mismatch'
+
 print(f'PASS: {len(rows)} linked titles; {len(evidence)} evidence records; 13 mainline / 16 related entries; {len(mirrors)} licensed PDF hashes; links and PDF-only survey release valid.')
