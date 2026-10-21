@@ -16,13 +16,12 @@
 
 <p align="center">
   <a href="Survey.pdf"><strong>Read the survey PDF</strong></a> &nbsp;·&nbsp;
-  <a href="papers/README.md">Reading library</a> &nbsp;·&nbsp;
   <a href="#paper-catalog">Papers</a> &nbsp;·&nbsp;
   <a href="docs/EVIDENCE.md">Evidence</a> &nbsp;·&nbsp;
   <a href="#citation">Cite</a>
 </p>
 
-Low-precision execution changes both the cost of generating experience and the learning signal computed from it. This focused survey connects numerical mechanisms, estimator correction, and policy optimization through a component taxonomy and source-linked evidence.
+Quantized rollout changes both the cost of generating experience and the policy that supplies it. This survey follows those changes through sampling, gradient estimation, and policy updates, then compares the numerical and learning interventions used to control them. The framework connects mechanisms to reported quality and total training cost.
 
 ## Explore the survey
 
@@ -30,6 +29,8 @@ Low-precision execution changes both the cost of generating experience and the l
 |---|---|---|
 | Policy roles, execution differences, and their effects on learning. | Numerical alignment, fidelity control, estimator correction, and update control. | Within-study findings, assumptions, quality, and system cost. |
 | [Reading routes](#reading-routes) · §§2–3 | [Component taxonomy](#taxonomy) · §§4–5 | [Evidence records](docs/EVIDENCE.md) · §6 |
+
+**New to the topic?** Start with the GRPO example in §2.1: rewards → group advantages → policy ratios and clipping → update → quantized synchronization. Section 2.4 explains W/A/KV targets, QAT, and native arithmetic.
 
 <p align="center">
   <img src="figures/overview.svg" alt="Survey overview: generation, collected experience, and learner updates form a feedback loop" width="680">
@@ -39,7 +40,7 @@ Low-precision execution changes both the cost of generating experience and the l
 
 ## Contents
 
-[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Compare](#comparing-methods) · [Reading routes](#reading-routes) · [Reading library](#reading-library) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
+[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Compare](#comparing-methods) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
 
 ## Scope
 
@@ -116,19 +117,6 @@ The catalog follows first public appearance. The routes below follow conceptual 
 
 Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html) visible as an exploration boundary case and [Beyond Precision](https://arxiv.org/abs/2602.01826) as general TIM evidence for scheduling. A route expresses reading dependencies, without implying a performance ranking or historical influence.
 
-## Reading library
-
-The [numbered paper library](papers/README.md) follows a focused reading path: **13 papers centered on quantized RL**, complemented by **16 related theory and system papers**. The numbering matches the local library; the survey's broader contribution roles remain in the catalog below.
-
-| Start here | Continue here |
-|---|---|
-| [01 · 量化 RL 主线 / Quantized RL](papers/01_%E9%87%8F%E5%8C%96RL%E4%B8%BB%E7%BA%BF/README.md) | [02 · 相关理论与系统 / Related reading](papers/02_%E7%9B%B8%E5%85%B3%E7%90%86%E8%AE%BA%E4%B8%8E%E7%B3%BB%E7%BB%9F/README.md) |
-| 13 papers centered on quantized rollout and low-precision RL. | 16 papers on TIM, optimization, diagnosis, theory, and integrated systems. |
-
-**Mechanism essentials:** [Score Centering](https://arxiv.org/abs/2609.20807v1) is a core B1 study even though the numbered library places it under related theory and systems. Folder placement follows the paper’s main research scope, not its importance to the survey.
-
-The library includes **11 licensed PDF copies and 18 official-PDF links**, with complete titles and reading notes. Third-party copies retain their own [licenses and attribution](papers/NOTICES.md).
-
 ## Paper catalog
 
 Each entry pairs a short name with the full paper title, linked directly to the reviewed source. The tables follow first public appearance and count each contribution once. Authors, reviewed versions, and additional discussion locations are in the [reviewed catalog](docs/CATALOG.md) and Surveyed Papers appendix. Dates can precede the formal publication linked here. [Classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains. [JSON records](data/papers.json) support reuse.
@@ -189,15 +177,13 @@ Roles describe relevance to the survey, rather than evidence quality. Primary an
 
 The [evidence records](data/evidence.json) cover all nineteen core studies and locate their observations in the primary papers. The survey develops three recurring findings:
 
-**Correction and mismatch evolve together.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [AIS](https://arxiv.org/abs/2605.13907), and [Score Centering](https://arxiv.org/abs/2609.20807) address clipping and update visibility, adaptive importance weighting, and conditional score drift. These interventions change the policy and the mismatch encountered later; [P3O](https://arxiv.org/abs/2605.12380v2) adds batch-adaptive control with setting-specific trajectory evidence.
+**Shared computation matters more than nominal symmetry.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QaRL](https://aclanthology.org/2026.findings-acl.841/), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) coordinate different objects: precision flow, quantized representations, or realized rounding. Matching format labels alone does not identify what remains inconsistent.
 
-**Alignment depends on the shared computation.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) share different information: a precision-flow design, a representation, or realized rounding decisions. Their remaining execution differences determine the scope of agreement.
+**Controlling disagreement must preserve useful learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [Score Centering](https://arxiv.org/abs/2609.20807), [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870), and [TRIAGE](https://arxiv.org/abs/2610.07043) address update visibility, gradient drift, clipping, and direction-dependent control. Their mechanisms explain why stable curves or small mean gaps alone do not establish effective learning.
 
-**Signed update selection reveals hidden effects.** [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870) and [TRIAGE](https://arxiv.org/abs/2610.07043) connect stability to signed clipping or direction-dependent control. [DRPO](https://arxiv.org/abs/2606.09821v1) and [MIPU](https://arxiv.org/abs/2606.29526v1) extend the comparison to corrective gradients and whole-candidate acceptance. Mean disagreement alone leaves the location, direction, and stage of control unresolved.
+**Generation speed and learning efficiency have different costs.** [KV4-RL](https://arxiv.org/abs/2610.14448) reports distinct rollout and full-iteration gains. Calibration, behavior reconstruction, rounding guidance, and weight conversion add dependencies elsewhere in the loop. Section 6 relates these costs to learned-policy quality; the [comparison records](docs/COMPARISONS.md) retain the tested configurations.
 
-Interpretation depends on the execution regime: **simulated FP4** in HiFloat4, **native NVFP4 rollout with BF16 training matmuls** in QATFactory, and recipe-level system integration in Miles support different accuracy and efficiency claims.
-
-Numerical fidelity, optimization stability, policy quality, and runtime remain distinct outcomes. Section 6 connects them through within-study evidence, information requirements, and timing scope.
+The collection distinguishes simulated FP4, native low-bit kernels, and BF16 computation on quantized values. It synthesizes source-reported results and does not introduce a common leaderboard or an independently reproduced benchmark.
 
 <details>
 <summary><strong>Analytical example: clipping depends on advantage sign</strong></summary>
@@ -251,4 +237,4 @@ The paper adapts the **typesetting template** from [arXiv:2601.14004v4](https://
 
 The survey is under active development. Its scientific scope and source versions are documented alongside the manuscript; editorial assessments are available in the [review history](docs/REVIEW.md).
 
-The original survey, annotations, and template adaptations use [CC BY-SA 4.0](LICENSE). Third-party paper copies retain their individual licenses and attribution, as documented in [paper notices](papers/NOTICES.md); other entries link to official PDFs.
+The survey PDF, repository content, and template adaptations use [CC BY-SA 4.0](LICENSE). Linked papers retain their own licenses; their PDFs are not redistributed here.
