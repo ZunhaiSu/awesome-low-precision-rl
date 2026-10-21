@@ -108,4 +108,17 @@ for item in comparison_data['comparisons']:
  assert item['study_key'] in by_key and item['url']==by_key[item['study_key']]['reviewed_source_url']
  assert all(item.get(f) for f in ['setting','compared','outcome','checkpoint_rule','limit','locator'])
 
+
+measurement_data=json.loads((root/'data/measurements.json').read_text())
+measurements=measurement_data['records']
+assert measurement_data['literature_snapshot']=='2026-10-20'
+assert len(measurements)==len({m['key'] for m in measurements})==19
+assert {m['key'] for m in measurements}=={r['key'] for r in rows if r['role']=='core'}
+for item in measurements:
+ assert item['url']==by_key[item['key']]['reviewed_source_url']
+ assert item['title']==by_key[item['key']]['title']
+ assert item['reviewed_version']==by_key[item['key']]['reviewed_version']
+ assert all(item.get(f) for f in ['family','locator','measure','comparison','interpretation_limit'])
+ assert item['title'] in (root/'docs/MEASUREMENTS.md').read_text()
+
 print(f'PASS: {len(rows)} linked titles; {len(evidence)} evidence records; 13 mainline / 16 related entries; {len(mirrors)} licensed PDF hashes; links and PDF-only survey release valid.')

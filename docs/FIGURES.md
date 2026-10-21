@@ -4,7 +4,7 @@ Twelve original vector figures connect the learning loop, method mechanisms and 
 
 | Figure | Purpose | Interpretation |
 |---|---|---|
-| 1 · [Survey at a glance](../figures/overview.svg) | The rollout–learning loop and four intervention classes. | Conceptual synthesis. |
+| 1 · [Survey at a glance](../figures/overview.svg) | The rollout–learning loop, four intervention classes, and complementary source/target/setting views. | Conceptual synthesis. |
 | 2 · [Component taxonomy](../figures/taxonomy.svg) | All 29 focal works, with scheduling and supporting roles shown separately. | Component assignments; no ranking. |
 | 3 · [Policy identities](../figures/policies.svg) | Learner, sampling snapshot, actual behavior, proximal and KL-reference roles. | Probability semantics. |
 | 4 · [Mechanism map](../figures/mechanisms.svg) | Weighting, conditional drift, clipping and feedback. | Conceptual synthesis. |

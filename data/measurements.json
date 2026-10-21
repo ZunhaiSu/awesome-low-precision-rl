@@ -1,0 +1,215 @@
+{
+  "literature_snapshot": "2026-10-20",
+  "scope": "Selected measurement definitions and evidence from all 19 core studies; not an exhaustive inventory of every logged statistic.",
+  "records": [
+    {
+      "key": "flashrl",
+      "title": "On the Rollout-Training Mismatch in Modern RL Systems",
+      "url": "https://www.opt-ml.org/papers/2025/paper116.pdf",
+      "reviewed_version": "OPT2025",
+      "family": "distribution",
+      "locator": "Figure 3 and Sections 3–4",
+      "measure": "Cross-engine KL is plotted alongside accuracy; TIS uses the learner-to-behavior sampled-action ratio.",
+      "comparison": "The formulation compares FSDP and vLLM at the old parameter snapshot.",
+      "interpretation_limit": "The figure caption does not specify KL direction, vocabulary coverage, or the numerical reduction. Do not reconstruct these from the TIS formula."
+    },
+    {
+      "key": "jet",
+      "title": "Jet-RL: Enabling On-Policy FP8 Reinforcement Learning with Unified Training and Rollout Precision Flow",
+      "url": "https://arxiv.org/abs/2601.14243v2",
+      "reviewed_version": "v2",
+      "family": "outcome",
+      "locator": "Section 3.2, Figures 3–4",
+      "measure": "Learning curves compare BF16 training with FP8 rollout across context lengths and task difficulty.",
+      "comparison": "BF16 and mixed-precision training runs; rollout length and initial model capability are varied.",
+      "interpretation_limit": "These experiments establish a learning discrepancy, not a common scalar TIM distance. The reference-policy KL loss is a different quantity."
+    },
+    {
+      "key": "fp8rl",
+      "title": "FP8-RL: A Practical and Stable Low-Precision Stack for LLM Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2601.18150v2",
+      "reviewed_version": "v2",
+      "family": "distribution",
+      "locator": "Section 2.2.1, Metrics; Figure 12",
+      "measure": "Mismatch KL is defined as D_KL(pi_FP8 || pi_train). Scaling and KV/attention ablations track it with learning curves.",
+      "comparison": "Rollout versus training policies in the stated precision configuration.",
+      "interpretation_limit": "The direction is explicit; the metrics paragraph does not fully specify the estimator, vocabulary coverage, or reduction. Do not equate it with full-vocabulary KL by default."
+    },
+    {
+      "key": "qurl",
+      "title": "QuRL: Low-Precision Reinforcement Learning for Efficient Reasoning",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html",
+      "reviewed_version": "ICLR2026",
+      "family": "distribution_and_tail",
+      "locator": "Section 4.2, Figure 3",
+      "measure": "Behavior-to-proximal KL, E_behav[log(pi_behav/pi_prox)], and the maximum proximal-to-behavior ratio.",
+      "comparison": "Quantized behavior policy against the proximal training policy used for correction.",
+      "interpretation_limit": "KL and the maximum ratio describe different aspects of mismatch. The maximum depends on token population and batch size; this KL is not reference regularization."
+    },
+    {
+      "key": "qarl",
+      "title": "QaRL: Rollout-Aligned Quantization-Aware RL for Fast and Stable Training under Training--Inference Mismatch",
+      "url": "https://aclanthology.org/2026.findings-acl.841/",
+      "reviewed_version": "ACL2026-Findings",
+      "family": "update",
+      "locator": "Section 3.2, Figure 4; Appendix Figure 13",
+      "measure": "Token-level distributions of the proximal ratio and mismatch weight; response-level geometric-mean ratios drive TBPO.",
+      "comparison": "Current/old learner probabilities are separated from old learner/sampler probabilities.",
+      "interpretation_limit": "The proximal and mismatch ratios have different denominators. Geometric-mean response ratios are not complete-response likelihood ratios."
+    },
+    {
+      "key": "p3o",
+      "title": "Let the Batch Decide, On- or Off-Policy: Effective Sample Size for RL Post-Training",
+      "url": "https://arxiv.org/abs/2605.12380v2",
+      "reviewed_version": "v2",
+      "family": "weight",
+      "locator": "Equation 11 and Algorithm 2",
+      "measure": "Normalized ESS = mean(rho)^2 / mean(rho^2), formed from all-reduced ratio sums, squared sums, and valid-token counts.",
+      "comparison": "Current learner/recorded behavior ratios across valid response tokens in the batch.",
+      "interpretation_limit": "This includes parameter lag as well as execution differences. Uniform weights yield high empirical ESS even when their common value is not one."
+    },
+    {
+      "key": "ais",
+      "title": "AIS: Adaptive Importance Sampling for Quantized RL",
+      "url": "https://arxiv.org/abs/2605.13907v1",
+      "reviewed_version": "v1",
+      "family": "gap_and_weight",
+      "locator": "Section 3.1, Equations 12–17",
+      "measure": "Mean absolute sampled-token log gap; ESS of truncated weights; standard-deviation amplification std(A*w_bar)/(std(A)+epsilon).",
+      "comparison": "Current training and rollout probabilities on the mini-batch; reliability uses capped weights.",
+      "interpretation_limit": "The gap controls correction necessity; capped-weight ESS controls reliability. Its value is not directly comparable with raw-ratio ESS in P3O."
+    },
+    {
+      "key": "drpo",
+      "title": "Rethinking the Divergence Regularization in LLM RL",
+      "url": "https://arxiv.org/abs/2606.09821v1",
+      "reviewed_version": "v1",
+      "family": "update",
+      "locator": "Sections 3.1–3.2; Appendix D.4, Figures 9–10",
+      "measure": "Binary-TV probability shift defines the constraint geometry; accuracy, entropy, and response length characterize update outcomes.",
+      "comparison": "Sampled-action probabilities of the current policy and the behavior anchor in the objective.",
+      "interpretation_limit": "A constraint variable is not necessarily a separately logged TIM metric. Binary-TV on one sampled action is not full-vocabulary total variation."
+    },
+    {
+      "key": "mipu",
+      "title": "The Mirage of Optimizing Training Policies: Monotonic Inference Policies as the Real Objective for LLM Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2606.29526v1",
+      "reviewed_version": "v1",
+      "family": "distribution_and_decision",
+      "locator": "Section 5.1; Sections 4.2 and 5.4",
+      "measure": "Mismatch-K3 = mean(exp(d)-d-1), d=log(pi_train)-log(mu), on rollout tokens; post-synchronization inference-gap proxy and rollback rate.",
+      "comparison": "Rollout-token learner/sampler comparison; candidate policy additionally examined after synchronization.",
+      "interpretation_limit": "K3 estimates D_KL(mu || pi) under normalization/support assumptions. The inference-gap proxy and rollback rate measure update acceptance, not a policy distance."
+    },
+    {
+      "key": "quads",
+      "title": "QUADS: Stabilizing NVFP4 Reinforcement Learning for MoE via QUantization-error Alignment across Dual Sides",
+      "url": "https://arxiv.org/abs/2607.15810v1",
+      "reviewed_version": "v1",
+      "family": "gap_and_local",
+      "locator": "Figures 2, 6–7; Section 3.1",
+      "measure": "Per-step maximum norm of train–inference log-probability differences; layer-wise MoE activation/output L2 discrepancies.",
+      "comparison": "Paired training/inference execution under weight and activation ablations.",
+      "interpretation_limit": "A maximum gap depends on the measured population. Layer-wise L2 also depends on tensor shape, scale, and measurement location."
+    },
+    {
+      "key": "acrl",
+      "title": "ACRL: Adaptive Control of Training-Inference Discrepancy for Stable Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2607.24062v1",
+      "reviewed_version": "v1",
+      "family": "probability",
+      "locator": "Section 4.1, Equations 8–12",
+      "measure": "Absolute sampled-action probability difference |pi-mu|; within-response means are averaged over a response group and compared with an initial/baseline reference X.",
+      "comparison": "Training and inference probabilities at the old parameter snapshot; Y/X controls reweighting.",
+      "interpretation_limit": "Absolute probability distance is not absolute log distance. Response/group weighting differs from one global token mean; the baseline normalizes a controller, not a universal tolerance."
+    },
+    {
+      "key": "hif4",
+      "title": "HiFloat4 Format for End-To-End Reinforcement Learning Post-Training of Large Language Models",
+      "url": "https://arxiv.org/abs/2607.26515v1",
+      "reviewed_version": "v1",
+      "family": "local_and_outcome",
+      "locator": "Sections 4.2–4.3, Figure 4; Section 5 ablations",
+      "measure": "Activation/residual MSE and RMSE under 2:4 sparsification, together with precision ablations and learned performance.",
+      "comparison": "A quantized tensor and its sparsified counterpart in the residual design; rollout/training precision arms in learning ablations.",
+      "interpretation_limit": "The Figure 4 tensor errors are not paired learner–sampler probability distances. Precision ablations locate an error source but do not yield a common TIM scalar."
+    },
+    {
+      "key": "miles",
+      "title": "Miles v0.1: Production-Level Post-Training",
+      "url": "https://arxiv.org/abs/2609.08368v1",
+      "reviewed_version": "v1",
+      "family": "gap_and_distribution",
+      "locator": "Section 3.1; Section 5.3; Figure 5",
+      "measure": "Same-token cross-engine log-probability comparisons verify low-precision recipes. A separate agentic reference run reports a train–inference KL curve; true-on-policy mode reports zero sampled-token absolute difference.",
+      "comparison": "Comparisons depend on the execution mode. True-on-policy re-scores completed sequences by prefill rather than retaining decode-kernel probabilities.",
+      "interpretation_limit": "The different observations are not one universal metric or one low-precision experiment. Exact sampled-token scores do not imply equality over the entire vocabulary or remove parameter lag."
+    },
+    {
+      "key": "score",
+      "title": "Score Centering Stabilizes Off-policy Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2609.20807v1",
+      "reviewed_version": "v1",
+      "family": "estimator_and_outcome",
+      "locator": "Sections 3–5, especially Section 5.1",
+      "measure": "Conditional mean score and baseline drift motivate the method analytically; shared-objective learning curves test injected weight noise, quantization, and lag separately.",
+      "comparison": "Correction rules share objective, advantages, sampler, and trainer; severe mismatch is used to separate methods within short runs.",
+      "interpretation_limit": "The score expectation is a theoretical estimand, not automatically an empirically logged norm. Stress-test severity and failure time are not a calibrated distance scale."
+    },
+    {
+      "key": "fullfp8",
+      "title": "Towards Full Pipeline FP8 Reinforcement Learning for LLMs",
+      "url": "https://arxiv.org/abs/2609.22870v1",
+      "reviewed_version": "v1",
+      "family": "update_and_local",
+      "locator": "Section 3, Figures 1 and 3–4",
+      "measure": "Normalized MAE of FP8 probabilities and ratios versus BF16 shadow passes; lower/upper over-clipping classified by advantage sign and a BF16 branch counterfactual.",
+      "comparison": "FP8 and BF16 shadow probabilities/ratios for the examined updates; negative-advantage lower-bound over-clipping requires r_BF16>1-epsilon but r_FP8<=1-epsilon.",
+      "interpretation_limit": "Over-clipping is a counterfactual decision disagreement, not the ordinary clipping fraction. Ratio NMAE concerns update distortion and is not solely a fixed-snapshot learner–sampler distance."
+    },
+    {
+      "key": "qatfactory",
+      "title": "QATFactory: A Versatile, Deployment-Aligned Framework for Quantization-aware Training and Distillation of LLMs",
+      "url": "https://arxiv.org/abs/2609.39223v2",
+      "reviewed_version": "v2",
+      "family": "fidelity_and_outcome",
+      "locator": "Section 4.6, Figure 8 and Table 8; Sections 4.1–4.4 for QAD",
+      "measure": "QARL reports loss, reward, completion length, post-export accuracy, and speed. The paper also reports teacher KL/top-1 agreement in its separate QAD experiments.",
+      "comparison": "QARL versus BF16 RL and post-hoc quantization; QAD compares teacher/student fidelity on held-out corpora.",
+      "interpretation_limit": "Teacher-student KL from QAD must not be presented as an online QARL learner–sampler mismatch measurement."
+    },
+    {
+      "key": "triage",
+      "title": "TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2610.07043v2",
+      "reviewed_version": "v2",
+      "family": "gap_and_direction",
+      "locator": "Section 3, Figure 4; Appendices B.2–B.6",
+      "measure": "Mean absolute sampled-token log gap, signed quantiles, advantage-conditioned amplifying/contracting masses, and segment-localization statistics; before/after replay audits directional motion.",
+      "comparison": "Recorded generation log probabilities are fixed. The 30B characterization replays sampled MoE routes; 4B measures the ordinary gap. Marginal statistics include all valid completion tokens; gradient-bearing occupancy excludes zero advantage.",
+      "interpretation_limit": "The paper explicitly does not compare raw 4B and routing-conditioned 30B magnitudes. Directional indicators are audited rather than assumed to predict every token update."
+    },
+    {
+      "key": "trace",
+      "title": "TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models",
+      "url": "https://arxiv.org/abs/2610.07767v2",
+      "reviewed_version": "v2",
+      "family": "gap_and_local",
+      "locator": "Section 3.1, Figure 4; Section 4.4, Figure 11; Appendix A",
+      "measure": "Maximum/minimum log-probability differences; relative excess activation MSE (D_FP4-D_BF16)/D_BF16 across layers.",
+      "comparison": "Paired train–rollout activation discrepancies under FP4 and BF16; online extrema accompany reward/entropy/test curves.",
+      "interpretation_limit": "The excess MSE is a relative increase over BF16 train–rollout discrepancy, not quantized-versus-exact tensor reconstruction error. Extrema are not TRIAGE-style mean absolute gaps; exact reduction must be retained."
+    },
+    {
+      "key": "kv4",
+      "title": "KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization",
+      "url": "https://arxiv.org/abs/2610.14448v1",
+      "reviewed_version": "v1",
+      "family": "distribution",
+      "locator": "Section 5.2, Equation 5.2; Appendix B.5",
+      "measure": "Mean full-vocabulary conditional D_KL(p_BF16 || q_quant) over identical BF16-generated prefixes, before temperature scaling or sampling truncation.",
+      "comparison": "Same policy checkpoint, paired KV execution, fixed prefix set; response-cluster bootstrap intervals.",
+      "interpretation_limit": "This isolates a raw conditional numerical discrepancy, not actual post-decoding behavior probabilities, visited-prefix shift, or the online current-learner/old-behavior gap."
+    }
+  ]
+}

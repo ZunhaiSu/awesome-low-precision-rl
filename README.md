@@ -40,7 +40,7 @@ Quantized rollout changes both the cost of generating experience and the policy 
 
 ## Contents
 
-[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Compare](#comparing-methods) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
+[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Measurements](#measuring-mismatch) · [Compare](#comparing-methods) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
 
 ## Scope
 
@@ -64,7 +64,7 @@ This is a focused narrative survey. General PTQ, low-precision pretraining, and 
 | 7. Open Problems | Develop priorities in diagnosis, composition, stateful execution, and transfer. |
 | 8. Conclusion | Bring numerical fidelity and learning correction into one perspective. |
 
-Appendix A summarizes all twenty-nine focal works; Appendices B–C describe source selection, assumptions, and transfer; Appendix D defines the terminology.
+Appendix A summarizes all twenty-nine focal works; Appendices B–C describe source selection, assumptions, and transfer; Appendix D defines the terminology; Appendix E maps mismatch measurements across all nineteen core studies.
 
 </details>
 
@@ -72,6 +72,8 @@ Appendix A summarizes all twenty-nine focal works; Appendices B–C describe sou
 
 <img src="figures/taxonomy.svg" alt="Component taxonomy of low-precision RL" width="100%">
 
+
+Read each work through three complementary views: **mismatch source → intervention target → tested setting**. The source explains why probabilities differ; the target determines the method class; the setting conditions its evidence.
 
 Four primary classes describe the **component being changed**, so a paper may contribute to several classes.
 
@@ -85,6 +87,16 @@ Four primary classes describe the **component being changed**, so a paper may co
 Precision format, W/A/KV target, architecture, adaptation regime, and collection schedule are **separate configuration labels**. CIS calibrates importance sampling; Calibrated Clipping calibrates update boundaries. QeRL is discussed in a boundary box; VeXact is a diagnostic reference.
 
 Scheduling is a complementary topic in §5.3; B3 remains a navigation tag for its supporting literature. It is not a fifth primary route.
+
+B2 includes boundary placement (QuRL/QaRL/Calibrated Clipping), batch reliability (P3O), divergence geometry (DPPO/DRPO), directional influence (ACRL/TRIAGE), and candidate acceptance (MIPU). Their different decision units are summarized in the [classification guide](docs/TAXONOMY.md#control-decisions-inside-b2).
+
+The [related-work perspectives](docs/RELATED_WORK.md) connect this framework to how the primary papers organize neighboring work. Their terminology is interpreted alongside each paper's actual mechanism.
+
+## Measuring mismatch
+
+The papers do **not** use one common mismatch metric. TRIAGE's average absolute log gap, TRACE's gap extrema, QuRL's behavior-to-proximal KL, and KV4-RL's full-distribution shared-prefix KL describe different quantities. ESS measures weight concentration; reward and entropy describe learning outcomes.
+
+The survey connects **numerical disagreement → estimator or update effects → learned quality and total cost**. Its [measurement guide](docs/MEASUREMENTS.md) maps all **19 core studies**, with complete titles, source locations, policy comparisons, and interpretation limits. Section 3.4 explains the definitions; Appendix E provides the paper-level map. This is an evidence synthesis, not a new benchmark.
 
 ## Comparing methods
 
