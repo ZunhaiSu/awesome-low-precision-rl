@@ -96,4 +96,16 @@ assert len(entries) - len(mirrors) == library['counts']['official_links'] == 18
 assert set(p for p in tracked if p.lower().endswith('.pdf')) == {'Survey.pdf'} | mirrors
 assert not any(Path(p).suffix.lower() in {'.tex', '.cls', '.sty', '.bib', '.bst'} for p in tracked)
 assert (root / 'Survey.pdf').read_bytes().startswith(b'%PDF-')
+comparison_data=json.loads((root/'data/comparisons.json').read_text())
+by_key={r['key']:r for r in rows}
+assert comparison_data['literature_snapshot']=='2026-10-20'
+assert len({r['key'] for r in comparison_data['regimes']})==len(comparison_data['regimes'])
+assert len({r['id'] for r in comparison_data['comparisons']})==len(comparison_data['comparisons'])
+for item in comparison_data['regimes']:
+ assert item['key'] in by_key and item['url']==by_key[item['key']]['reviewed_source_url']
+ assert all(item.get(f) for f in ['learner','rollout','collection','boundary','locator'])
+for item in comparison_data['comparisons']:
+ assert item['study_key'] in by_key and item['url']==by_key[item['study_key']]['reviewed_source_url']
+ assert all(item.get(f) for f in ['setting','compared','outcome','checkpoint_rule','limit','locator'])
+
 print(f'PASS: {len(rows)} linked titles; {len(evidence)} evidence records; 13 mainline / 16 related entries; {len(mirrors)} licensed PDF hashes; links and PDF-only survey release valid.')

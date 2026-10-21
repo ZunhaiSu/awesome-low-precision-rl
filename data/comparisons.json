@@ -1,0 +1,82 @@
+{
+  "literature_snapshot": "2026-10-20",
+  "editorial_review": "2026-10-21",
+  "scope": "Selected configuration-specific records, not an exhaustive benchmark or cross-paper leaderboard.",
+  "regimes": [
+    {
+      "key": "trace",
+      "learner": "Guided fake-quantized forward; BF16 backward",
+      "rollout": "NVFP4 W4A4 routed experts + NVFP4 KV in softmax attention; other modules BF16",
+      "collection": "Asynchronous; routing replay and importance correction retained",
+      "boundary": "No native-FP4 trainer acceleration is established.",
+      "locator": "Sections 3.1 and 4; Table 1",
+      "url": "https://arxiv.org/abs/2610.07767v2"
+    },
+    {
+      "key": "triage",
+      "learner": "Native NVFP4 W4A4 forward; higher-precision training state remains",
+      "rollout": "Native W4A4; KV is BF16 in documented characterization",
+      "collection": "Synchronous math RL on Qwen3-4B and Qwen3-30B-A3B",
+      "boundary": "No KV4 experiment or direct SC/TIS+SC comparison is reported.",
+      "locator": "Section 5; Appendix B.1; Table 1",
+      "url": "https://arxiv.org/abs/2610.07043v2"
+    },
+    {
+      "key": "score",
+      "learner": "BF16 learner; top-k behavior reconstruction",
+      "rollout": "Quantization stress includes FP4 KV and INT8 sampler with INT4 KV",
+      "collection": "Quantization and policy-lag tests are separate settings",
+      "boundary": "Shared-objective controls and training-accuracy curves are not full-recipe replications or a universal held-out ranking.",
+      "locator": "Sections 5.1-5.4; Appendix D",
+      "url": "https://arxiv.org/abs/2609.20807v1"
+    },
+    {
+      "key": "kv4",
+      "learner": "BF16",
+      "rollout": "INT4 KV with bounded INT8 protection; cache-focused execution",
+      "collection": "Quota-based partial collection; generation and learning alternate",
+      "boundary": "Common BF16 evaluation isolates learned-policy quality; no joint W4A4/KV4 training result is established.",
+      "locator": "Sections 5.2 and 6; Appendix A.1",
+      "url": "https://arxiv.org/abs/2610.14448v1"
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "trace-score",
+      "study_key": "trace",
+      "title": "TRACE versus TIS+SC",
+      "setting": "Qwen3.5-35B-A3B; joint NVFP4 expert W/A and KV rollout; four reasoning/code benchmarks",
+      "compared": "TRACE; TIS+SC (cap 2, top-128 reconstruction); BF16 reference",
+      "outcome": "Reported task mean: TRACE 75.3; TIS+SC 74.1; BF16 74.9.",
+      "checkpoint_rule": "SC is selected by its highest four-task mean through 400 training steps.",
+      "limit": "TRACE and TIS+SC each lead on two of the four tasks; Table 6 provides no uncertainty interval. This is not a TRIAGE comparison.",
+      "locator": "Section 4.4; Table 6",
+      "url": "https://arxiv.org/abs/2610.07767v2"
+    },
+    {
+      "id": "triage-tis",
+      "study_key": "triage",
+      "title": "TRIAGE versus TIS under native W4A4",
+      "setting": "Qwen3-30B-A3B; synchronous math RL; native NVFP4 W4A4 forward",
+      "compared": "BF16; native NVFP4; NVFP4+TIS; full TRIAGE",
+      "outcome": "At step 1700, five-task mean: TRIAGE 70.96; TIS 63.18; BF16 72.41.",
+      "checkpoint_rule": "Stable arms use their final step 1700. Collapsed naive NVFP4 uses the saved step-700 checkpoint.",
+      "limit": "No direct SC/TIS+SC, TRACE or KV4 comparison is reported. Stability is observed only within the evaluated horizon.",
+      "locator": "Section 5.1-5.2; Table 1; Section 8",
+      "url": "https://arxiv.org/abs/2610.07043v2"
+    },
+    {
+      "id": "kv4-cache-controls",
+      "study_key": "kv4",
+      "title": "KV4-RL versus cache-precision controls",
+      "setting": "Qwen3-8B-Base; 400 updates; TIS retained; common BF16 evaluation",
+      "compared": "BF16, KV8, unprotected KV4 and selectively protected KV4-RL",
+      "outcome": "Final six-task mean: KV4-RL 52.8, BF16 52.4. Cumulative rollout/full-iteration speedups: 1.80x/1.27x.",
+      "checkpoint_rule": "Final step 400; one training run per precision in the documented 8B learning-curve study, with three evaluation seeds.",
+      "limit": "Evaluation-seed standard deviations do not measure variability across independent training runs. Timing is specific to this collection workload.",
+      "locator": "Sections 6.1-6.3; Table 1; Appendix D.5",
+      "url": "https://arxiv.org/abs/2610.14448v1"
+    }
+  ],
+  "editorial_release": "2026-10-22"
+}

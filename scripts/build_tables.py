@@ -4,6 +4,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from build_comparisons import comparison_markdown
 
 ROOT = Path(__file__).resolve().parents[1]
 START = '<!-- BEGIN GENERATED CATALOG -->'
@@ -59,7 +60,7 @@ def generate():
             ('A2', 'Fidelity (A2)', 'Quantization error and visible parameter updates.'),
             ('B1', 'Estimation (B1)', 'Target expectations and gradient correction.'),
             ('B2', 'Update control (B2)', 'The influence of samples on policy updates.'),
-            ('B3', 'Scheduling (B3)', 'The scale of optimization over time; direct low-bit evidence remains limited.')]:
+            ('B3', 'Scheduling (B3)', 'Complementary scheduling, retained as a navigation topic rather than a fifth primary class; direct low-bit evidence remains limited.')]:
         selected = [r for r in rows if re.search(r'\b' + code + r'\b', r['categories'])]
         links = [f"[{r['name']}](#paper-{r['key']})" + (' (support)' if r['role'] == 'support' else '')
                  for r in sorted(selected, key=lambda r: r['first_publication'])]
@@ -99,7 +100,8 @@ def generate():
     return {ROOT / 'README.md': readme,
             ROOT / 'docs/CATALOG.md': '\n'.join(full),
             ROOT / 'docs/EVIDENCE.md': '\n'.join(detail),
-            ROOT / 'figures/status.svg': status}
+            ROOT / 'figures/status.svg': status,
+            ROOT / 'docs/COMPARISONS.md': comparison_markdown(ROOT)}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

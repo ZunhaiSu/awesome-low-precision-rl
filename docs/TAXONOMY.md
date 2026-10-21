@@ -1,6 +1,6 @@
 # Classification and evidence roles
 
-The unit of classification is a component. Its operative purpose identifies the class:
+The unit of classification is a component. Four primary classes follow the object directly changed:
 
 | Class | Direct target | Assignment rule |
 |---|---|---|
@@ -8,7 +8,8 @@ The unit of classification is a component. Its operative purpose identifies the 
 | A2 | Numerical fidelity | Preserve update resolution or sensitive information through scaling, compensation, calibration, or selective precision. |
 | B1 | Estimation | Change action weights or score expectations to address a distributional estimation problem. |
 | B2 | Update influence | Change the constraints, magnitude, or direction of sampled contributions, or accept/reject a whole candidate update. |
-| B3 | Optimization schedule | Change the scale or schedule of learning over time. |
+
+**Complementary scheduling.** Beyond Precision remains under §5.3 with navigation tag B3. Its general-TIM scheduling evidence is useful context, but it does not form a fifth primary route with equal direct low-bit coverage.
 
 These purposes can overlap. QaRL introduces A1 and B2 components, QuRL introduces B2 and A2 components, and QUADS combines A1 with A2. Rollout-ResQ is A2 activation compensation. P3O, DRPO, and MIPU are B2 controls over batch reliability, divergence geometry, and whole-update acceptance. Miles contributes A1 contracts and A2 precision choices; QATFactory's QARL component aligns quantized representations while retaining BF16 training matmuls. A multiplicative weight can belong to B1 or B2 depending on its target. A system's adoption of TIS is distinguished from its numerical or integration contribution.
 
@@ -23,5 +24,7 @@ Three other fields answer different questions:
 No E1–E4 or numerical quality grade is inferred from these fields. A quality assessment would need experiment-level extraction of controls, seeds, uncertainty, baselines, and reproduction. A formulation or diagnostic role is not evidence of weak experimental quality.
 
 Reviewed arXiv versions are pinned where the source record identifies one. Formal publication records remain distinct from arXiv versions; version-unspecified records are left explicit. The [catalog](CATALOG.md) and [source observations](EVIDENCE.md) are generated from the JSON records with `python3 scripts/build_tables.py`.
+
+The [configuration and comparison records](COMPARISONS.md) additionally distinguish learner arithmetic, rollout W/A/KV scope, direct baselines, checkpoint selection and evaluation randomness. Method classes do not imply experimental validation in every precision regime.
 
 The eight-section paper develops definitions and mechanisms before comparing numerical and learning interventions, then connects published findings to costs and open questions. Figure 2 maps all focal works, including contextual connections and the QeRL exploration boundary; Appendix A provides numerical regimes and discussion locations. The complete section outline is retained in the README and printed contents.

@@ -36,7 +36,7 @@ The influence of samples on policy updates.
 
 ### Scheduling (B3)
 
-The scale of optimization over time; direct low-bit evidence remains limited.
+Complementary scheduling, retained as a navigation topic rather than a fifth primary class; direct low-bit evidence remains limited.
 
 [Beyond Precision](#paper-beyond) (support)
 
@@ -426,9 +426,9 @@ First public: 2026-09-08 · Reviewed record: [v1](https://arxiv.org/abs/2609.083
 
 Authors: Martin Marek; Max Ryabinin.
 
-First public: 2026-09-17 · Reviewed record: [v1](https://arxiv.org/abs/2609.20807v1) · Source snapshot checked: 2026-10-19
+First public: 2026-09-17 · Reviewed record: [v1](https://arxiv.org/abs/2609.20807v1) · Source snapshot checked: 2026-10-21
 
-- Numerical regime: BF16 learner; quantized rollout or policy lag
+- Numerical regime: BF16 learner; quantized sampler including FP4/INT4 KV variants; separate policy-lag tests
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: B1
 - Main discussion: 5.1; additional locations: 2.2; 3.2; 5.4; 6.2
@@ -498,9 +498,9 @@ First public: 2026-09-30 · Reviewed record: [v2](https://arxiv.org/abs/2609.392
 
 Authors: Zhen Li; Shuai Zhang; Yanggan Gu; Yiming Zhang; Yang Yu; Mingfa Feng; Congkai Xie; Shuang Yu; Junjie Lai; Hongxia Yang.
 
-First public: 2026-10-05 · Reviewed record: [v2](https://arxiv.org/abs/2610.07043v2) · Source snapshot checked: 2026-10-19
+First public: 2026-10-05 · Reviewed record: [v2](https://arxiv.org/abs/2610.07043v2) · Source snapshot checked: 2026-10-21
 
-- Numerical regime: Native NVFP4 W4A4; MoE analysis
+- Numerical regime: Native NVFP4 W4A4 forward on both endpoints; documented BF16 KV; synchronous math RL
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: B2
 - Main discussion: 5.2; additional locations: 3.3; 6.2
@@ -516,9 +516,9 @@ First public: 2026-10-05 · Reviewed record: [v2](https://arxiv.org/abs/2610.070
 
 Authors: Xin Wang; Hao Yu; Zhengyang Zhuge; Bochao Mao; Zheng Li; Junda Feng; Yuyan Luo; Yi Zhang; Yizhong Cao; Mi Zhang; Dayiheng Liu; Jianwei Zhang.
 
-First public: 2026-10-06 · Reviewed record: [v2](https://arxiv.org/abs/2610.07767v2) · Source snapshot checked: 2026-10-19
+First public: 2026-10-06 · Reviewed record: [v2](https://arxiv.org/abs/2610.07767v2) · Source snapshot checked: 2026-10-21
 
-- Numerical regime: FP4 MoE rollout; guided learner QAT
+- Numerical regime: NVFP4 expert W4A4 + softmax KV4 rollout; guided fake-quantized learner forward, BF16 backward; asynchronous
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: A1
 - Main discussion: 4.1; additional locations: 3.1; 6.2
@@ -534,9 +534,9 @@ First public: 2026-10-06 · Reviewed record: [v2](https://arxiv.org/abs/2610.077
 
 Authors: Sihwan Park; Sung-Yub Kim; Doohyuk Jang; Eunho Yang.
 
-First public: 2026-10-10 · Reviewed record: [v1](https://arxiv.org/abs/2610.14448v1) · Source snapshot checked: 2026-10-19
+First public: 2026-10-10 · Reviewed record: [v1](https://arxiv.org/abs/2610.14448v1) · Source snapshot checked: 2026-10-21
 
-- Numerical regime: INT4 KV with bounded INT8 protection
+- Numerical regime: BF16 learner; INT4 KV with bounded INT8 protection; quota-based partial collection
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: A2; system
 - Main discussion: 4.2; additional locations: 5.1; 6.2; 6.3

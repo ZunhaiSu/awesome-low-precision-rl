@@ -1,5 +1,7 @@
 # Editorial review history
 
+The current edition is the [22 October assessment](ASSESSMENT.md), with [configuration-specific comparisons](COMPARISONS.md). Four primary method classes, expanded mechanism figures and explicit evidence boundaries supersede the organization of earlier drafts. The historical entries below describe their respective editions; current document validation is recorded in [BUILD.md](BUILD.md).
+
 The recommended manuscript is the [current refined edition](ASSESSMENT.md), which integrates the expanded coverage and evidence with a more continuous scientific argument. The entries below preserve earlier assessments; [REVISION_5.md](REVISION_5.md) describes the integrated base edition.
 
 The first cycle below records the original delivered draft. The additional cycle at the end links to the current revision assessment.

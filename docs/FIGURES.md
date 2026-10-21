@@ -1,24 +1,22 @@
 # Figures and visual conventions
 
-The manuscript contains ten original vector figures, also supplied as SVGs for repository reuse. The captions and assumptions appear in [Survey.pdf](../Survey.pdf). No figure is a cross-paper performance leaderboard.
+Twelve original vector figures connect the learning loop, method mechanisms and source-bound comparisons. Numerical examples are constructed illustrations; comparison sets retain their source configurations.
 
 | Figure | Purpose | Interpretation |
 |---|---|---|
-| 1 · [Survey at a glance](../figures/overview.svg) | First-page learning loop and intervention interfaces. | Conceptual synthesis. |
-| 2 · [Work-to-class taxonomy](../figures/taxonomy.svg) | All twenty-nine focal works; cross-category components, supporting studies, and the exploration boundary. | Conceptual synthesis. |
-| 3 · [Policy identities](../figures/policies.svg) | Current learner, sampling snapshot, actual behavior, proximal anchor, and KL reference. | Conceptual synthesis. |
-| 4 · [Conditional and response probabilities](../figures/prefixes.svg) | Exact two-step construction: leaf probabilities and prefix mass; not empirical. | Mathematical illustration. |
-| 5 · [Three mechanism routes](../figures/mechanisms.svg) | Relative influence, expected direction, and update selection can propagate through learning. | Conceptual synthesis. |
-| 6 · [Signed clipping](../figures/clipping.svg) | Analytical surrogate with epsilon 0.2 and advantages +1/-1; all loss-axis values explicit. | Mathematical illustration. |
-| 7 · [Update visibility](../figures/quantization.svg) | Fixed-step scalar quantizer, avoiding ties; a smaller update can cross a boundary. | Mathematical illustration. |
-| 8 · [Learning operators](../figures/operators.svg) | Estimator correction, local and batch control, whole-candidate acceptance, and scheduling. | Conceptual synthesis. |
-| 9 · [Evidence lenses](../figures/evidence.svg) | Different conditions for numerical, update, trajectory, and quality/cost observations. | Conceptual synthesis. |
-| 10 · [Serialized timing](../figures/timing.svg) | Constructed normalized example; rollout share 0.6, speedup 2, and optional added overhead 0.1. | Mathematical illustration. |
+| 1 · [Survey at a glance](../figures/overview.svg) | The rollout–learning loop and four intervention classes. | Conceptual synthesis. |
+| 2 · [Component taxonomy](../figures/taxonomy.svg) | All 29 focal works, with scheduling and supporting roles shown separately. | Component assignments; no ranking. |
+| 3 · [Policy identities](../figures/policies.svg) | Learner, sampling snapshot, actual behavior, proximal and KL-reference roles. | Probability semantics. |
+| 4 · [Conditional and response probabilities](../figures/prefixes.svg) | Local conditionals and visited prefix mass. | Exact two-step illustration. |
+| 5 · [Mechanism map](../figures/mechanisms.svg) | Weighting, conditional drift, clipping and feedback. | Conceptual synthesis. |
+| 6 · [Signed clipping](../figures/clipping.svg) | Opposite active clipping boundaries for positive and negative advantages. | Analytical surrogate; epsilon 0.2 and advantages ±1. |
+| 7 · [Rollout-guided rounding](../figures/rounding.svg) | Learner 0.74 and rollout 0.76 on a fixed E2M1 interval. | Constructed example separating agreement from per-path error. |
+| 8 · [Update visibility](../figures/quantization.svg) | Quantization-boundary crossings can differ from update magnitude. | Fixed-step scalar quantizer, avoiding ties. |
+| 9 · [Score centering](../figures/centering.svg) | A behavior-weighted score mean of 0.3 becomes zero. | Exact two-action scalar-logit example. |
+| 10 · [Learning operators](../figures/operators.svg) | Estimator correction, TRIAGE eligibility and normalized gate influence. | Local rules and illustrative raw weights. |
+| 11 · [Comparison sets](../figures/evidence.svg) | TRACE and TRIAGE's reported baselines in their respective settings. | Direct comparisons; no cross-study ordering. |
+| 12 · [Serialized timing](../figures/timing.svg) | Faster generation and added work affect total iteration time. | Constructed example with rollout share 0.6 and speedup 2. |
 
-## Visual system
+Blue and teal identify numerical interventions; violet and amber identify estimation and update control. Slate identifies context and complementary scheduling. Labels, equations and line styles carry meaning independently of color.
 
-Blue and teal distinguish numerical interfaces; violet and amber distinguish estimation and update control; slate identifies scheduling and context. Category codes, text, solid/dashed lines, and explicit values carry the meaning independently of color. Diagram text uses a consistent sans-serif face within the paper's original Charter-based template.
-
-The original contents typography remains on pages two and three, following the title/abstract and graphical overview. Main text begins on page four. The full work taxonomy and Surveyed Papers appendix are retained.
-
-The SVGs and PDF are prepared from the same authoring project. Figure updates are published together with the corresponding manuscript revision.
+The original Charter-based paper template and contents typography are retained. The first-page overview is followed by the contents and main text. Figures are exported from the same embedded TikZ source as the manuscript.

@@ -1,6 +1,6 @@
 {
-  "checked_date": "2026-10-20",
-  "purpose": "Source-linked qualitative evidence for all nineteen core method/system studies. Six selected comparisons appear in the manuscript evidence table; this is not exhaustive experimental extraction or a new benchmark.",
+  "checked_date": "2026-10-21",
+  "purpose": "Source-linked qualitative evidence for all nineteen core method/system studies. Four configuration-specific comparison cases appear in the manuscript; this is not exhaustive experimental extraction or a new benchmark.",
   "observations": [
     {
       "key": "flashrl",
@@ -62,8 +62,8 @@
       "key": "score",
       "url": "https://arxiv.org/html/2609.20807v1",
       "locator": "Sections 5.1-5.4; Appendix A.1-A.2",
-      "observation": "Shared-objective corrections are compared; top-k behavior reconstruction is used; composition is tested under lag.",
-      "limit": "Conditional score centering is not recovery of the on-policy trajectory distribution."
+      "observation": "Shared-objective corrections are compared under quantization stress; separate lag experiments test composition. Top-k reconstruction approximates the conditional score expectation.",
+      "limit": "Quantization stress curves report training accuracy, not a universal held-out ranking. Conditional centering does not recover the on-policy trajectory distribution."
     },
     {
       "key": "fullfp8",
@@ -75,16 +75,16 @@
     {
       "key": "triage",
       "url": "https://arxiv.org/html/2610.07043v2",
-      "locator": "Sections 3-5; Appendix B.3-B.4",
-      "observation": "Local directional diagnostics motivate gating and repair; token-wise predictiveness is restricted in the routing-conditioned MoE analysis.",
-      "limit": "Population directional trends do not ensure token-independent contraction."
+      "locator": "Sections 3-5; Figure 4; Table 1; Appendix B.1 and B.3-B.4",
+      "observation": "Synchronous native-W4A4 math RL compares BF16, NVFP4, TIS and full TRIAGE over 600/1700 steps. Local directional diagnostics motivate gating and repair.",
+      "limit": "No direct SC/TIS+SC or KV4 experiment is reported. Population directional trends do not guarantee token-wise contraction."
     },
     {
       "key": "trace",
       "url": "https://arxiv.org/html/2610.07767v2",
-      "locator": "Sections 3.1-3.2 and 4.1-4.5",
-      "observation": "Rollout-guided FP4 rounding and compact quantization-information transfer are evaluated for MoE learning, including efficiency and component comparisons.",
-      "limit": "The local rounding argument is not a global policy-divergence guarantee; storage, transport, and state matching remain system dependencies."
+      "locator": "Sections 3.1-3.2 and 4.1-4.5; Table 6",
+      "observation": "Guided fake-quantized learner forward with BF16 backward supports joint FP4 expert W/A and KV rollout. Table 6 directly compares TIS+SC at cap 2.",
+      "limit": "SC uses its best mean checkpoint through 400 steps; task-wise outcomes differ. The local rounding argument is not a global policy guarantee, and learner execution is not native FP4 training."
     },
     {
       "key": "kv4",

@@ -7,7 +7,7 @@
 
 <p align="center">
   <strong>Zunhai Su</strong> · The University of Hong Kong<br>
-  Literature snapshot: <strong>20 October 2026</strong> · Editorial update: 20 October 2026
+  Literature snapshot: <strong>20 October 2026</strong> · Editorial update: 22 October 2026
 </p>
 
 <p align="center">
@@ -39,7 +39,7 @@ Low-precision execution changes both the cost of generating experience and the l
 
 ## Contents
 
-[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Reading routes](#reading-routes) · [Reading library](#reading-library) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
+[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Compare](#comparing-methods) · [Reading routes](#reading-routes) · [Reading library](#reading-library) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
 
 ## Scope
 
@@ -55,11 +55,11 @@ This is a focused narrative survey. General PTQ, low-precision pretraining, and 
 | Section | Purpose |
 |---|---|
 | 1. Introduction and Scope | Motivate the learner–sampler interface and define the review boundary. |
-| 2. Problem Formulation and Taxonomy | Separate policy roles, execution mismatch, decoding, and staleness. |
-| 3. Mechanisms | Trace probability differences through estimation, clipping, and feedback. |
+| 2. Background and Problem Formulation | Separate policy roles, execution mismatch, decoding, and staleness. |
+| 3. How Execution Mismatch Affects Learning | Trace probability differences through estimation, clipping, and feedback. |
 | 4. Numerical Design and Execution Alignment | Compare computation alignment, fidelity control, and update visibility. |
-| 5. Learning under Residual Mismatch | Compare estimator correction, update control, scheduling, and composition. |
-| 6. Synthesis of Findings and Practical Trade-offs | Connect published learning outcomes to evidence and system cost. |
+| 5. Learning under Residual Mismatch | Explain estimator correction and update control, with complementary scheduling and composition. |
+| 6. Evidence Synthesis and System Trade-offs | Connect published learning outcomes to evidence and system cost. |
 | 7. Open Problems | Develop priorities in diagnosis, composition, stateful execution, and transfer. |
 | 8. Conclusion | Bring numerical fidelity and learning correction into one perspective. |
 
@@ -72,7 +72,7 @@ Appendix A summarizes all twenty-nine focal works; Appendices B–C describe sou
 <img src="figures/taxonomy.svg" alt="Component taxonomy of low-precision RL" width="100%">
 
 
-The unit of classification is a **component**, so a paper may occupy multiple cells.
+Four primary classes describe the **component being changed**, so a paper may contribute to several classes.
 
 | Code | Intervention | Main discussion | Representative components |
 |---|---|---|---|
@@ -80,9 +80,25 @@ The unit of classification is a **component**, so a paper may occupy multiple ce
 | A2 | Control quantization error and preserve parameter updates | §4.2 | QuRL UAQ; QUADS RAC; FP8-RL calibration; KV4-RL protection; Rollout-ResQ; Miles precision exceptions |
 | B1 | Correct gradient estimation | §5.1 | FlashRL/TIS; AIS; CIS; Score Centering; baseline/centering theory |
 | B2 | Control policy-update influence | §5.2 | QuRL ACR; QaRL TBPO; Calibrated Clipping; P3O; DRPO; MIPU; ACRL; TRIAGE; DPPO as background |
-| B3 | Adapt the optimization schedule | §5.3 | Beyond Precision, as general TIM support |
 
 Precision format, W/A/KV target, architecture, adaptation regime, and collection schedule are **separate configuration labels**. CIS calibrates importance sampling; Calibrated Clipping calibrates update boundaries. QeRL is discussed in a boundary box; VeXact is a diagnostic reference.
+
+Scheduling is a complementary topic in §5.3; B3 remains a navigation tag for its supporting literature. It is not a fifth primary route.
+
+## Comparing methods
+
+The taxonomy identifies the intervention; the configuration identifies its tested scope. Read the learner path, rollout W/A/KV precision, and comparison rule together.
+
+| Work | Mechanism | Reviewed execution setting |
+|---|---|---|
+| **TRACE**<br>[TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models](https://arxiv.org/abs/2610.07767v2) | Guide learner rounding using rollout quantization information. | Joint NVFP4 expert W4A4 and softmax KV4 rollout; guided fake-quantized learner forward, BF16 backward. |
+| **TRIAGE**<br>[TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning](https://arxiv.org/abs/2610.07043v2) | Gate and rebalance selected updates; add bounded repair. | Native NVFP4 W4A4 forward on both endpoints; documented BF16 KV; no reported KV4 experiment. |
+| **Score Centering**<br>[Score Centering Stabilizes Off-policy Reinforcement Learning](https://arxiv.org/abs/2609.20807v1) | Center the behavior-weighted score to remove conditional drift. | BF16 learner; quantization stress includes FP4/INT4 KV; policy-lag experiments are separate. |
+| **KV4-RL**<br>[KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization](https://arxiv.org/abs/2610.14448v1) | Protect sensitive cache positions at higher precision. | INT4 KV with bounded INT8 protection; BF16 learner; quota-based partial collection. |
+
+TRACE directly compares TIS+SC under joint NVFP4 W/A/KV rollout. TRIAGE's reported comparisons do not include SC/TIS+SC or TRACE. Their results therefore answer different questions.
+
+[Execution and direct-comparison records](docs/COMPARISONS.md) retain the models, source locations, checkpoint rules, outcomes and limits. The [comparison map](figures/evidence.svg) shows selected within-study connections.
 
 ## Reading routes
 
@@ -102,12 +118,14 @@ Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f06
 
 ## Reading library
 
-The [numbered paper library](papers/README.md) follows a focused reading path: **13 quantized-RL papers first**, followed by **16 related theory and system papers**. The numbering matches the local library; the survey's broader contribution roles remain in the catalog below.
+The [numbered paper library](papers/README.md) follows a focused reading path: **13 papers centered on quantized RL**, complemented by **16 related theory and system papers**. The numbering matches the local library; the survey's broader contribution roles remain in the catalog below.
 
 | Start here | Continue here |
 |---|---|
 | [01 · 量化 RL 主线 / Quantized RL](papers/01_%E9%87%8F%E5%8C%96RL%E4%B8%BB%E7%BA%BF/README.md) | [02 · 相关理论与系统 / Related reading](papers/02_%E7%9B%B8%E5%85%B3%E7%90%86%E8%AE%BA%E4%B8%8E%E7%B3%BB%E7%BB%9F/README.md) |
 | 13 papers centered on quantized rollout and low-precision RL. | 16 papers on TIM, optimization, diagnosis, theory, and integrated systems. |
+
+**Mechanism essentials:** [Score Centering](https://arxiv.org/abs/2609.20807v1) is a core B1 study even though the numbered library places it under related theory and systems. Folder placement follows the paper’s main research scope, not its importance to the survey.
 
 The library includes **11 licensed PDF copies and 18 official-PDF links**, with complete titles and reading notes. Third-party copies retain their own [licenses and attribution](papers/NOTICES.md).
 
@@ -115,7 +133,7 @@ The library includes **11 licensed PDF copies and 18 official-PDF links**, with 
 
 Each entry pairs a short name with the full paper title, linked directly to the reviewed source. The tables follow first public appearance and count each contribution once. Authors, reviewed versions, and additional discussion locations are in the [reviewed catalog](docs/CATALOG.md) and Surveyed Papers appendix. Dates can precede the formal publication linked here. [Classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains. [JSON records](data/papers.json) support reuse.
 
-Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 · Fidelity](docs/CATALOG.md#fidelity-a2) · [B1 · Estimation](docs/CATALOG.md#estimation-b1) · [B2 · Update control](docs/CATALOG.md#update-control-b2) · [B3 · Scheduling](docs/CATALOG.md#scheduling-b3).
+Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 · Fidelity](docs/CATALOG.md#fidelity-a2) · [B1 · Estimation](docs/CATALOG.md#estimation-b1) · [B2 · Update control](docs/CATALOG.md#update-control-b2). Complement: [scheduling](docs/CATALOG.md#scheduling-b3).
 
 <!-- BEGIN GENERATED CATALOG -->
 
@@ -199,8 +217,10 @@ The curves illustrate the standard surrogate with epsilon 0.2 and advantage ±1.
 | [Probability trees](figures/prefixes.svg) | Equal local conditionals with different prefix and response probabilities. |
 | [Mechanism map](figures/mechanisms.svg) | Relative influence, score drift, update selection, and feedback. |
 | [Quantized-update visibility](figures/quantization.svg) | Why a smaller update can cross a boundary while a larger one remains invisible. |
-| [Learning operators](figures/operators.svg) | Estimator correction, local and batch control, whole-candidate acceptance, and scheduling. |
-| [Evidence lenses](figures/evidence.svg) | Numerical, update, trajectory, and quality/cost measurements. |
+| [Score centering](figures/centering.svg) | A calculated two-action example separating gradient centering from reward centering. |
+| [Rollout-guided rounding](figures/rounding.svg) | Why better cross-path agreement can differ from lower per-path quantization error. |
+| [Learning operators](figures/operators.svg) | Estimator correction, direction-selective control, and effective gate normalization. |
+| [Direct-comparison map](figures/evidence.svg) | Available comparison sets and their distinct numerical settings. |
 | [Timing decomposition](figures/timing.svg) | A constructed example separating rollout acceleration from iteration speedup. |
 
 All figures are available as scalable vector drawings. Numerical illustrations are explicitly labeled; no cross-paper leaderboard is inferred. See the [figure notes](docs/FIGURES.md) for their purposes and assumptions.
