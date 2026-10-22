@@ -95,7 +95,7 @@ The table identifies the selected evidence. Each following entry states its comp
 
 TRIAGE's average absolute gap, TRACE's extrema, QuRL's behavior-to-proximal KL, MIPU's sampled K3, and KV4-RL's paired full-distribution KL should not be ranked on a shared numerical axis. A useful synthesis follows a chain: **specified numerical disagreement → estimator or update effect → learned quality and total cost**. Each arrow requires its own evidence.
 
-This measurement map complements the [component taxonomy](TAXONOMY.md), [controlled comparison records](COMPARISONS.md), and [survey PDF](../Survey.pdf). Definitions and reported observations are taken from the reviewed versions in [the catalog](../data/papers.json); structured records are in [measurements.json](../data/measurements.json). No independent reproduction or universal mismatch score is claimed.
+This measurement map complements the [component taxonomy](TAXONOMY.md), [controlled comparison records](COMPARISONS.md), and [survey PDF](../Survey.pdf). Definitions and reported observations are taken from the reviewed versions in [the catalog](CATALOG.md); structured records are in [measurements.json](../data/measurements.json).
 
 ## Measurement practice: a reproducible report
 

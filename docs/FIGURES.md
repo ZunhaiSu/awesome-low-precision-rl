@@ -1,6 +1,6 @@
 # Figures and visual conventions
 
-Thirteen original vector figures connect the learning loop, method mechanisms and source-bound comparisons. Numerical examples are constructed illustrations; comparison sets retain their source configurations.
+The vector figures explain the learning loop, method mechanisms, and published comparisons. Numerical examples are constructed illustrations; comparison sets retain their source configurations.
 
 | Figure | Purpose | Interpretation |
 |---|---|---|
@@ -19,9 +19,5 @@ Thirteen original vector figures connect the learning loop, method mechanisms an
 | 13 · [Conditional and response probabilities](../figures/prefixes.svg) | Local conditionals and visited prefix mass, in Appendix C. | Exact two-step illustration. |
 
 Blue and teal identify numerical interventions; violet and amber identify estimation and update control. Slate identifies context and complementary scheduling. Labels, equations and line styles carry meaning independently of color.
-
-The original Charter-based paper template and contents typography are retained. The first-page overview is followed by the contents and main text. Figures are exported from the same embedded TikZ source as the manuscript.
-
-Figure labels and notes use a consistent sans-serif hierarchy with larger minimum text. The restrained blue, teal, violet and amber palette keeps the semantic classes readable on pale backgrounds; numerical examples and source comparisons retain distinct captions.
 
 Named studies in the taxonomy and comparison figures carry numbered citations matching the manuscript bibliography. Method-specific examples cite their conceptual sources while remaining labeled as constructed illustrations. Full titles and reviewed source versions are available in the [catalog](CATALOG.md).

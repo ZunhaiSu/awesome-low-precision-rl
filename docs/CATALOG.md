@@ -1,8 +1,8 @@
 # Reviewed paper catalog
 
-Generated from `data/papers.json`. Dates and versions identify the reviewed snapshot, not a claim that a source has never changed.
+Full titles, source versions, numerical regimes, and discussion locations for the surveyed contributions.
 
-The catalog separates contribution role, evidence domain, and numerical regime. No independent reproduction was performed for this survey; this status makes no claim about reproductions elsewhere. Code availability, seed counts, and experiment-level model/task coverage are not systematically audited here.
+Entries distinguish contribution roles, numerical regimes, and tested settings.
 
 ## Browse by intervention
 
@@ -50,7 +50,7 @@ Complementary scheduling, retained as a navigation topic rather than a fifth pri
 
 Authors: Feng Yao; Liyuan Liu; Dinghuai Zhang; Chengyu Dong; Jingbo Shang; Jianfeng Gao.
 
-First public: 2025 · Reviewed record: [OPT2025](https://www.opt-ml.org/papers/2025/paper116.pdf) · Source snapshot checked: 2026-10-19
+First public: 2025 · Source version: [OPT2025](https://www.opt-ml.org/papers/2025/paper116.pdf)
 
 - Numerical regime: Higher-precision learner; quantized rollout
 - Contribution role: core; evidence domain: direct_low_precision
@@ -66,7 +66,7 @@ First public: 2025 · Reviewed record: [OPT2025](https://www.opt-ml.org/papers/2
 
 Authors: Wei Huang; Yi Ge; Shuai Yang; Yicheng Xiao; Huizi Mao; Yujun Lin; Hanrong Ye; Sifei Liu; Ka Chun Cheung; Hongxu Yin; Yao Lu; Xiaojuan Qi; Song Han; Yukang Chen.
 
-First public: 2025-10-13 · Reviewed record: [ICLR2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html) · Source snapshot checked: 2026-10-20
+First public: 2025-10-13 · Source version: [ICLR2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f0663d1ba7db91103ac61c9-Abstract-Conference.html)
 
 - Numerical regime: NVFP4 with LoRA and adaptive noise
 - Contribution role: boundary; evidence domain: exploration_boundary
@@ -84,7 +84,7 @@ First public: 2025-10-13 · Reviewed record: [ICLR2026](https://proceedings.iclr
 
 Authors: Wenhan Ma; Hailin Zhang; Liang Zhao; Yifan Song; Yudong Wang; Zhifang Sui; Fuli Luo.
 
-First public: 2025-10-13 · Reviewed record: [v2](https://arxiv.org/abs/2510.11370v2) · Source snapshot checked: 2026-10-19
+First public: 2025-10-13 · Source version: [v2](https://arxiv.org/abs/2510.11370v2)
 
 - Numerical regime: MoE routing; general execution mismatch
 - Contribution role: support; evidence domain: general_TIM
@@ -102,7 +102,7 @@ First public: 2025-10-13 · Reviewed record: [v2](https://arxiv.org/abs/2510.113
 
 Authors: Penghui Qi; Zichen Liu; Xiangxin Zhou; Tianyu Pang; Chao Du; Wee Sun Lee; Min Lin.
 
-First public: 2025-10-30 · Reviewed record: [v1](https://arxiv.org/abs/2510.26788v1) · Source snapshot checked: 2026-10-19
+First public: 2025-10-30 · Source version: [v1](https://arxiv.org/abs/2510.26788v1)
 
 - Numerical regime: BF16 / FP16 numerical comparison
 - Contribution role: support; evidence domain: higher_precision_comparison
@@ -120,7 +120,7 @@ First public: 2025-10-30 · Reviewed record: [v1](https://arxiv.org/abs/2510.267
 
 Authors: Ziyang Zhang; Xinheng Ding; Jiayi Yuan; Rixin Liu; Huizi Mao; Jiarong Xing; Zirui Liu.
 
-First public: 2025-11-21 · Reviewed record: [v2](https://arxiv.org/abs/2511.17826v2) · Source snapshot checked: 2026-10-20
+First public: 2025-11-21 · Source version: [v2](https://arxiv.org/abs/2511.17826v2)
 
 - Numerical regime: BF16 / FP32; matched reduction order across TP sizes
 - Contribution role: support; evidence domain: general_TIM
@@ -138,7 +138,7 @@ First public: 2025-11-21 · Reviewed record: [v2](https://arxiv.org/abs/2511.178
 
 Authors: Chujie Zheng; Kai Dang; Bowen Yu; Mingze Li; Huiqiang Jiang; Junrong Lin; Yuqiong Liu; Hao Lin; Chencan Wu; Feng Hu; An Yang; Jingren Zhou; Junyang Lin.
 
-First public: 2025-12-01 · Reviewed record: [v3](https://arxiv.org/abs/2512.01374v3) · Source snapshot checked: 2026-10-19
+First public: 2025-12-01 · Source version: [v3](https://arxiv.org/abs/2512.01374v3)
 
 - Numerical regime: Hybrid-engine RL; includes FP8-rollout experiments
 - Contribution role: support; evidence domain: direct_low_precision
@@ -156,7 +156,7 @@ First public: 2025-12-01 · Reviewed record: [v3](https://arxiv.org/abs/2512.013
 
 Authors: Haocheng Xi; Charlie Ruan; Peiyuan Liao; Yujun Lin; Han Cai; Yilong Zhao; Shuo Yang; Kurt Keutzer; Song Han; Ligeng Zhu.
 
-First public: 2026-01-20 · Reviewed record: [v2](https://arxiv.org/abs/2601.14243v2) · Source snapshot checked: 2026-10-19
+First public: 2026-01-20 · Source version: [v2](https://arxiv.org/abs/2601.14243v2)
 
 - Numerical regime: Unified FP8 learner and rollout paths
 - Contribution role: core; evidence domain: direct_low_precision
@@ -174,7 +174,7 @@ First public: 2026-01-20 · Reviewed record: [v2](https://arxiv.org/abs/2601.142
 
 Authors: Zhaopeng Qiu; Shuang Yu; Jingqi Zhang; Shuai Zhang; Xue Huang; Jingyi Yang; Junjie Lai.
 
-First public: 2026-01-26 · Reviewed record: [v2](https://arxiv.org/abs/2601.18150v2) · Source snapshot checked: 2026-10-19
+First public: 2026-01-26 · Source version: [v2](https://arxiv.org/abs/2601.18150v2)
 
 - Numerical regime: W8A8 rollout; FP8 attention / KV; FP8 learner explored in v2
 - Contribution role: core; evidence domain: direct_low_precision
@@ -192,7 +192,7 @@ First public: 2026-01-26 · Reviewed record: [v2](https://arxiv.org/abs/2601.181
 
 Authors: Yaxiang Zhang; Yingru Li; Jiacai Liu; Jiawei Xu; Ziniu Li; Qian Liu; Haoyuan Li.
 
-First public: 2026-02-02 · Reviewed record: [v1](https://arxiv.org/abs/2602.01826v1) · Source snapshot checked: 2026-10-20
+First public: 2026-02-02 · Source version: [v1](https://arxiv.org/abs/2602.01826v1)
 
 - Numerical regime: General TIM; optimization scheduling
 - Contribution role: support; evidence domain: general_TIM
@@ -210,7 +210,7 @@ First public: 2026-02-02 · Reviewed record: [v1](https://arxiv.org/abs/2602.018
 
 Authors: Penghui Qi; Xiangxin Zhou; Zichen Liu; Tianyu Pang; Chao Du; Min Lin; Wee Sun Lee.
 
-First public: 2026-02-04 · Reviewed record: [v3](https://arxiv.org/abs/2602.04879v3) · Source snapshot checked: 2026-10-20
+First public: 2026-02-04 · Source version: [v3](https://arxiv.org/abs/2602.04879v3)
 
 - Numerical regime: General LLM trust-region and cross-engine mismatch evidence
 - Contribution role: support; evidence domain: general_TIM
@@ -228,7 +228,7 @@ First public: 2026-02-04 · Reviewed record: [v3](https://arxiv.org/abs/2602.048
 
 Authors: Yuhang Li; Reena Elangovan; Xin Dong; Priyadarshini Panda; Brucek Khailany.
 
-First public: 2026-02-15 · Reviewed record: [ICLR2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html) · Source snapshot checked: 2026-10-20
+First public: 2026-02-15 · Source version: [ICLR2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html)
 
 - Numerical regime: INT8 / FP8 rollout
 - Contribution role: core; evidence domain: direct_low_precision
@@ -246,7 +246,7 @@ First public: 2026-02-15 · Reviewed record: [ICLR2026](https://proceedings.iclr
 
 Authors: Hao Gu; Hao Wang; Jiacheng Liu; Lujun Li; Qiyuan Zhu; Bei Liu; Binxing Xu; Lei Wang; Xintong Yang; Sida Lin; Sirui Han; Yike Guo.
 
-First public: 2026-04-09 · Reviewed record: [ACL2026-Findings](https://aclanthology.org/2026.findings-acl.841/) · Source snapshot checked: 2026-10-19
+First public: 2026-04-09 · Source version: [ACL2026-Findings](https://aclanthology.org/2026.findings-acl.841/)
 
 - Numerical regime: Quantized MoE rollout; aligned learner QAT
 - Contribution role: core; evidence domain: direct_low_precision
@@ -264,7 +264,7 @@ First public: 2026-04-09 · Reviewed record: [ACL2026-Findings](https://aclantho
 
 Authors: Rasool Fakoor; Murdock Aubry; Nicholas Stranges; Alexander J. Smola.
 
-First public: 2026-05-12 · Reviewed record: [v2](https://arxiv.org/abs/2605.12380v2) · Source snapshot checked: 2026-10-20
+First public: 2026-05-12 · Source version: [v2](https://arxiv.org/abs/2605.12380v2)
 
 - Numerical regime: BF16 learner / FP8 rollout; dense reasoning models
 - Contribution role: core; evidence domain: direct_low_precision
@@ -282,7 +282,7 @@ First public: 2026-05-12 · Reviewed record: [v2](https://arxiv.org/abs/2605.123
 
 Authors: Jiajun Zhou; Wei Shao; Lingchao Zheng; Yuwei Fan; Ngai Wong.
 
-First public: 2026-05-13 · Reviewed record: [v1](https://arxiv.org/abs/2605.13907v1) · Source snapshot checked: 2026-10-19
+First public: 2026-05-13 · Source version: [v1](https://arxiv.org/abs/2605.13907v1)
 
 - Numerical regime: BF16 learner / FP8 rollout; autoregressive and diffusion models
 - Contribution role: core; evidence domain: direct_low_precision
@@ -300,7 +300,7 @@ First public: 2026-05-13 · Reviewed record: [v1](https://arxiv.org/abs/2605.139
 
 Authors: Tianle Zhong; Neiwen Ling; Yifan Pi; Zijun Wei; Tianshu Yu; Geoffrey Fox; Peng Wu; Xiao Yu.
 
-First public: 2026-05-14 · Reviewed record: [v2](https://arxiv.org/abs/2605.14220v2) · Source snapshot checked: 2026-10-20
+First public: 2026-05-14 · Source version: [v2](https://arxiv.org/abs/2605.14220v2)
 
 - Numerical regime: Matched-execution diagnostic reference
 - Contribution role: support; evidence domain: diagnostic_reference
@@ -318,7 +318,7 @@ First public: 2026-05-14 · Reviewed record: [v2](https://arxiv.org/abs/2605.142
 
 Authors: Jiarui Yao; Xiangxin Zhou; Penghui Qi; Wee Sun Lee; Liefeng Bo; Tianyu Pang.
 
-First public: 2026-06-08 · Reviewed record: [v1](https://arxiv.org/abs/2606.09821v1) · Source snapshot checked: 2026-10-20
+First public: 2026-06-08 · Source version: [v1](https://arxiv.org/abs/2606.09821v1)
 
 - Numerical regime: BF16, FP8 rollout-only, and FP8 end-to-end MoE settings
 - Contribution role: core; evidence domain: direct_low_precision
@@ -336,7 +336,7 @@ First public: 2026-06-08 · Reviewed record: [v1](https://arxiv.org/abs/2606.098
 
 Authors: Jing Liang; Hongyao Tang; Yi Ma; Yancheng He; Weixun Wang; Xiaoyang Li; Ju Huang; Wenbo Su; Jinyi Liu; Yan Zheng; Jianye Hao; Bo Zheng.
 
-First public: 2026-06-28 · Reviewed record: [v1](https://arxiv.org/abs/2606.29526v1) · Source snapshot checked: 2026-10-20
+First public: 2026-06-28 · Source version: [v1](https://arxiv.org/abs/2606.29526v1)
 
 - Numerical regime: BF16 learner / FP8 rollout; Qwen3-1.7B and 4B
 - Contribution role: core; evidence domain: direct_low_precision
@@ -354,7 +354,7 @@ First public: 2026-06-28 · Reviewed record: [v1](https://arxiv.org/abs/2606.295
 
 Authors: Zhengyang Zhuge; Hao Yu; Xin Wang; Zheng Li; Yizhong Cao; Dayiheng Liu; Jianwei Zhang.
 
-First public: 2026-07-17 · Reviewed record: [v1](https://arxiv.org/abs/2607.15810v1) · Source snapshot checked: 2026-10-19
+First public: 2026-07-17 · Source version: [v1](https://arxiv.org/abs/2607.15810v1)
 
 - Numerical regime: NVFP4 MoE rollout; learner weight QAT
 - Contribution role: core; evidence domain: direct_low_precision
@@ -372,7 +372,7 @@ First public: 2026-07-17 · Reviewed record: [v1](https://arxiv.org/abs/2607.158
 
 Authors: Wenwu Fan; Qihong Lin; Zhijie Xia; Zhuo Zheng; Sihao Wang; Qiang Chen; Liangsheng Zhu.
 
-First public: 2026-07-27 · Reviewed record: [v1](https://arxiv.org/abs/2607.24062v1) · Source snapshot checked: 2026-10-19
+First public: 2026-07-27 · Source version: [v1](https://arxiv.org/abs/2607.24062v1)
 
 - Numerical regime: FP8 rollout; discrepancy-dependent updates
 - Contribution role: core; evidence domain: direct_low_precision
@@ -390,7 +390,7 @@ First public: 2026-07-27 · Reviewed record: [v1](https://arxiv.org/abs/2607.240
 
 Authors: Hei Yi Mak; Shadan Golestan; Hoang Le; Mehran Taghian Jazi; Yunke Peng; Yaoyuan Wang; Yao Wang; Junsong Wang; Tianchi Hu; Fengchen He; Guipeng Hu; Tanzila Rahman; Anandharaju Durai Raju.
 
-First public: 2026-07-29 · Reviewed record: [v1](https://arxiv.org/abs/2607.26515v1) · Source snapshot checked: 2026-10-20
+First public: 2026-07-29 · Source version: [v1](https://arxiv.org/abs/2607.26515v1)
 
 - Numerical regime: Simulated end-to-end HiF4 / MXFP4; rollout residual correction
 - Contribution role: core; evidence domain: direct_low_precision
@@ -408,7 +408,7 @@ First public: 2026-07-29 · Reviewed record: [v1](https://arxiv.org/abs/2607.265
 
 Authors: RadixArk; Tom Chen; Mao Cheng; Shi Dong; Kangrui Du; Yanbin Jiang; Jiajun Li; Yiming Li; Tao Lin; Yusheng Su; Andy Ye; Yueming Yuan; Zhichen Zeng.
 
-First public: 2026-09-08 · Reviewed record: [v1](https://arxiv.org/abs/2609.08368v1) · Source snapshot checked: 2026-10-20
+First public: 2026-09-08 · Source version: [v1](https://arxiv.org/abs/2609.08368v1)
 
 - Numerical regime: FP8 / MXFP8 / NVFP4 RL recipes; precision exceptions
 - Contribution role: core; evidence domain: direct_low_precision
@@ -426,7 +426,7 @@ First public: 2026-09-08 · Reviewed record: [v1](https://arxiv.org/abs/2609.083
 
 Authors: Martin Marek; Max Ryabinin.
 
-First public: 2026-09-17 · Reviewed record: [v1](https://arxiv.org/abs/2609.20807v1) · Source snapshot checked: 2026-10-21
+First public: 2026-09-17 · Source version: [v1](https://arxiv.org/abs/2609.20807v1)
 
 - Numerical regime: BF16 learner; quantized sampler including FP4/INT4 KV variants; separate policy-lag tests
 - Contribution role: core; evidence domain: direct_low_precision
@@ -444,7 +444,7 @@ First public: 2026-09-17 · Reviewed record: [v1](https://arxiv.org/abs/2609.208
 
 Authors: Fanchao Chen; Ziheng Jiang; Ziyun Wei; Zheng Zhong; Du Li; Chi Zhang; Haibin Lin; Shivaram Venkataraman.
 
-First public: 2026-09-19 · Reviewed record: [v1](https://arxiv.org/abs/2609.22870v1) · Source snapshot checked: 2026-10-19
+First public: 2026-09-19 · Source version: [v1](https://arxiv.org/abs/2609.22870v1)
 
 - Numerical regime: FP8 learner and rollout; calibration against BF16
 - Contribution role: core; evidence domain: direct_low_precision
@@ -462,7 +462,7 @@ First public: 2026-09-19 · Reviewed record: [v1](https://arxiv.org/abs/2609.228
 
 Authors: Tianrun Yu; Kaixiang Zhao; Shangzhe Li; Yuxiao Yang; Porter Jenkins; Weitong Zhang; Taylor W. Killian.
 
-First public: 2026-09-26 · Reviewed record: [v1](https://arxiv.org/abs/2609.32444v1) · Source snapshot checked: 2026-10-20
+First public: 2026-09-26 · Source version: [v1](https://arxiv.org/abs/2609.32444v1)
 
 - Numerical regime: BF16 cross-engine mismatch
 - Contribution role: support; evidence domain: general_TIM
@@ -480,7 +480,7 @@ First public: 2026-09-26 · Reviewed record: [v1](https://arxiv.org/abs/2609.324
 
 Authors: Weili Xu; Jisen Li; Yuqing Jian; Chenxi Li; Zhizhou Sha; Yifan Yu; Qingyang Wu; Chenfeng Xu; Zhongzhu Zhou; Tianyi Zhang; Ben Athiwaratkun.
 
-First public: 2026-09-30 · Reviewed record: [v2](https://arxiv.org/abs/2609.39223v2) · Source snapshot checked: 2026-10-20
+First public: 2026-09-30 · Source version: [v2](https://arxiv.org/abs/2609.39223v2)
 
 - Numerical regime: Native NVFP4 rollout; simulated-quantization BF16 training
 - Contribution role: core; evidence domain: direct_low_precision
@@ -498,7 +498,7 @@ First public: 2026-09-30 · Reviewed record: [v2](https://arxiv.org/abs/2609.392
 
 Authors: Zhen Li; Shuai Zhang; Yanggan Gu; Yiming Zhang; Yang Yu; Mingfa Feng; Congkai Xie; Shuang Yu; Junjie Lai; Hongxia Yang.
 
-First public: 2026-10-05 · Reviewed record: [v2](https://arxiv.org/abs/2610.07043v2) · Source snapshot checked: 2026-10-21
+First public: 2026-10-05 · Source version: [v2](https://arxiv.org/abs/2610.07043v2)
 
 - Numerical regime: Native NVFP4 W4A4 forward on both endpoints; documented BF16 KV; synchronous math RL
 - Contribution role: core; evidence domain: direct_low_precision
@@ -516,7 +516,7 @@ First public: 2026-10-05 · Reviewed record: [v2](https://arxiv.org/abs/2610.070
 
 Authors: Xin Wang; Hao Yu; Zhengyang Zhuge; Bochao Mao; Zheng Li; Junda Feng; Yuyan Luo; Yi Zhang; Yizhong Cao; Mi Zhang; Dayiheng Liu; Jianwei Zhang.
 
-First public: 2026-10-06 · Reviewed record: [v2](https://arxiv.org/abs/2610.07767v2) · Source snapshot checked: 2026-10-21
+First public: 2026-10-06 · Source version: [v2](https://arxiv.org/abs/2610.07767v2)
 
 - Numerical regime: NVFP4 expert W4A4 + softmax KV4 rollout; guided fake-quantized learner forward, BF16 backward; asynchronous
 - Contribution role: core; evidence domain: direct_low_precision
@@ -534,7 +534,7 @@ First public: 2026-10-06 · Reviewed record: [v2](https://arxiv.org/abs/2610.077
 
 Authors: Sihwan Park; Sung-Yub Kim; Doohyuk Jang; Eunho Yang.
 
-First public: 2026-10-10 · Reviewed record: [v1](https://arxiv.org/abs/2610.14448v1) · Source snapshot checked: 2026-10-21
+First public: 2026-10-10 · Source version: [v1](https://arxiv.org/abs/2610.14448v1)
 
 - Numerical regime: BF16 learner; INT4 KV with bounded INT8 protection; quota-based partial collection
 - Contribution role: core; evidence domain: direct_low_precision
@@ -552,7 +552,7 @@ First public: 2026-10-10 · Reviewed record: [v1](https://arxiv.org/abs/2610.144
 
 Authors: Shuo Han; Ziqing Hu.
 
-First public: 2026-10-15 · Reviewed record: [v1](https://arxiv.org/abs/2610.22263v1) · Source snapshot checked: 2026-10-20
+First public: 2026-10-15 · Source version: [v1](https://arxiv.org/abs/2610.22263v1)
 
 - Numerical regime: Sequence- and token-level regularized importance sampling
 - Contribution role: support; evidence domain: general_TIM

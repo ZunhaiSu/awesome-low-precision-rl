@@ -1,8 +1,8 @@
 # Source-linked qualitative evidence
 
-Generated from `data/evidence.json` and `data/papers.json`. These records cover all nineteen core studies. Supporting and boundary studies remain in the [complete catalog](CATALOG.md); their role does not imply an absence of low-precision experiments.
+Published findings from the nineteen core studies, with their numerical regimes and primary-source locations.
 
-Observations retain their source setting and interpretive limit. They are not quality grades, pooled estimates, or independent replications. A source section is a locator within the linked reviewed source; a survey discussion number is a different field.
+Read each outcome under the stated configuration and evaluation rule. Findings from different settings are not pooled.
 
 | Study / reviewed regime | Source observation | Interpretive limit | Primary source / location |
 |---|---|---|---|
@@ -25,5 +25,3 @@ Observations retain their source setting and interpretive limit. They are not qu
 | **HiFloat4 / Rollout-ResQ**<br>[HiFloat4 Format for End-To-End Reinforcement Learning Post-Training of Large Language Models](https://arxiv.org/abs/2607.26515v1)<br>Simulated end-to-end HiF4 / MXFP4; rollout residual correction | Precision ablations identify rollout activation underflow as a key failure source; sparse residual correction improves the evaluated FP4 RL accuracy. | All FP4 experiments use simulation. Hardware-friendly sparsity and overhead analysis do not establish measured native-FP4 speedup. | [Source](https://arxiv.org/abs/2607.26515v1)<br>Sections 4.2-4.3 and 5; Section 6 limitations |
 | **Miles v0.1**<br>[Miles v0.1: Production-Level Post-Training](https://arxiv.org/abs/2609.08368v1)<br>FP8 / MXFP8 / NVFP4 RL recipes; precision exceptions | The system coordinates checkpoint conversion, learner forward, rollout, and weight export under common quantization rules, with explicit high-precision exceptions. | Recipe-level integration is not isolated evidence for every component; MXFP8/NVFP4 are marked Beta and tested model/hardware coverage is bounded. | [Source](https://arxiv.org/abs/2609.08368v1)<br>Sections 3.1, 4, 5.3, and 9 |
 | **QATFactory / QARL**<br>[QATFactory: A Versatile, Deployment-Aligned Framework for Quantization-aware Training and Distillation of LLMs](https://arxiv.org/abs/2609.39223v2)<br>Native NVFP4 rollout; simulated-quantization BF16 training | On Qwen3-8B-Base, native NVFP4 rollout with simulated-quantization training improves quantized endpoint quality over post-RL RTN and reduces measured step time. | QARL evidence must be separated from the larger QAD study; the training matmuls run in BF16 and this is not native FP4 training. | [Source](https://arxiv.org/abs/2609.39223v2)<br>Sections 3.4-3.5 and 4.6 |
-
-Statistical reporting and external replication have not been exhaustively extracted. Missing metadata is unassessed, rather than a negative experimental finding.

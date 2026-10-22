@@ -7,8 +7,7 @@
 
 <p align="center">
   <strong>Zunhai Su<sup>1</sup> · Wei Wu<sup>2</sup> · Jianchao Tan<sup>2</sup> · Ngai Wong<sup>1</sup></strong><br>
-  <sup>1</sup>The University of Hong Kong &nbsp;·&nbsp; <sup>2</sup>Meituan<br>
-  Literature snapshot: <strong>20 October 2026</strong> · Editorial update: 22 October 2026
+  <sup>1</sup>The University of Hong Kong &nbsp;·&nbsp; <sup>2</sup>Meituan
 </p>
 
 <p align="center">
@@ -234,7 +233,6 @@ Use the citation below or GitHub's **Cite this repository** control, which uses 
   title  = {Training--Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey},
   author = {Su, Zunhai and Wu, Wei and Tan, Jianchao and Wong, Ngai},
   year   = {2026},
-  note   = {Working manuscript},
   url    = {https://github.com/ZunhaiSu/awesome-low-precision-rl}
 }
 ```
@@ -243,10 +241,8 @@ Use the citation below or GitHub's **Cite this repository** control, which uses 
 
 Propose a missing paper, correct a technical claim, or discuss a research collaboration through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues). Primary sources and precise section/equation references make corrections especially useful. See [contribution guidance](CONTRIBUTING.md) for catalog fields, evidence records, and version handling.
 
-## Template, status, and license
+## Attribution and license
 
 The paper adapts the **typesetting template** from [arXiv:2601.14004v4](https://arxiv.org/abs/2601.14004v4); its scientific framework is specific to this survey. Attribution and modifications are documented in [TEMPLATE.md](docs/TEMPLATE.md).
-
-[Source versions](docs/CATALOG.md), [research perspective](docs/ASSESSMENT.md), and [manuscript validation](docs/BUILD.md) accompany the survey.
 
 The survey PDF, repository content, and template adaptations use [CC BY-SA 4.0](LICENSE). Third-party papers retain their own licenses. The [reading library](papers/README.md) provides 11 explicitly licensed PDF mirrors and 18 official-source links, with attribution and version records in [NOTICES](papers/NOTICES.md) and the [manifest](papers/manifest.json).

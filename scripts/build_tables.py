@@ -50,8 +50,8 @@ def generate():
     readme = before + START + '\n\n' + '\n'.join(catalog) + '\n' + END + after
 
     full = ['# Reviewed paper catalog', '',
-            'Generated from `data/papers.json`. Dates and versions identify the reviewed snapshot, not a claim that a source has never changed.', '',
-            'The catalog separates contribution role, evidence domain, and numerical regime. No independent reproduction was performed for this survey; this status makes no claim about reproductions elsewhere. Code availability, seed counts, and experiment-level model/task coverage are not systematically audited here.', '']
+            'Full titles, source versions, numerical regimes, and discussion locations for the surveyed contributions.', '',
+            'Entries distinguish contribution roles, numerical regimes, and tested settings.', '']
     full += ['## Browse by intervention', '',
              '[Chronological records](#chronological-records) · [Evidence synthesis](EVIDENCE.md) · [Classification rules](TAXONOMY.md)', '',
              'A work can appear in several component classes. Supporting studies are labeled explicitly; diagnostics and the exploration boundary remain in the chronological records.', '']
@@ -69,7 +69,7 @@ def generate():
     for r in sorted(rows, key=lambda r: r['first_publication']):
         full += [f'<a id="paper-{r["key"]}"></a>', '', f"### {r['name']}", '', f"**{title_link(r)}**", '',
                  'Authors: ' + '; '.join(author_name(x) for x in r['authors']) + '.', '',
-                 f"First public: {r['first_publication']} · Reviewed record: [{r['reviewed_version']}]({source(r)}) · Source snapshot checked: {r['checked_date']}", '',
+                 f"First public: {r['first_publication']} · Source version: [{r['reviewed_version']}]({source(r)})", '',
                  f"- Numerical regime: {r['regime']}",
                  f"- Contribution role: {r['role']}; evidence domain: {r['evidence_domain']}",
                  f"- Components: {r['categories']}",
@@ -79,15 +79,14 @@ def generate():
             full += [f"[arXiv record]({r['arxiv_url']}) · [Publication/source]({r['publication_url']})", '']
 
     detail = ['# Source-linked qualitative evidence', '',
-              'Generated from `data/evidence.json` and `data/papers.json`. These records cover all nineteen core studies. Supporting and boundary studies remain in the [complete catalog](CATALOG.md); their role does not imply an absence of low-precision experiments.', '',
-              'Observations retain their source setting and interpretive limit. They are not quality grades, pooled estimates, or independent replications. A source section is a locator within the linked reviewed source; a survey discussion number is a different field.', '',
+              'Published findings from the nineteen core studies, with their numerical regimes and primary-source locations.', '',
+              'Read each outcome under the stated configuration and evaluation rule. Findings from different settings are not pooled.', '',
               '| Study / reviewed regime | Source observation | Interpretive limit | Primary source / location |',
               '|---|---|---|---|']
     for e in evidence['observations']:
         r = by_key[e['key']]
         detail.append(f"| **{cell(r['name'])}**<br>{title_link(r)}<br>{cell(r['regime'])} | {cell(e['observation'])} | "
                       f"{cell(e['limit'])} | [Source]({e['url']})<br>{cell(e['locator'])} |")
-    detail += ['', 'Statistical reporting and external replication have not been exhaustively extracted. Missing metadata is unassessed, rather than a negative experimental finding.', '']
     status = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570 30" role="img" aria-labelledby="title desc">
 <title id="title">Research survey · {len(rows)} focal studies · CC BY-SA 4.0</title>
 <desc id="desc">Research status, catalog size, and repository license.</desc>

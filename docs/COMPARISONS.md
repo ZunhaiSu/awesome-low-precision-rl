@@ -2,7 +2,7 @@
 
 A method class describes what an intervention changes. Its experimental configuration describes where the source tested it. These selected records keep the two separate.
 
-Literature snapshot: **20 October 2026**. The cases below are source-reported observations, not independent reproductions or a cross-paper leaderboard.
+The comparisons retain the numerical configurations, baselines, and evaluation rules reported in each primary study.
 
 ## Execution configurations
 
@@ -67,6 +67,6 @@ Literature snapshot: **20 October 2026**. The cases below are source-reported ob
 | Held-out quality | Requires the evaluation precision, decoding and checkpoint rule. A common BF16 evaluator and a deployed low-precision evaluator answer different questions. |
 | Rollout and iteration time | Different timing scopes. Generation length, concurrency, synchronization and guidance can affect total cost. |
 
-The mechanism and evidence tables support a focused narrative survey. A controlled benchmark and any proposed predictive metric require additional experiments; neither is claimed by these records.
+Interpret outcomes under their stated execution and evaluation conditions. Checkpoint selection and timing scope can change the comparison.
 
 [Survey PDF](../Survey.pdf) · [Full catalog](CATALOG.md) · [Source observations](EVIDENCE.md) · [Classification](TAXONOMY.md)
