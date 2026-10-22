@@ -73,7 +73,7 @@ Appendices collect the paper mapping, source selection, assumptions, terminology
 
 <img src="figures/timeline.svg" alt="Research timeline of representative quantized-rollout methods, with author institutions and a curved chronological spine" width="100%">
 
-Representative milestones follow first public release. Marks identify author institutions, with up to three per work. The [figure notes](docs/FIGURES.md#timeline-affiliations-and-organization-marks) give affiliations and mark sources; the [paper catalog](#paper-catalog) provides complete titles and links.
+Representative milestones follow first public release; chronology does not imply direct technical inheritance. Brief labels highlight selected mechanisms, while marks identify author institutions or teams, with up to three per work. The [figure notes](docs/FIGURES.md#timeline-affiliations-and-organization-marks) give affiliations and mark sources; the [paper catalog](#paper-catalog) provides complete titles and links.
 
 ## Taxonomy
 

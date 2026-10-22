@@ -1,5 +1,5 @@
 {
-  "scope": "Representative milestones in direct quantized-rollout methods, with FlashRL/TIS as an estimator foundation and QeRL as an exploration boundary. A curved spine shows grouped chronology; branch spacing is adjusted for readability and does not encode influence or performance.",
+  "scope": "Representative milestones in direct quantized-rollout methods, with FlashRL/TIS as an estimator foundation and QeRL as an exploration boundary. Brief labels highlight five selected mechanisms. A curved spine shows grouped chronology; branch spacing is adjusted for readability and does not encode influence or performance.",
   "date_convention": "First public release from the canonical paper catalog; an undated workshop source is identified only by year.",
   "affiliation_convention": "Every listed author institution is retained in text; up to three marks follow the first-page institution order. Independent researchers are identified in text.",
   "institutions": {
@@ -130,7 +130,7 @@
       "group": 0,
       "row": 0,
       "components": "B1",
-      "mechanism_label": "Likelihoods",
+      "mechanism_label": "Behavior correction",
       "affiliations": [
         "microsoft",
         "ucsd",
@@ -142,7 +142,8 @@
         "mila"
       ],
       "affiliation_label": "MSR, UCSD, Mila",
-      "independent_researcher": false
+      "independent_researcher": false,
+      "display_mechanism_label": true
     },
     {
       "key": "qerl",
@@ -219,7 +220,7 @@
       "group": 1,
       "row": 2,
       "components": "A2/B2",
-      "mechanism_label": "Visible updates",
+      "mechanism_label": "Update visibility",
       "affiliations": [
         "nvidia",
         "yale",
@@ -231,7 +232,8 @@
         "usc"
       ],
       "affiliation_label": "NVIDIA, Yale, USC",
-      "independent_researcher": false
+      "independent_researcher": false,
+      "display_mechanism_label": true
     },
     {
       "key": "qarl",
@@ -393,7 +395,8 @@
         "nvidia"
       ],
       "affiliation_label": "InfiX.ai, NVIDIA",
-      "independent_researcher": false
+      "independent_researcher": false,
+      "display_mechanism_label": true
     },
     {
       "key": "trace",
@@ -404,7 +407,7 @@
       "group": 5,
       "row": 1,
       "components": "A1",
-      "mechanism_label": "Guided rounding",
+      "mechanism_label": "Rounding alignment",
       "affiliations": [
         "alibaba",
         "osu"
@@ -414,7 +417,8 @@
         "osu"
       ],
       "affiliation_label": "Alibaba Token Hub\nOhio State",
-      "independent_researcher": false
+      "independent_researcher": false,
+      "display_mechanism_label": true
     },
     {
       "key": "kv4",
@@ -425,7 +429,7 @@
       "group": 5,
       "row": 2,
       "components": "A2",
-      "mechanism_label": "KV protection",
+      "mechanism_label": "Cache fidelity",
       "affiliations": [
         "kaist",
         "naver",
@@ -437,7 +441,8 @@
         "aitrics"
       ],
       "affiliation_label": "KAIST, NAVER Cloud\nAITRICS",
-      "independent_researcher": false
+      "independent_researcher": false,
+      "display_mechanism_label": true
     }
   ]
 }

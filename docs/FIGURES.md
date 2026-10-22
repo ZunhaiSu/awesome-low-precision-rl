@@ -5,7 +5,7 @@ The figures separate field organization, learning mechanisms, measurement practi
 | Figure | Purpose | Interpretation |
 |---|---|---|
 | 1 · [Survey at a glance](../figures/overview.svg) | The rollout–learning loop, the A/B families, and four assessment levels. | Conceptual synthesis. |
-| 2 · [Research timeline](../figures/timeline.svg) | Representative methods in publication order, paired with author institutions. | Grouped first public release; all institution names and at most three marks per work. |
+| 2 · [Research timeline](../figures/timeline.svg) | Representative methods in publication order, paired with author institutions. | Grouped first public release; selected mechanism labels, all institution names, and at most three marks per work. |
 | 3 · [Policy identities](../figures/policies.svg) | Learner, sampling snapshot, actual behavior, proximal anchor, and KL reference. | A ratio decomposition at a fixed token and history, rather than a data-flow diagram. |
 | 4 · [Component taxonomy](../figures/taxonomy.svg) | All focal works mapped to four intervention classes, with scheduling and supporting roles separate. | A component map; papers can contribute to several classes. |
 | 5 · [Mismatch-to-learning mechanisms](../figures/mechanisms.svg) | Relative influence, conditional score drift, update decisions, and subsequent feedback. | Representative method responses are linked to the mechanisms they address. |
@@ -19,7 +19,7 @@ The figures separate field organization, learning mechanisms, measurement practi
 | 13 · [Signed clipping](../figures/clipping.svg) | Positive and negative advantages have opposite active clipping boundaries. | Constructed surrogate with epsilon 0.2 and advantages ±1; Appendix F. |
 | 14 · [Score centering](../figures/centering.svg) | A behavior-weighted scalar score mean becomes zero. | Exact two-action example; Appendix F. |
 
-In the mechanism and taxonomy figures, blue and teal identify numerical interventions; violet and amber identify estimation and update control. Slate denotes context or complementary mechanisms. Labels and line styles carry meaning independently of color. The timeline uses pale yellow method labels and blue calendar nodes.
+In the mechanism and taxonomy figures, blue and teal identify numerical interventions; violet and amber identify estimation and update control. Slate denotes context or complementary mechanisms. Labels and line styles carry meaning independently of color. The timeline uses pale yellow method labels and blue calendar nodes. All scientific figures use Charter text, with consistent heading, body, and annotation styles; mathematical notation follows the manuscript. Smaller affiliation marks remain secondary to method names. Chronological proximity does not assert technical inheritance.
 
 Named studies carry citations matching the manuscript bibliography. The [catalog](CATALOG.md) gives complete titles and reviewed versions; the [timeline records](../data/timeline.json) give dates, affiliations, and source locations.
 
