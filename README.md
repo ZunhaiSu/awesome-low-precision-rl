@@ -29,7 +29,7 @@ Quantized rollout changes the policy that generates training experience. This su
 
 [Mechanisms and background](#reading-routes) · [Interventions](#taxonomy) · [Measurement practice](docs/MEASUREMENTS.md) · [Source-linked evidence](docs/EVIDENCE.md)
 
-For the papers themselves, use the [core reading route](papers/README.md#core-reading) across the two topic folders. **Score Centering is a core B1 method**, alongside TIS and AIS; folder placement is independent of its role in the survey.
+Use the [core reading route](papers/README.md#core-reading) across both topic folders. Folder placement describes the paper's topic; core and supporting roles describe its contribution to the survey.
 
 **New to the topic?** Start with the GRPO example in §2.1: rewards → group advantages → policy ratios and clipping → update → quantized synchronization. Section 2.4 explains W/A/KV targets, QAT, and native arithmetic.
 
@@ -76,7 +76,7 @@ Appendix A summarizes all twenty-nine focal works; Appendices B–C describe sou
 
 Read each work through three complementary views: **mismatch source → intervention target → tested setting**. The source explains why probabilities differ; the target determines the method class; the setting conditions its evidence.
 
-Four primary classes describe the **component being changed**, so a paper may contribute to several classes.
+**A · Numerical design** addresses mismatch at its computational source: align the two paths (A1), or preserve numerical fidelity and update resolution (A2). **B · Learning under residual mismatch** manages its effect on learning: correct gradient estimation (B1), or control update influence and acceptance (B2). B can preserve useful learning without shrinking the policy gap. The families can be combined within one system.
 
 | Code | Intervention | Main discussion | Representative components |
 |---|---|---|---|

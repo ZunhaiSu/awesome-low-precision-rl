@@ -13,7 +13,7 @@ Thirteen original vector figures connect the learning loop, method mechanisms an
 | 7 · [Rollout-guided rounding](../figures/rounding.svg) | Learner 0.74 and rollout 0.76 on a fixed E2M1 interval. | Constructed example separating agreement from per-path error. |
 | 8 · [Update visibility](../figures/quantization.svg) | Quantization-boundary crossings can differ from update magnitude. | Fixed-step scalar quantizer, avoiding ties. |
 | 9 · [Score centering](../figures/centering.svg) | A behavior-weighted score mean of 0.3 becomes zero. | Exact two-action scalar-logit example. |
-| 10 · [Learning operators](../figures/operators.svg) | Estimator correction, TRIAGE eligibility and normalized gate influence. | Local rules and illustrative raw weights. |
+| 10 · [Learning operators](../figures/operators.svg) | Estimator correction, TRIAGE eligibility and normalized gate influence. | Local sign guide with segment conditions; repair covers all valid tokens in eligible positive-advantage segments. Raw weights are illustrative. |
 | 11 · [Comparison graphs](../figures/evidence.svg) | Separate TRACE and TRIAGE comparison graphs. | Edges mark direct comparisons; no cross-study ordering. |
 | 12 · [Serialized timing](../figures/timing.svg) | Faster generation and added work affect total iteration time. | Constructed example with rollout share 0.6 and speedup 2. |
 | 13 · [Conditional and response probabilities](../figures/prefixes.svg) | Local conditionals and visited prefix mass, in Appendix C. | Exact two-step illustration. |
@@ -23,3 +23,5 @@ Blue and teal identify numerical interventions; violet and amber identify estima
 The original Charter-based paper template and contents typography are retained. The first-page overview is followed by the contents and main text. Figures are exported from the same embedded TikZ source as the manuscript.
 
 Figure labels and notes use a consistent sans-serif hierarchy with larger minimum text. The restrained blue, teal, violet and amber palette keeps the semantic classes readable on pale backgrounds; numerical examples and source comparisons retain distinct captions.
+
+Named studies in the taxonomy and comparison figures carry numbered citations matching the manuscript bibliography. Method-specific examples cite their conceptual sources while remaining labeled as constructed illustrations. Full titles and reviewed source versions are available in the [catalog](CATALOG.md).

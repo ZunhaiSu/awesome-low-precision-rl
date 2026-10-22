@@ -2,7 +2,9 @@
 
 Three views describe a contribution: **mismatch source** (why probabilities differ), **intervention target** (what the component changes), and **execution setting** (where the source tested it). Numerical execution, routing and lag are source descriptions; W/A/KV precision, adaptation and collection are setting axes. They are not peer method classes.
 
-The unit of method classification is a component. Four primary classes follow the object directly changed:
+**A addresses the numerical source; B manages the learning consequences.** A changes how a policy is numerically evaluated or how parameter changes survive quantization. B changes how collected experience forms, constrains, or passes acceptance for an update while mismatch remains. B can correct gradient drift or preserve useful updates without forcing learner and sampler probabilities to agree.
+
+These are intervention targets, so numerical design can act on the learner, sampler, or both. A and B components can operate together; the distinction is not a division between training and inference. Four primary classes refine these targets:
 
 | Class | Direct target | Assignment rule |
 |---|---|---|
