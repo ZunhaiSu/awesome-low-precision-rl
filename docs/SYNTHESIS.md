@@ -22,7 +22,7 @@ Shared granularity does not imply shared estimators, and complementary targets d
 
 ## Studied combinations
 
-The following bundles are discussed in the reviewed primary sources. They illustrate mechanistic complementarity without establishing that any component can be swapped into another system unchanged.
+The studied combinations link complementary intervention targets. Their compatibility depends on the behavior information, weighting, and numerical interfaces used in each system.
 
 | Study and complete title | Components used together | Why the combination matters |
 |---|---|---|
@@ -37,7 +37,7 @@ The following bundles are discussed in the reviewed primary sources. They illust
 
 A controlled shared-prefix probe can locate conditional numerical disagreement. An online learner–behavior curve measures the discrepancy encountered during learning, potentially including parameter lag. An update audit asks which clipping branches, signed contributions, or candidate decisions change. Held-out quality and total cost establish whether that mechanism matters for useful learning.
 
-These roles explain why a smaller average gap, higher empirical ESS, or lower clipping fraction is not a sufficient endpoint. A control signal can be reduced by selection; a capped-weight ESS can rise because the cap removed its tail; a stable run can still learn slowly. Report the policy pair, reduction population, selected subset, update stage, and the measured consequence.
+Selection can lower an average gap, and weight capping can raise empirical ESS by removing its tail. The policy pair, reduction population, selected subset, and update stage determine whether these changes reflect the intended mechanism. Learning trajectories and held-out quality reveal the resulting effect on policy improvement.
 
 ## Three connections across the collection
 
@@ -45,7 +45,7 @@ These roles explain why a smaller average gap, higher empirical ESS, or lower cl
 
 **Correction and control preserve different information.** A bounded action weight, a reconstructed conditional score mean, and an advantage-conditioned gate change different aspects of the gradient. Their composition requires consistent behavior probabilities, the intended weighted expectation, and compatible reduction rules. Tested bundles provide evidence for their own implementation and regime.
 
-**Execution savings must survive the learning loop.** Native kernels, simulated quantization, BF16 backward passes, guidance transfer, reference calibration and candidate rejection have different costs. The relevant outcome combines quality with the budget of the complete system, not an isolated kernel speedup.
+**Total cost includes mitigation overhead.** Native kernels, simulated quantization, BF16 backward passes, guidance transfer, reference calibration and candidate rejection have different costs. The relevant outcome combines quality with the budget of the complete system, not an isolated kernel speedup.
 
 Joint cache/weight/activation quantization and untested mixtures of rounding guidance, score centering and directional control remain empirical questions. Controlled comparisons under matched resources would establish their learning benefits and costs.
 

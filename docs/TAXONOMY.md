@@ -57,4 +57,4 @@ These are descriptions within B2, not five additional primary classes. QAT and P
 
 ## Measurement is a separate view
 
-A method class identifies the intervention target. A diagnostic identifies what is observed: numerical agreement, estimator reliability, update distortion, or learning outcomes. These views should not be conflated. See the [measurement map of all nineteen core studies](MEASUREMENTS.md) and §3.4 / Appendix E of the survey.
+Method classes identify intervention targets; diagnostics measure numerical agreement, estimator reliability, update distortion, or learning outcomes. A single intervention can affect several diagnostic levels. See the [measurement map of all nineteen core studies](MEASUREMENTS.md) and §3.4 / Appendix E of the survey.

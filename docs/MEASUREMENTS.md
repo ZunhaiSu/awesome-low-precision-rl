@@ -13,7 +13,7 @@ There is no shared measurement protocol across the surveyed studies. Probability
 
 The levels are connected, but a reduction at one level does not guarantee improvement at the next. A high empirical ESS can coexist with uniformly miscalibrated weights; a small mean gap can conceal a harmful local tail; exact scores on sampled tokens do not prove equality over the vocabulary.
 
-## Definitions that must travel with a curve
+## Measurement definitions and comparison conditions
 
 1. **Policy pair and time:** current learner or sampling-snapshot learner; actual behavior, re-scored rollout, proximal anchor, or fixed reference. Current/behavior differences may include policy lag.
 2. **Probability convention:** raw softmax or post-temperature/truncation behavior; support, normalization, and stored precision. A reference-policy KL penalty is not a TIM diagnostic.
@@ -27,7 +27,7 @@ Normalized empirical ESS = (Σw)² / (N Σw²) measures concentration among N we
 
 ## Training duration and delayed instability
 
-Longer optimization and longer generated trajectories test different properties. Stability over the reported training window does not establish stability over larger budgets, and a persistent numerical gap does not by itself imply failed correction. The question is whether useful learning persists as the policy and sampled states evolve.
+Longer optimization and longer generated trajectories test different properties. Extended training evaluates whether policy improvement persists as the policy, numerical statistics, and sampled states evolve. A persistent numerical gap can coexist with effective correction, while a stable early phase can precede later deterioration.
 
 Report optimizer steps, rollout and learner tokens, and elapsed training cost; retain late-stage quality alongside the best checkpoint. Periodic paired execution probes help separate numerical error from policy staleness, while online estimator and update diagnostics show how the data continue to influence learning. Track retained contributions or rejected updates to detect stability obtained by progressively suppressing learning.
 

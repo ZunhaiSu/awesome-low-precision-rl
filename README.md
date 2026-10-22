@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <strong>Zunhai Su<sup>1</sup> · Wei Wu<sup>2</sup> · Jianchao Tan<sup>2</sup> · Ngai Wong<sup>1</sup></strong><br>
+  <strong>Zunhai Su<sup>1</sup> · Wei Wu<sup>2</sup> · Yifan Zhang<sup>2</sup> · Jianchao Tan<sup>2</sup> · Ngai Wong<sup>1</sup></strong><br>
   <sup>1</sup>The University of Hong Kong &nbsp;·&nbsp; <sup>2</sup>Meituan
 </p>
 
@@ -22,7 +22,7 @@
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollouts can reduce generation cost, but the sampler and learner may assign different probabilities to the same token even with identical parameters and histories. This mismatch can distort gradient estimation and policy updates. The survey organizes remedies by intervention target: **numerical design** changes execution, while **learning under residual mismatch** corrects estimation or controls updates. It connects measurement practices and published evidence to policy quality and end-to-end cost. Progress requires sustained policy improvement; closer numerical agreement alone is insufficient.
+Quantized rollouts can reduce generation cost, but the sampler and learner may assign different probabilities to the same token even with identical parameters and histories. This training–rollout mismatch can distort gradient estimation and policy updates. The survey organizes recent approaches by intervention target: **numerical design** aligns computation or preserves fidelity and update visibility; **learning under residual mismatch** corrects estimation or controls updates. It compares measurement practices and experimental findings, then examines open problems in lower-cost mitigation, sustained policy improvement, and evaluation at matched quality or end-to-end cost.
 
 <p align="center">
   <img src="figures/overview.svg" alt="Survey overview: numerical design and learning under residual mismatch in the rollout–learning loop" width="760">
@@ -47,7 +47,7 @@ The [numbered reading library](papers/README.md) groups papers by topic and pres
 
 The collection focuses on the interface between the numerical policy that generates a rollout and the computation used to learn from it. It covers weight, activation, and KV-cache quantization; low precision on one or both endpoints; and closely related work on training–inference mismatch (TIM).
 
-The corpus contains **19 core method/system studies, 9 supporting studies, and 1 exploration boundary case**. Roles describe contributions to this synthesis; foundational RL papers and neighboring surveys are additional bibliography entries.
+Direct low-precision methods and systems form the core of the collection, supported by work on policy-gradient estimation and general training–inference mismatch. Quantization-assisted exploration provides a related boundary case. The [paper catalog](#paper-catalog) distinguishes these roles.
 
 The survey synthesizes primary-source methods and within-study results. The [neighboring-survey comparison](docs/RELATED_WORK.md#scope-among-surveys) distinguishes this focus from broader rollout lifecycle and efficiency reviews. Numerical formats, architectures, collection protocols, and evaluation rules are recorded alongside the findings. General PTQ, low-precision pretraining, and broader rollout acceleration provide context where they explain this interface.
 
@@ -79,7 +79,7 @@ Representative milestones follow first public release; chronology does not imply
 
 <img src="figures/taxonomy.svg" alt="Component taxonomy of low-precision RL" width="100%">
 
-Read each work through three complementary views: **mismatch source → intervention target → tested setting**. The source explains why probabilities differ; the target determines the method class; the setting conditions its evidence.
+Three views connect each method to its experimental results: **mismatch source → intervention target → tested setting**. The source explains why probabilities differ, the target determines the method class, and the setting defines the conditions under which it was evaluated.
 
 **A · Numerical design** changes numerical execution: A1 targets agreement across the two paths; A2 preserves fidelity within a path or the visibility of parameter updates after quantization. **B · Learning under residual mismatch** manages its effect on learning: correct gradient estimation (B1), or control update influence and acceptance (B2). B can preserve useful learning without shrinking the policy gap. The families can be combined within one system.
 
@@ -107,7 +107,7 @@ A reported discrepancy is meaningful only with its **policy pair, conditioning, 
 | Estimator and update diagnostics | ESS, conditional score drift, sign-conditioned clipping disagreement | Describe weight concentration or the effect of mismatch on learning contributions. |
 | Learning and system outcomes | Reward, held-out quality, and complete-loop cost | Establish the learning benefit and cost of an intervention. |
 
-The [measurement guide](docs/MEASUREMENTS.md) records each core study's definition, source location, and interpretation. In the survey, **§3.4 develops the measurements, §6.2 connects them to learning evidence, and Appendix E maps study-specific practices**. Controlled numerical probes and online diagnostics answer different questions: the latter can include parameter lag and legitimate policy movement.
+The [measurement guide](docs/MEASUREMENTS.md) compares each core study's definitions and experimental conditions. Controlled numerical probes isolate execution differences, while online diagnostics can also include policy lag and movement after updates. The survey develops this distinction in **§3.4**, connects it to learning results in **§6.2**, and summarizes study-specific practices in **Appendix E**.
 
 ## Comparing methods
 
@@ -130,15 +130,15 @@ The [source-linked evidence](docs/EVIDENCE.md) connects intervention mechanisms 
 
 **Alignment depends on what the paths share.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QaRL](https://aclanthology.org/2026.findings-acl.841/), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) coordinate different objects: precision flow, quantized representations, or realized rounding. The shared computation determines which discrepancies are addressed and which remain.
 
-**Controlling disagreement must preserve useful learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [Score Centering](https://arxiv.org/abs/2609.20807), [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870), and [TRIAGE](https://arxiv.org/abs/2610.07043) address update visibility, gradient drift, clipping, and direction-dependent control. Their mechanisms explain why stable curves or small mean gaps alone do not establish effective learning.
+**Correction acts on different parts of the update.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [Score Centering](https://arxiv.org/abs/2609.20807), [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870), and [TRIAGE](https://arxiv.org/abs/2610.07043) address update visibility, gradient drift, clipping, and direction-dependent control. Comparing these interventions therefore requires identifying which estimation errors or update contributions each changes.
 
-**Stability claims have a training horizon.** [TRACE](https://arxiv.org/abs/2610.07767v2) reports late degradation for conventional FP4 QAT in its joint W/A/KV setting; [TRIAGE](https://arxiv.org/abs/2610.07043v2) leaves substantially longer training unevaluated. Extended runs should distinguish sustained improvement, postponed deterioration, and stagnation under restrictive control; the [measurement guide](docs/MEASUREMENTS.md#training-duration-and-delayed-instability) explains the comparison.
+**Learning gains can change during training.** [TRACE](https://arxiv.org/abs/2610.07767v2) reports late degradation for conventional FP4 QAT in its joint W/A/KV setting; [TRIAGE](https://arxiv.org/abs/2610.07043v2) leaves substantially longer training unevaluated. Extended runs can distinguish sustained improvement, postponed deterioration, and stagnation under restrictive control; the [measurement guide](docs/MEASUREMENTS.md#training-duration-and-delayed-instability) develops this distinction.
 
 **Combinations address complementary residual errors.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html) combines update visibility with clipping control; [QUADS](https://arxiv.org/abs/2607.15810v1) combines weight alignment with activation compensation. The [component analysis](docs/SYNTHESIS.md#mechanism-granularity-and-required-information) connects intervention targets, granularity, and information requirements; the tested bundles retain their original execution and estimator assumptions.
 
 **Efficiency depends on the complete learning loop.** [KV4-RL](https://arxiv.org/abs/2610.14448) reports distinct rollout and full-iteration gains. Calibration, behavior reconstruction, rounding guidance, and weight conversion add dependencies elsewhere in the loop. Section 6 relates these costs to learned-policy quality; the [comparison records](docs/COMPARISONS.md) retain the tested configurations.
 
-Open directions include testing whether stress protocols predict extended-run behavior, adapting control references as the policy evolves, and lowering the cost of guidance and update control. Adaptive mechanisms should be assessed by the learning contributions they preserve, their tuning effort, and their runtime overhead. Controlled comparisons should report policy quality at matched total training cost and cost to a target quality.
+Open problems include determining when stress tests predict extended-run failures, adapting control references as the policy evolves, and reducing guidance and control overhead. Quality at a fixed total training budget and cost to a target quality provide complementary comparisons of these trade-offs.
 
 ## Reading routes
 
@@ -253,7 +253,7 @@ Use the citation below or GitHub's **Cite this repository** control, which uses 
 ```bibtex
 @misc{su2026trainingrollout,
   title  = {Training--Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey},
-  author = {Su, Zunhai and Wu, Wei and Tan, Jianchao and Wong, Ngai},
+  author = {Su, Zunhai and Wu, Wei and Zhang, Yifan and Tan, Jianchao and Wong, Ngai},
   year   = {2026},
   url    = {https://github.com/ZunhaiSu/awesome-low-precision-rl}
 }
