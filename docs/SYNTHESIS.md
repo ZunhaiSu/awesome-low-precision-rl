@@ -29,6 +29,6 @@ These roles explain why a smaller average gap, higher empirical ESS, or lower cl
 
 **Execution savings must survive the learning loop.** Native kernels, simulated quantization, BF16 backward passes, guidance transfer, reference calibration and candidate rejection have different costs. The relevant outcome combines quality with the budget of the complete system, not an isolated kernel speedup.
 
-Joint cache/weight/activation quantization and untested mixtures of rounding guidance, score centering and directional control remain empirical questions. The survey organizes the available evidence; the proposed fair-comparison benchmark remains future work.
+Joint cache/weight/activation quantization and untested mixtures of rounding guidance, score centering and directional control remain empirical questions. Controlled comparisons under matched resources would establish their learning benefits and costs.
 
 See [measurement practice](MEASUREMENTS.md), [component definitions](TAXONOMY.md), [source-specific comparisons](COMPARISONS.md), and [the survey PDF](../Survey.pdf).

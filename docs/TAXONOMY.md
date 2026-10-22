@@ -29,7 +29,7 @@ Three other fields answer different questions:
 - `evidence_domain`: direct low-precision RL, general TIM, higher-precision comparison, diagnostic reference, or exploration boundary. MiniRL has a supporting role and direct FP8 experiments; QeRL contributes low-precision exploration evidence at a different research boundary.
 - `replication_status`: whether this survey independently reproduced the source. The current records state that it did not; they do not characterize replication elsewhere.
 
-No E1–E4 or numerical quality grade is inferred from these fields. A quality assessment would need experiment-level extraction of controls, seeds, uncertainty, baselines, and reproduction. A formulation or diagnostic role is not evidence of weak experimental quality.
+Contribution roles describe relevance independently of experimental strength. Assessing evidence quality requires experiment-level controls, training seeds, uncertainty, baselines, and reproduction records.
 
 Reviewed arXiv versions are pinned where the source record identifies one. Formal publication records remain distinct from arXiv versions; version-unspecified records are left explicit. The [catalog](CATALOG.md) and [source observations](EVIDENCE.md) are generated from the JSON records with `python3 scripts/build_tables.py`.
 

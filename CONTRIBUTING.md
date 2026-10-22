@@ -18,7 +18,7 @@ Identify the exact claim, the source section or equation supporting the correcti
 
 ## Suggest a collaboration
 
-We welcome ideas on predictive mismatch diagnostics, numerical and learning method composition, stateful rollout semantics, and clearer synthesis of existing evidence. Describe the question you would like to explore and link any relevant public work. Opening a discussion does not add authorship or endorsement; those are agreed with the people involved.
+We welcome ideas on predictive mismatch diagnostics, numerical and learning method composition, stateful rollout semantics, and clearer synthesis of existing evidence. Describe the question you would like to explore and link any relevant public work.
 
 ## Keep evidence comparable
 
@@ -33,5 +33,3 @@ Contribute original material you may share under the repository license. Third-p
 The repository-root `Survey.pdf` is the only published survey manuscript file. Licensed third-party reading copies belong under `papers/` and are checked against its manifest. Manuscript sources are maintained separately in Overleaf and must not be uploaded to this repository. Do not add LaTeX sources, class/style files, manuscript build scripts, or a second PDF copy in a source directory.
 
 After a requested manuscript update, compile and check the source in the authoring project, inspect the affected PDF pages, then publish the successful PDF as `Survey.pdf`. Refresh changed catalog records and SVG figures as needed. Preserve unrelated GitHub edits. A failed compilation must not replace the last successful public PDF.
-
-Synchronization is manual. The scheduled Overleaf monitor is paused; manuscript edits and publication are performed when requested. An unchanged source does not require a rebuild or an empty commit. The literature snapshot changes only after a literature check, independently of typesetting or synchronization.

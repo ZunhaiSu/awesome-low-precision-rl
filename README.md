@@ -11,36 +11,37 @@
 </p>
 
 <p align="center">
-  <img src="figures/status.svg" alt="Research survey · 29 focal studies · CC BY-SA 4.0" width="570">
+  <img src="figures/status.svg" alt="Survey · Curated reading · CC BY-SA 4.0" width="570">
 </p>
 
 <p align="center">
   <a href="Survey.pdf"><strong>Read the survey PDF</strong></a> &nbsp;·&nbsp;
   <a href="papers/README.md"><strong>Reading library</strong></a> &nbsp;·&nbsp;
   <a href="#paper-catalog">All papers</a> &nbsp;·&nbsp;
-  <a href="docs/EVIDENCE.md">Evidence</a> &nbsp;·&nbsp;
+  <a href="docs/MEASUREMENTS.md">Measurements</a> &nbsp;·&nbsp;
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollout can accelerate generation while giving the sampler different token probabilities from the learner, even at identical parameters. This survey classifies interventions by the mechanism they change, connects mismatch measurements to learning outcomes, and develops research directions in sustained stability, efficient mitigation, and quality at matched total training cost.
-
-## Explore the survey
-
-[Mechanisms and background](#reading-routes) · [Interventions](#taxonomy) · [Measurement practice](docs/MEASUREMENTS.md) · [Source-linked evidence](docs/EVIDENCE.md)
-
-Use the [core reading route](papers/README.md#core-reading) across both topic folders. Folder placement describes the paper's topic; core and supporting roles describe its contribution to the survey.
-
-**New to the topic?** Start with the GRPO example in §2.1: rewards → group advantages → policy ratios and clipping → update → quantized synchronization. Section 2.4 explains W/A/KV targets, QAT, and native arithmetic.
+Quantized rollouts reduce generation cost, but numerical differences can make the sampler and learner assign different probabilities to the same token history. This survey connects those differences to gradient estimation, policy updates, and learned quality. It organizes methods into **numerical design** and **learning under residual mismatch**, with a shared perspective on measurements and system cost.
 
 <p align="center">
-  <img src="figures/overview.svg" alt="Survey overview: generation, collected experience, and learner updates form a feedback loop" width="680">
+  <img src="figures/overview.svg" alt="Survey overview: numerical design and learning under residual mismatch in the rollout–learning loop" width="760">
 </p>
-
-> **Updates and collaboration.** Technical corrections, relevant papers, and collaboration enquiries are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
 
 ## Contents
 
-[Explore](#explore-the-survey) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Measurements](#measuring-mismatch) · [Compare](#comparing-methods) · [Reading routes](#reading-routes) · [Papers](#paper-catalog) · [Findings](#research-findings) · [Contribute](#contribute) · [Citation](#citation)
+[Start here](#start-here) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Measurements](#measuring-mismatch) · [Method comparisons](#comparing-methods) · [Findings](#research-findings) · [Reading routes](#reading-routes) · [Paper catalog](#paper-catalog) · [Contribute](#contribute) · [Citation](#citation)
+
+## Start here
+
+| Your focus | Entry point |
+|---|---|
+| Learn the background | Survey §§2–3: GRPO policy roles, numerical mismatch, and its effects on learning. |
+| Read the key papers | [Core reading route](papers/README.md#core-reading), then the [mechanism-specific routes](#reading-routes). |
+| Understand the classification | [Two families and four intervention classes](#taxonomy), with the complete [classification guide](docs/TAXONOMY.md). |
+| Interpret reported measurements | [Measurement guide](docs/MEASUREMENTS.md), [source-linked evidence](docs/EVIDENCE.md), and [comparison records](docs/COMPARISONS.md). |
+
+The [numbered reading library](papers/README.md) groups papers by topic and preserves their reading order. Survey roles describe each work's contribution to the synthesis; the core route draws from both topic folders.
 
 ## Scope
 
@@ -48,7 +49,7 @@ The collection focuses on the interface between the numerical policy that genera
 
 The corpus contains **19 core method/system studies, 9 supporting studies, and 1 exploration boundary case**. Roles describe contributions to this synthesis; foundational RL papers and neighboring surveys are additional bibliography entries.
 
-This narrative survey synthesizes published evidence. General PTQ, low-precision pretraining, and unrelated rollout acceleration enter only where they explain this interface.
+The survey synthesizes primary-source methods and within-study results. Numerical formats, architectures, collection protocols, and evaluation rules are recorded alongside the findings. General PTQ, low-precision pretraining, and broader rollout acceleration provide context where they explain this interface.
 
 <details>
 <summary><strong>Survey organization: eight sections</strong></summary>
@@ -64,14 +65,13 @@ This narrative survey synthesizes published evidence. General PTQ, low-precision
 | 7. Open Problems | Develop priorities in sustained stability, composition, mitigation cost, stateful execution, and transfer. |
 | 8. Conclusion | Bring numerical fidelity and learning correction into one perspective. |
 
-Appendix A summarizes all twenty-nine focal works; Appendices B–C describe source selection, assumptions, and transfer; Appendix D defines the terminology; Appendix E maps mismatch measurements across all nineteen core studies.
+Appendices collect the surveyed-paper mapping, source selection, assumptions and transfer, terminology, and study-specific measurement practices.
 
 </details>
 
 ## Taxonomy
 
 <img src="figures/taxonomy.svg" alt="Component taxonomy of low-precision RL" width="100%">
-
 
 Read each work through three complementary views: **mismatch source → intervention target → tested setting**. The source explains why probabilities differ; the target determines the method class; the setting conditions its evidence.
 
@@ -86,19 +86,26 @@ Read each work through three complementary views: **mismatch source → interven
 
 Format, W/A/KV target, architecture, adaptation, and collection schedule are **configuration labels**. Scheduling (§5.3, navigation tag B3) complements the four classes. QeRL marks the exploration boundary; VeXact supplies a diagnostic reference.
 
-B2 includes boundary placement (QuRL/QaRL/Calibrated Clipping), batch reliability (P3O), divergence geometry (DPPO/DRPO), directional influence (ACRL/TRIAGE), and candidate acceptance (MIPU). Their different decision units are summarized in the [classification guide](docs/TAXONOMY.md#control-decisions-inside-b2).
+B2 spans token, response, batch, and whole-policy decisions. The [classification guide](docs/TAXONOMY.md#control-decisions-inside-b2) relates these decision units to clipping, batch adaptation, constraint geometry, directional control, and candidate acceptance.
 
 The [related-work perspectives](docs/RELATED_WORK.md) connect this framework to how the primary papers organize neighboring work. Their terminology is interpreted alongside each paper's actual mechanism.
 
 ## Measuring mismatch
 
-The papers do **not** use one common mismatch metric. TRIAGE's average absolute log gap, TRACE's gap extrema, QuRL's behavior-to-proximal KL, and KV4-RL's full-distribution shared-prefix KL describe different quantities. ESS measures weight concentration; reward and entropy describe learning outcomes.
+A reported discrepancy is meaningful only with its **policy pair, conditioning, and aggregation**. The studies use complementary measurements:
 
-The [measurement guide](docs/MEASUREMENTS.md) maps all **19 core studies** with complete titles, source locations, policy comparisons, and interpretation limits. In the paper, **§3.4 defines the measurements, §6.2 interprets the learning evidence, and Appendix E collects study-specific practices**. The chain is numerical disagreement → estimator or update effects → learned quality and total cost.
+| Measurement | Representative practice | Interpretation |
+|---|---|---|
+| Sampled-token log gaps | TRIAGE's mean absolute gap; TRACE's extrema | Summarize disagreement on observed actions, with different sensitivity to tails and population size. |
+| Distributional divergence | QuRL's behavior-to-proximal KL; KV4-RL's shared-prefix, full-vocabulary KL | Depend on KL direction, compared policies, and whether prefixes and parameters are fixed. |
+| Estimator and update diagnostics | ESS, conditional score drift, sign-conditioned clipping disagreement | Describe weight concentration or the effect of mismatch on learning contributions. |
+| Learning and system outcomes | Reward, held-out quality, and complete-loop cost | Establish the learning benefit and cost of an intervention. |
+
+The [measurement guide](docs/MEASUREMENTS.md) records each core study's definition, source location, and interpretation. In the survey, **§3.4 develops the measurements, §6.2 connects them to learning evidence, and Appendix E maps study-specific practices**. Controlled numerical probes and online diagnostics answer different questions: the latter can include parameter lag and legitimate policy movement.
 
 ## Comparing methods
 
-The taxonomy identifies the intervention; the configuration identifies its tested scope. Read the learner path, rollout W/A/KV precision, and comparison rule together.
+Method comparisons require the learner path, rollout W/A/KV precision, and evaluation protocol to be read together. Four representative configurations illustrate the differences.
 
 | Work | Mechanism | Reviewed execution setting |
 |---|---|---|
@@ -107,9 +114,23 @@ The taxonomy identifies the intervention; the configuration identifies its teste
 | **Score Centering**<br>[Score Centering Stabilizes Off-policy Reinforcement Learning](https://arxiv.org/abs/2609.20807v1) | Center the behavior-weighted score to remove conditional drift. | BF16 learner; quantization stress includes FP4/INT4 KV; policy-lag experiments are separate. |
 | **KV4-RL**<br>[KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization](https://arxiv.org/abs/2610.14448v1) | Protect sensitive cache positions at higher precision. | INT4 KV with bounded INT8 protection; BF16 learner; quota-based partial collection. |
 
-The [studied combinations](docs/SYNTHESIS.md) connect numerical alignment, fidelity, correction and update control while distinguishing tested bundles from open combinations. TRACE directly compares TIS+SC under joint NVFP4 W/A/KV rollout. TRIAGE's reported comparisons do not include SC/TIS+SC or TRACE. Their results therefore answer different questions.
+TRACE compares TIS+SC under joint NVFP4 W/A/KV rollout; TRIAGE tests recovery beyond TIS under native W4A4, without a direct SC or TRACE comparison. Their results establish benefits within different experimental settings. The [studied combinations](docs/SYNTHESIS.md) explain how alignment, fidelity, correction, and update control interact in tested systems.
 
 [Execution and direct-comparison records](docs/COMPARISONS.md) retain the models, source locations, checkpoint rules, outcomes and limits. The [comparison map](figures/evidence.svg) shows selected within-study connections.
+
+## Research findings
+
+The [source-linked evidence](docs/EVIDENCE.md) connects intervention mechanisms to policy improvement and system cost. Four conclusions recur across the collection.
+
+**Alignment depends on what the paths share.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QaRL](https://aclanthology.org/2026.findings-acl.841/), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) coordinate different objects: precision flow, quantized representations, or realized rounding. The shared computation determines which discrepancies are addressed and which remain.
+
+**Controlling disagreement must preserve useful learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [Score Centering](https://arxiv.org/abs/2609.20807), [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870), and [TRIAGE](https://arxiv.org/abs/2610.07043) address update visibility, gradient drift, clipping, and direction-dependent control. Their mechanisms explain why stable curves or small mean gaps alone do not establish effective learning.
+
+**Stability claims have a training horizon.** [TRACE](https://arxiv.org/abs/2610.07767v2) reports late degradation for conventional FP4 QAT in its joint W/A/KV setting; [TRIAGE](https://arxiv.org/abs/2610.07043v2) leaves substantially longer training unevaluated. Extended runs should distinguish sustained improvement, postponed deterioration, and stagnation under restrictive control; the [measurement guide](docs/MEASUREMENTS.md#training-duration-and-delayed-instability) explains the comparison.
+
+**Efficiency depends on the complete learning loop.** [KV4-RL](https://arxiv.org/abs/2610.14448) reports distinct rollout and full-iteration gains. Calibration, behavior reconstruction, rounding guidance, and weight conversion add dependencies elsewhere in the loop. Section 6 relates these costs to learned-policy quality; the [comparison records](docs/COMPARISONS.md) retain the tested configurations.
+
+Open directions include testing whether stress protocols predict extended-run behavior, adapting control references as the policy evolves, and lowering the cost of guidance and update control. Adaptive mechanisms should be assessed by the learning contributions they preserve, their tuning effort, and their runtime overhead. Controlled comparisons should report policy quality at matched total training cost and cost to a target quality.
 
 ## Reading routes
 
@@ -129,7 +150,7 @@ Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f06
 
 ## Paper catalog
 
-Each entry pairs a short name with the full paper title, linked directly to the reviewed source. The tables follow first public appearance and count each contribution once. Authors, reviewed versions, and additional discussion locations are in the [reviewed catalog](docs/CATALOG.md) and Surveyed Papers appendix. Dates can precede the formal publication linked here. [Classification rules](docs/TAXONOMY.md) distinguish contribution roles from evidence domains. [JSON records](data/papers.json) support reuse.
+The tables follow first public appearance, with **complete titles and direct source links**. Conference and preprint versions count as one contribution. The [complete catalog](docs/CATALOG.md) adds authors, reviewed versions, numerical regimes, and discussion locations; [JSON records](data/papers.json) support reuse. First-publication dates can precede the formal publication linked below.
 
 Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 · Fidelity](docs/CATALOG.md#fidelity-a2) · [B1 · Estimation](docs/CATALOG.md#estimation-b1) · [B2 · Update control](docs/CATALOG.md#update-control-b2). Complement: [scheduling](docs/CATALOG.md#scheduling-b3).
 
@@ -183,22 +204,6 @@ Roles describe relevance to the survey, rather than evidence quality. Primary an
 
 <!-- END GENERATED CATALOG -->
 
-## Research findings
-
-The [evidence records](data/evidence.json) cover all nineteen core studies and locate their observations in the primary papers. The synthesis connects numerical design, learning effects, and system cost.
-
-**Shared computation matters more than nominal symmetry.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QaRL](https://aclanthology.org/2026.findings-acl.841/), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) coordinate different objects: precision flow, quantized representations, or realized rounding. Matching format labels alone does not identify what remains inconsistent.
-
-**Controlling disagreement must preserve useful learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [Score Centering](https://arxiv.org/abs/2609.20807), [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870), and [TRIAGE](https://arxiv.org/abs/2610.07043) address update visibility, gradient drift, clipping, and direction-dependent control. Their mechanisms explain why stable curves or small mean gaps alone do not establish effective learning.
-
-**Stability claims have a training horizon.** Early agreement or completion of one run cannot establish sustained improvement at larger budgets. [TRACE](https://arxiv.org/abs/2610.07767v2) reports late degradation for conventional FP4 QAT in its joint W/A/KV setting; [TRIAGE](https://arxiv.org/abs/2610.07043v2) leaves substantially longer training unevaluated. These are different evidence claims. Extended runs should distinguish sustained useful learning, postponed deterioration, and learning stagnation; the [measurement guide](docs/MEASUREMENTS.md#training-duration-and-delayed-instability) explains the comparison.
-
-**Generation speed and learning efficiency have different costs.** [KV4-RL](https://arxiv.org/abs/2610.14448) reports distinct rollout and full-iteration gains. Calibration, behavior reconstruction, rounding guidance, and weight conversion add dependencies elsewhere in the loop. Section 6 relates these costs to learned-policy quality; the [comparison records](docs/COMPARISONS.md) retain the tested configurations.
-
-Open directions include testing whether stress protocols predict extended-run behavior, adapting control references as the policy evolves, and lowering the cost of guidance and update control. Adaptive mechanisms should be assessed by the learning contributions they preserve, their tuning effort, and their runtime overhead. Controlled comparisons should report policy quality at matched total training cost and cost to a target quality.
-
-The collection distinguishes simulated FP4, native low-bit kernels, and BF16 computation on quantized values. It synthesizes source-reported results and does not introduce a common leaderboard or an independently reproduced benchmark.
-
 <details>
 <summary><strong>Analytical example: clipping depends on advantage sign</strong></summary>
 
@@ -224,9 +229,13 @@ The curves illustrate the standard surrogate with epsilon 0.2 and advantage ±1.
 | [Direct-comparison map](figures/evidence.svg) | Available comparison sets and their distinct numerical settings. |
 | [Timing decomposition](figures/timing.svg) | A constructed example separating rollout acceleration from iteration speedup. |
 
-All figures are available as scalable vector drawings. Numerical illustrations are explicitly labeled; no cross-paper leaderboard is inferred. See the [figure notes](docs/FIGURES.md) for their purposes and assumptions.
+The figures are available as scalable vector drawings. Constructed numerical examples are labeled separately from published measurements; the [figure notes](docs/FIGURES.md) explain their purposes and assumptions.
 
 </details>
+
+## Contribute
+
+The collection welcomes new work, technical corrections, and research collaborations through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues). Primary sources and precise section/equation references make corrections especially useful. See [contribution guidance](CONTRIBUTING.md) for catalog fields, evidence records, and version handling.
 
 ## Citation
 
@@ -240,10 +249,6 @@ Use the citation below or GitHub's **Cite this repository** control, which uses 
   url    = {https://github.com/ZunhaiSu/awesome-low-precision-rl}
 }
 ```
-
-## Contribute
-
-Propose a missing paper, correct a technical claim, or discuss a research collaboration through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues). Primary sources and precise section/equation references make corrections especially useful. See [contribution guidance](CONTRIBUTING.md) for catalog fields, evidence records, and version handling.
 
 ## Attribution and license
 

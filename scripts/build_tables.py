@@ -88,11 +88,11 @@ def generate():
         detail.append(f"| **{cell(r['name'])}**<br>{title_link(r)}<br>{cell(r['regime'])} | {cell(e['observation'])} | "
                       f"{cell(e['limit'])} | [Source]({e['url']})<br>{cell(e['locator'])} |")
     status = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570 30" role="img" aria-labelledby="title desc">
-<title id="title">Research survey · {len(rows)} focal studies · CC BY-SA 4.0</title>
-<desc id="desc">Research status, catalog size, and repository license.</desc>
+<title id="title">Survey · Curated reading · CC BY-SA 4.0</title>
+<desc id="desc">Survey, curated reading resources, and repository license.</desc>
 <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11.5" font-weight="600" text-anchor="middle">
 <rect x="1" y="1" width="182" height="28" rx="6" fill="#EDF3F9" stroke="#CCD8E2"/><text x="92" y="19" fill="#2B608F">RESEARCH SURVEY</text>
-<rect x="194" y="1" width="182" height="28" rx="6" fill="#EDF6F2" stroke="#CCD8E2"/><text x="285" y="19" fill="#1A7B70">{len(rows)} FOCAL STUDIES</text>
+<rect x="194" y="1" width="182" height="28" rx="6" fill="#EDF6F2" stroke="#CCD8E2"/><text x="285" y="19" fill="#1A7B70">CURATED READING</text>
 <rect x="387" y="1" width="182" height="28" rx="6" fill="#F2F4F7" stroke="#CCD8E2"/><text x="478" y="19" fill="#526477">CC BY-SA 4.0</text>
 </g></svg>
 '''
