@@ -22,7 +22,7 @@
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollouts can reduce generation cost, but sampler and learner probabilities can differ for the same token and history. This mismatch can distort gradient estimation and policy updates. The survey organizes remedies by where they intervene: **numerical design** changes execution, while **learning under residual mismatch** corrects estimation or controls updates. It connects these mechanisms to measurements, policy quality, and total training cost. Closer numerical agreement alone does not establish better learning.
+Quantized rollouts can reduce generation cost, but sampler and learner probabilities can differ for the same token and history. This mismatch can distort gradient estimation and policy updates. The survey organizes remedies by where they intervene: **numerical design** changes execution, while **learning under residual mismatch** corrects estimation or controls updates. It connects these mechanisms to measurements, policy quality, and end-to-end training cost. Closer numerical agreement alone does not establish better learning.
 
 <p align="center">
   <img src="figures/overview.svg" alt="Survey overview: numerical design and learning under residual mismatch in the rollout–learning loop" width="760">
@@ -65,7 +65,7 @@ The survey synthesizes primary-source methods and within-study results. The [nei
 | 7. Open Problems | Develop priorities in sustained stability, composition, mitigation cost, stateful execution, and transfer. |
 | 8. Conclusion | Bring numerical fidelity and learning correction into one perspective. |
 
-Appendices collect the surveyed-paper mapping, source selection, assumptions and transfer, terminology, and study-specific measurement practices.
+Appendices collect the paper mapping, source selection, assumptions, terminology, measurement practices, and illustrative examples.
 
 </details>
 
@@ -73,7 +73,7 @@ Appendices collect the surveyed-paper mapping, source selection, assumptions and
 
 <img src="figures/timeline.svg" alt="Research timeline of representative quantized-rollout methods, with author institutions and a curved chronological spine" width="100%">
 
-Milestones follow first public release. All author institutions are named; each work displays up to three marks in the paper’s affiliation order. The [figure notes](docs/FIGURES.md#timeline-affiliations-and-organization-marks) explain the compact labels and asset sources. The [paper catalog](#paper-catalog) provides complete titles and links.
+Representative milestones follow first public release. Marks identify author institutions, with up to three per work. The [figure notes](docs/FIGURES.md#timeline-affiliations-and-organization-marks) give affiliations and mark sources; the [paper catalog](#paper-catalog) provides complete titles and links.
 
 ## Taxonomy
 

@@ -5,9 +5,9 @@ The figures separate field organization, learning mechanisms, measurement practi
 | Figure | Purpose | Interpretation |
 |---|---|---|
 | 1 · [Survey at a glance](../figures/overview.svg) | The rollout–learning loop, the A/B families, and four assessment levels. | Conceptual synthesis. |
-| 2 · [Component taxonomy](../figures/taxonomy.svg) | All focal works mapped to four intervention classes, with scheduling and supporting roles separate. | A component map; papers can contribute to several classes. |
-| 3 · [Research timeline](../figures/timeline.svg) | Representative methods in publication order, paired with author institutions. | Grouped first public release; all institution names and at most three marks per work. |
-| 4 · [Policy identities](../figures/policies.svg) | Learner, sampling snapshot, actual behavior, proximal anchor, and KL reference. | A ratio decomposition at a fixed token and history, rather than a data-flow diagram. |
+| 2 · [Research timeline](../figures/timeline.svg) | Representative methods in publication order, paired with author institutions. | Grouped first public release; all institution names and at most three marks per work. |
+| 3 · [Policy identities](../figures/policies.svg) | Learner, sampling snapshot, actual behavior, proximal anchor, and KL reference. | A ratio decomposition at a fixed token and history, rather than a data-flow diagram. |
+| 4 · [Component taxonomy](../figures/taxonomy.svg) | All focal works mapped to four intervention classes, with scheduling and supporting roles separate. | A component map; papers can contribute to several classes. |
 | 5 · [Mismatch-to-learning mechanisms](../figures/mechanisms.svg) | Relative influence, conditional score drift, update decisions, and subsequent feedback. | Representative method responses are linked to the mechanisms they address. |
 | 6 · [Measurement regimes](../figures/measurement_practice.svg) | Controlled numerical probes and online learning diagnostics. | The former isolates execution under fixed controls; the latter can include lag and policy movement. |
 | 7 · [Rollout-guided rounding](../figures/rounding.svg) | Agreement across paths versus approximation to a higher-precision value. | Constructed fixed-scale example: learner 0.74 and rollout 0.76. |
@@ -25,7 +25,7 @@ Named studies carry citations matching the manuscript bibliography. The [catalog
 
 ## Timeline affiliations and organization marks
 
-Affiliations follow the author block of each cited paper. All institution names are retained, using compact labels in the figure. Up to three marks follow the institution order on the first page; this order does not encode contribution rank. QeRL lists NVIDIA, MIT, HKU, and Tsinghua University (THU), while showing the first three marks. UCB denotes UC Berkeley. Jet-RL also includes an independent researcher. QUADS and TRACE use the Qwen team mark, while their affiliation labels retain the paper’s institutional names.
+Affiliations follow the author block of each cited paper. All institution names are retained, using compact labels in the figure. Up to three marks follow the institution order on the first page; this order does not encode contribution rank. QeRL lists NVIDIA, MIT, HKU, and Tsinghua University (THU), while showing the first three marks. Jet-RL also includes an independent researcher. QUADS and TRACE use the Qwen team mark, while their affiliation labels retain the paper’s institutional names.
 
 The marks identify author affiliations and retain their respective owners’ rights. They are excluded from the repository’s CC BY-SA grant. Sources are institutional websites and official media resources, with the indicated university images obtained from Wikimedia.
 
