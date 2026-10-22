@@ -22,7 +22,7 @@
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollouts can reduce generation cost, but numerical differences can make the sampler and learner assign different probabilities to the same token history. This survey connects those differences to gradient estimation, policy updates, and learned quality. Numerical agreement, optimization stability, and policy improvement are treated as distinct outcomes. It organizes methods into **numerical design** and **learning under residual mismatch**, with a shared perspective on measurements and system cost.
+Quantized rollouts can reduce generation cost, but sampler and learner probabilities can differ for the same token and history. This mismatch can distort gradient estimation and policy updates. The survey organizes remedies by where they intervene: **numerical design** changes execution, while **learning under residual mismatch** corrects estimation or controls updates. It connects these mechanisms to measurements, policy quality, and total training cost. Closer numerical agreement alone does not establish better learning.
 
 <p align="center">
   <img src="figures/overview.svg" alt="Survey overview: numerical design and learning under residual mismatch in the rollout–learning loop" width="760">
