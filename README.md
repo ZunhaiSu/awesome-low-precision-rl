@@ -23,7 +23,7 @@
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollout changes the policy that generates training experience. This survey traces the resulting discrepancy through gradient estimation and policy updates, connecting numerical mechanisms, measurement practice, learned quality, and total training cost.
+Low-precision rollout can accelerate generation while changing the policy that supplies training experience. This survey explains how the mismatch affects gradient estimation and updates, compares remedies, and examines their learning quality and total cost.
 
 ## Explore the survey
 
@@ -227,7 +227,7 @@ All figures are available as scalable vector drawings. Numerical illustrations a
 
 ## Citation
 
-The survey is a working manuscript. Use the citation below or GitHub's **Cite this repository** control, which uses [CITATION.cff](CITATION.cff). Please cite the original papers for their individual results.
+Use the citation below or GitHub's **Cite this repository** control, which uses [CITATION.cff](CITATION.cff). Please cite the original papers for their individual results.
 
 ```bibtex
 @misc{su2026trainingrollout,
@@ -247,6 +247,6 @@ Propose a missing paper, correct a technical claim, or discuss a research collab
 
 The paper adapts the **typesetting template** from [arXiv:2601.14004v4](https://arxiv.org/abs/2601.14004v4); its scientific framework is specific to this survey. Attribution and modifications are documented in [TEMPLATE.md](docs/TEMPLATE.md).
 
-This working manuscript welcomes corrections and collaboration. [Scope and source versions](docs/CATALOG.md), [editorial assessment](docs/ASSESSMENT.md), and [document validation](docs/BUILD.md) accompany the PDF.
+[Source versions](docs/CATALOG.md), [research perspective](docs/ASSESSMENT.md), and [manuscript validation](docs/BUILD.md) accompany the survey.
 
 The survey PDF, repository content, and template adaptations use [CC BY-SA 4.0](LICENSE). Third-party papers retain their own licenses. The [reading library](papers/README.md) provides 11 explicitly licensed PDF mirrors and 18 official-source links, with attribution and version records in [NOTICES](papers/NOTICES.md) and the [manifest](papers/manifest.json).
