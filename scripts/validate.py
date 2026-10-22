@@ -129,3 +129,20 @@ expected_authors=[('Su','Zunhai','The University of Hong Kong'),('Wu','Wei','Mei
 assert authors==expected_authors*2,'citation author/affiliation mismatch'
 
 print(f'PASS: {len(rows)} linked titles; {len(evidence)} evidence records; 13 mainline / 16 related entries; {len(mirrors)} licensed PDF hashes; links and PDF-only survey release valid.')
+
+# Timeline claims remain bound to paper metadata and recorded affiliation sources.
+timeline=json.loads((root/'data/timeline.json').read_text())
+canonical={p['key']:p for p in rows}
+assert len({m['key'] for m in timeline['milestones']})==len(timeline['milestones'])
+for m in timeline['milestones']:
+ p=canonical[m['key']]
+ assert m['title']==p['title'] and m['first_publication']==p['first_publication']
+ assert m['source']==p['reviewed_source_url'] and m['source_locator']
+ assert set(re.findall(r'[AB][12]',m['components']))==set(re.findall(r'[AB][12]',p['categories']))
+ assert len(m['affiliations'])==len(set(m['affiliations']))
+ assert m['displayed_marks']==m['affiliations'][:3]
+ assert all(k in timeline['institutions'] for k in m['affiliations'])
+for x in timeline['institutions'].values():
+ assert x['name'] and x['short_name'] and x['asset_source'].startswith('https://')
+assert (root/'figures/timeline.svg').is_file()
+print(f"PASS: {len(timeline['milestones'])} source-bound timeline milestones; all affiliations retained; mark cap valid.")

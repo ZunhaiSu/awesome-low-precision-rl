@@ -4,6 +4,42 @@
   "scope": "Selected configuration-specific records, not an exhaustive benchmark or cross-paper leaderboard.",
   "regimes": [
     {
+      "key": "jet",
+      "learner": "FP8 GEMMs with unified precision flow",
+      "rollout": "FP8 execution coordinated with the learner path",
+      "collection": "Updated actor weights transfer to the inference engine after each step; vLLM and verl implementation",
+      "boundary": "Operator-level FP8 does not imply that every module and training state is FP8.",
+      "locator": "Sections 2.1 and 4.1-4.3",
+      "url": "https://arxiv.org/abs/2601.14243v2"
+    },
+    {
+      "key": "fp8rl",
+      "learner": "Higher-precision learner with repeated calibration and weight synchronization",
+      "rollout": "Native W8A8 linear layers; FP8 attention and KV extensions",
+      "collection": "Step-wise rollout/training workflow with dynamic QKV-scale recalibration",
+      "boundary": "Each extension has its own precision exceptions and calibration cost.",
+      "locator": "Sections 2.1-2.3; Figures 1 and 4",
+      "url": "https://arxiv.org/abs/2601.18150v2"
+    },
+    {
+      "key": "qarl",
+      "learner": "Rollout-aligned fake quantization in the learner forward",
+      "rollout": "W8A8 and W4A16 configurations; W4A8 in quantization ablations",
+      "collection": "Quantized rollout and aligned learner under TBPO; numerical targets are tested across model regimes",
+      "boundary": "KV quantization is excluded; QAT should not be read as a measured native low-bit trainer speedup.",
+      "locator": "Sections 3-4; Figure 9; Appendix A",
+      "url": "https://aclanthology.org/2026.findings-acl.841/"
+    },
+    {
+      "key": "hif4",
+      "learner": "QAT under simulated FP4 execution",
+      "rollout": "HiFloat4 and MXFP4 with Rollout-ResQ activation compensation",
+      "collection": "Simulated low-precision RL experiments",
+      "boundary": "Simulation overhead prevents direct measurement of native-FP4 speedup.",
+      "locator": "Sections 4-6; Limitations and Future Directions",
+      "url": "https://arxiv.org/abs/2607.26515v1"
+    },
+    {
       "key": "trace",
       "learner": "Guided fake-quantized forward; BF16 backward",
       "rollout": "NVFP4 W4A4 routed experts + NVFP4 KV in softmax attention; other modules BF16",

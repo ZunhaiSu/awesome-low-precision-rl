@@ -30,7 +30,7 @@ Quantized rollouts can reduce generation cost, but sampler and learner probabili
 
 ## Contents
 
-[Start here](#start-here) · [Scope](#scope) · [Taxonomy](#taxonomy) · [Measurements](#measuring-mismatch) · [Method comparisons](#comparing-methods) · [Findings](#research-findings) · [Reading routes](#reading-routes) · [Paper catalog](#paper-catalog) · [Contribute](#contribute) · [Citation](#citation)
+[Start here](#start-here) · [Scope](#scope) · [Development](#development-timeline) · [Taxonomy](#taxonomy) · [Measurements](#measuring-mismatch) · [Method comparisons](#comparing-methods) · [Findings](#research-findings) · [Reading routes](#reading-routes) · [Paper catalog](#paper-catalog) · [Contribute](#contribute) · [Citation](#citation)
 
 ## Start here
 
@@ -68,6 +68,12 @@ The survey synthesizes primary-source methods and within-study results. The [nei
 Appendices collect the surveyed-paper mapping, source selection, assumptions and transfer, terminology, and study-specific measurement practices.
 
 </details>
+
+## Development timeline
+
+<img src="figures/timeline.svg" alt="Research timeline of representative quantized-rollout methods, with author institutions and a curved chronological spine" width="100%">
+
+Milestones follow first public release. All author institutions are named; each work displays up to three marks in the paper’s affiliation order. The [figure notes](docs/FIGURES.md#timeline-affiliations-and-organization-marks) explain the compact labels and asset sources. The [paper catalog](#paper-catalog) provides complete titles and links.
 
 ## Taxonomy
 
@@ -220,6 +226,7 @@ The curves illustrate the standard surrogate with epsilon 0.2 and advantage ±1.
 
 | Figure | What it explains |
 |---|---|
+| [Development timeline](figures/timeline.svg) | Representative milestones with method citations and author institutions. |
 | [Policy identities](figures/policies.svg) | Learner, sampling snapshot, actual behavior, proximal anchor, and KL reference. |
 | [Probability trees](figures/prefixes.svg) | Equal local conditionals with different prefix and response probabilities. |
 | [Measurement regimes](figures/measurement_practice.svg) | Fixed-checkpoint numerical probes and online update diagnostics, with distinct policy comparisons. |
@@ -227,7 +234,7 @@ The curves illustrate the standard surrogate with epsilon 0.2 and advantage ±1.
 | [Quantized-update visibility](figures/quantization.svg) | Why a smaller update can cross a boundary while a larger one remains invisible. |
 | [Score centering](figures/centering.svg) | A calculated two-action example separating gradient centering from reward centering. |
 | [Rollout-guided rounding](figures/rounding.svg) | Why better cross-path agreement can differ from lower per-path quantization error. |
-| [Learning operators](figures/operators.svg) | Estimator correction, direction-selective control, and effective gate normalization. |
+| [Learning operators](figures/operators.svg) | Estimator correction versus update influence and acceptance, including information requirements and composition. |
 | [Direct-comparison map](figures/evidence.svg) | Available comparison sets and their distinct numerical settings. |
 | [Timing decomposition](figures/timing.svg) | A constructed example separating rollout acceleration from iteration speedup. |
 
@@ -256,4 +263,4 @@ Use the citation below or GitHub's **Cite this repository** control, which uses 
 
 The paper adapts the **typesetting template** from [arXiv:2601.14004v4](https://arxiv.org/abs/2601.14004v4); its scientific framework is specific to this survey. Attribution and modifications are documented in [TEMPLATE.md](docs/TEMPLATE.md).
 
-The survey PDF, repository content, and template adaptations use [CC BY-SA 4.0](LICENSE). Third-party papers retain their own licenses. The [reading library](papers/README.md) provides 11 explicitly licensed PDF mirrors and 18 official-source links, with attribution and version records in [NOTICES](papers/NOTICES.md) and the [manifest](papers/manifest.json).
+The survey PDF, repository content, and template adaptations use [CC BY-SA 4.0](LICENSE). Third-party papers and institution marks retain their respective rights; mark sources are documented in the [figure notes](docs/FIGURES.md#timeline-affiliations-and-organization-marks). The [reading library](papers/README.md) provides 11 explicitly licensed PDF mirrors and 18 official-source links, with attribution and version records in [NOTICES](papers/NOTICES.md) and the [manifest](papers/manifest.json).
