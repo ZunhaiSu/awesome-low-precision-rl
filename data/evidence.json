@@ -25,7 +25,7 @@
     },
     {
       "key": "qurl",
-      "url": "https://arxiv.org/html/2602.13953v1",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html",
       "locator": "Sections 4.1-4.3 and 5.3",
       "observation": "Longer-run behavior under TIS motivates ACR; invariant scaling addresses quantized weight-update visibility.",
       "limit": "Within-paper setting; not a universal failure horizon."

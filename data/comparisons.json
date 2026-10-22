@@ -14,11 +14,11 @@
     },
     {
       "key": "fp8rl",
-      "learner": "Higher-precision learner with repeated calibration and weight synchronization",
+      "learner": "Higher-precision learner; v2 also explores end-to-end FP8",
       "rollout": "Native W8A8 linear layers; FP8 attention and KV extensions",
       "collection": "Step-wise rollout/training workflow with dynamic QKV-scale recalibration",
-      "boundary": "Each extension has its own precision exceptions and calibration cost.",
-      "locator": "Sections 2.1-2.3; Figures 1 and 4",
+      "boundary": "The representative rollout recipe and the end-to-end FP8 exploration have different learner precision; each extension has its own precision exceptions and calibration cost.",
+      "locator": "Sections 2.1-2.4; Figures 1 and 4",
       "url": "https://arxiv.org/abs/2601.18150v2"
     },
     {
