@@ -22,7 +22,7 @@
   <a href="#citation">Cite</a>
 </p>
 
-Low-precision rollout can accelerate generation while changing the policy that supplies training experience. This survey explains how the mismatch affects gradient estimation and updates, compares remedies, and examines their learning quality and total cost.
+Quantized rollout can accelerate generation while giving the sampler different token probabilities from the learner, even at identical parameters. This survey explains the consequences for gradient estimation and policy updates, compares remedies, and examines learned quality alongside total training cost.
 
 ## Explore the survey
 
@@ -75,12 +75,12 @@ Appendix A summarizes all twenty-nine focal works; Appendices B–C describe sou
 
 Read each work through three complementary views: **mismatch source → intervention target → tested setting**. The source explains why probabilities differ; the target determines the method class; the setting conditions its evidence.
 
-**A · Numerical design** addresses mismatch at its computational source: align the two paths (A1), or preserve numerical fidelity and update resolution (A2). **B · Learning under residual mismatch** manages its effect on learning: correct gradient estimation (B1), or control update influence and acceptance (B2). B can preserve useful learning without shrinking the policy gap. The families can be combined within one system.
+**A · Numerical design** addresses mismatch at its computational source: align the two paths (A1), or preserve numerical fidelity and update visibility (A2). **B · Learning under residual mismatch** manages its effect on learning: correct gradient estimation (B1), or control update influence and acceptance (B2). B can preserve useful learning without shrinking the policy gap. The families can be combined within one system.
 
 | Code | Intervention | Main discussion | Representative components |
 |---|---|---|---|
 | A1 | Align computation between learner and rollout | §4.1 | Jet-RL; QaRL QAT; QUADS weight QAT; TRACE; Miles; QATFactory QARL; R3/TBIK as background |
-| A2 | Control quantization error and preserve parameter updates | §4.2 | QuRL UAQ; QUADS RAC; FP8-RL calibration; KV4-RL protection; Rollout-ResQ; Miles precision exceptions |
+| A2 | Preserve numerical fidelity and update visibility | §4.2 | QuRL UAQ; QUADS RAC; FP8-RL calibration; KV4-RL protection; Rollout-ResQ; Miles precision exceptions |
 | B1 | Correct gradient estimation | §5.1 | FlashRL/TIS; AIS; CIS; Score Centering; baseline/centering theory |
 | B2 | Control policy-update influence | §5.2 | QuRL ACR; QaRL TBPO; Calibrated Clipping; P3O; DRPO; MIPU; ACRL; TRIAGE; DPPO as background |
 
