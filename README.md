@@ -22,7 +22,7 @@
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollouts reduce generation cost, but numerical differences can make the sampler and learner assign different probabilities to the same token history. This survey connects those differences to gradient estimation, policy updates, and learned quality. It organizes methods into **numerical design** and **learning under residual mismatch**, with a shared perspective on measurements and system cost.
+Quantized rollouts can reduce generation cost, but numerical differences can make the sampler and learner assign different probabilities to the same token history. This survey connects those differences to gradient estimation, policy updates, and learned quality. Numerical agreement, optimization stability, and policy improvement are treated as distinct outcomes. It organizes methods into **numerical design** and **learning under residual mismatch**, with a shared perspective on measurements and system cost.
 
 <p align="center">
   <img src="figures/overview.svg" alt="Survey overview: numerical design and learning under residual mismatch in the rollout–learning loop" width="760">
@@ -49,7 +49,7 @@ The collection focuses on the interface between the numerical policy that genera
 
 The corpus contains **19 core method/system studies, 9 supporting studies, and 1 exploration boundary case**. Roles describe contributions to this synthesis; foundational RL papers and neighboring surveys are additional bibliography entries.
 
-The survey synthesizes primary-source methods and within-study results. Numerical formats, architectures, collection protocols, and evaluation rules are recorded alongside the findings. General PTQ, low-precision pretraining, and broader rollout acceleration provide context where they explain this interface.
+The survey synthesizes primary-source methods and within-study results. The [neighboring-survey comparison](docs/RELATED_WORK.md#scope-among-surveys) distinguishes this focus from broader rollout lifecycle and efficiency reviews. Numerical formats, architectures, collection protocols, and evaluation rules are recorded alongside the findings. General PTQ, low-precision pretraining, and broader rollout acceleration provide context where they explain this interface.
 
 <details>
 <summary><strong>Survey organization: eight sections</strong></summary>
@@ -75,7 +75,7 @@ Appendices collect the surveyed-paper mapping, source selection, assumptions and
 
 Read each work through three complementary views: **mismatch source → intervention target → tested setting**. The source explains why probabilities differ; the target determines the method class; the setting conditions its evidence.
 
-**A · Numerical design** addresses mismatch at its computational source: align the two paths (A1), or preserve numerical fidelity and update visibility (A2). **B · Learning under residual mismatch** manages its effect on learning: correct gradient estimation (B1), or control update influence and acceptance (B2). B can preserve useful learning without shrinking the policy gap. The families can be combined within one system.
+**A · Numerical design** changes numerical execution: A1 targets agreement across the two paths; A2 preserves fidelity within a path or the visibility of parameter updates after quantization. **B · Learning under residual mismatch** manages its effect on learning: correct gradient estimation (B1), or control update influence and acceptance (B2). B can preserve useful learning without shrinking the policy gap. The families can be combined within one system.
 
 | Code | Intervention | Main discussion | Representative components |
 |---|---|---|---|
@@ -84,9 +84,9 @@ Read each work through three complementary views: **mismatch source → interven
 | B1 | Correct gradient estimation | §5.1 | FlashRL/TIS; AIS; CIS; Score Centering; baseline/centering theory |
 | B2 | Control policy-update influence | §5.2 | QuRL ACR; QaRL TBPO; Calibrated Clipping; P3O; DRPO; MIPU; ACRL; TRIAGE; DPPO as background |
 
-Format, W/A/KV target, architecture, adaptation, and collection schedule are **configuration labels**. Scheduling (§5.3, navigation tag B3) complements the four classes. QeRL marks the exploration boundary; VeXact supplies a diagnostic reference.
+Format, W/A/KV target, architecture, adaptation, and collection schedule are **configuration labels**. Scheduling S (§5.3) is a cross-family complement. QeRL marks the exploration boundary; VeXact supplies a diagnostic reference.
 
-B2 spans token, response, batch, and whole-policy decisions. The [classification guide](docs/TAXONOMY.md#control-decisions-inside-b2) relates these decision units to clipping, batch adaptation, constraint geometry, directional control, and candidate acceptance.
+B2 separates the decision rule, its control signal, and its application unit. Batch statistics can inform token-level weights, while whole-policy acceptance evaluates the synchronized candidate. The [classification guide](docs/TAXONOMY.md#control-decisions-inside-b2) relates these decision units to clipping, batch adaptation, constraint geometry, directional control, and candidate acceptance.
 
 The [related-work perspectives](docs/RELATED_WORK.md) connect this framework to how the primary papers organize neighboring work. Their terminology is interpreted alongside each paper's actual mechanism.
 
@@ -120,13 +120,15 @@ TRACE compares TIS+SC under joint NVFP4 W/A/KV rollout; TRIAGE tests recovery be
 
 ## Research findings
 
-The [source-linked evidence](docs/EVIDENCE.md) connects intervention mechanisms to policy improvement and system cost. Four conclusions recur across the collection.
+The [source-linked evidence](docs/EVIDENCE.md) connects intervention mechanisms to policy improvement and system cost.
 
 **Alignment depends on what the paths share.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QaRL](https://aclanthology.org/2026.findings-acl.841/), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) coordinate different objects: precision flow, quantized representations, or realized rounding. The shared computation determines which discrepancies are addressed and which remain.
 
 **Controlling disagreement must preserve useful learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [Score Centering](https://arxiv.org/abs/2609.20807), [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870), and [TRIAGE](https://arxiv.org/abs/2610.07043) address update visibility, gradient drift, clipping, and direction-dependent control. Their mechanisms explain why stable curves or small mean gaps alone do not establish effective learning.
 
 **Stability claims have a training horizon.** [TRACE](https://arxiv.org/abs/2610.07767v2) reports late degradation for conventional FP4 QAT in its joint W/A/KV setting; [TRIAGE](https://arxiv.org/abs/2610.07043v2) leaves substantially longer training unevaluated. Extended runs should distinguish sustained improvement, postponed deterioration, and stagnation under restrictive control; the [measurement guide](docs/MEASUREMENTS.md#training-duration-and-delayed-instability) explains the comparison.
+
+**Combinations address complementary residual errors.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html) combines update visibility with clipping control; [QUADS](https://arxiv.org/abs/2607.15810v1) combines weight alignment with activation compensation. The [component analysis](docs/SYNTHESIS.md#mechanism-granularity-and-required-information) connects intervention targets, granularity, and information requirements; the tested bundles retain their original execution and estimator assumptions.
 
 **Efficiency depends on the complete learning loop.** [KV4-RL](https://arxiv.org/abs/2610.14448) reports distinct rollout and full-iteration gains. Calibration, behavior reconstruction, rounding guidance, and weight conversion add dependencies elsewhere in the loop. Section 6 relates these costs to learned-policy quality; the [comparison records](docs/COMPARISONS.md) retain the tested configurations.
 
@@ -152,7 +154,7 @@ Keep [QeRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/a15a2ece7f06
 
 The tables follow first public appearance, with **complete titles and direct source links**. Conference and preprint versions count as one contribution. The [complete catalog](docs/CATALOG.md) adds authors, reviewed versions, numerical regimes, and discussion locations; [JSON records](data/papers.json) support reuse. First-publication dates can precede the formal publication linked below.
 
-Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 · Fidelity](docs/CATALOG.md#fidelity-a2) · [B1 · Estimation](docs/CATALOG.md#estimation-b1) · [B2 · Update control](docs/CATALOG.md#update-control-b2). Complement: [scheduling](docs/CATALOG.md#scheduling-b3).
+Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 · Fidelity](docs/CATALOG.md#fidelity-a2) · [B1 · Estimation](docs/CATALOG.md#estimation-b1) · [B2 · Update control](docs/CATALOG.md#update-control-b2). Complement: [scheduling](docs/CATALOG.md#scheduling-s).
 
 <!-- BEGIN GENERATED CATALOG -->
 
@@ -188,7 +190,7 @@ Browse by intervention: [A1 · Alignment](docs/CATALOG.md#alignment-a1) · [A2 �
 | 2025-10-30 | **FP16-Mismatch**<br>[Defeating the Training-Inference Mismatch via FP16](https://arxiv.org/abs/2510.26788v1) | BF16/FP16 precision-selection evidence | Support; A2 · 3.1 |
 | 2025-11-21 | **TBIK / Deterministic Inference**<br>[Deterministic Inference across Tensor Parallel Sizes That Eliminates Training-Inference Mismatch](https://arxiv.org/abs/2511.17826v2) | Cross-TP deterministic kernels as an alignment reference | Support; A1 · 3.1 |
 | 2025-12-01 | **MiniRL**<br>[Stabilizing Reinforcement Learning with LLMs: Formulation and Practices](https://arxiv.org/abs/2512.01374v3) | Policy roles and mismatch-aware formulation; FP8 experiments | Support; B1/B2 · 2.1 |
-| 2026-02-02 | **Beyond Precision**<br>[Beyond Precision: Training-Inference Mismatch is an Optimization Problem and Simple LR Scheduling Fixes It](https://arxiv.org/abs/2602.01826v1) | Optimization schedule under general TIM | Support; B3 · 5.3 |
+| 2026-02-02 | **Beyond Precision**<br>[Beyond Precision: Training-Inference Mismatch is an Optimization Problem and Simple LR Scheduling Fixes It](https://arxiv.org/abs/2602.01826v1) | Optimization schedule under general TIM | Support; S · 5.3 |
 | 2026-02-04 | **DPPO**<br>[Rethinking the Trust Region in LLM Reinforcement Learning](https://arxiv.org/abs/2602.04879v3) | Divergence-based trust regions under general TIM | Support; B2 · 5.2 |
 | 2026-05-14 | **VeXact / Diagnosing TIM**<br>[Diagnosing Training Inference Mismatch in LLM Reinforcement Learning via a Zero-Mismatch Reference](https://arxiv.org/abs/2605.14220v2) | Zero-mismatch diagnostic reference | Diagnostic · 3.4 |
 | 2026-09-26 | **CIS**<br>[Rethinking Training-Inference Mismatch in LLM Reinforcement Learning: Where It Arises and How to Correct It](https://arxiv.org/abs/2609.32444v1) | Confidence-dependent correction under BF16 cross-engine mismatch | Support; B1 · 5.1 |

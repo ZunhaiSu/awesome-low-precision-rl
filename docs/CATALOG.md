@@ -34,9 +34,9 @@ The influence of samples on policy updates.
 
 [MiniRL](#paper-minirl) (support) · [DPPO](#paper-dppo) (support) · [QuRL](#paper-qurl) · [QaRL](#paper-qarl) · [P3O / ESS](#paper-p3o) · [DRPO](#paper-drpo) · [MIPU](#paper-mipu) · [ACRL](#paper-acrl) · [Full Pipeline FP8 RL](#paper-fullfp8) · [TRIAGE](#paper-triage)
 
-### Scheduling (B3)
+### Scheduling (S)
 
-Complementary scheduling, retained as a navigation topic rather than a fifth primary class; direct low-bit evidence remains limited.
+Cross-family optimization scheduling; direct low-bit validation remains limited.
 
 [Beyond Precision](#paper-beyond) (support)
 
@@ -196,7 +196,7 @@ First public: 2026-02-02 · Source version: [v1](https://arxiv.org/abs/2602.0182
 
 - Numerical regime: General TIM; optimization scheduling
 - Contribution role: support; evidence domain: general_TIM
-- Components: Support; B3
+- Components: Support; S
 - Main discussion: 5.3; additional locations: 3.3
 - Scope: General TIM scheduling evidence; do not infer FP4 validation.
 

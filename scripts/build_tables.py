@@ -60,7 +60,7 @@ def generate():
             ('A2', 'Fidelity (A2)', 'Quantization error and visible parameter updates.'),
             ('B1', 'Estimation (B1)', 'Target expectations and gradient correction.'),
             ('B2', 'Update control (B2)', 'The influence of samples on policy updates.'),
-            ('B3', 'Scheduling (B3)', 'Complementary scheduling, retained as a navigation topic rather than a fifth primary class; direct low-bit evidence remains limited.')]:
+            ('S', 'Scheduling (S)', 'Cross-family optimization scheduling; direct low-bit validation remains limited.')]:
         selected = [r for r in rows if re.search(r'\b' + code + r'\b', r['categories'])]
         links = [f"[{r['name']}](#paper-{r['key']})" + (' (support)' if r['role'] == 'support' else '')
                  for r in sorted(selected, key=lambda r: r['first_publication'])]

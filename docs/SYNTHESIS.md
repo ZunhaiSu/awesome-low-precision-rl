@@ -2,6 +2,24 @@
 
 The survey follows a chain: **numerical execution → sampled experience → gradient estimation → policy update → the next numerical sampler**. Measurements identify a discrepancy or its consequence at a point in this chain; method classes identify which component is changed. These are complementary views, not interchangeable classifications.
 
+## Mechanism, granularity, and required information
+
+Intervention class identifies what changes. Granularity identifies where it acts; information requirements determine what the implementation must observe or retain. These examples describe components, including the specified UAQ component of QuRL.
+
+| Component / class | Targeted mechanism | Application unit | Required information or execution |
+|---|---|---|---|
+| **Jet-RL · A1**<br>[Jet-RL: Enabling On-Policy FP8 Reinforcement Learning with Unified Training and Rollout Precision Flow](https://arxiv.org/abs/2601.14243v2) | Share operator precision and numerical configuration. | Corresponding operators. | Coordinated precision flow and quantizer semantics. |
+| **QuRL · A2 · UAQ component**<br>[QuRL: Low-Precision Reinforcement Learning for Efficient Reasoning](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html) | Preserve the expression of parameter updates after quantization. | Parameters and layer parameterization. | A rescaling chosen relative to update and quantization scales. |
+| **TRACE · A1**<br>[TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models](https://arxiv.org/abs/2610.07767v2) | Couple realized rounding outcomes. | Paired layer, token, and quantization site. | Retained rollout code information and scales, matched to learner states. |
+| **KV4-RL · A2**<br>[KV4-RL: Unlocking Faster Asynchronous Rollouts for RLVR with INT4 KV Cache Quantization](https://arxiv.org/abs/2610.14448v1) | Protect sensitive cache information. | Selected cache positions. | Position-aware low-bit cache execution with higher-precision protection. |
+| **FlashRL / TIS · B1**<br>[On the Rollout-Training Mismatch in Modern RL Systems](https://www.opt-ml.org/papers/2025/paper116.pdf) | Reweight observed actions toward a specified target. | Sampled tokens and the declared reduction. | Actual behavior and proximal/learner probabilities, with support assumptions. |
+| **Score Centering · B1**<br>[Score Centering Stabilizes Off-policy Reinforcement Learning](https://arxiv.org/abs/2609.20807v1) | Remove the corresponding conditional score mean. | Action expectation at a prefix. | Behavior distribution information; the implementation reconstructs it from top-k records and a modeled tail. |
+| **P3O / ESS · B2**<br>[Let the Batch Decide, On- or Off-Policy: Effective Sample Size for RL Post-Training](https://arxiv.org/abs/2605.12380v2) | Adapt cap and regularization to reliability. | Batch-level signal, applied through the objective. | Raw ratio moments and valid-token counts. |
+| **TRIAGE · B2**<br>[TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning](https://arxiv.org/abs/2610.07043v2) | Select directional contributions and apply bounded repair. | Tokens and segments with response normalization. | Advantages, signed learner–behavior gaps, and segment statistics. |
+| **MIPU · B2**<br>[The Mirage of Optimizing Training Policies: Monotonic Inference Policies as the Real Objective for LLM Reinforcement Learning](https://arxiv.org/abs/2606.29526v1) | Accept or reject a synchronized inference-policy candidate. | Whole candidate policy. | Post-conversion assessment and a candidate/rollback mechanism. |
+
+Shared granularity does not imply shared estimators, and complementary targets do not guarantee a compatible implementation. The policy pair, weighting and reduction must remain consistent when components are combined.
+
 ## Studied combinations
 
 The following bundles are discussed in the reviewed primary sources. They illustrate mechanistic complementarity without establishing that any component can be swapped into another system unchanged.

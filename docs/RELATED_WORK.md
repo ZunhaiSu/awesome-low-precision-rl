@@ -2,6 +2,14 @@
 
 The primary papers organize neighboring work from different viewpoints. This guide relates those viewpoints to the survey’s component framework. Interpretations refer to the reviewed versions linked below; method-level descriptions are checked against the source methods, rather than inferred only from a related-work label.
 
+## Scope among surveys
+
+| Survey | Organizing scope | Connection to this review |
+|---|---|---|
+| [Generate, Filter, Control, Replay: A Comprehensive Survey of Rollout Strategies for LLM Reinforcement Learning](https://arxiv.org/abs/2605.02913v1) | Lifecycle functions of rollout pipelines. | Provides the broader data-collection context. |
+| [Rollout Efficiency in Reinforcement Learning for Reasoning Large Language Models: A Taxonomy and Future Directions](https://arxiv.org/abs/2609.25463v1) | Mechanisms and bottlenecks of rollout efficiency, composition, and reporting. | Provides the broader efficiency context. |
+| [Training–Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey](../Survey.pdf) | Numerical discrepancies, estimation, update decisions, and learning consequences. | Connects intervention targets to the information and evidence needed to assess their effects. |
+
 ## Three complementary views
 
 | View | Question | Role in the survey |

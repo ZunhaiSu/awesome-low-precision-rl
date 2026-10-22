@@ -13,9 +13,13 @@ These are intervention targets, so numerical design can act on the learner, samp
 | B1 | Estimation | Change action weights or score expectations to address a distributional estimation problem. |
 | B2 | Update influence | Change the constraints, magnitude, or direction of sampled contributions, or accept/reject a whole candidate update. |
 
-**Complementary scheduling.** Beyond Precision remains under §5.3 with navigation tag B3. Its general-TIM scheduling evidence is useful context, but it does not form a fifth primary route with equal direct low-bit coverage.
+**Complementary scheduling.** Scheduling S is a cross-family complement, discussed in §5.3. Beyond Precision supplies general-TIM evidence; direct validation under aggressive low-bit execution remains limited.
 
 The classes answer four questions: can the two computations agree more closely (A1); is useful information preserved at low precision (A2); how should behavior samples estimate a target gradient (B1); and which updates should influence the next policy (B2)? The distinction follows the component's direct target, not its software primitive. Both B1 and B2 can multiply a loss by weights. B1 starts from an estimation target; B2 starts from a constraint, selection rule, or acceptance criterion. Truncation can bias an estimator, and update control can also change estimation.
+
+A2 contains two preservation mechanisms: retaining activation/state fidelity through compensation, calibration, or selective precision, and retaining the expression of parameter updates after quantization. These mechanisms share an information-preservation goal but address different failures. They remain within A2 without additional primary labels.
+
+Control granularity is independent of the rule used to enforce a decision. P3O uses batch statistics to change contributions through the objective; ACRL uses response statistics to guide token weights; MIPU assesses a whole synchronized candidate. Objective design and token, segment, batch, or policy units therefore describe complementary dimensions. The [mechanism and information map](SYNTHESIS.md#mechanism-granularity-and-required-information) illustrates these distinctions.
 
 A loss can contain an importance ratio while contributing a new update constraint. DPPO and DRPO are classified by trust-region geometry (B2), whereas Score Centering changes a conditional gradient expectation (B1). The presence of a ratio or mask alone does not fix the assignment.
 

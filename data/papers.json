@@ -273,7 +273,7 @@
     "arxiv_url": "https://arxiv.org/abs/2602.01826",
     "reviewed_version": "v1",
     "role": "support",
-    "categories": "Support; B3",
+    "categories": "Support; S",
     "primary_section": "5.3",
     "secondary_sections": "3.3",
     "note": "General TIM scheduling evidence; do not infer FP4 validation.",
