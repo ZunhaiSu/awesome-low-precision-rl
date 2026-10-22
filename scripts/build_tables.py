@@ -92,9 +92,9 @@ def generate():
 <title id="title">Working survey · {len(rows)} focal studies · CC BY-SA 4.0</title>
 <desc id="desc">Research status, catalog size, and repository license.</desc>
 <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11.5" font-weight="600" text-anchor="middle">
-<rect x="1" y="1" width="182" height="28" rx="6" fill="#EEF4FB" stroke="#CBD7E2"/><text x="92" y="19" fill="#2865A0">WORKING SURVEY</text>
-<rect x="194" y="1" width="182" height="28" rx="6" fill="#EDF7F4" stroke="#CBD7E2"/><text x="285" y="19" fill="#147D77">{len(rows)} FOCAL STUDIES</text>
-<rect x="387" y="1" width="182" height="28" rx="6" fill="#F1F4F7" stroke="#CBD7E2"/><text x="478" y="19" fill="#52677D">CC BY-SA 4.0</text>
+<rect x="1" y="1" width="182" height="28" rx="6" fill="#EDF3F9" stroke="#CCD8E2"/><text x="92" y="19" fill="#2B608F">WORKING SURVEY</text>
+<rect x="194" y="1" width="182" height="28" rx="6" fill="#EDF6F2" stroke="#CCD8E2"/><text x="285" y="19" fill="#1A7B70">{len(rows)} FOCAL STUDIES</text>
+<rect x="387" y="1" width="182" height="28" rx="6" fill="#F2F4F7" stroke="#CCD8E2"/><text x="478" y="19" fill="#526477">CC BY-SA 4.0</text>
 </g></svg>
 '''
     return {ROOT / 'README.md': readme,

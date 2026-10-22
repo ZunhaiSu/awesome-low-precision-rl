@@ -17,19 +17,19 @@
 
 <p align="center">
   <a href="Survey.pdf"><strong>Read the survey PDF</strong></a> &nbsp;·&nbsp;
-  <a href="#paper-catalog">Papers</a> &nbsp;·&nbsp;
+  <a href="papers/README.md"><strong>Reading library</strong></a> &nbsp;·&nbsp;
+  <a href="#paper-catalog">All papers</a> &nbsp;·&nbsp;
   <a href="docs/EVIDENCE.md">Evidence</a> &nbsp;·&nbsp;
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollout changes both the cost of generating experience and the policy that supplies it. This survey follows those changes through sampling, gradient estimation, and policy updates, then compares the numerical and learning interventions used to control them. The framework connects numerical mechanisms to the measurements used in practice, the interventions they motivate, and reported quality and total training cost.
+Quantized rollout changes the policy that generates training experience. This survey traces the resulting discrepancy through gradient estimation and policy updates, connecting numerical mechanisms, measurement practice, learned quality, and total training cost.
 
 ## Explore the survey
 
-| Understand the mechanisms | Compare interventions | Assess the evidence |
-|---|---|---|
-| Policy roles, execution differences, and their effects on learning. | Numerical alignment, fidelity control, estimator correction, and update control. | Within-study findings, assumptions, quality, and system cost. |
-| [Reading routes](#reading-routes) · §§2–3 | [Component taxonomy](#taxonomy) · §§4–5 | [Evidence records](docs/EVIDENCE.md) · §6 |
+[Mechanisms and background](#reading-routes) · [Interventions](#taxonomy) · [Measurement practice](docs/MEASUREMENTS.md) · [Source-linked evidence](docs/EVIDENCE.md)
+
+For the papers themselves, use the [core reading route](papers/README.md#core-reading) across the two topic folders. **Score Centering is a core B1 method**, alongside TIS and AIS; folder placement is independent of its role in the survey.
 
 **New to the topic?** Start with the GRPO example in §2.1: rewards → group advantages → policy ratios and clipping → update → quantized synchronization. Section 2.4 explains W/A/KV targets, QAT, and native arithmetic.
 
@@ -47,9 +47,9 @@ Quantized rollout changes both the cost of generating experience and the policy 
 
 The collection focuses on the interface between the numerical policy that generates a rollout and the computation used to learn from it. It covers weight, activation, and KV-cache quantization; low precision on one or both endpoints; and closely related work on training–inference mismatch (TIM).
 
-The focal corpus contains **19 method/system studies, 9 supporting formulation/theory/general TIM studies, and 1 exploration boundary case**. These roles describe how a study enters the survey. Foundational RL papers and neighboring surveys appear in the bibliography but are not counted as focal works.
+The corpus contains **19 core method/system studies, 9 supporting studies, and 1 exploration boundary case**. Roles describe contributions to this synthesis; foundational RL papers and neighboring surveys are additional bibliography entries.
 
-This is a focused narrative survey. General PTQ, low-precision pretraining, and unrelated rollout acceleration fall outside its focal scope. The collection synthesizes published evidence and introduces no new benchmark.
+This narrative survey synthesizes published evidence. General PTQ, low-precision pretraining, and unrelated rollout acceleration enter only where they explain this interface.
 
 <details>
 <summary><strong>Survey organization: eight sections</strong></summary>
@@ -85,9 +85,7 @@ Four primary classes describe the **component being changed**, so a paper may co
 | B1 | Correct gradient estimation | §5.1 | FlashRL/TIS; AIS; CIS; Score Centering; baseline/centering theory |
 | B2 | Control policy-update influence | §5.2 | QuRL ACR; QaRL TBPO; Calibrated Clipping; P3O; DRPO; MIPU; ACRL; TRIAGE; DPPO as background |
 
-Precision format, W/A/KV target, architecture, adaptation regime, and collection schedule are **separate configuration labels**. CIS calibrates importance sampling; Calibrated Clipping calibrates update boundaries. QeRL is discussed in a boundary box; VeXact is a diagnostic reference.
-
-Scheduling is a complementary topic in §5.3; B3 remains a navigation tag for its supporting literature. It is not a fifth primary route.
+Format, W/A/KV target, architecture, adaptation, and collection schedule are **configuration labels**. Scheduling (§5.3, navigation tag B3) complements the four classes. QeRL marks the exploration boundary; VeXact supplies a diagnostic reference.
 
 B2 includes boundary placement (QuRL/QaRL/Calibrated Clipping), batch reliability (P3O), divergence geometry (DPPO/DRPO), directional influence (ACRL/TRIAGE), and candidate acceptance (MIPU). Their different decision units are summarized in the [classification guide](docs/TAXONOMY.md#control-decisions-inside-b2).
 
@@ -97,7 +95,7 @@ The [related-work perspectives](docs/RELATED_WORK.md) connect this framework to 
 
 The papers do **not** use one common mismatch metric. TRIAGE's average absolute log gap, TRACE's gap extrema, QuRL's behavior-to-proximal KL, and KV4-RL's full-distribution shared-prefix KL describe different quantities. ESS measures weight concentration; reward and entropy describe learning outcomes.
 
-The survey connects **numerical disagreement → estimator or update effects → learned quality and total cost**. Its [measurement guide](docs/MEASUREMENTS.md) maps all **19 core studies**, with complete titles, source locations, policy comparisons, and interpretation limits. Section 3.4 separates controlled numerical probes from online training diagnostics; Appendix E maps the source practices and reporting choices. Token versus response averaging, raw versus capped ESS, masks, distributed reductions and KL conventions are treated explicitly. This is an evidence synthesis, not a new benchmark.
+The [measurement guide](docs/MEASUREMENTS.md) maps all **19 core studies** with complete titles, source locations, policy comparisons, and interpretation limits. In the paper, **§3.4 defines the measurements, §6.2 interprets the learning evidence, and Appendix E collects study-specific practices**. The chain is numerical disagreement → estimator or update effects → learned quality and total cost.
 
 ## Comparing methods
 
@@ -116,7 +114,7 @@ The [studied combinations](docs/SYNTHESIS.md) connect numerical alignment, fidel
 
 ## Reading routes
 
-The catalog follows first public appearance. The routes below follow conceptual dependencies and keep closely related questions together.
+The catalog is chronological; these routes connect mechanisms. The [numbered reading library](papers/README.md) preserves the local topic groups and provides direct paper access.
 
 | Question | Suggested route | Survey |
 |---|---|---|
@@ -249,6 +247,6 @@ Propose a missing paper, correct a technical claim, or discuss a research collab
 
 The paper adapts the **typesetting template** from [arXiv:2601.14004v4](https://arxiv.org/abs/2601.14004v4); its scientific framework is specific to this survey. Attribution and modifications are documented in [TEMPLATE.md](docs/TEMPLATE.md).
 
-The survey is under active development. Its scientific scope and source versions are documented alongside the manuscript; editorial assessments are available in the [review history](docs/REVIEW.md).
+This working manuscript welcomes corrections and collaboration. [Scope and source versions](docs/CATALOG.md), [editorial assessment](docs/ASSESSMENT.md), and [document validation](docs/BUILD.md) accompany the PDF.
 
-The survey PDF, repository content, and template adaptations use [CC BY-SA 4.0](LICENSE). Linked papers retain their own licenses; their PDFs are not redistributed here.
+The survey PDF, repository content, and template adaptations use [CC BY-SA 4.0](LICENSE). Third-party papers retain their own licenses. The [reading library](papers/README.md) provides 11 explicitly licensed PDF mirrors and 18 official-source links, with attribution and version records in [NOTICES](papers/NOTICES.md) and the [manifest](papers/manifest.json).

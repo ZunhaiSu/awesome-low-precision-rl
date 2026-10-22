@@ -1,5 +1,7 @@
 # Related theory and systems / 相关理论与系统
 
+This folder groups broader theory and systems by topic. It includes core survey methods such as FlashRL/TIS, Score Centering, P3O and DRPO. Start from the [core reading route](../README.md#core-reading); folder placement is independent of importance.
+
 通用 TIM／off-policy 方法、诊断与理论，以及综合系统或量化框架，按首次公开时间排序。
 
 [All reading routes](../README.md) · [Survey PDF](../../Survey.pdf)

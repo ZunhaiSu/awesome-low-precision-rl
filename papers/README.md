@@ -1,6 +1,6 @@
 # Quantized RL reading library / 量化 RL 阅读库
 
-Start with **13 papers centered on quantized rollout or low-precision RL**. Continue with **16 related papers** on TIM, off-policy optimization, diagnostics, theory, and broader systems. Each group follows first public appearance and uses the same numbering as the local reading library.
+The two numbered folders preserve the local collection's **topic grouping**: 13 studies centered on quantized RL and 16 related theory/system studies. Folder placement does not determine importance or the survey's core/supporting role. Use the [core reading route](#core-reading) below to connect essential mechanisms across both folders.
 
 | Reading group | Papers | Purpose |
 |---|---:|---|
@@ -9,9 +9,22 @@ Start with **13 papers centered on quantized rollout or low-precision RL**. Cont
 
 The folders contain **11 unmodified PDF copies with verified redistribution licenses** and **18 numbered entries linking to official PDFs**. Every entry includes the complete title, pinned source, and reading focus. PDF copies match the official sources byte for byte; their authors and licenses are recorded in [Third-party notices](NOTICES.md) and the [manifest](manifest.json).
 
-These are reading priorities, complementary to the survey's component taxonomy and contribution roles. QeRL belongs to the quantization reading route while remaining an exploration boundary in the survey; general TIM methods remain fully covered by the survey. The groups do not express experimental-quality rankings.
+Folder numbers preserve the existing chronological order within each topic. The survey independently identifies 19 core studies, 9 supporting studies and one exploration boundary.
 
 [Survey PDF](../Survey.pdf) · [Full surveyed catalog](../docs/CATALOG.md) · [Component taxonomy](../docs/TAXONOMY.md)
+
+## Core reading
+
+Read across the folders by the question each method answers. These are starting routes through the core literature, rather than a performance ranking; the [catalog](../docs/CATALOG.md) includes all 19 core studies.
+
+| Question | Suggested route | Survey |
+|---|---|---|
+| How should behavior samples enter a gradient? | FlashRL / TIS → AIS → **Score Centering** | §5.1 |
+| What must learner and sampler share? | Jet-RL → QaRL → QUADS → TRACE | §4.1 |
+| Which updates should remain active? | QuRL → Full Pipeline FP8 RL → TRIAGE; P3O and DRPO extend the control perspective | §5.2 |
+| Which cache states need protection? | KV4-RL, read alongside TIS | §4.2 |
+
+**Score Centering is a core B1 method.** Its location in the related-theory folder reflects the paper's broader TIM formulation. The separate *Baselines and Score Centering in Policy Gradient Estimation* paper is supporting theory. Full titles and paper links appear in the chronological tables below.
 
 ## Quantized RL mainline / 量化 RL 主线
 

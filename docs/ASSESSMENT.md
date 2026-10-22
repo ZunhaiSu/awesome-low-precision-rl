@@ -1,13 +1,12 @@
 # Editorial assessment
 
-The survey now develops a connected argument from the numerical policy that generates experience to the update that produces the next policy. Four primary intervention classes remain stable; sources, tested settings, diagnostic levels and contribution roles describe different views of the same literature.
+The manuscript follows one argument: numerical execution changes the experience supplied to RL, which changes gradient estimation and policy updates. Its four intervention classes locate these mechanisms; execution settings and measurement practices determine how the published evidence can be interpreted.
 
-| Aspect | Earlier limitation | Current treatment |
+| Aspect | Before this refinement | Current treatment |
 |---|---|---|
-| Measurement | Formula definitions and a paper-level map did not fully explain how a number is produced in practice. | Controlled probes and online diagnostics are separated; aggregation, selected populations, version lag, numeric floors, distributed reductions and uncertainty are explicit. |
-| Mechanisms | Detailed SC/TRIAGE discussions outweighed some earlier components, and forward agreement could be confused with gradient fidelity. | AIS, CIS and compact TRACE guidance receive fuller explanations; derivative arithmetic is distinguished from forward mismatch. |
-| Composition | Complementarity was often described in general terms. | Six source-backed bundles identify the residual effect each component addresses; estimator and state compatibility precede claims of synergy. |
-| Evidence | New diagnostics could remain disconnected from the outcome synthesis. | Control signals, numerical evaluation metrics and explanatory update audits are distinguished, then connected to held-out learning and total cost. |
-| Presentation | Small figure notes and several sparse page spills weakened continuity. | A restrained semantic palette, larger figure text, a new measurement diagram, a tighter abstract and repaired pagination retain the original template. |
+| Measurement | Definitions, interpretation and reporting controls overlapped across three locations. | §3.4 defines quantities, §6.2 interprets evidence, and Appendix E holds study-specific practices and implementation controls. |
+| Prose | Repeated framing and qualifications slowed the comparison of methods. | Shorter transitions preserve mechanisms, assumptions and source-specific results; the manuscript is 43 pages, down from 44. |
+| Reading navigation | Topic folders could be mistaken for an importance ordering. | Core routes cross both folders; Score Centering is explicitly a core B1 method. Existing paper numbers remain stable. |
+| Presentation | Captions repeated diagram labels; current and historical release notes were mixed. | Leaner captions, one semantic palette and a concise historical index clarify the paper and companion repository. |
 
-The current version is a coherent qualitative survey manuscript, not a universal benchmark or method ranking. The strongest addition is a practical interpretation of heterogeneous mismatch measurements. Its scope remains twenty-nine reviewed contributions, with source-specific evidence and explicit distinctions between direct low-precision results, supporting TIM studies and exploration. A future benchmark can build on these measurement specifications, but is outside the empirical claims of this manuscript.
+The strongest perspective is the connection between heterogeneous mismatch measurements, estimator or update effects, and useful learning at total cost. The manuscript is ready for final author review as a qualitative survey. Its curated corpus and heterogeneous primary evidence still limit cross-study comparisons; a common benchmark and independent experimental reproduction remain separate research work.

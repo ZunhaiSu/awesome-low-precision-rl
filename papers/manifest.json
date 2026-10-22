@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "checked_date": "2026-10-20",
-  "grouping_basis": "Reading priority: quantized RL mainline, then related theory and systems.",
+  "grouping_basis": "Topic grouping: quantization-focused studies and related theory/systems. Folder placement is independent of the survey contribution role and core-reading priority.",
   "counts": {
     "main": 13,
     "related": 16,
