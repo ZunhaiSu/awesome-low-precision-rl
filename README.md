@@ -6,7 +6,8 @@
 </p>
 
 <p align="center">
-  <strong>Zunhai Su<sup>1</sup> · Wei Wu<sup>2</sup> · Yifan Zhang<sup>2</sup> · Chao Zhang<sup>2</sup> · Yuxuan Sun<sup>2</sup> · Jianchao Tan<sup>2</sup> · Ngai Wong<sup>1</sup></strong><br>
+  <strong>Zunhai Su<sup>1</sup> · Wei Wu<sup>2</sup> · Yifan Zhang<sup>2</sup> · Chao Zhang<sup>2</sup><br>
+  Yuxuan Sun<sup>2</sup> · Jianchao Tan<sup>2</sup> · Yik-Chung Wu<sup>1</sup> · Ngai Wong<sup>1</sup></strong><br>
   <sup>1</sup>The University of Hong Kong &nbsp;·&nbsp; <sup>2</sup>Meituan
 </p>
 
@@ -253,7 +254,7 @@ Use the citation below or GitHub's **Cite this repository** control, which uses 
 ```bibtex
 @misc{su2026trainingrollout,
   title  = {Training--Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey},
-  author = {Su, Zunhai and Wu, Wei and Zhang, Yifan and Zhang, Chao and Sun, Yuxuan and Tan, Jianchao and Wong, Ngai},
+  author = {Su, Zunhai and Wu, Wei and Zhang, Yifan and Zhang, Chao and Sun, Yuxuan and Tan, Jianchao and Wu, Yik-Chung and Wong, Ngai},
   year   = {2026},
   url    = {https://github.com/ZunhaiSu/awesome-low-precision-rl}
 }
