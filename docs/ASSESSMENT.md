@@ -1,7 +1,7 @@
-# Editorial assessment
+# Research perspective
 
-The survey follows numerical execution through sampled experience, gradient estimation, and policy updates. Its A/B distinction is now explicit: numerical design addresses the computational source, while learning interventions manage the consequences of residual mismatch. Both can operate within one system; correction need not force the two policies to agree.
+The survey connects numerical execution, sampled experience, gradient estimation, and policy updates. Its organizing distinction separates interventions in numerical computation from interventions in learning under residual mismatch. Components within both families can contribute to one system.
 
-The manuscript is 41 pages. Tighter mechanism summaries and transitions preserve the policy definitions, equations, source-specific findings and measurement guidance. Short paragraph endings were rewritten, named studies in the figures carry citations, and the update-control diagram distinguishes a local sign guide from segment-level repair eligibility.
+Measurement practice provides the bridge between mechanism and evidence: policy identities, conditioning, aggregation, and update stage determine the meaning of a reported discrepancy. Conditional agreement, gradient fidelity, policy improvement, and total training cost remain distinct evaluation targets.
 
-The central contribution remains the connection between heterogeneous mismatch measurements, estimator or update effects, and useful learning at total cost. The manuscript is suitable for final author review as a qualitative survey. Its curated corpus and heterogeneous primary evidence limit cross-study ordering; a common benchmark and independent experimental reproduction remain separate research work.
+The synthesis draws on published within-study comparisons. Differences in models, precision paths, collection protocols, and checkpoint rules constrain cross-study ordering. Controlled comparisons under matched resources are a research direction arising from these differences.

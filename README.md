@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img src="figures/status.svg" alt="Working survey · 29 focal studies · CC BY-SA 4.0" width="570">
+  <img src="figures/status.svg" alt="Research survey · 29 focal studies · CC BY-SA 4.0" width="570">
 </p>
 
 <p align="center">
@@ -37,7 +37,7 @@ Use the [core reading route](papers/README.md#core-reading) across both topic fo
   <img src="figures/overview.svg" alt="Survey overview: generation, collected experience, and learner updates form a feedback loop" width="680">
 </p>
 
-> **Living survey.** Technical corrections, missing papers, and research collaborations are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
+> **Updates and collaboration.** Technical corrections, relevant papers, and collaboration enquiries are welcome through [GitHub Issues](https://github.com/ZunhaiSu/awesome-low-precision-rl/issues).
 
 ## Contents
 
