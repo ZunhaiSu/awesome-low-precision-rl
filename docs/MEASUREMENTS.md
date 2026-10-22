@@ -25,6 +25,14 @@ With d = log p − log q on actions sampled from q, the mean of |d| is a sampled
 
 Normalized empirical ESS = (Σw)² / (N Σw²) measures concentration among N weights. Report whether w is raw or capped. It is not, by itself, a calibrated numerical distance or a guarantee of gradient accuracy.
 
+## Training duration and delayed instability
+
+Longer optimization and longer generated trajectories test different properties. Stability over the reported training window does not establish stability over larger budgets, and a persistent numerical gap does not by itself imply failed correction. The question is whether useful learning persists as the policy and sampled states evolve.
+
+Report optimizer steps, rollout and learner tokens, and elapsed training cost; retain late-stage quality alongside the best checkpoint. Periodic paired execution probes help separate numerical error from policy staleness, while online estimator and update diagnostics show how the data continue to influence learning. Track retained contributions or rejected updates to detect stability obtained by progressively suppressing learning.
+
+Time to failure requires a declared event and persistence window, such as sustained quality loss assessed alongside estimator or update diagnostics. Independent RL runs reveal variation in onset. A run ending without the event establishes survival only to its observation limit. Extended-budget comparisons should distinguish sustained useful learning, delayed deterioration, and learning stagnation. Stress tests require separate validation: [Score Centering](https://arxiv.org/abs/2609.20807v1) describes severe mismatch on short sequences as a proxy for longer training under milder mismatch, while [ACRL](https://arxiv.org/abs/2607.24062v1) identifies possible reference-baseline drift over exceptionally long runs.
+
 ## Source-by-source measurement map
 
 The table identifies the selected evidence. Each following entry states its comparison and interpretation boundary. A missing detail is marked locally; it is not inferred from another paper using the same metric name.

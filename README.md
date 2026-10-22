@@ -22,7 +22,7 @@
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollout can accelerate generation while giving the sampler different token probabilities from the learner, even at identical parameters. This survey explains the consequences for gradient estimation and policy updates, compares remedies, and examines learned quality alongside total training cost.
+Quantized rollout can accelerate generation while giving the sampler different token probabilities from the learner, even at identical parameters. This survey classifies interventions by the mechanism they change, connects mismatch measurements to learning outcomes, and develops research directions in sustained stability, efficient mitigation, and quality at matched total training cost.
 
 ## Explore the survey
 
@@ -61,7 +61,7 @@ This narrative survey synthesizes published evidence. General PTQ, low-precision
 | 4. Numerical Design and Execution Alignment | Compare computation alignment, fidelity control, and update visibility. |
 | 5. Learning under Residual Mismatch | Explain estimator correction and update control, with complementary scheduling and composition. |
 | 6. Evidence Synthesis and System Trade-offs | Connect published learning outcomes to evidence and system cost. |
-| 7. Open Problems | Develop priorities in diagnosis, composition, mitigation cost, stateful execution, and transfer. |
+| 7. Open Problems | Develop priorities in sustained stability, composition, mitigation cost, stateful execution, and transfer. |
 | 8. Conclusion | Bring numerical fidelity and learning correction into one perspective. |
 
 Appendix A summarizes all twenty-nine focal works; Appendices B–C describe source selection, assumptions, and transfer; Appendix D defines the terminology; Appendix E maps mismatch measurements across all nineteen core studies.
@@ -185,15 +185,17 @@ Roles describe relevance to the survey, rather than evidence quality. Primary an
 
 ## Research findings
 
-The [evidence records](data/evidence.json) cover all nineteen core studies and locate their observations in the primary papers. The survey develops three recurring findings:
+The [evidence records](data/evidence.json) cover all nineteen core studies and locate their observations in the primary papers. The synthesis connects numerical design, learning effects, and system cost.
 
 **Shared computation matters more than nominal symmetry.** [Jet-RL](https://arxiv.org/abs/2601.14243), [QaRL](https://aclanthology.org/2026.findings-acl.841/), [QUADS](https://arxiv.org/abs/2607.15810), and [TRACE](https://arxiv.org/abs/2610.07767) coordinate different objects: precision flow, quantized representations, or realized rounding. Matching format labels alone does not identify what remains inconsistent.
 
 **Controlling disagreement must preserve useful learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [Score Centering](https://arxiv.org/abs/2609.20807), [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870), and [TRIAGE](https://arxiv.org/abs/2610.07043) address update visibility, gradient drift, clipping, and direction-dependent control. Their mechanisms explain why stable curves or small mean gaps alone do not establish effective learning.
 
+**Stability claims have a training horizon.** Early agreement or completion of one run cannot establish sustained improvement at larger budgets. [TRACE](https://arxiv.org/abs/2610.07767v2) reports late degradation for conventional FP4 QAT in its joint W/A/KV setting; [TRIAGE](https://arxiv.org/abs/2610.07043v2) leaves substantially longer training unevaluated. These are different evidence claims. Extended runs should distinguish sustained useful learning, postponed deterioration, and learning stagnation; the [measurement guide](docs/MEASUREMENTS.md#training-duration-and-delayed-instability) explains the comparison.
+
 **Generation speed and learning efficiency have different costs.** [KV4-RL](https://arxiv.org/abs/2610.14448) reports distinct rollout and full-iteration gains. Calibration, behavior reconstruction, rounding guidance, and weight conversion add dependencies elsewhere in the loop. Section 6 relates these costs to learned-policy quality; the [comparison records](docs/COMPARISONS.md) retain the tested configurations.
 
-Open directions include reducing the storage and communication required for rollout guidance and simplifying the configuration of mismatch control. More unified or adaptive mechanisms should be assessed by the useful learning they preserve, their tuning effort, and their runtime overhead. Controlled comparisons should report policy quality at matched total training cost and cost to a target quality.
+Open directions include testing whether stress protocols predict extended-run behavior, adapting control references as the policy evolves, and lowering the cost of guidance and update control. Adaptive mechanisms should be assessed by the learning contributions they preserve, their tuning effort, and their runtime overhead. Controlled comparisons should report policy quality at matched total training cost and cost to a target quality.
 
 The collection distinguishes simulated FP4, native low-bit kernels, and BF16 computation on quantized values. It synthesizes source-reported results and does not introduce a common leaderboard or an independently reproduced benchmark.
 

@@ -251,7 +251,7 @@ First public: 2026-04-09 · Source version: [ACL2026-Findings](https://aclanthol
 - Numerical regime: Quantized MoE rollout; aligned learner QAT
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: A1; B2
-- Main discussion: 4.1; additional locations: 5.2; 5.4; 6.2
+- Main discussion: 4.1; additional locations: 5.2; 5.4; 6.2; 7.3
 - Scope: Aligned QAT and TBPO are distinct components.
 
 [arXiv record](https://arxiv.org/abs/2604.07853) · [Publication/source](https://aclanthology.org/2026.findings-acl.841/)
@@ -287,7 +287,7 @@ First public: 2026-05-13 · Source version: [v1](https://arxiv.org/abs/2605.1390
 - Numerical regime: BF16 learner / FP8 rollout; autoregressive and diffusion models
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: B1
-- Main discussion: 5.1; additional locations: 6.1; 6.2
+- Main discussion: 5.1; additional locations: 6.1; 6.2; 7.5
 - Scope: Adaptive estimator mixture; autoregressive and diffusion evidence distinguished.
 
 [arXiv record](https://arxiv.org/abs/2605.13907) · [Publication/source](https://arxiv.org/abs/2605.13907)
@@ -341,7 +341,7 @@ First public: 2026-06-28 · Source version: [v1](https://arxiv.org/abs/2606.2952
 - Numerical regime: BF16 learner / FP8 rollout; Qwen3-1.7B and 4B
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: B2; formulation
-- Main discussion: 5.2; additional locations: 2.1; 6.2; 6.3
+- Main discussion: 5.2; additional locations: 2.1; 6.2; 6.3; 7.3
 - Scope: Sampler-referenced candidates and inference-gap-aware acceptance; practical proxy guarantees are limited.
 
 [arXiv record](https://arxiv.org/abs/2606.29526) · [Publication/source](https://arxiv.org/abs/2606.29526)
@@ -377,7 +377,7 @@ First public: 2026-07-27 · Source version: [v1](https://arxiv.org/abs/2607.2406
 - Numerical regime: FP8 rollout; discrepancy-dependent updates
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: B2
-- Main discussion: 5.2; additional locations: 3.3; 6.2
+- Main discussion: 5.2; additional locations: 3.3; 6.2; 7.1
 - Scope: Advantage-guided, discrepancy-dependent update control.
 
 [arXiv record](https://arxiv.org/abs/2607.24062) · [Publication/source](https://arxiv.org/abs/2607.24062)
@@ -431,7 +431,7 @@ First public: 2026-09-17 · Source version: [v1](https://arxiv.org/abs/2609.2080
 - Numerical regime: BF16 learner; quantized sampler including FP4/INT4 KV variants; separate policy-lag tests
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: B1
-- Main discussion: 5.1; additional locations: 2.2; 3.2; 5.4; 6.2
+- Main discussion: 5.1; additional locations: 2.2; 3.2; 5.4; 6.2; 7.1; 7.2
 - Scope: Additive score correction; not full on-policy recovery.
 
 [arXiv record](https://arxiv.org/abs/2609.20807) · [Publication/source](https://arxiv.org/abs/2609.20807)
@@ -503,7 +503,7 @@ First public: 2026-10-05 · Source version: [v2](https://arxiv.org/abs/2610.0704
 - Numerical regime: Native NVFP4 W4A4 forward on both endpoints; documented BF16 KV; synchronous math RL
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: B2
-- Main discussion: 5.2; additional locations: 3.3; 6.2; 7.3
+- Main discussion: 5.2; additional locations: 3.3; 6.2; 7.3; 7.4
 - Scope: Direction-aware control under native W4A4 execution.
 
 [arXiv record](https://arxiv.org/abs/2610.07043) · [Publication/source](https://arxiv.org/abs/2610.07043)
@@ -539,7 +539,7 @@ First public: 2026-10-10 · Source version: [v1](https://arxiv.org/abs/2610.1444
 - Numerical regime: BF16 learner; INT4 KV with bounded INT8 protection; quota-based partial collection
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: A2; system
-- Main discussion: 4.2; additional locations: 5.1; 6.2; 6.3
+- Main discussion: 4.2; additional locations: 5.1; 6.2; 6.3; 7.4
 - Scope: INT4 KV with selective protection; colocated partial rollout.
 
 [arXiv record](https://arxiv.org/abs/2610.14448) · [Publication/source](https://arxiv.org/abs/2610.14448)
