@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <strong>Zunhai Su<sup>1</sup> · Wei Wu<sup>2</sup> · Yifan Zhang<sup>2</sup> · Jianchao Tan<sup>2</sup> · Ngai Wong<sup>1</sup></strong><br>
+  <strong>Zunhai Su<sup>1</sup> · Wei Wu<sup>2</sup> · Yifan Zhang<sup>2</sup> · Chao Zhang<sup>2</sup> · Yuxuan Sun<sup>2</sup> · Jianchao Tan<sup>2</sup> · Ngai Wong<sup>1</sup></strong><br>
   <sup>1</sup>The University of Hong Kong &nbsp;·&nbsp; <sup>2</sup>Meituan
 </p>
 
@@ -22,7 +22,7 @@
   <a href="#citation">Cite</a>
 </p>
 
-Quantized rollouts can reduce generation cost, but the sampler and learner may assign different probabilities to the same token even with identical parameters and histories. This training–rollout mismatch can distort gradient estimation and policy updates. The survey organizes recent approaches by intervention target: **numerical design** aligns computation or preserves fidelity and update visibility; **learning under residual mismatch** corrects estimation or controls updates. It compares measurement practices and experimental findings, then examines open problems in lower-cost mitigation, sustained policy improvement, and evaluation at matched quality or end-to-end cost.
+Quantized rollouts can reduce generation cost, but the sampler and learner may assign different probabilities to the same token even with identical parameters and histories. This training–rollout mismatch can distort gradient estimation and policy updates. The survey organizes recent approaches by intervention target: **numerical design** aligns computation or preserves fidelity and update visibility; **learning under residual mismatch** corrects estimation or controls updates. It compares mismatch measurements and learning results across policy pairs, numerical settings, and training horizons. Open problems include lower-cost mitigation, sustained policy improvement, and evaluation at matched quality or end-to-end cost.
 
 <p align="center">
   <img src="figures/overview.svg" alt="Survey overview: numerical design and learning under residual mismatch in the rollout–learning loop" width="760">
@@ -253,7 +253,7 @@ Use the citation below or GitHub's **Cite this repository** control, which uses 
 ```bibtex
 @misc{su2026trainingrollout,
   title  = {Training--Rollout Mismatch in Low-Precision LLM Reinforcement Learning: A Survey},
-  author = {Su, Zunhai and Wu, Wei and Zhang, Yifan and Tan, Jianchao and Wong, Ngai},
+  author = {Su, Zunhai and Wu, Wei and Zhang, Yifan and Zhang, Chao and Sun, Yuxuan and Tan, Jianchao and Wong, Ngai},
   year   = {2026},
   url    = {https://github.com/ZunhaiSu/awesome-low-precision-rl}
 }
