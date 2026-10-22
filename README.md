@@ -61,7 +61,7 @@ This narrative survey synthesizes published evidence. General PTQ, low-precision
 | 4. Numerical Design and Execution Alignment | Compare computation alignment, fidelity control, and update visibility. |
 | 5. Learning under Residual Mismatch | Explain estimator correction and update control, with complementary scheduling and composition. |
 | 6. Evidence Synthesis and System Trade-offs | Connect published learning outcomes to evidence and system cost. |
-| 7. Open Problems | Develop priorities in diagnosis, composition, stateful execution, and transfer. |
+| 7. Open Problems | Develop priorities in diagnosis, composition, mitigation cost, stateful execution, and transfer. |
 | 8. Conclusion | Bring numerical fidelity and learning correction into one perspective. |
 
 Appendix A summarizes all twenty-nine focal works; Appendices B–C describe source selection, assumptions, and transfer; Appendix D defines the terminology; Appendix E maps mismatch measurements across all nineteen core studies.
@@ -192,6 +192,8 @@ The [evidence records](data/evidence.json) cover all nineteen core studies and l
 **Controlling disagreement must preserve useful learning.** [QuRL](https://proceedings.iclr.cc/paper_files/paper/2026/hash/6b4880ced785077159b340710ceb7681-Abstract-Conference.html), [Score Centering](https://arxiv.org/abs/2609.20807), [Full Pipeline FP8 RL](https://arxiv.org/abs/2609.22870), and [TRIAGE](https://arxiv.org/abs/2610.07043) address update visibility, gradient drift, clipping, and direction-dependent control. Their mechanisms explain why stable curves or small mean gaps alone do not establish effective learning.
 
 **Generation speed and learning efficiency have different costs.** [KV4-RL](https://arxiv.org/abs/2610.14448) reports distinct rollout and full-iteration gains. Calibration, behavior reconstruction, rounding guidance, and weight conversion add dependencies elsewhere in the loop. Section 6 relates these costs to learned-policy quality; the [comparison records](docs/COMPARISONS.md) retain the tested configurations.
+
+Open directions include reducing the storage and communication required for rollout guidance and simplifying the configuration of mismatch control. More unified or adaptive mechanisms should be assessed by the useful learning they preserve, their tuning effort, and their runtime overhead. Controlled comparisons should report policy quality at matched total training cost and cost to a target quality.
 
 The collection distinguishes simulated FP4, native low-bit kernels, and BF16 computation on quantized values. It synthesizes source-reported results and does not introduce a common leaderboard or an independently reproduced benchmark.
 

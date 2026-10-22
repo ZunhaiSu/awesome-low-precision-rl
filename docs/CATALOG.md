@@ -503,7 +503,7 @@ First public: 2026-10-05 · Source version: [v2](https://arxiv.org/abs/2610.0704
 - Numerical regime: Native NVFP4 W4A4 forward on both endpoints; documented BF16 KV; synchronous math RL
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: B2
-- Main discussion: 5.2; additional locations: 3.3; 6.2
+- Main discussion: 5.2; additional locations: 3.3; 6.2; 7.3
 - Scope: Direction-aware control under native W4A4 execution.
 
 [arXiv record](https://arxiv.org/abs/2610.07043) · [Publication/source](https://arxiv.org/abs/2610.07043)
@@ -521,7 +521,7 @@ First public: 2026-10-06 · Source version: [v2](https://arxiv.org/abs/2610.0776
 - Numerical regime: NVFP4 expert W4A4 + softmax KV4 rollout; guided fake-quantized learner forward, BF16 backward; asynchronous
 - Contribution role: core; evidence domain: direct_low_precision
 - Components: A1
-- Main discussion: 4.1; additional locations: 3.1; 6.2
+- Main discussion: 4.1; additional locations: 3.1; 6.2; 7.3
 - Scope: Rollout-guided rounding; local guarantees have limited scope.
 
 [arXiv record](https://arxiv.org/abs/2610.07767) · [Publication/source](https://arxiv.org/abs/2610.07767)
